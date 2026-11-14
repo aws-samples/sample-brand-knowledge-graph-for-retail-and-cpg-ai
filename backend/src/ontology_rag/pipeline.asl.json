@@ -1,0 +1,117 @@
+{
+  "Comment": "Ingest pipeline: classify every source (photo or text) against the ontology with a Bedrock model, validate the answer, MERGE it into Neptune Analytics, then summarize the batch. Input: the run document written by the API (ontology_id, model_id, prompt_caching, line_id, sources[]).",
+  "QueryLanguage": "JSONata",
+  "StartAt": "Classify and ingest each source",
+  "States": {
+    "Classify and ingest each source": {
+      "Type": "Map",
+      "Comment": "One iteration per source, a few at a time: the wall time is the slowest source, not the sum. MaxConcurrency also caps how many Bedrock calls run in parallel.",
+      "Items": "{% $states.input.sources %}",
+      "MaxConcurrency": 4,
+      "ItemSelector": {
+        "run": "{% $states.input %}",
+        "source": "{% $states.context.Map.Item.Value %}"
+      },
+      "ItemProcessor": {
+        "ProcessorConfig": { "Mode": "INLINE" },
+        "StartAt": "Classify",
+        "States": {
+          "Classify": {
+            "Type": "Task",
+            "Comment": "Lambda step 1: ontology as system prompt (cached), source as user turn, one Converse call, answer validated against the ontology.",
+            "Resource": "arn:${Partition}:states:::lambda:invoke",
+            "Arguments": {
+              "FunctionName": "${PipelineFunctionArn}",
+              "Payload": {
+                "step": "classify",
+                "run": "{% $states.input.run %}",
+                "source": "{% $states.input.source %}"
+              }
+            },
+            "Assign": { "run": "{% $states.input.run %}" },
+            "Output": "{% $states.result.Payload %}",
+            "Retry": [
+              {
+                "Comment": "Bedrock throttling and other transient errors: back off and try again instead of hand-writing a retry loop.",
+                "ErrorEquals": ["RetryableError", "Lambda.TooManyRequestsException", "Lambda.ServiceException"],
+                "IntervalSeconds": 5,
+                "BackoffRate": 2,
+                "MaxAttempts": 4,
+                "JitterStrategy": "FULL"
+              }
+            ],
+            "Catch": [
+              {
+                "Comment": "Anything else fails this source only; the batch continues.",
+                "ErrorEquals": ["States.ALL"],
+                "Next": "Record failure",
+                "Output": { "source": "{% $states.input.source %}", "error": "{% $states.errorOutput %}" }
+              }
+            ],
+            "Next": "Ingest"
+          },
+          "Ingest": {
+            "Type": "Task",
+            "Comment": "Lambda step 2: the validated answer as OWL individuals of the ontology, mapped onto nodes and edges and MERGEd into Neptune Analytics; embeddings via Bedrock.",
+            "Resource": "arn:${Partition}:states:::lambda:invoke",
+            "Arguments": {
+              "FunctionName": "${PipelineFunctionArn}",
+              "Payload": {
+                "step": "ingest",
+                "run": "{% $run %}",
+                "classified": "{% $states.input %}"
+              }
+            },
+            "Output": "{% $states.result.Payload %}",
+            "Retry": [
+              {
+                "Comment": "Concurrent MERGEs on the same node and embedding throttling are transient too.",
+                "ErrorEquals": ["RetryableError", "Lambda.TooManyRequestsException", "Lambda.ServiceException"],
+                "IntervalSeconds": 3,
+                "BackoffRate": 2,
+                "MaxAttempts": 4,
+                "JitterStrategy": "FULL"
+              }
+            ],
+            "Catch": [
+              {
+                "ErrorEquals": ["States.ALL"],
+                "Next": "Record failure",
+                "Output": { "source": "{% $states.input %}", "error": "{% $states.errorOutput %}" }
+              }
+            ],
+            "End": true
+          },
+          "Record failure": {
+            "Type": "Pass",
+            "Comment": "The iteration's result for a failed source: same shape as a success, status error.",
+            "Output": {
+              "index": "{% $states.input.source.index %}",
+              "kind": "{% $states.input.source.kind %}",
+              "label": "{% $states.input.source.label ? $states.input.source.label : ($states.input.source.title ? $states.input.source.title : $states.input.source.example) %}",
+              "status": "error",
+              "error": "{% $states.input.error.Error & ': ' & $substring($states.input.error.Cause, 0, 300) %}"
+            },
+            "End": true
+          }
+        }
+      },
+      "Next": "Summarize"
+    },
+    "Summarize": {
+      "Type": "Task",
+      "Comment": "Lambda step 3: node counts before/after, what the sources share (categories, values, components), ontology feedback across the batch.",
+      "Resource": "arn:${Partition}:states:::lambda:invoke",
+      "Arguments": {
+        "FunctionName": "${PipelineFunctionArn}",
+        "Payload": {
+          "step": "summarize",
+          "run": "{% $states.context.Execution.Input %}",
+          "results": "{% $states.input %}"
+        }
+      },
+      "Output": "{% $states.result.Payload %}",
+      "End": true
+    }
+  }
+}

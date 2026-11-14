@@ -1,0 +1,20 @@
+[
+  {
+    "id": "look:58f0a33d",
+    "name": "Professional look",
+    "occasion": "Professional",
+    "description": "Outfit in a photo: beige trench coat worn open, black double-breasted blazer, black tailored trousers, black leather tote bag, gold chunky chain necklace, dark cat-eye sunglasses with gold frame, white sneaker right, white sneaker left",
+    "item_ids": [
+      "item:58f0a33d-e1-coat",
+      "item:58f0a33d-e2-jacket",
+      "item:58f0a33d-e3-pants",
+      "item:58f0a33d-e4-bag",
+      "item:58f0a33d-e5-necklace",
+      "item:58f0a33d-e6-glasses",
+      "item:58f0a33d-e7-shoe"
+    ],
+    "props": {
+      "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+    }
+  }
+]

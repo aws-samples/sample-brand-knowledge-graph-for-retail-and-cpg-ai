@@ -1,0 +1,210 @@
+[
+  {
+    "id": "article:velloway-journal-01",
+    "title": "Notes on layering: the Atlas method",
+    "source": "Velloway Journal",
+    "published": "2026-09-01",
+    "statements": [
+      {
+        "id": "st:layering-1",
+        "text": "Start with a plain base layer: the thermal henley under everything, so collars never compete.",
+        "illustrates": [
+          "look:atlas-site-day",
+          "item:atlas-henley"
+        ]
+      },
+      {
+        "id": "st:layering-2",
+        "text": "The waxed field jacket is cut short on purpose; it should end where a high-rise trouser begins.",
+        "illustrates": [
+          "item:atlas-field-jacket",
+          "look:atlas-site-day"
+        ]
+      },
+      {
+        "id": "st:layering-3",
+        "text": "Corduroy over brushed flannel gives two textures in one palette; keep both in the earth range.",
+        "illustrates": [
+          "look:atlas-weekend-layers"
+        ]
+      },
+      {
+        "id": "st:layering-4",
+        "text": "When it turns cold, the quilted vest goes over the fisherman sweater, not under it.",
+        "illustrates": [
+          "look:atlas-cold-snap"
+        ]
+      },
+      {
+        "id": "st:layering-5",
+        "text": "Rinse denim breaks cleanly on a crepe sole; save the lug boot for canvas.",
+        "illustrates": [
+          "item:atlas-suede-chukka",
+          "item:atlas-work-boot"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "article:velloway-journal-02",
+    "title": "Linen, worn properly",
+    "source": "Velloway Journal",
+    "published": "2026-06-15",
+    "statements": [
+      {
+        "id": "st:linen-1",
+        "text": "Linen is meant to crease. The unlined blazer looks best after a day, not before.",
+        "illustrates": [
+          "item:solstice-linen-blazer"
+        ]
+      },
+      {
+        "id": "st:linen-2",
+        "text": "The camp-collar shirt is always worn open over the ribbed tank; buttoned up it loses the point.",
+        "illustrates": [
+          "look:solstice-harbour",
+          "item:solstice-linen-shirt"
+        ]
+      },
+      {
+        "id": "st:linen-3",
+        "text": "Pair tonal linen on linen for daytime; add one color, the terracotta wrap skirt or the coral scarf, for evening.",
+        "illustrates": [
+          "look:solstice-market",
+          "look:solstice-golden-hour"
+        ]
+      },
+      {
+        "id": "st:linen-4",
+        "text": "Pleated shorts sit at the natural waist and finish above the knee; the striped linen shirt stays untucked.",
+        "illustrates": [
+          "look:solstice-terrace-lunch"
+        ]
+      },
+      {
+        "id": "st:linen-5",
+        "text": "A wide linen leg needs a flat shoe: espadrille or slide, never a heel.",
+        "illustrates": [
+          "item:solstice-drawstring-pants",
+          "item:solstice-espadrille"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "article:velloway-journal-03",
+    "title": "Black tie, the Meridian way",
+    "source": "Velloway Journal",
+    "published": "2026-11-20",
+    "statements": [
+      {
+        "id": "st:blacktie-1",
+        "text": "Meridian black tie replaces the dress shirt with a fine cashmere turtleneck under the satin-lapel jacket.",
+        "illustrates": [
+          "look:meridian-black-tie",
+          "item:meridian-cashmere-turtleneck"
+        ]
+      },
+      {
+        "id": "st:blacktie-2",
+        "text": "Patent loafers, never lace-ups, with the tuxedo trouser.",
+        "illustrates": [
+          "item:meridian-patent-loafer",
+          "look:meridian-black-tie"
+        ]
+      },
+      {
+        "id": "st:blacktie-3",
+        "text": "For gala dressing the column gown takes the velvet cape rather than a jacket; nothing should break the vertical line.",
+        "illustrates": [
+          "look:meridian-gala"
+        ]
+      },
+      {
+        "id": "st:blacktie-4",
+        "text": "The double-breasted blazer over a satin camisole is the house cocktail look.",
+        "illustrates": [
+          "look:meridian-cocktail"
+        ]
+      },
+      {
+        "id": "st:blacktie-5",
+        "text": "A slim silk tie appears only with the tuxedo jacket and only in winter, under the camel overcoat.",
+        "illustrates": [
+          "look:meridian-winter-evening"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "article:velloway-journal-04",
+    "title": "High-low: mixing the lines",
+    "source": "Velloway Journal",
+    "published": "2026-10-05",
+    "statements": [
+      {
+        "id": "st:highlow-1",
+        "text": "The tuxedo jacket over raw selvedge denim and suede chukkas is the most Velloway outfit there is.",
+        "illustrates": [
+          "look:cross-tux-and-denim"
+        ]
+      },
+      {
+        "id": "st:highlow-2",
+        "text": "Sharp Meridian tailoring over a relaxed Solstice camp collar reads as effortless rather than undone.",
+        "illustrates": [
+          "look:cross-linen-and-tailoring"
+        ]
+      },
+      {
+        "id": "st:highlow-3",
+        "text": "Cross the lines by texture, not by color: keep one palette and change the fabric weight.",
+        "illustrates": [
+          "look:cross-tux-and-denim",
+          "look:cross-linen-and-tailoring"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "article:velloway-fit-guide",
+    "title": "Fit and proportion guide",
+    "source": "Velloway Fit Guide",
+    "published": "2026-08-01",
+    "statements": [
+      {
+        "id": "st:fit-1",
+        "text": "Every Velloway jacket is cut to sit over a high-rise trouser; the proportion is the brand's core silhouette.",
+        "illustrates": [
+          "item:atlas-field-jacket",
+          "item:meridian-tux-jacket",
+          "item:solstice-linen-blazer"
+        ]
+      },
+      {
+        "id": "st:fit-2",
+        "text": "Oversized knitwear balances a wide leg; slim knitwear balances a straight leg.",
+        "illustrates": [
+          "look:atlas-cold-snap",
+          "look:meridian-boardroom"
+        ]
+      },
+      {
+        "id": "st:fit-3",
+        "text": "Trouser hems break on the shoe: wide legs take a slim shoe, straight legs take a boot.",
+        "illustrates": [
+          "item:meridian-wide-trousers",
+          "item:atlas-cargo-pants"
+        ]
+      },
+      {
+        "id": "st:fit-4",
+        "text": "Loose shirt dresses are belted at the natural waist; fitted dresses never are.",
+        "illustrates": [
+          "look:solstice-shirt-dress-day",
+          "item:solstice-slip-dress"
+        ]
+      }
+    ]
+  }
+]

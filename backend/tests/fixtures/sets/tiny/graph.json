@@ -1,0 +1,103 @@
+{
+ "edges": [
+  {
+   "props": {},
+   "source": "look:tiny-l1",
+   "target": "item:tiny-coat",
+   "type": "CONTAINS"
+  },
+  {
+   "props": {},
+   "source": "look:tiny-l1",
+   "target": "item:tiny-skirt",
+   "type": "CONTAINS"
+  },
+  {
+   "props": {},
+   "source": "look:tiny-l1",
+   "target": "item:tiny-sneaker",
+   "type": "CONTAINS"
+  },
+  {
+   "props": {},
+   "source": "look:tiny-l2",
+   "target": "item:tiny-skirt",
+   "type": "CONTAINS"
+  },
+  {
+   "props": {},
+   "source": "look:tiny-l2",
+   "target": "item:tiny-sneaker",
+   "type": "CONTAINS"
+  },
+  {
+   "props": {},
+   "source": "look:tiny-l1",
+   "target": "occasion:dress",
+   "type": "FOR"
+  },
+  {
+   "props": {},
+   "source": "look:tiny-l2",
+   "target": "occasion:dress",
+   "type": "FOR"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "brand:tiny",
+   "label": "Brand",
+   "props": {
+    "name": "Tiny"
+   }
+  },
+  {
+   "id": "occasion:dress",
+   "label": "Occasion",
+   "props": {
+    "name": "Dress"
+   }
+  },
+  {
+   "id": "look:tiny-l1",
+   "label": "Look",
+   "props": {
+    "description": "Camel coat over a slip skirt with white sneakers",
+    "image_key": "tiny/looks/l1.jpg",
+    "name": "l1.jpg",
+    "occasion": "Dress"
+   }
+  },
+  {
+   "id": "look:tiny-l2",
+   "label": "Look",
+   "props": {
+    "description": "Slip skirt and white sneakers",
+    "image_key": "tiny/looks/l2.jpg",
+    "name": "l2.jpg",
+    "occasion": "Dress"
+   }
+  },
+  {
+   "id": "item:tiny-coat",
+   "label": "Item",
+   "props": {
+    "name": "camel wool coat"
+   }
+  },
+  {
+   "id": "item:tiny-skirt",
+   "label": "Item",
+   "props": {
+    "name": "ivory slip skirt"
+   }
+  },
+  {
+   "id": "item:tiny-sneaker",
+   "label": "Item",
+   "props": {
+    "name": "white leather sneaker"
+   }
+  }
+ ]
+}

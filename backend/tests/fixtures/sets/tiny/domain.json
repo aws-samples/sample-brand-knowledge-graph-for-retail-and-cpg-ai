@@ -1,0 +1,16 @@
+{
+  "name": "Not the domain's name",
+  "example_questions": [
+    "What goes with the camel coat?",
+    "What goes with a trench coat in autumn?"
+  ],
+  "photo_questions": [
+    "What goes with this piece? Style the rest of the outfit around it."
+  ],
+  "query_examples": [
+    {
+      "question": "Which looks of the brand Tiny are for a dress occasion?",
+      "cypher": "MATCH (l:Look)-[:FOR]->(o:Occasion {name: 'Dress'})\nWHERE l.image_key STARTS WITH 'tiny/'\nRETURN l.name AS look"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+# Secrets and local environment files: never commit
+.env
+.env.*
+.envrc
+.envrc.local
+
+# What a former local run left (graph snapshot, run records), and the file blob store's default
+# folder (LOCAL_DATA_DIR, used only without a data bucket): never commit
+data/local/*
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Node / CDK / Vite
+node_modules/
+cdk.out/
+infra/build/
+web/dist/
+*.tsbuildinfo
+
+# Tooling
+.DS_Store
+.playwright-mcp/
+.idea/
+.vscode/
+
+# local mirror of the ontologies bucket (ONTOLOGIES_CACHE_DIR default outside Lambda)
+.cache/
+
+# Agent and assistant configuration: never shipped with the sample
+.kiro/
+.claude/
+.cursor/
+.amazonq/
+.aider*
+
+# Logs and scanner state
+*.log
+.ash/
+ash_output/
+.semgrep*
+*.sbom
+bom/
+.impeccable/

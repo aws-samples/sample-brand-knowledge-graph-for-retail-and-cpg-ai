@@ -1,0 +1,21 @@
+# What the Lambda functions need next to the runtime (Python 3.14, Linux x86_64), vendored into the
+# deployment package by infra/lib/bundling.ts. lambda-requirements.txt is the pinned set with hashes
+# the zip is built from (`uv pip install -r lambda-requirements.txt --require-hashes`); regenerate it
+# with
+#   uv pip compile lambda-requirements.in --python-version 3.14 --python-platform x86_64-manylinux2014 \
+#     --only-binary :all: --generate-hashes -o lambda-requirements.txt
+# and keep boto3/botocore on the version of agentcore/requirements.in and agentcore-lake/requirements.in.
+#
+# rdflib and pyparsing for the OWL explorer; boto3 with its dependencies because the boto3 of the
+# Lambda runtime varies by Region and over time, and tab 3 needs a botocore with the `s3vectors`
+# client (tab 2 the `bedrock-agentcore` one). No token library: IAM decides who may call the API's
+# function URL (infra/lib/auth.ts).
+rdflib==7.6.0
+pyparsing==3.3.3
+boto3==1.43.111
+botocore==1.43.111
+s3transfer==0.19.2
+jmespath==1.1.0
+python-dateutil==2.9.0.post0
+six==1.17.0
+urllib3==2.8.0

@@ -1,0 +1,263 @@
+THIRD-PARTY CONTENT AND ATTRIBUTIONS
+====================================
+
+Bundled content
+---------------
+
+1. Fashionpedia ontology (category and attribute vocabulary, supercategories, taxonomy ids)
+   ontologies/fashion/fashion.ttl is derived from the Fashionpedia ontology.
+   Fashionpedia: https://fashionpedia.github.io/home/index.html
+   Terms of use: https://fashionpedia.github.io/home/data_license.html
+   "The annotations in the Fashionpedia dataset along with the ontology, and the websites belong to
+   the Fashionpedia and are licensed under a Creative Commons Attribution 4.0 License."
+   License: CC BY 4.0, https://creativecommons.org/licenses/by/4.0/
+   ontologies/fashion/fashion.ttl is licensed under CC BY 4.0. The MIT-0 license of this repository
+   does not apply to that file; it says so in its first lines and in dcterms:rights. The
+   Fashionpedia authors do not endorse this sample.
+   Attribution: Fashionpedia ontology by Menglin Jia, Mengyun Shi, Mikhail Sirotenko, Yin Cui,
+   Claire Cardie, Bharath Hariharan, Hartwig Adam, Serge Belongie. "Fashionpedia: Ontology,
+   Segmentation, and an Attribute Localization Dataset". ECCV 2020.
+   Changes made for this repository (CC BY 4.0 requires that modifications are indicated): the flat
+   category/attribute catalog is expressed as an OWL 2 ontology (groups and categories as classes,
+   attribute families as classes with attribute values as named individuals, one has<Family> object
+   property per family); Fashionpedia's family and supercategory names are rendered as class and
+   property names (for example "textile finishing, manufacturing techniques" becomes TextileFinishing
+   and hasTextileFinishing, "animal" becomes AnimalMaterial); parenthesized qualifiers of value names
+   are kept as skos:prefLabel and dropped from rdfs:label; an applicability matrix is added as
+   property domains; hasPart links garments to parts/closures/decorations; four jewelry categories
+   that Fashionpedia does not have (earring, necklace, bracelet, ring) are added to its "others"
+   group, each marked with a skos:editorialNote; a brand knowledge-graph schema (Look, Item,
+   Statement, Article, Line, Brand and their relations) is added, with the fo:visual and
+   fo:conceptId annotations; a closed vocabulary of occasions (the class Occasion, nine named
+   individuals with labels, definitions and skos:hiddenLabel matching words, and the property for
+   from Look to Occasion) is added, each term marked with a skos:editorialNote. See
+   ontologies/fashion/README.md.
+   Definitions: the Fashionpedia catalog has names, supercategories, levels and taxonomy ids, but
+   no description text. Every definition in fashion.ttl (rdfs:comment, skos:definition) was
+   written for this sample by its authors.
+   The catalog file the ontology is built from is data/demo/category_attributes_descriptions.json
+   in the Fashionpedia API repository, https://github.com/KMnP/fashionpedia-api. The build script
+   (ontologies/fashion/build_fashion_ontology.py) downloads it; it is not included here.
+   Copyright (c) 2020, Menglin Jia. All rights reserved. License: BSD-2-Clause (reproduced below).
+   Only the ontology vocabulary is included. No Fashionpedia images or annotations are distributed
+   (Fashionpedia does not own the copyright of its images).
+
+   Redistribution and use in source and binary forms, with or without modification, are permitted
+   provided that the following conditions are met:
+   1. Redistributions of source code must retain the above copyright notice, this list of conditions
+      and the following disclaimer.
+   2. Redistributions in binary form must reproduce the above copyright notice, this list of
+      conditions and the following disclaimer in the documentation and/or other materials provided
+      with the distribution.
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+   IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+   FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+   IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+   OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+2. Example images (ontologies/fashion/examples/images/*.jpg)
+   Synthetic lookbook photos of the fictional brand Whimsikora, generated with Amazon Nova Canvas
+   on Amazon Bedrock (model ID amazon.nova-canvas-v1:0; the original file name per file in
+   manifest.json). They depict no real person and contain no third-party photography. MIT-0.
+
+   Single-piece product photos (ontologies/fashion/examples/items/*.jpg)
+   Synthetic product shots of the fictional brand Whimsikora's catalog, generated with Amazon Nova
+   Canvas on Amazon Bedrock (model ID amazon.nova-canvas-v1:0; the product shot per file in
+   manifest.json). They depict no real person, carry no logo or lettering and contain no
+   third-party photography. MIT-0.
+
+3. Synthetic data set (ontologies/fashion/datasets/velloway/)
+   Authored for this repository; fictional brand, products, looks and editorial copy. MIT-0.
+
+4. Whimsikora data set (ontologies/fashion/datasets/whimsikora/)
+   One look of a fictional brand, synthetic. The photo (media/looks/) is one more photo of the
+   Whimsikora lookbook, generated with Amazon Nova Canvas on Amazon Bedrock; it shows no real
+   person, and the pieces were read from it by the sample's own classify step. MIT-0.
+
+Python packages vendored into the Lambda deployment package
+-----------------------------------------------------------
+
+The Lambda zip built by infra/ contains these packages, installed unmodified from PyPI
+(backend/lambda-requirements.txt, pinned with hashes; infra/lib/bundling.ts installs it):
+
+rdflib 7.6.0, BSD-3-Clause, Copyright (c) 2002-2026, RDFLib Team, https://github.com/RDFLib/rdflib
+pyparsing 3.3.3, MIT, Copyright (c) 2003-2025 Paul McGuire, https://github.com/pyparsing/pyparsing
+boto3 1.43.111, Apache-2.0, Copyright Amazon.com, Inc. or its affiliates, https://github.com/boto/boto3
+botocore 1.43.111, Apache-2.0, Copyright Amazon.com, Inc. or its affiliates, https://github.com/boto/botocore
+s3transfer 0.19.2, Apache-2.0, Copyright Amazon.com, Inc. or its affiliates, https://github.com/boto/s3transfer
+jmespath 1.1.0, MIT, Copyright (c) 2013 Amazon.com, Inc. or its affiliates, https://github.com/jmespath/jmespath.py
+python-dateutil 2.9.0.post0, Apache-2.0 / BSD-3-Clause (dual), Copyright (c) Gustavo Niemeyer and dateutil contributors, https://github.com/dateutil/dateutil
+six 1.17.0, MIT, Copyright (c) 2010-2024 Benjamin Peterson, https://github.com/benjaminp/six
+urllib3 2.8.0, MIT, Copyright (c) 2008-2020 Andrey Petrov and contributors, https://github.com/urllib3/urllib3
+
+The query agent of tabs 3 and 6 runs on Amazon Bedrock AgentCore Runtime from a second zip,
+query-agent.zip (backend/agentcore/requirements.txt, pinned with hashes; Linux arm64 wheels for
+CPython 3.14, installed unmodified from PyPI). Next to rdflib, pyparsing, boto3 / botocore and the
+boto3 dependencies listed above (same versions and licenses), it contains:
+
+PyJWT 2.15.1 (a dependency of mcp), MIT, Copyright (c) 2015-2022 José Padilla, https://github.com/jpadilla/pyjwt
+cryptography 50.0.2, Apache-2.0 OR BSD-3-Clause, Copyright (c) Individual contributors, https://github.com/pyca/cryptography
+cffi 2.1.1, MIT-0, https://github.com/python-cffi/cffi
+pycparser 3.11, BSD-3-Clause, Copyright (c) 2008-2027, Eli Bendersky, https://github.com/eliben/pycparser
+
+bedrock-agentcore 1.24.1, Apache-2.0, Copyright Amazon.com, Inc. or its affiliates, https://github.com/aws/bedrock-agentcore-sdk-python
+aws-opentelemetry-distro 0.22.0, Apache-2.0, Copyright Amazon.com, Inc. or its affiliates, https://github.com/aws-observability/aws-otel-python-instrumentation
+awslabs.amazon-neptune-mcp-server 1.1.1, Apache-2.0, Copyright Amazon.com, Inc. or its affiliates, https://github.com/awslabs/mcp
+mcp 2.3.0 and mcp-types 2.3.0, MIT, Copyright (c) Anthropic, PBC, https://github.com/modelcontextprotocol/python-sdk
+opentelemetry-* (61 packages: api, sdk, proto, exporter-otlp-proto-common/grpc/http 1.45.2; distro, instrumentation, the instrumentation-* packages, semantic-conventions, exporter-http-transport and exporter-otlp-common 0.66b2; propagator-aws-xray 1.0.2, propagator-b3/jaeger 1.45.2, propagator-ot-trace 0.66b2, sdk-extension-aws 2.1.0, processor-baggage and util-http 0.66b2), Apache-2.0, Copyright The OpenTelemetry Authors, https://github.com/open-telemetry/opentelemetry-python and https://github.com/open-telemetry/opentelemetry-python-contrib
+googleapis-common-protos 1.75.5, Apache-2.0, Copyright Google LLC, https://github.com/googleapis/google-cloud-python
+grpcio 1.84.0, Apache-2.0, Copyright The gRPC Authors, https://github.com/grpc/grpc
+protobuf 6.33.5, BSD-3-Clause, Copyright Google Inc., https://github.com/protocolbuffers/protobuf
+loguru 0.7.3, MIT, https://github.com/Delgan/loguru
+pydantic 2.14.0 and pydantic-core 2.50.0, MIT, https://github.com/pydantic/pydantic and https://github.com/pydantic/pydantic-core
+annotated-types 0.8.0, MIT, https://github.com/annotated-types/annotated-types
+annotated-doc 0.0.5, MIT, https://github.com/fastapi/annotated-doc
+typing-extensions 4.16.0, PSF-2.0, https://github.com/python/typing_extensions
+typing-inspection 0.4.4, MIT, https://github.com/pydantic/typing-inspection
+anyio 4.15.1, MIT, https://github.com/agronholm/anyio
+asgiref 3.12.1, BSD-3-Clause, https://github.com/django/asgiref
+idna 3.20, BSD-3-Clause, https://github.com/kjd/idna
+h11 0.16.0, MIT, https://github.com/python-hyper/h11
+httpx2 2.13.1 and httpcore2 2.13.1, BSD-3-Clause, https://github.com/pydantic/httpx2
+truststore 0.10.4, MIT, https://github.com/sethmlarson/truststore
+jsonschema 4.26.0, jsonschema-specifications 2025.9.1 and referencing 0.37.0, MIT, https://github.com/python-jsonschema
+rpds-py 2026.9.1, MIT, https://github.com/crate-py/rpds
+attrs 26.1.0, MIT, https://github.com/python-attrs/attrs
+python-multipart 0.0.32, Apache-2.0, https://github.com/Kludex/python-multipart
+python-dotenv 1.2.4, BSD-3-Clause, https://github.com/theskumar/python-dotenv
+sse-starlette 3.5.0, BSD-3-Clause, https://github.com/sysid/sse-starlette
+starlette 1.7.0, BSD-3-Clause, https://github.com/Kludex/starlette
+uvicorn 0.54.0, BSD-3-Clause, https://github.com/Kludex/uvicorn
+websockets 17.2, BSD-3-Clause, https://github.com/python-websockets/websockets
+click 8.5.0, BSD-3-Clause, https://github.com/pallets/click
+typer 0.27.3, MIT, https://github.com/fastapi/typer
+rich 15.0.0, MIT, https://github.com/Textualize/rich
+shellingham 1.5.4, ISC, https://github.com/sarugaku/shellingham
+markdown-it-py 4.2.0 and mdurl 0.1.2, MIT, https://github.com/executablebooks/markdown-it-py
+Pygments 2.21.0, BSD-2-Clause, https://github.com/pygments/pygments
+requests 2.34.2, Apache-2.0, https://github.com/psf/requests
+charset-normalizer 3.5.2, MIT, https://github.com/jawah/charset_normalizer
+certifi 2026.10.23, MPL-2.0, https://github.com/certifi/python-certifi
+cachetools 6.2.4, MIT, https://github.com/tkem/cachetools
+packaging 26.3, Apache-2.0 OR BSD-2-Clause, https://github.com/pypa/packaging
+psutil 7.2.2, BSD-3-Clause, https://github.com/giampaolo/psutil
+PyYAML 6.0.3, MIT, https://github.com/yaml/pyyaml
+wrapt 2.5.0, BSD-2-Clause, https://github.com/GrahamDumpleton/wrapt
+
+The lake agent of tab 6 runs on its own AgentCore Runtime from a third zip, lake-agent.zip
+(backend/agentcore-lake/requirements.txt, pinned with hashes; Linux arm64 wheels for CPython 3.14,
+installed unmodified from PyPI; versions per backend/src/ontology_rag/lake_overrides.txt). Next to
+the packages of query-agent.zip it shares (the AgentCore SDK, ADOT, the MCP SDK, boto3, rdflib and
+their dependencies, same licenses; not the Neptune MCP server), it contains:
+
+awslabs.s3-tables-mcp-server 0.1.1, Apache-2.0, Copyright Amazon.com, Inc. or its affiliates, https://github.com/awslabs/mcp
+pyiceberg 0.12.0, Apache-2.0, The Apache Software Foundation, https://github.com/apache/iceberg-python
+pyarrow 25.0.1, Apache-2.0, The Apache Software Foundation, https://github.com/apache/arrow
+daft 0.7.26, Apache-2.0, Eventual Inc., https://github.com/Eventual-Inc/Daft
+fsspec 2026.9.0, BSD-3-Clause, https://github.com/fsspec/filesystem_spec
+mmh3 5.3.1, MIT, https://github.com/hajimes/mmh3
+pyroaring 1.2.0, MIT, https://github.com/Ezibenroc/PyRoaringBitMap
+sqlparse 0.6.0, BSD-3-Clause, https://github.com/andialbrecht/sqlparse
+strictyaml 1.7.3, MIT, https://github.com/crdoconnor/strictyaml
+tenacity 9.2.1, Apache-2.0, https://github.com/jd/tenacity
+tqdm 4.67.3, MPL-2.0 AND MIT, https://github.com/tqdm/tqdm
+zstandard 0.25.0, BSD-3-Clause, https://github.com/indygreg/python-zstandard
+
+Each package's license text is included in its *.dist-info/ folder inside the zips.
+
+certifi 2026.10.23 and tqdm 4.67.3 are under the Mozilla Public License 2.0, unmodified. License text:
+https://www.mozilla.org/en-US/MPL/2.0/ ; source: https://github.com/certifi/python-certifi/tree/2026.10.23
+and https://github.com/tqdm/tqdm/tree/v4.67.3 (and the sdists on https://pypi.org).
+
+Web app bundle (web/dist, built by the stack and served from Amazon CloudFront)
+--------------------------------------------------------------------------------
+
+The JavaScript bundle the stack publishes contains these 56 npm packages, installed unmodified
+from the npm registry (versions per web/package-lock.json). Each package's license text is in its
+folder under web/node_modules after `npm ci`.
+
+accessor-fn 1.5.3, MIT
+@aws-crypto/sha256-js 5.2.0, Apache-2.0
+@aws-crypto/util 5.2.0, Apache-2.0
+@aws-sdk/core 3.981.0, Apache-2.0
+@aws-sdk/credential-provider-cognito-identity 3.972.83, Apache-2.0
+@aws-sdk/credential-providers 3.1167.0, Apache-2.0
+@aws-sdk/nested-clients 3.998.3, Apache-2.0
+bezier-js 6.1.4, MIT
+canvas-color-tracker 1.3.2, MIT
+classcat 5.0.5, MIT
+clsx 2.1.1, MIT
+d3-array 3.2.4, ISC
+d3-binarytree 1.0.2, MIT
+d3-color 3.1.0, ISC
+d3-dispatch 3.0.1, ISC
+d3-drag 3.0.0, ISC
+d3-ease 3.0.1, BSD-3-Clause
+d3-force-3d 3.0.6, MIT
+d3-interpolate 3.0.1, ISC
+d3-octree 1.1.0, MIT
+d3-quadtree 3.0.1, ISC
+d3-scale 4.0.2, ISC
+d3-scale-chromatic 3.1.0, ISC
+d3-selection 3.0.0, ISC
+d3-timer 3.0.1, ISC
+d3-transition 3.0.1, ISC
+d3-zoom 3.0.0, ISC
+float-tooltip 1.7.5, MIT
+force-graph 1.52.0, MIT
+index-array-by 1.4.2, MIT
+internmap 2.0.3, ISC
+jerrypick 1.1.2, MIT
+jwt-decode 4.0.0, MIT
+kapsule 1.16.3, MIT
+lodash-es 4.18.1, MIT
+oidc-client-ts 3.5.0, Apache-2.0
+preact 10.29.8, MIT
+prism-react-renderer 2.4.1, MIT
+prop-types 15.8.1, MIT
+react 19.3.0, MIT
+react-dom 19.3.0, MIT
+react-force-graph-2d 1.29.1, MIT
+react-kapsule 2.6.0, MIT
+scheduler 0.28.0, MIT
+@smithy/core 3.40.0, Apache-2.0
+@smithy/fetch-http-handler 5.8.1, Apache-2.0
+@smithy/signature-v4 5.7.5, Apache-2.0
+@smithy/types 4.20.0, Apache-2.0
+@smithy/util-utf8 2.3.0, Apache-2.0
+tinycolor2 1.6.0, MIT
+tslib 2.9.1, 0BSD
+@tweenjs/tween.js 25.0.0, MIT
+use-sync-external-store 1.7.0, MIT
+@xyflow/react 12.12.0, MIT
+@xyflow/system 0.0.83, MIT
+zustand 4.5.7, MIT
+
+prism-react-renderer bundles the Prism grammars and the "Night Owl" theme (MIT, Sarah Drasner).
+
+Dependencies (not bundled; installed by package managers)
+---------------------------------------------------------
+
+Python (backend/pyproject.toml): boto3 (Apache-2.0), rdflib (BSD-3-Clause);
+optional (agent): awslabs.amazon-neptune-mcp-server (Apache-2.0) with the packages listed above plus the MCP SDK's
+cli extra, which adds typer (MIT), rich (MIT), python-dotenv (BSD-3-Clause) and their dependencies; lake:
+pyiceberg and pyarrow (Apache-2.0) with their dependencies; tab 6's S3 Tables MCP server is fetched
+by uvx at run time (the lake agent's packages above); dev: pytest
+(MIT), ruff (MIT).
+
+Node (infra/package.json): aws-cdk-lib 2.273.0 (Apache-2.0), constructs 10.8.1 (Apache-2.0),
+source-map-support 0.5.21 (MIT), cdk-nag 3.0.2 (Apache-2.0); build and test tools: aws-cdk 2.1145.0
+(Apache-2.0), typescript 5.7.3 (Apache-2.0), ts-node 10.9.2 (MIT), jest 30.5.2 (MIT), ts-jest 29.4.14 (MIT).
+
+Node (web/package.json), build and test tools only (not in the bundle): vite 7.3.7 (MIT),
+@vitejs/plugin-react 4.7.0 (MIT), typescript 5.7.3 (Apache-2.0), vitest 5.0.3 (MIT),
+playwright 1.65.0 (Apache-2.0, renders the figures). The service icons in the architecture diagrams (web/src/components/arch/awsIcons.ts
+and web/figures/icons.ts) and in the figures under assets/ are AWS Architecture Icons, which AWS
+allows customers and partners to use in architecture diagrams: https://aws.amazon.com/architecture/icons/
+web/src/components/studio/__fixtures__/fashion.view.json is the parsed fashion ontology (see the
+Fashionpedia attribution above), stored for the layout tests;
+web/src/components/arch/__fixtures__/classify.opus55.json is one recorded
+Bedrock response (Claude Opus 5.5 on a synthetic example image) for the prompt-tab tests.

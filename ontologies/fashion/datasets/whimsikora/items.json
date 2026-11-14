@@ -1,0 +1,97 @@
+[
+  {
+    "id": "item:58f0a33d-e1-coat",
+    "name": "beige trench coat worn open",
+    "category_id": "coat",
+    "line_id": "",
+    "description": "Coat; trench (coat), below the knee (length), double breasted, oversized",
+    "color": "beige",
+    "material": "",
+    "attributes": {
+      "length": "length:below-the-knee",
+      "nickname": "nickname:trench-coat",
+      "opening-type": "opening-type:double-breasted",
+      "silhouette": "silhouette:oversized"
+    },
+    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+  },
+  {
+    "id": "item:58f0a33d-e2-jacket",
+    "name": "black double-breasted blazer",
+    "category_id": "jacket",
+    "line_id": "",
+    "description": "Jacket; blazer, double breasted, v-neck, hip (length)",
+    "color": "black",
+    "material": "",
+    "attributes": {
+      "length": "length:hip",
+      "neckline-type": "neckline-type:v-neck",
+      "nickname": "nickname:blazer",
+      "opening-type": "opening-type:double-breasted"
+    },
+    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+  },
+  {
+    "id": "item:58f0a33d-e3-pants",
+    "name": "black tailored trousers",
+    "category_id": "pants",
+    "line_id": "",
+    "description": "Pants; straight, plain (pattern), short (length)",
+    "color": "black",
+    "material": "",
+    "attributes": {
+      "length": "length:short",
+      "silhouette": "silhouette:straight",
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+  },
+  {
+    "id": "item:58f0a33d-e4-bag",
+    "name": "black leather tote bag",
+    "category_id": "bag",
+    "line_id": "",
+    "description": "Bag",
+    "color": "black",
+    "material": "leather",
+    "attributes": {},
+    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+  },
+  {
+    "id": "item:58f0a33d-e5-necklace",
+    "name": "gold chunky chain necklace",
+    "category_id": "necklace",
+    "line_id": "",
+    "description": "Necklace; metal",
+    "color": "gold",
+    "material": "",
+    "attributes": {
+      "non-textile-material-type": "non-textile-material-type:metal"
+    },
+    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+  },
+  {
+    "id": "item:58f0a33d-e6-glasses",
+    "name": "dark cat-eye sunglasses with gold frame",
+    "category_id": "glasses",
+    "line_id": "",
+    "description": "Glasses",
+    "color": "",
+    "material": "",
+    "attributes": {},
+    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+  },
+  {
+    "id": "item:58f0a33d-e7-shoe",
+    "name": "white lace-up sneakers",
+    "category_id": "shoe",
+    "line_id": "",
+    "description": "Shoe; lace up",
+    "color": "white",
+    "material": "",
+    "attributes": {
+      "opening-type": "opening-type:lace-up"
+    },
+    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+  }
+]

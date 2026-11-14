@@ -1,0 +1,909 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix fo: <http://example.org/multimodal-ai-knowledge-graph/fashion#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix hf: <http://example.org/multimodal-ai-knowledge-graph/home#> .
+
+
+
+<http://example.org/multimodal-ai-knowledge-graph/home> a owl:Ontology ;
+
+    rdfs:label "Home furnishings ontology (sample)"@en ;
+
+    dcterms:creator "Amazon Web Services (sample code, MIT-0)" ;
+
+    rdfs:comment "A small sample ontology written by hand for this workshop, in the same shape as the fashion ontology: kinds of furnishing in a hierarchy, families of detail with their allowed values, furniture parts, and a graph-only schema with the brand's curatorial relation (what is placed together in a room). Not a standard; extend it for a real catalog."@en ;
+
+    owl:versionInfo "0.1.0" .
+
+
+
+fo:visual a owl:AnnotationProperty ;
+
+    rdfs:label "visual concept"@en ;
+
+    rdfs:comment "false for schema concepts that cannot be observed in an image (used to exclude them from classification prompts)."@en .
+
+
+
+# ---------------------------------------------------------------- kinds
+
+hf:Furnishing a owl:Class ;
+    rdfs:label "Furnishing"@en ;
+    rdfs:comment "A piece of furniture, lighting, textile or decor."@en ;
+    skos:prefLabel "Furnishing"@en .
+
+hf:Seating a owl:Class ;
+    rdfs:label "seating"@en ;
+    rdfs:subClassOf hf:Furnishing ;
+    skos:prefLabel "seating"@en .
+
+hf:Sofa a owl:Class ;
+    rdfs:label "sofa"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "sofa"@en .
+
+hf:Sectional a owl:Class ;
+    rdfs:label "sectional"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "sectional"@en .
+
+hf:Armchair a owl:Class ;
+    rdfs:label "armchair"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "armchair"@en .
+
+hf:AccentChair a owl:Class ;
+    rdfs:label "accent chair"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "accent chair"@en .
+
+hf:DiningChair a owl:Class ;
+    rdfs:label "dining chair"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "dining chair"@en .
+
+hf:Bench a owl:Class ;
+    rdfs:label "bench"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "bench"@en .
+
+hf:Stool a owl:Class ;
+    rdfs:label "stool"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "stool"@en .
+
+hf:Ottoman a owl:Class ;
+    rdfs:label "ottoman"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "ottoman"@en .
+
+hf:Chaise a owl:Class ;
+    rdfs:label "chaise"@en ;
+    rdfs:subClassOf hf:Seating ;
+    skos:prefLabel "chaise"@en .
+
+hf:Table a owl:Class ;
+    rdfs:label "table"@en ;
+    rdfs:subClassOf hf:Furnishing ;
+    skos:prefLabel "table"@en .
+
+hf:CoffeeTable a owl:Class ;
+    rdfs:label "coffee table"@en ;
+    rdfs:subClassOf hf:Table ;
+    skos:prefLabel "coffee table"@en .
+
+hf:SideTable a owl:Class ;
+    rdfs:label "side table"@en ;
+    rdfs:subClassOf hf:Table ;
+    skos:prefLabel "side table"@en .
+
+hf:ConsoleTable a owl:Class ;
+    rdfs:label "console table"@en ;
+    rdfs:subClassOf hf:Table ;
+    skos:prefLabel "console table"@en .
+
+hf:DiningTable a owl:Class ;
+    rdfs:label "dining table"@en ;
+    rdfs:subClassOf hf:Table ;
+    skos:prefLabel "dining table"@en .
+
+hf:Desk a owl:Class ;
+    rdfs:label "desk"@en ;
+    rdfs:subClassOf hf:Table ;
+    skos:prefLabel "desk"@en .
+
+hf:Nightstand a owl:Class ;
+    rdfs:label "nightstand"@en ;
+    rdfs:subClassOf hf:Table ;
+    skos:prefLabel "nightstand"@en .
+
+hf:Storage a owl:Class ;
+    rdfs:label "storage"@en ;
+    rdfs:subClassOf hf:Furnishing ;
+    skos:prefLabel "storage"@en .
+
+hf:Bookcase a owl:Class ;
+    rdfs:label "bookcase"@en ;
+    rdfs:subClassOf hf:Storage ;
+    skos:prefLabel "bookcase"@en .
+
+hf:Sideboard a owl:Class ;
+    rdfs:label "sideboard"@en ;
+    rdfs:subClassOf hf:Storage ;
+    skos:prefLabel "sideboard"@en .
+
+hf:Dresser a owl:Class ;
+    rdfs:label "dresser"@en ;
+    rdfs:subClassOf hf:Storage ;
+    skos:prefLabel "dresser"@en .
+
+hf:Cabinet a owl:Class ;
+    rdfs:label "cabinet"@en ;
+    rdfs:subClassOf hf:Storage ;
+    skos:prefLabel "cabinet"@en .
+
+hf:ShelvingUnit a owl:Class ;
+    rdfs:label "shelving unit"@en ;
+    rdfs:subClassOf hf:Storage ;
+    skos:prefLabel "shelving unit"@en .
+
+hf:MediaUnit a owl:Class ;
+    rdfs:label "media unit"@en ;
+    rdfs:subClassOf hf:Storage ;
+    skos:prefLabel "media unit"@en .
+
+hf:Bed a owl:Class ;
+    rdfs:label "bed"@en ;
+    rdfs:subClassOf hf:Furnishing ;
+    skos:prefLabel "bed"@en .
+
+hf:BedFrame a owl:Class ;
+    rdfs:label "bed frame"@en ;
+    rdfs:subClassOf hf:Bed ;
+    skos:prefLabel "bed frame"@en .
+
+hf:Headboard a owl:Class ;
+    rdfs:label "headboard"@en ;
+    rdfs:subClassOf hf:Bed ;
+    skos:prefLabel "headboard"@en .
+
+hf:Lighting a owl:Class ;
+    rdfs:label "lighting"@en ;
+    rdfs:subClassOf hf:Furnishing ;
+    skos:prefLabel "lighting"@en .
+
+hf:FloorLamp a owl:Class ;
+    rdfs:label "floor lamp"@en ;
+    rdfs:subClassOf hf:Lighting ;
+    skos:prefLabel "floor lamp"@en .
+
+hf:TableLamp a owl:Class ;
+    rdfs:label "table lamp"@en ;
+    rdfs:subClassOf hf:Lighting ;
+    skos:prefLabel "table lamp"@en .
+
+hf:Pendant a owl:Class ;
+    rdfs:label "pendant"@en ;
+    rdfs:subClassOf hf:Lighting ;
+    skos:prefLabel "pendant"@en .
+
+hf:Chandelier a owl:Class ;
+    rdfs:label "chandelier"@en ;
+    rdfs:subClassOf hf:Lighting ;
+    skos:prefLabel "chandelier"@en .
+
+hf:WallSconce a owl:Class ;
+    rdfs:label "wall sconce"@en ;
+    rdfs:subClassOf hf:Lighting ;
+    skos:prefLabel "wall sconce"@en .
+
+hf:Textile a owl:Class ;
+    rdfs:label "textile"@en ;
+    rdfs:subClassOf hf:Furnishing ;
+    skos:prefLabel "textile"@en .
+
+hf:Rug a owl:Class ;
+    rdfs:label "rug"@en ;
+    rdfs:subClassOf hf:Textile ;
+    skos:prefLabel "rug"@en .
+
+hf:Throw a owl:Class ;
+    rdfs:label "throw"@en ;
+    rdfs:subClassOf hf:Textile ;
+    skos:prefLabel "throw"@en .
+
+hf:Cushion a owl:Class ;
+    rdfs:label "cushion"@en ;
+    rdfs:subClassOf hf:Textile ;
+    skos:prefLabel "cushion"@en .
+
+hf:Curtain a owl:Class ;
+    rdfs:label "curtain"@en ;
+    rdfs:subClassOf hf:Textile ;
+    skos:prefLabel "curtain"@en .
+
+hf:Bedding a owl:Class ;
+    rdfs:label "bedding"@en ;
+    rdfs:subClassOf hf:Textile ;
+    skos:prefLabel "bedding"@en .
+
+hf:Decor a owl:Class ;
+    rdfs:label "decor"@en ;
+    rdfs:subClassOf hf:Furnishing ;
+    skos:prefLabel "decor"@en .
+
+hf:Mirror a owl:Class ;
+    rdfs:label "mirror"@en ;
+    rdfs:subClassOf hf:Decor ;
+    skos:prefLabel "mirror"@en .
+
+hf:Vase a owl:Class ;
+    rdfs:label "vase"@en ;
+    rdfs:subClassOf hf:Decor ;
+    skos:prefLabel "vase"@en .
+
+hf:WallArt a owl:Class ;
+    rdfs:label "wall art"@en ;
+    rdfs:subClassOf hf:Decor ;
+    skos:prefLabel "wall art"@en .
+
+hf:Planter a owl:Class ;
+    rdfs:label "planter"@en ;
+    rdfs:subClassOf hf:Decor ;
+    skos:prefLabel "planter"@en .
+
+hf:Candle a owl:Class ;
+    rdfs:label "candle"@en ;
+    rdfs:subClassOf hf:Decor ;
+    skos:prefLabel "candle"@en .
+
+hf:Clock a owl:Class ;
+    rdfs:label "clock"@en ;
+    rdfs:subClassOf hf:Decor ;
+    skos:prefLabel "clock"@en .
+
+
+# ---------------------------------------------------------------- parts
+
+hf:FurnitureComponent a owl:Class ;
+    rdfs:label "Furniture component"@en ;
+    rdfs:comment "A visible part of a piece of furniture or a lamp."@en ;
+    skos:prefLabel "Furniture component"@en .
+
+hf:Structure a owl:Class ;
+    rdfs:label "structure"@en ;
+    rdfs:subClassOf hf:FurnitureComponent ;
+    skos:prefLabel "structure"@en .
+
+hf:Leg a owl:Class ;
+    rdfs:label "leg"@en ;
+    rdfs:subClassOf hf:Structure ;
+    skos:prefLabel "leg"@en .
+
+hf:Base a owl:Class ;
+    rdfs:label "base"@en ;
+    rdfs:subClassOf hf:Structure ;
+    skos:prefLabel "base"@en .
+
+hf:Frame a owl:Class ;
+    rdfs:label "frame"@en ;
+    rdfs:subClassOf hf:Structure ;
+    skos:prefLabel "frame"@en .
+
+hf:Arm a owl:Class ;
+    rdfs:label "arm"@en ;
+    rdfs:subClassOf hf:Structure ;
+    skos:prefLabel "arm"@en .
+
+hf:Backrest a owl:Class ;
+    rdfs:label "backrest"@en ;
+    rdfs:subClassOf hf:Structure ;
+    skos:prefLabel "backrest"@en .
+
+hf:Surface a owl:Class ;
+    rdfs:label "surface"@en ;
+    rdfs:subClassOf hf:FurnitureComponent ;
+    skos:prefLabel "surface"@en .
+
+hf:Tabletop a owl:Class ;
+    rdfs:label "tabletop"@en ;
+    rdfs:subClassOf hf:Surface ;
+    skos:prefLabel "tabletop"@en .
+
+hf:Shelf a owl:Class ;
+    rdfs:label "shelf"@en ;
+    rdfs:subClassOf hf:Surface ;
+    skos:prefLabel "shelf"@en .
+
+hf:SeatCushion a owl:Class ;
+    rdfs:label "seat cushion"@en ;
+    rdfs:subClassOf hf:Surface ;
+    skos:prefLabel "seat cushion"@en .
+
+hf:Hardware a owl:Class ;
+    rdfs:label "hardware"@en ;
+    rdfs:subClassOf hf:FurnitureComponent ;
+    skos:prefLabel "hardware"@en .
+
+hf:Handle a owl:Class ;
+    rdfs:label "handle"@en ;
+    rdfs:subClassOf hf:Hardware ;
+    skos:prefLabel "handle"@en .
+
+hf:Hinge a owl:Class ;
+    rdfs:label "hinge"@en ;
+    rdfs:subClassOf hf:Hardware ;
+    skos:prefLabel "hinge"@en .
+
+hf:Caster a owl:Class ;
+    rdfs:label "caster"@en ;
+    rdfs:subClassOf hf:Hardware ;
+    skos:prefLabel "caster"@en .
+
+hf:LightPart a owl:Class ;
+    rdfs:label "light part"@en ;
+    rdfs:subClassOf hf:FurnitureComponent ;
+    skos:prefLabel "light part"@en .
+
+hf:Lampshade a owl:Class ;
+    rdfs:label "lampshade"@en ;
+    rdfs:subClassOf hf:LightPart ;
+    skos:prefLabel "lampshade"@en .
+
+hf:Bulb a owl:Class ;
+    rdfs:label "bulb"@en ;
+    rdfs:subClassOf hf:LightPart ;
+    skos:prefLabel "bulb"@en .
+
+hf:Cord a owl:Class ;
+    rdfs:label "cord"@en ;
+    rdfs:subClassOf hf:LightPart ;
+    skos:prefLabel "cord"@en .
+
+hf:hasPart a owl:ObjectProperty ;
+    rdfs:label "has part"@en ;
+    rdfs:comment "A part of the packaging, applicator or piece, visible in the photo."@en ;
+    rdfs:domain hf:Furnishing ;
+    rdfs:range hf:FurnitureComponent .
+
+
+# ---------------------------------------------------------------- details and their allowed values
+
+hf:Attribute a owl:Class ;
+    rdfs:label "Attribute value"@en ;
+    rdfs:comment "A detail of a product; each family is a subclass and each value a named individual."@en ;
+    skos:prefLabel "Attribute value"@en .
+
+hf:hasAttribute a owl:ObjectProperty ;
+    rdfs:label "has attribute"@en ;
+    rdfs:comment "Generic link from a product to one of its detail values; sub-properties are one per family."@en ;
+    rdfs:domain hf:Furnishing ;
+    rdfs:range hf:Attribute .
+
+hf:Material a owl:Class ;
+    rdfs:label "material"@en ;
+    rdfs:subClassOf hf:Attribute ;
+    skos:prefLabel "material"@en .
+
+hf:hasMaterial a owl:ObjectProperty ;
+    rdfs:label "hasMaterial"@en ;
+    rdfs:domain hf:Furnishing ;
+    rdfs:range hf:Material ;
+    rdfs:subPropertyOf hf:hasAttribute .
+
+hf:material_oak a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "oak"@en ;
+    skos:prefLabel "oak"@en .
+
+hf:material_walnut a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "walnut"@en ;
+    skos:prefLabel "walnut"@en .
+
+hf:material_ash a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "ash"@en ;
+    skos:prefLabel "ash"@en .
+
+hf:material_rattan a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "rattan"@en ;
+    skos:prefLabel "rattan"@en .
+
+hf:material_cane a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "cane"@en ;
+    skos:prefLabel "cane"@en .
+
+hf:material_marble a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "marble"@en ;
+    skos:prefLabel "marble"@en .
+
+hf:material_travertine a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "travertine"@en ;
+    skos:prefLabel "travertine"@en .
+
+hf:material_brass a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "brass"@en ;
+    skos:prefLabel "brass"@en .
+
+hf:material_steel a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "steel"@en ;
+    skos:prefLabel "steel"@en .
+
+hf:material_glass a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "glass"@en ;
+    skos:prefLabel "glass"@en .
+
+hf:material_linen a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "linen"@en ;
+    skos:prefLabel "linen"@en .
+
+hf:material_boucle a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "boucle"@en ;
+    skos:prefLabel "boucle"@en .
+
+hf:material_velvet a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "velvet"@en ;
+    skos:prefLabel "velvet"@en .
+
+hf:material_leather a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "leather"@en ;
+    skos:prefLabel "leather"@en .
+
+hf:material_wool a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "wool"@en ;
+    skos:prefLabel "wool"@en .
+
+hf:material_jute a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "jute"@en ;
+    skos:prefLabel "jute"@en .
+
+hf:material_ceramic a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "ceramic"@en ;
+    skos:prefLabel "ceramic"@en .
+
+hf:material_concrete a hf:Material,
+        owl:NamedIndividual ;
+    rdfs:label "concrete"@en ;
+    skos:prefLabel "concrete"@en .
+
+hf:Style a owl:Class ;
+    rdfs:label "style"@en ;
+    rdfs:subClassOf hf:Attribute ;
+    skos:prefLabel "style"@en .
+
+hf:hasStyle a owl:ObjectProperty ;
+    rdfs:label "hasStyle"@en ;
+    rdfs:domain hf:Furnishing ;
+    rdfs:range hf:Style ;
+    rdfs:subPropertyOf hf:hasAttribute .
+
+hf:style_mid-century-modern a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "mid-century modern"@en ;
+    skos:prefLabel "mid-century modern"@en .
+
+hf:style_scandinavian a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "Scandinavian"@en ;
+    skos:prefLabel "Scandinavian"@en .
+
+hf:style_japandi a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "Japandi"@en ;
+    skos:prefLabel "Japandi"@en .
+
+hf:style_industrial a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "industrial"@en ;
+    skos:prefLabel "industrial"@en .
+
+hf:style_traditional a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "traditional"@en ;
+    skos:prefLabel "traditional"@en .
+
+hf:style_coastal a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "coastal"@en ;
+    skos:prefLabel "coastal"@en .
+
+hf:style_bohemian a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "bohemian"@en ;
+    skos:prefLabel "bohemian"@en .
+
+hf:style_minimalist a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "minimalist"@en ;
+    skos:prefLabel "minimalist"@en .
+
+hf:style_art-deco a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "art deco"@en ;
+    skos:prefLabel "art deco"@en .
+
+hf:style_farmhouse a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "farmhouse"@en ;
+    skos:prefLabel "farmhouse"@en .
+
+hf:style_contemporary a hf:Style,
+        owl:NamedIndividual ;
+    rdfs:label "contemporary"@en ;
+    skos:prefLabel "contemporary"@en .
+
+hf:Finish a owl:Class ;
+    rdfs:label "finish"@en ;
+    rdfs:subClassOf hf:Attribute ;
+    skos:prefLabel "finish"@en .
+
+hf:hasFinish a owl:ObjectProperty ;
+    rdfs:label "hasFinish"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( hf:Seating hf:Table hf:Storage hf:Bed hf:Lighting hf:Decor ) ] ;
+    rdfs:range hf:Finish ;
+    rdfs:subPropertyOf hf:hasAttribute .
+
+hf:finish_matte a hf:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "matte"@en ;
+    skos:prefLabel "matte"@en .
+
+hf:finish_lacquered a hf:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "lacquered"@en ;
+    skos:prefLabel "lacquered"@en .
+
+hf:finish_oiled a hf:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "oiled"@en ;
+    skos:prefLabel "oiled"@en .
+
+hf:finish_natural a hf:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "natural"@en ;
+    skos:prefLabel "natural"@en .
+
+hf:finish_painted a hf:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "painted"@en ;
+    skos:prefLabel "painted"@en .
+
+hf:finish_brushed a hf:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "brushed"@en ;
+    skos:prefLabel "brushed"@en .
+
+hf:finish_polished a hf:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "polished"@en ;
+    skos:prefLabel "polished"@en .
+
+hf:finish_distressed a hf:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "distressed"@en ;
+    skos:prefLabel "distressed"@en .
+
+hf:Shape a owl:Class ;
+    rdfs:label "shape"@en ;
+    rdfs:subClassOf hf:Attribute ;
+    skos:prefLabel "shape"@en .
+
+hf:hasShape a owl:ObjectProperty ;
+    rdfs:label "hasShape"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( hf:Table hf:Lighting hf:Decor hf:Textile ) ] ;
+    rdfs:range hf:Shape ;
+    rdfs:subPropertyOf hf:hasAttribute .
+
+hf:shape_round a hf:Shape,
+        owl:NamedIndividual ;
+    rdfs:label "round"@en ;
+    skos:prefLabel "round"@en .
+
+hf:shape_oval a hf:Shape,
+        owl:NamedIndividual ;
+    rdfs:label "oval"@en ;
+    skos:prefLabel "oval"@en .
+
+hf:shape_rectangular a hf:Shape,
+        owl:NamedIndividual ;
+    rdfs:label "rectangular"@en ;
+    skos:prefLabel "rectangular"@en .
+
+hf:shape_square a hf:Shape,
+        owl:NamedIndividual ;
+    rdfs:label "square"@en ;
+    skos:prefLabel "square"@en .
+
+hf:shape_curved a hf:Shape,
+        owl:NamedIndividual ;
+    rdfs:label "curved"@en ;
+    skos:prefLabel "curved"@en .
+
+hf:shape_organic a hf:Shape,
+        owl:NamedIndividual ;
+    rdfs:label "organic"@en ;
+    skos:prefLabel "organic"@en .
+
+hf:shape_tapered a hf:Shape,
+        owl:NamedIndividual ;
+    rdfs:label "tapered"@en ;
+    skos:prefLabel "tapered"@en .
+
+hf:Color a owl:Class ;
+    rdfs:label "color"@en ;
+    rdfs:subClassOf hf:Attribute ;
+    skos:prefLabel "color"@en .
+
+hf:hasColor a owl:ObjectProperty ;
+    rdfs:label "hasColor"@en ;
+    rdfs:domain hf:Furnishing ;
+    rdfs:range hf:Color ;
+    rdfs:subPropertyOf hf:hasAttribute .
+
+hf:color_white a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "white"@en ;
+    skos:prefLabel "white"@en .
+
+hf:color_ivory a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "ivory"@en ;
+    skos:prefLabel "ivory"@en .
+
+hf:color_black a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "black"@en ;
+    skos:prefLabel "black"@en .
+
+hf:color_charcoal a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "charcoal"@en ;
+    skos:prefLabel "charcoal"@en .
+
+hf:color_natural-wood a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "natural wood"@en ;
+    skos:prefLabel "natural wood"@en .
+
+hf:color_sage a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "sage"@en ;
+    skos:prefLabel "sage"@en .
+
+hf:color_terracotta a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "terracotta"@en ;
+    skos:prefLabel "terracotta"@en .
+
+hf:color_navy a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "navy"@en ;
+    skos:prefLabel "navy"@en .
+
+hf:color_blush a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "blush"@en ;
+    skos:prefLabel "blush"@en .
+
+hf:color_mustard a hf:Color,
+        owl:NamedIndividual ;
+    rdfs:label "mustard"@en ;
+    skos:prefLabel "mustard"@en .
+
+hf:Pattern a owl:Class ;
+    rdfs:label "pattern"@en ;
+    rdfs:subClassOf hf:Attribute ;
+    skos:prefLabel "pattern"@en .
+
+hf:hasPattern a owl:ObjectProperty ;
+    rdfs:label "hasPattern"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( hf:Seating hf:Textile ) ] ;
+    rdfs:range hf:Pattern ;
+    rdfs:subPropertyOf hf:hasAttribute .
+
+hf:pattern_solid a hf:Pattern,
+        owl:NamedIndividual ;
+    rdfs:label "solid"@en ;
+    skos:prefLabel "solid"@en .
+
+hf:pattern_striped a hf:Pattern,
+        owl:NamedIndividual ;
+    rdfs:label "striped"@en ;
+    skos:prefLabel "striped"@en .
+
+hf:pattern_checked a hf:Pattern,
+        owl:NamedIndividual ;
+    rdfs:label "checked"@en ;
+    skos:prefLabel "checked"@en .
+
+hf:pattern_floral a hf:Pattern,
+        owl:NamedIndividual ;
+    rdfs:label "floral"@en ;
+    skos:prefLabel "floral"@en .
+
+hf:pattern_geometric a hf:Pattern,
+        owl:NamedIndividual ;
+    rdfs:label "geometric"@en ;
+    skos:prefLabel "geometric"@en .
+
+hf:pattern_textured a hf:Pattern,
+        owl:NamedIndividual ;
+    rdfs:label "textured"@en ;
+    skos:prefLabel "textured"@en .
+
+hf:Scale a owl:Class ;
+    rdfs:label "scale"@en ;
+    rdfs:subClassOf hf:Attribute ;
+    skos:prefLabel "scale"@en .
+
+hf:hasScale a owl:ObjectProperty ;
+    rdfs:label "hasScale"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( hf:Seating hf:Table hf:Storage hf:Bed ) ] ;
+    rdfs:range hf:Scale ;
+    rdfs:subPropertyOf hf:hasAttribute .
+
+hf:scale_compact a hf:Scale,
+        owl:NamedIndividual ;
+    rdfs:label "compact"@en ;
+    skos:prefLabel "compact"@en .
+
+hf:scale_standard a hf:Scale,
+        owl:NamedIndividual ;
+    rdfs:label "standard"@en ;
+    skos:prefLabel "standard"@en .
+
+hf:scale_oversized a hf:Scale,
+        owl:NamedIndividual ;
+    rdfs:label "oversized"@en ;
+    skos:prefLabel "oversized"@en .
+
+hf:Room a owl:Class ;
+    rdfs:label "room"@en ;
+    rdfs:subClassOf hf:Attribute ;
+    skos:prefLabel "room"@en .
+
+hf:hasRoom a owl:ObjectProperty ;
+    rdfs:label "hasRoom"@en ;
+    rdfs:domain hf:Furnishing ;
+    rdfs:range hf:Room ;
+    rdfs:subPropertyOf hf:hasAttribute .
+
+hf:room_living-room a hf:Room,
+        owl:NamedIndividual ;
+    rdfs:label "living room"@en ;
+    skos:prefLabel "living room"@en .
+
+hf:room_dining-room a hf:Room,
+        owl:NamedIndividual ;
+    rdfs:label "dining room"@en ;
+    skos:prefLabel "dining room"@en .
+
+hf:room_bedroom a hf:Room,
+        owl:NamedIndividual ;
+    rdfs:label "bedroom"@en ;
+    skos:prefLabel "bedroom"@en .
+
+hf:room_home-office a hf:Room,
+        owl:NamedIndividual ;
+    rdfs:label "home office"@en ;
+    skos:prefLabel "home office"@en .
+
+hf:room_entryway a hf:Room,
+        owl:NamedIndividual ;
+    rdfs:label "entryway"@en ;
+    skos:prefLabel "entryway"@en .
+
+hf:room_outdoor a hf:Room,
+        owl:NamedIndividual ;
+    rdfs:label "outdoor"@en ;
+    skos:prefLabel "outdoor"@en .
+
+
+# ---------------------------------------------------------------- the brand graph's schema (not shown to the vision model)
+
+hf:RoomScene a owl:Class ;
+    rdfs:label "RoomScene"@en ;
+    fo:visual false ;
+    rdfs:comment "A styled room the brand shows: catalog or showroom photography (home's look)."@en ;
+    skos:prefLabel "RoomScene"@en .
+
+hf:Item a owl:Class ;
+    rdfs:label "Item"@en ;
+    fo:visual false ;
+    rdfs:comment "One piece as it appears in a room scene or a product shot."@en ;
+    skos:prefLabel "Item"@en .
+
+hf:Brand a owl:Class ;
+    rdfs:label "Brand"@en ;
+    fo:visual false ;
+    rdfs:comment "The brand."@en ;
+    skos:prefLabel "Brand"@en .
+
+hf:Article a owl:Class ;
+    rdfs:label "Article"@en ;
+    fo:visual false ;
+    rdfs:comment "An editorial text: a styling guide, a journal post."@en ;
+    skos:prefLabel "Article"@en .
+
+hf:Statement a owl:Class ;
+    rdfs:label "Statement"@en ;
+    fo:visual false ;
+    rdfs:comment "One claim of an article, about a room scene or a piece."@en ;
+    skos:prefLabel "Statement"@en .
+
+hf:contains a owl:ObjectProperty ;
+    rdfs:label "contains"@en ;
+    fo:visual false ;
+    rdfs:comment "The pieces in a room scene."@en ;
+    rdfs:domain hf:RoomScene ;
+    rdfs:range hf:Item .
+
+hf:isCategory a owl:ObjectProperty ;
+    rdfs:label "is category"@en ;
+    fo:visual false ;
+    rdfs:comment "The kind of furnishing an item is."@en ;
+    rdfs:domain hf:Item ;
+    rdfs:range hf:Furnishing .
+
+hf:hasStatement a owl:ObjectProperty ;
+    rdfs:label "has statement"@en ;
+    fo:visual false ;
+    rdfs:comment "The statements of an article."@en ;
+    rdfs:domain hf:Article ;
+    rdfs:range hf:Statement .
+
+hf:illustrates a owl:ObjectProperty ;
+    rdfs:label "illustrates"@en ;
+    fo:visual false ;
+    rdfs:comment "The room scene a statement is about."@en ;
+    rdfs:domain hf:Statement ;
+    rdfs:range hf:RoomScene .
+
+hf:placedWith a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "placed with"@en ;
+    fo:visual false ;
+    rdfs:comment "Kind-level styling rule: pieces of these kinds are shown together in a room."@en ;
+    rdfs:domain hf:Furnishing ;
+    rdfs:range hf:Furnishing .
+
+
+# ---------------------------------------------------------------- a few of the brand's rules, as examples
+
+hf:Sofa hf:placedWith hf:CoffeeTable .
+
+hf:Sofa hf:placedWith hf:Rug .
+
+hf:Armchair hf:placedWith hf:SideTable .
+
+hf:DiningTable hf:placedWith hf:Pendant .
+
+hf:BedFrame hf:placedWith hf:Nightstand .

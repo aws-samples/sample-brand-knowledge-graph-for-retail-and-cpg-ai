@@ -1,0 +1,6 @@
+{
+  "name": "Beauty and skincare",
+  "description": "Skincare, makeup, haircare, body care and fragrance products, their packaging parts and their details (key ingredient, skin type and concern, finish, texture), with a routine order and ingredient conflicts as the brand's rules. Written by hand for this sample, to browse.",
+  "browse_only": true,
+  "start_with": ["Serum", "hasKeyIngredient", "Dropper"]
+}

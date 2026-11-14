@@ -1,0 +1,10 @@
+# gitleaks settings: the default rules, plus one path whose matches are never secrets.
+# .gitleaksignore lists the individual findings reviewed so far.
+title = "gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "detect-secrets baseline: SHA-1 hashes of the strings it reviewed, never the strings"
+paths = ['''^\.secrets\.baseline$''']

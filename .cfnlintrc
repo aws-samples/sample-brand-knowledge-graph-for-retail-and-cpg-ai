@@ -1,0 +1,9 @@
+# cfn-lint settings for the synthesized templates (infra/cdk.out/*.template.json):
+#   uvx cfn-lint infra/cdk.out/MultimodalAiKnowledgeGraph.template.json
+# E3601 reads the state machine's task resource "arn:${Partition}:states:::lambda:invoke" as a
+# malformed ARN. ${Partition} is a DefinitionSubstitutions placeholder of the state machine
+# (backend/src/ontology_rag/pipeline.asl.json) that CloudFormation replaces with the partition at
+# deploy time, so the rule has nothing to check there. W3005 (redundant DependsOn) and W3045 (the
+# logs bucket's LogDeliveryWrite ACL, which CloudFront standard logging needs) are left visible.
+ignore_checks:
+  - E3601

@@ -1,0 +1,13 @@
+# Versions the S3 Tables MCP server (awslabs.s3-tables-mcp-server==0.1.1) runs with in this sample.
+# The server pins exact versions; pyiceberg 0.10.0 has no Linux arm64 wheels (AgentCore Runtime) and
+# none for Python 3.13+, and boto3 1.42 / mcp 2.0 would clash with the rest of the agent's runtime.
+# Used as `uvx --overrides` locally (lake_agent.server_parameters) and as `uv pip compile --override`
+# for the lake agent's runtime (backend/agentcore-lake/requirements.txt); tests/test_lake_agent.py
+# runs the server's query engine on these versions.
+boto3==1.43.111
+botocore==1.43.111
+mcp[cli]==2.3.0
+pydantic==2.14.0
+pyiceberg==0.12.0
+pyarrow==25.0.1
+daft==0.7.26

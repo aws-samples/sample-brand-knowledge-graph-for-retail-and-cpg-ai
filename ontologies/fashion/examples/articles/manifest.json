@@ -1,0 +1,56 @@
+{
+  "license": "MIT-0. Synthetic editorial copy and social posts written for this sample about the fictional brand \"Whimsikora\"; they describe no real brand, product, person or dataset.",
+  "articles": [
+    {
+      "file": "01-three-ways-trench.md",
+      "title": "Three ways to wear the trench this autumn",
+      "kind": "editorial",
+      "source": "Whimsikora Journal",
+      "published": "2026-09-14",
+      "pairs_with_image": "01-trench-coat-sweater-dress.jpg",
+      "batch": "first"
+    },
+    {
+      "file": "02-sheath-dress-post.md",
+      "title": "Last of the summer light",
+      "kind": "social post",
+      "source": "Whimsikora · social post",
+      "published": "2026-09-02",
+      "pairs_with_image": "02-sheath-dress-knee-high-boots.jpg"
+    },
+    {
+      "file": "03-fitting-room-pinstripe-suit.md",
+      "title": "Fitting-room notes: the pinstripe suit",
+      "kind": "product notes",
+      "source": "Whimsikora fitting-room notes",
+      "published": "2026-08-27",
+      "pairs_with_image": "08-pinstripe-suit.jpg",
+      "batch": "first"
+    },
+    {
+      "file": "04-biker-jacket-weekend-post.md",
+      "title": "Weekend uniform",
+      "kind": "social post",
+      "source": "Whimsikora · social post",
+      "published": "2026-08-30",
+      "pairs_with_image": "04-biker-jacket-jeans-sneakers.jpg",
+      "batch": "first"
+    },
+    {
+      "file": "05-layering-knits.md",
+      "title": "Layering knits without the bulk",
+      "kind": "editorial",
+      "source": "Whimsikora Journal",
+      "published": "2026-09-21",
+      "pairs_with_image": "06-cardigan-wide-leg-trousers.jpg"
+    },
+    {
+      "file": "06-wool-coat-cold-snap-post.md",
+      "title": "Cold snap",
+      "kind": "social post",
+      "source": "Whimsikora · social post",
+      "published": "2026-09-26",
+      "pairs_with_image": "07-wool-coat-ankle-boots.jpg"
+    }
+  ]
+}
