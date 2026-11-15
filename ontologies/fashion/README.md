@@ -138,7 +138,8 @@ Annotation properties: `fo:conceptId` (the stable id the pipeline uses: `coat`, 
 * **Graph loader**: `ontology.load_ontology()` maps the OWL onto the flat model the graph uses
   (`Group` / `Category` / `AttributeFamily` / `Attribute` nodes with `IN_GROUP`, `IN_FAMILY`,
   `APPLIES_TO` edges), keyed by `fo:conceptId`, so the domain's data sets in [`datasets/`](datasets/)
-  (the sample ships [`datasets/velloway/`](datasets/velloway/)) join on it; a catalog's attributes are
+  (the sample ships [`datasets/velloway/`](datasets/velloway/) and
+  [`datasets/whimsikora/`](datasets/whimsikora/)) join on it; a catalog's attributes are
   validated against the applicability matrix. The individuals of a photo property's range become
   shared nodes labeled with their class (`(:Occasion {id: "occasion:evening"})`), and a look's
   occasion text (`"evening / formal"`) is matched against their labels: `Look -FOR-> Occasion`.

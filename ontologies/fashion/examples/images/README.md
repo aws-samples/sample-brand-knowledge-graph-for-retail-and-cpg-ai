@@ -16,11 +16,10 @@ length, pattern, opening type, material).
 | `07-wool-coat-ankle-boots.jpg` | long wool coat, white shirt, pleated wide-leg trousers, cap-toe ankle boots, chain-strap bag |
 | `08-pinstripe-suit.jpg` | pinstripe suit, silk blouse, flat slides, tote with a pearl strap |
 
-Tab 2 (Hydrate the graph) starts with a first batch when the domain has no new shoot: the
-photos and texts whose manifest entry says `"batch": "first"`. Here that is `01`, `04` and `08`
-with the texts about them, so one of the looks wears white sneakers, the garment the sample's
-example question is about; its title says so ("biker jacket, jeans, white sneakers"), which tab
-2's step 1 counts.
+Tab 2 (*Hydrate the graph*) starts with the photos and texts whose manifest entry says
+`"batch": "first"`: photos `01`, `04` and `08` and the texts about them. Photo `04` wears white
+sneakers, the garment the sample's example question is about. Its title says so ("biker jacket,
+jeans, white sneakers"), and tab 2's step 1 counts the photos whose title names white sneakers.
 
 ## Provenance and license
 
@@ -30,9 +29,7 @@ this sample (the original file name of each photo is in `manifest.json`). The sa
 Whimsikora data set holds one more photo of the same lookbook
 ([`../../datasets/whimsikora/`](../../datasets/whimsikora/)). The photos depict no real person and
 contain no third-party photography, so they can be redistributed with this sample under its
-license. Amazon Nova Canvas reached the end of its life on Amazon Bedrock in September 2026 and the
-sample has no script that generates them, so the photos cannot be generated again; to try other
-outfits, add your own photos (below).
+license. To try other outfits, add your own photos (below).
 
 No Fashionpedia dataset image is included: Fashionpedia does not own its photos (Flickr /
 Unsplash / Pexels terms); only its CC BY 4.0 ontology is reused (see

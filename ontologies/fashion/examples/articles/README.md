@@ -1,7 +1,7 @@
 # Example articles for the fashion ontology
 
-Six short texts (editorial pieces, social posts and fitting-room notes) used by the
-**Ingest pipeline** tab next to the example images in [`../images/`](../images/). Each describes an outfit
+Six short texts (editorial pieces, social posts and fitting-room notes) used by tab 2
+(*Hydrate the graph*) next to the example images in [`../images/`](../images/). Each describes an outfit
 with the same kind of detail a photo shows (garments, parts, silhouette, neckline, length,
 opening type, pattern, material), so the same ontology-grounded classification works on a
 text as on an image: identical system prompt, only the user turn differs.
@@ -32,7 +32,7 @@ brand, product, person or dataset and are distributed under this sample's licens
 ## Add your own
 
 Any `*.md` or `*.txt` file dropped into this folder is listed automatically by the API
-(`GET /api/ontologies/articles?id=fashion`) and appears in the Ingest pipeline tab's
+(`GET /api/ontologies/articles?id=fashion`) and appears in tab 2's
 source picker; a `manifest.json` entry only adds a title, kind, source and date. Keep files
 under 20,000 characters; the first `# heading` becomes the title when there is no manifest
 entry.

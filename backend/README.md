@@ -42,8 +42,7 @@ is what the tests use.
 The runtime dependencies are `boto3` and `rdflib` (`pyproject.toml`). The Lambda zip vendors
 rdflib, pyparsing and boto3 with its dependencies: the 9 pins of `lambda-requirements.in`, resolved
 with hashes into `lambda-requirements.txt`, which `infra/lib/bundling.ts` installs with
-`--require-hashes` (CPython 3.14 x86_64 wheels, no Docker). There is no token library: IAM decides
-at the function URL who may call the API.
+`--require-hashes` (CPython 3.14 x86_64 wheels, no Docker).
 
 Deployed, the agents run on Amazon Bedrock AgentCore Runtime from zips of their own: `agentcore/main.py`
 (the query agent) and `agentcore-lake/main.py` (the lake agent), this package and the pinned closure
@@ -76,5 +75,5 @@ fails when a refactor moves a marked line, so the panels cannot drift from the c
 
 Imports sit at the top of a module, with two exceptions: `boto3` (and the clients built from it)
 is imported where it is used, so that `pytest -q` neither loads the SDK nor needs credentials
-and runs offline in about 12 s; and the optional extras (`mcp`, `pyiceberg`, `pyarrow`) are imported
+and runs offline in about 25 s; and the optional extras (`mcp`, `pyiceberg`, `pyarrow`) are imported
 where they are used, so the package works without them.

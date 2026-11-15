@@ -35,7 +35,7 @@ ontologies/
     ├── <domain>.ttl                the ontology
     ├── domain.json                 optional
     ├── README.md
-    ├── build_*.py, generate_*.py   scripts that made the files (never deployed)
+    ├── build_*.py                  optional: the script that builds the ontology (never deployed)
     ├── examples/                   inputs to try in the app; the deploy never loads them into the graph
     │   ├── images/                 whole photos (tabs 1, 2; tab 6 for "batch": "new-work") + manifest.json, README.md
     │   ├── items/                  single pieces (tab 5's Style recommendation) + manifest.json, README.md
@@ -58,7 +58,7 @@ The ontology file may be Turtle (preferred), RDF/XML (`.owl`, `.rdf`, `.xml`), N
 or JSON-LD (`.jsonld`). The domain's `README.md` holds attribution and modeling notes
 (`GET /api/ontologies/detail` returns it as `readme`). In `examples/`, photos are JPEG, PNG, WebP
 or GIF and texts are `.md` or `.txt`. Each `manifest.json` is optional and adds per file what the
-file name cannot say (a photo's title, prompt and provenance; a piece's category and source photo;
+file name cannot say (a photo's title and provenance; a piece's category and source photo;
 a text's kind, source, date and the photo it pairs with), and a `README.md` is never listed as an
 example.
 

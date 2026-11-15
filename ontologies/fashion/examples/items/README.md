@@ -41,9 +41,7 @@ model, and the result of both checks.
 Synthetic images generated with Amazon Nova Canvas on Amazon Bedrock for the Whimsikora catalog
 (the product shot of each file is named in `manifest.json`), redistributed under the same license
 as the sample. They show no real person and contain no third-party photography (see
-[`../images/README.md`](../images/README.md)). Like the example photos, they cannot be generated
-again: Amazon Nova Canvas reached the end of its life on Amazon Bedrock in September 2026, and the
-sample has no script that generates them.
+[`../images/README.md`](../images/README.md)).
 
 Any image dropped into this folder is listed by `GET /api/ontologies/examples?id=fashion&set=items`
 and offered in tab 5; the manifest only adds titles and categories.

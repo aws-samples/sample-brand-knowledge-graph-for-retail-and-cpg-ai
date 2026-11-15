@@ -20,9 +20,9 @@ Bedrock AgentCore Runtime, to the comparison itself. The sample is the take-home
 
 > [!NOTE]
 > All catalog data is synthetic: two fictional brands, Velloway and Whimsikora. The photos are
-> Whimsikora's lookbook photos and product shots, generated on Amazon Bedrock with Amazon Nova Canvas
-> (which reached end of life in September 2026), and show no real person. No customer data is
-> included. [Bring your own data](#bring-your-own-data) shows how to add your own catalog.
+> Whimsikora's lookbook photos and product shots, generated on Amazon Bedrock with Amazon Nova Canvas,
+> and show no real person. No customer data is included. [Bring your own data](#bring-your-own-data)
+> shows how to add your own catalog.
 
 ## Contents
 
@@ -64,8 +64,8 @@ the brand's looks in the graph.
 
 ![RAG and GraphRAG side by side. Both search the same product catalog in Amazon S3 Vectors and answer with the same prompt in Amazon Bedrock. RAG plans 3 to 6 searches with a model; GraphRAG embeds the question, finds the brand's looks in Neptune Analytics and searches the catalog for their pieces.](assets/rag-vs-graphrag.png)
 
-A re:Invent 2026 workshop (IND416) builds on this sample by adding a larger data set. The workshop
-is not part of this repository.
+The IND416 session's workshop builds on this sample by adding a larger data set. The workshop is
+not part of this repository.
 
 ## Architecture
 

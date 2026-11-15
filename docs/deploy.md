@@ -56,9 +56,8 @@ or when the loading code changes (`loader.py`, `dna.py`, `ontology.py`, `owl.py`
 `service.py` and `payoff.py` in `backend/src/ontology_rag/`). Adding or changing a data set
 therefore loads it on the next deploy.
 
-The loader never empties the graph (`Reset: 'false'`). A stack deployed from an earlier revision of
-the sample keeps what its graph holds and gains the data sets next to it. Photos that an earlier
-revision copied to the data bucket stay there unused.
+The loader never empties the graph (`Reset: 'false'`): a later deploy keeps what the graph holds,
+including what tab 2 added, and MERGEs the data sets into it.
 
 A second custom resource, `AuthSetup`, sets the generated sign-in password on the Cognito user.
 

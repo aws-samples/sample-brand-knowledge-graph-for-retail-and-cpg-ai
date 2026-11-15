@@ -43,10 +43,9 @@ Two formats:
   hidden labels; a text such as `evening / formal` is tried facet by facet), and the look gets a
   `FOR` edge to the first that matches; a look that matches none keeps its text, gets no edge, and
   the load lists it as unresolved.
-- **Style DNA export**: `graph.json`, `vectors.json` and optionally `catalog.json`, exported from a
-  graph by an earlier revision of the sample. The format is kept so that a set exported elsewhere
-  loads without a model call. The loader MERGEs the graph and writes the stored vectors as they are,
-  and fills the catalog index from `catalog.json`; no model is called.
+- **Style DNA export**: `graph.json`, `vectors.json` and optionally `catalog.json`, a graph exported
+  with its vectors. The loader MERGEs the graph, writes the stored vectors as they are and fills the
+  catalog index from `catalog.json`, so the set loads without a model call.
 
 A node's or a catalog row's `image_key` of the form `<set>/<sub>/<file>` names a photo at
 `<set>/media/<sub>/<file>` (`whimsikora/looks/<file>` is `whimsikora/media/looks/<file>`). In the
