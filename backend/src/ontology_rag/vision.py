@@ -469,7 +469,10 @@ def retry_reset_connection(client):
     connection that has been idle for 350 seconds and answers its next packet with a reset.
     botocore keeps connections open between calls, so the first call after a quiet spell can
     fail at once with ``ConnectionClosedError``. A client that tries a call only once gets one
-    more attempt for that error, on a new connection; a read timeout still ends the call."""
+    more attempt for that error, on a new connection; a read timeout still ends the call.
+    A connection that closes after the request reached the service makes the call run twice.
+    That costs only time and tokens here: model calls and the agents' questions and polls only
+    read, and a repeated lake export writes the same rows over its two tables again."""
     from botocore.exceptions import ConnectionClosedError
 
     def once_more(attempts, caught_exception=None, **_):
