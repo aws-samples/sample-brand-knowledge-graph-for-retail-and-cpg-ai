@@ -30,8 +30,9 @@ this sample (the original file name of each photo is in `manifest.json`). The sa
 Whimsikora data set holds one more photo of the same lookbook
 ([`../../datasets/whimsikora/`](../../datasets/whimsikora/)). The photos depict no real person and
 contain no third-party photography, so they can be redistributed with this sample under its
-license. Amazon Nova Canvas reached the end of its life on Amazon Bedrock in September 2026, so
-the photos cannot be generated again; to try other outfits, add your own photos (below).
+license. Amazon Nova Canvas reached the end of its life on Amazon Bedrock in September 2026 and the
+sample has no script that generates them, so the photos cannot be generated again; to try other
+outfits, add your own photos (below).
 
 No Fashionpedia dataset image is included: Fashionpedia does not own its photos (Flickr /
 Unsplash / Pexels terms); only its CC BY 4.0 ontology is reused (see
