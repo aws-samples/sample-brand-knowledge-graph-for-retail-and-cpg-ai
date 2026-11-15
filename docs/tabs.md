@@ -594,11 +594,12 @@ The effort reaches the model in the agent's Converse request, as `additionalMode
 merged over the model's own request fields (`vision.with_effort`): for Claude, adaptive `thinking`
 with a summarized display, plus `output_config.effort` for Low, Medium and High (`thinking` disabled
 for Haiku's Off); for GPT and Grok, `reasoning.effort`; for Nova, `reasoningConfig` with
-`maxReasoningEffort`. Default sends nothing extra for GPT, Nova and Grok. The output budget stays
-4,096 tokens per turn at every level, so a turn that thinks too long stops with `max_tokens` in the
-trace. For Kimi K3 the loop removes the reasoning blocks of earlier turns before the next request, as
-its model card asks for Converse. Tab 3's query agent and every call outside the two agents send no
-effort, so their requests are unchanged.
+`maxReasoningEffort`. Default sends nothing extra for GPT and Nova; for Grok 4.7 the model's own
+request fields ask for low with every call. The output budget stays 4,096 tokens per turn at every
+level, so a turn that thinks too long stops with `max_tokens` in the trace. For Kimi K3 the loop
+removes the reasoning blocks of earlier turns before the next request, as its model card asks for
+Converse. Tab 3's query agent and every call outside the two agents send no effort, so their
+requests are unchanged.
 
 **What survives a tab switch.** Methods 1 and 2 keep their running job or their result, and the
 finished run before it for Side by side, for the browser tab (session storage), with the model and
