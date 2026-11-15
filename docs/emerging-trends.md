@@ -17,9 +17,10 @@ residual over a fitted trend ([GeoStyle, ICCV 2019](https://arxiv.org/abs/1908.1
 
 In this sample the stream is **the new content**, what tab 2 ingests (`run` set on its nodes), and
 the baseline is what the brand already had. A group's **lift** is its share of the new divided by its
-share of the baseline, add-half smoothed: `((n_new + 0.5) / (N_new + 1)) / ((n_base + 0.5) / (N_base
-+ 1))`. It is computed in code; the models only explain numbers they are given. The methods count
-different things, and each card says which:
+share of the baseline, add-half smoothed:
+`((n_new + 0.5) / (N_new + 1)) / ((n_base + 0.5) / (N_base + 1))`. It is computed in code; the
+models only explain numbers they are given. The methods count different things, and each card
+says which:
 
 | | methods 1 and 2 (`trends.py`) | method 3 (`lenses.py`) |
 |---|---|---|
