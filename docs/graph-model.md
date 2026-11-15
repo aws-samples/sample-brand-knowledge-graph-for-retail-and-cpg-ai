@@ -91,7 +91,7 @@ Neptune Analytics does not support custom ids on edges; edges are identified by
 `(source, type, target)` and `MERGE`d on that pattern.
 
 Ids the ingest pipeline assigns derive from the **content** of the source (the first 8 hex digits
-of its SHA-1), so the same photo or text always produces the same ids: `item:<digest>-e2-shoe`,
+of its SHA-256), so the same photo or text always produces the same ids: `item:<digest>-e2-shoe`,
 `look:<digest>`, `article:<digest>`, `st:<digest>-1`. Re-running a batch `MERGE`s onto the same
 look, article and statement nodes; an item's id also carries the model's entity number (`e2`) and
 class, so an entity the model names the same way is updated in place (its `model`, `confidence` and
