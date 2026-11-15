@@ -12,13 +12,20 @@ const CONFIG = {
   identityPoolId: 'us-east-1:00000000-0000-4000-8000-000000000000',
   apiUrl: 'https://abcdefghijklmnopqrstuvwxyz012345.lambda-url.us-east-1.on.aws',
 };
-const state = vi.hoisted(() => ({ idToken: 'id.token.one' as string | null, calls: [] as any[], expiresInMs: 3_600_000, fail: false }));
+const state = vi.hoisted(() => ({
+  idToken: 'id.token.one' as string | null,
+  calls: [] as any[],
+  expiresInMs: 3_600_000,
+  fail: false,
+  hold: null as Promise<void> | null, // while set, the identity pool's answer waits for it
+}));
 vi.mock('./config', () => ({ appConfig: async () => CONFIG }));
 vi.mock('./auth', () => ({ getIdToken: async () => state.idToken }));
 vi.mock('@aws-sdk/credential-providers', () => ({
   fromCognitoIdentityPool: (params: any) => {
     state.calls.push(params);
     return async () => {
+      if (state.hold) await state.hold;
       if (state.fail) throw new Error('ResourceConflictException');
       return {
         accessKeyId: 'TESTACCESSKEYID',
@@ -38,6 +45,7 @@ describe('signing API requests with the identity pool credentials', () => {
     state.calls = [];
     state.expiresInMs = 3_600_000;
     state.fail = false;
+    state.hold = null;
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-11-12T18:00:00Z'));
   });
@@ -80,6 +88,19 @@ describe('signing API requests with the identity pool credentials', () => {
     state.fail = false;
     await apiCredentials(); // not stuck on the failed exchange
     expect(state.calls).toHaveLength(3);
+  });
+
+  it('keeps nothing from an exchange that was under way when the credentials were forgotten', async () => {
+    let answer!: () => void;
+    state.hold = new Promise((resolve) => (answer = resolve));
+    const pending = apiCredentials();
+    await vi.waitFor(() => expect(state.calls).toHaveLength(1)); // the identity pool is asked
+    forgetCredentials(); // sign-out before it answers
+    answer();
+    expect((await pending)!.accessKeyId).toBe('TESTACCESSKEYID'); // the request that asked still gets them
+    state.hold = null;
+    await apiCredentials();
+    expect(state.calls).toHaveLength(2); // they were not kept: the next request asks again
   });
 
   it('signs for the lambda service on the function URL host, and leaves Host to the browser', async () => {

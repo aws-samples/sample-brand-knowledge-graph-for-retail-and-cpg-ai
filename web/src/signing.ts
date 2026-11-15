@@ -38,8 +38,11 @@ export async function apiCredentials(): Promise<Credentials | null> {
   if (!exchanging || exchanging.idToken !== idToken) exchanging = { promise: exchange(idToken), idToken };
   const current = exchanging;
   try {
-    kept = { credentials: await current.promise, idToken };
-    return kept.credentials;
+    const credentials = await current.promise;
+    // Kept only while this exchange is still the current one: after forgetCredentials() (sign-out,
+    // or credentials the API refused) an exchange that was under way must not store them again.
+    if (exchanging === current) kept = { credentials, idToken };
+    return credentials;
   } finally {
     if (exchanging === current) exchanging = undefined; // a failed exchange is tried again next time
   }
