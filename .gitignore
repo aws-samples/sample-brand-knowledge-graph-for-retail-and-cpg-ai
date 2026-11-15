@@ -27,19 +27,11 @@ web/dist/
 
 # Tooling
 .DS_Store
-.playwright-mcp/
 .idea/
 .vscode/
 
 # local mirror of the ontologies bucket (ONTOLOGIES_CACHE_DIR default outside Lambda)
 .cache/
-
-# Agent and assistant configuration: never shipped with the sample
-.kiro/
-.claude/
-.cursor/
-.amazonq/
-.aider*
 
 # Logs and scanner state
 *.log
