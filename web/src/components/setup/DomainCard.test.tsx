@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { OntologySummary } from '../../api';
 import { DomainCard } from './DomainCard';
+import { visibleText } from '../../visibleText';
 
 /** Tab 0's domain card: each domain with its data sets (`data_sets` of `GET /api/ontologies`). */
 const summary = (id: string, name: string, data_sets: string[]) =>
@@ -13,13 +14,7 @@ const summary = (id: string, name: string, data_sets: string[]) =>
 const fashion = summary('fashion', 'Fashion', ['velloway', 'whimsikora']);
 const furniture = summary('furniture', 'Furniture', []);
 /** The card as a reader sees it: tags dropped, the escaped characters back. */
-const text = (html: string) =>
-  html
-    .replace(/<[^>]+>/g, '')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&#x27;/g, "'")
-    .replace(/&amp;/g, '&');
+const text = (html: string) => visibleText(html);
 
 describe('DomainCard', () => {
   it('lists the data sets of each domain and their folder', () => {

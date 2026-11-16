@@ -7,11 +7,12 @@ import type { ClassifyResult, OntologyDetail } from '../../api';
 import recorded from '../arch/__fixtures__/classify.opus55.json';
 import fashion from './__fixtures__/fashion.view.json';
 import { photoPropertyLabel, RunDetails } from './ResultsPanel';
+import { visibleText } from '../../visibleText';
 
 /** Tab 1's result shows what the model said about the photo as a whole above the entities. */
 const result = recorded as unknown as ClassifyResult;
 const detail = { view: fashion } as unknown as OntologyDetail;
-const text = (html: string) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+const text = (html: string) => visibleText(html, ' ').replace(/\s+/g, ' ');
 
 describe("the photo's own values", () => {
   it('names a property by the class of its values, else by itself', () => {

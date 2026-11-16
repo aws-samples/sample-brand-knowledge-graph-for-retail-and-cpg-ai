@@ -7,6 +7,7 @@ import type { ClassifyResult } from '../../api';
 import recorded from './__fixtures__/classify.opus55.json';
 import { CodeViewer, KIND_META } from './CodeViewer';
 import { promptSnippet } from './promptSnippet';
+import { visibleText } from '../../visibleText';
 
 /** The viewer is rendered to static HTML: syntax tokens, line numbers, gutter pins and notes. */
 const converseSource = `def classify(bedrock, model, system_prompt, image, use_cache):
@@ -53,7 +54,7 @@ describe('CodeViewer', () => {
     const html = renderToStaticMarkup(<CodeViewer code={snippet.code} language={snippet.language} highlights={snippet.highlights} />);
     const lines = snippet.code.split('\n').length;
     expect(html.match(/token-line ide-line/g)).toHaveLength(lines);
-    expect(html.replace(/<[^>]+>/g, '')).toContain('## Entity classes (things you can locate in the image)'); // markdown headings are tokenized
+    expect(visibleText(html)).toContain('## Entity classes (things you can locate in the image)'); // markdown headings are tokenized
     expect(html.match(/class="ide-pin" title="/g)).toHaveLength(snippet.highlights.length);
     expect(html).toContain('the cache checkpoint');
   });

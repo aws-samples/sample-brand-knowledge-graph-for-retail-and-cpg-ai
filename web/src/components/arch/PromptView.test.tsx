@@ -6,10 +6,11 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import type { ClassifyResult } from '../../api';
 import recorded from './__fixtures__/classify.opus55.json';
 import { PromptView } from './PromptView';
+import { visibleText } from '../../visibleText';
 
 /** The readable prompt, rendered to static HTML from the recorded Opus 5.5 response. */
 const result = recorded as unknown as ClassifyResult;
-const text = (html: string) => html.replace(/<[^>]+>/g, ' ').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/\s+/g, ' ');
+const text = (html: string) => visibleText(html, ' ').replace(/\s+/g, ' ');
 
 describe('PromptView', () => {
   it('lays the fashion prompt out as instruction, class tree, relations, attributes, feedback ask and output contract', () => {

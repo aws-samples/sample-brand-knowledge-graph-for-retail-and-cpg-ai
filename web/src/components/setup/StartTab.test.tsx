@@ -5,14 +5,10 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { ExampleInfo } from '../../api';
 import { MeetTheBrand } from './StartTab';
+import { visibleText } from '../../visibleText';
 
 /** The box as a reader sees it: tags dropped, the escaped characters back. */
-const text = (html: string) =>
-  html
-    .replace(/<[^>]+>/g, '')
-    .replace(/&quot;/g, '"')
-    .replace(/&#x27;/g, "'")
-    .replace(/&amp;/g, '&');
+const text = (html: string) => visibleText(html);
 
 const velloway = { name: 'Velloway', description: 'Velloway is a contemporary label built on three lines.' };
 const whimsikora = { name: 'Whimsikora', description: 'A fictional luxury brand.' };

@@ -5,10 +5,11 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { SetupStatus } from '../../api';
 import { CatalogCard } from './CatalogCard';
+import { visibleText } from '../../visibleText';
 
 /** Tab 0's product catalog card: one S3 Vectors bucket and its `catalog` index (`catalog` block of `GET /api/setup`). */
 const status = (catalog: SetupStatus['catalog']) => ({ region: 'us-east-1', catalog }) as SetupStatus;
-const text = (html: string) => html.replace(/<[^>]+>/g, '').replace(/&#x27;/g, "'");
+const text = (html: string) => visibleText(html);
 
 describe('CatalogCard', () => {
   it('names the catalog index RAG and GraphRAG search, with the console link', () => {

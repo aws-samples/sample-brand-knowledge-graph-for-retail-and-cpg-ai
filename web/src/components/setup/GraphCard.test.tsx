@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import type { SetupStatus } from '../../api';
 import { GraphCard } from './GraphCard';
+import { visibleText } from '../../visibleText';
 
 /** Tab 0's graph card: the line that says the graph is private and names its VPC and endpoint (`graph.network` of `GET /api/setup`). */
 const status = (network: SetupStatus['graph']['network']) =>
@@ -23,11 +24,7 @@ const status = (network: SetupStatus['graph']['network']) =>
 const network = { vpc_id: 'vpc-0123456789abcdef0', endpoint_id: 'vpce-0fedcba9876543210' };
 const render = (s: SetupStatus) => renderToStaticMarkup(<GraphCard s={s} />);
 /** The card as a reader sees it: tags dropped, the escaped characters back. */
-const text = (html: string) =>
-  html
-    .replace(/<[^>]+>/g, '')
-    .replace(/&#x27;/g, "'")
-    .replace(/&amp;/g, '&');
+const text = (html: string) => visibleText(html);
 
 describe('GraphCard', () => {
   it('says the graph is private and names the VPC and the endpoint', () => {
