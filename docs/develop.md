@@ -53,6 +53,10 @@ make test        # pytest and ruff (offline), CDK assertions with cdk-nag, web t
 make scan        # detect-secrets against .secrets.baseline, bandit on the Python, pip-audit on the three hashed requirement files
 ```
 
+On GitHub, [.github/workflows/ci.yml](../.github/workflows/ci.yml) runs `make setup` and `make test`
+on every pull request to `main` and every push to `main`, with uv 0.12.22, Python 3.14 and
+Node.js 26. A pull request merges only when its `test` check passes.
+
 `make scan` needs [uv](https://docs.astral.sh/uv/), whose `uvx` fetches the scanners. It fails on a
 secret that is not in the baseline, on a bandit finding of medium severity or above, or on a known
 vulnerability in `backend/lambda-requirements.txt`, `backend/agentcore/requirements.txt` or
