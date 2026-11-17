@@ -158,7 +158,8 @@ export const architecture: FigureSpec = {
     { id: 'load', from: 'loader', fromHandle: 's-r', to: 'neptune', toHandle: 't-l2', kind: 'deploy', centerX: (c1 + 50 + WM + c2) / 2 },
     { id: 'put', from: 'loader', fromHandle: 's-b', to: 'vectors', toHandle: 't-t3', kind: 'deploy', label: 'products', labelDy: 8 },
     { id: 'lookup', from: 'api', fromHandle: 's-b0', to: 'vectors', toHandle: 't-t0', kind: 'data', label: 'QueryVectors', labelDy: 125 },
-    { id: 'models', from: 'vpc', fromHandle: 's-r1', to: 'bedrock', toHandle: 't-l', kind: 'data', label: 'NAT gateway' },
+    // the NAT gateway carries every AWS API call but the data bucket's, not only Bedrock's (docs/architecture.md, "Why these choices")
+    { id: 'models', from: 'vpc', fromHandle: 's-r1', to: 'bedrock', toHandle: 't-l', kind: 'data', label: 'NAT gateway\nBedrock and the\nother AWS APIs' },
     { id: 'bucket', from: 'vpc', fromHandle: 's-r2', to: 'data', toHandle: 't-l', kind: 'data', label: 'gateway endpoint' },
   ],
   legend: [

@@ -69,7 +69,7 @@ not part of this repository.
 
 ## Architecture
 
-![Architecture of the deployed stack. The browser signs in with Amazon Cognito, loads the site from Amazon S3 through Amazon CloudFront and calls the Lambda API's function URL with requests signed by AWS credentials from a Cognito identity pool. In a VPC with two private subnets, the API, the Step Functions ingest pipeline, the two agents on AgentCore Runtime and the GraphLoader reach a private Neptune Analytics graph. Amazon Bedrock is reached through a NAT gateway, the data bucket through a gateway endpoint; the API queries the catalog index in Amazon S3 Vectors and the lake agent queries Amazon S3 Tables.](assets/architecture.png)
+![Architecture of the deployed stack. The browser signs in with Amazon Cognito, loads the site from Amazon S3 through Amazon CloudFront and calls the Lambda API's function URL with requests signed by AWS credentials from a Cognito identity pool. In a VPC with two private subnets, the API, the Step Functions ingest pipeline, the two agents on AgentCore Runtime and the GraphLoader reach a private Neptune Analytics graph. Amazon Bedrock and the other AWS APIs are reached through a NAT gateway, the data bucket through a gateway endpoint; the API queries the catalog index in Amazon S3 Vectors and the lake agent queries Amazon S3 Tables.](assets/architecture.png)
 
 1. You sign in to an Amazon Cognito user pool (authorization code with PKCE). A Cognito identity
    pool gives the browser temporary AWS credentials of one IAM role, which may call the API and
@@ -87,7 +87,8 @@ not part of this repository.
    Iceberg export of the graph in Amazon S3 Tables through the S3 Tables MCP server.
 6. The graph has no public endpoint. The API, the pipeline, the loader and both agents run in two
    private subnets and reach it through a private graph endpoint. They reach Amazon S3 through a
-   gateway endpoint and the other AWS APIs through a NAT gateway.
+   gateway endpoint and the other AWS APIs through a NAT gateway, a choice for simplicity
+   ([why not interface endpoints](docs/architecture.md#why-these-choices)).
 7. At deploy, `GraphLoader` loads the ontology and every data set into the graph and the catalog
    index, and `AuthSetup` sets the generated sign-in password. A `BucketDeployment` copies the site
    and the `ontologies/` folder to their buckets.

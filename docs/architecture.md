@@ -25,6 +25,20 @@ resource, route and role in one block.
   integrations stop after 29 to 30 s, and the largest vision models take up to 65 s per image.
   The browser learns the ids it needs from `/config.json`, which the stack writes into the site
   bucket at deploy time; the function URL's CORS setting names the site's origin.
+* **A NAT gateway, not interface endpoints, for simplicity.** The graph answers only on its private
+  endpoint, so the API, the pipeline, the loader and both agents run in two private subnets. They
+  reach Amazon S3 through a gateway endpoint, which is free, and Amazon Bedrock and the other AWS
+  APIs they call (AgentCore, Neptune Analytics, CloudWatch Logs, Amazon S3 Vectors, Amazon S3
+  Tables, Step Functions and Lambda) through one regional NAT gateway. Interface endpoints (AWS
+  PrivateLink) would keep those calls off the internet, but they take one endpoint per service, each
+  billed in both Availability Zones: eight endpoints cost about $3.80 per day, the NAT gateway about
+  $2.40 (us-east-1, November 2026). A new AWS client in the code would also need its own endpoint
+  before its calls work. The sample is about ontologies and GraphRAG, not network isolation, so it
+  takes the simpler path. The price is that the functions and agents can reach any HTTPS host
+  through the NAT gateway ([security.md](security.md#network-and-delivery)). In production, give
+  the private subnets interface endpoints for the services they call and no route to the internet,
+  or filter their egress by domain name with Amazon Route 53 Resolver DNS Firewall or AWS Network
+  Firewall.
 * **Deploy-time loading as a custom resource.** The graph is populated when the stack turns green,
   so a 60-minute session explores and mutates a populated graph instead of waiting for extraction.
   The loader fails fast with a reason when it cannot finish before its timeout, so a failed deploy

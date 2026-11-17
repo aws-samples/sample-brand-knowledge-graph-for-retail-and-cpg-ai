@@ -309,7 +309,9 @@ user.
   own page, so name only origins you control.
 * The functions and agents in the VPC can reach any HTTPS host on the internet through the NAT
   gateway. Their security group allows outbound TCP 443 to every address, and nothing filters by
-  domain name. Amazon Route 53 Resolver DNS Firewall or AWS Network Firewall would.
+  domain name. Amazon Route 53 Resolver DNS Firewall or AWS Network Firewall would. The NAT gateway
+  instead of interface endpoints is a choice for simplicity
+  ([architecture.md](architecture.md#why-these-choices)).
 * Four deploy-time functions run outside the VPC (Security Hub control Lambda.3): the sample's auth
   setup function and aws-cdk-lib's providers for the deploy-time copy, the bucket auto-delete and
   the default security group. None of them calls the graph.

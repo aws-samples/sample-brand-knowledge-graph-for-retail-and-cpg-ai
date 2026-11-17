@@ -206,7 +206,7 @@ function FigureEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, ta
       <BaseEdge id={id} path={path} className={`flow-edge fig-edge ${d.kind}`} style={style} markerEnd={markerEnd} />
       {d.label && (
         <EdgeLabelRenderer>
-          <div className={`flow-label fig-label ${d.kind}`} style={{ transform }}>
+          <div className={`flow-label fig-label ${d.kind}`} style={{ transform, ...(d.label.includes('\n') ? { whiteSpace: 'pre', textAlign: 'center', lineHeight: 1.25 } : {}) }}>
             {d.label}
           </div>
         </EdgeLabelRenderer>
