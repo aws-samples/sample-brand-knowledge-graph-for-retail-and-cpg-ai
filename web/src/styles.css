@@ -784,6 +784,9 @@ table.garments td code { font-size: 0.78rem; }
 .query-controls .field { margin-bottom: 0; }
 .query-controls .spacer { flex: 1; }
 .query-result h3, .query-agent h3 { margin-top: 0; }
+/* 3b: Neptune refusing a question in plain words is the expected first step, shown as a note */
+.query-expected p { margin: 0 0 0.3rem; }
+.query-expected p:last-child { margin-bottom: 0; }
 .query-table { overflow: auto; max-height: 520px; }
 .agent-answer { font-size: 0.98rem; line-height: 1.45; margin: 0 0 0.7rem; padding: 0.6rem 0.8rem; border: 1px solid #cde8ec; background: #f2fafb; border-radius: 8px; }
 .agent-query-head { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; margin: 0.4rem 0 0.25rem; }

@@ -305,7 +305,9 @@ The whole graph: the brand's lookbook and everything tab 2 added, in three steps
 **The query agent.** When Neptune rejects the text (a typo, a Neo4j-only procedure, plain words), the
 text and Neptune's message go to an agent on the
 [Amazon Neptune MCP server](https://github.com/awslabs/mcp/tree/main/src/amazon-neptune-mcp-server)
-(`backend/src/ontology_rag/query_agent.py`), or straight to it with **Ask the agent**. The agent is
+(`backend/src/ontology_rag/query_agent.py`), or straight to it with **Ask the agent**. In 3b, the
+questions in plain words, **Ask the agent** is the main button; **Run** shows Neptune's refusal as
+the expected first step, in a grey note, before the agent takes over. The agent is
 a Bedrock Converse tool loop with the model picked in the panel; its tools are the server's own. It
 starts `awslabs.amazon-neptune-mcp-server` as a stdio subprocess pointed at the graph, reads the
 schema through `get_graph_schema`, hands the tools to the model as the Converse `toolConfig` and

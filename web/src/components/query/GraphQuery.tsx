@@ -144,16 +144,31 @@ export function GraphQuery({
       </div>
     </>
   );
-  const buttons = (
+  // 3b asks in plain words, so the agent is the main way there; Run shows why it takes an agent
+  const agentFirst = guided && way === '3b';
+  const runButton = (
+    <button className={agentFirst ? 'secondary' : undefined} onClick={run} disabled={busy || !text.trim() || !neptune} title="Run the text as openCypher (Ctrl/⌘ + Enter)">
+      {direct.status === 'running' ? 'Running…' : 'Run'}
+    </button>
+  );
+  const agentButton = (
+    <button className={agentFirst ? undefined : 'secondary'} onClick={askDirectly} disabled={busy || !text.trim() || !agentReady || !modelId} title="Skips the openCypher attempt. The agent writes the query.">
+      {agent.status === 'running' ? 'Agent working…' : 'Ask the agent'}
+    </button>
+  );
+  const buttons = agentFirst ? (
     <>
-      <button onClick={run} disabled={busy || !text.trim() || !neptune} title="Run the text as openCypher (Ctrl/⌘ + Enter)">
-        {direct.status === 'running' ? 'Running…' : 'Run'}
-      </button>
-      <button className="secondary" onClick={askDirectly} disabled={busy || !text.trim() || !agentReady || !modelId} title="Skips the openCypher attempt. The agent writes the query.">
-        {agent.status === 'running' ? 'Agent working…' : 'Ask the agent'}
-      </button>
+      {agentButton}
+      {runButton}
+    </>
+  ) : (
+    <>
+      {runButton}
+      {agentButton}
     </>
   );
+  // In 3b Neptune refusing the text is the expected first step before the agent, not an error
+  const expectedRefusal = agentFirst && direct.status === 'error' && handOver(direct.code);
   const notices = (
     <>
       {health && neptune && !agentReady && <p className="notice text">The agent is off: {health.query_agent?.reason}</p>}
@@ -186,9 +201,9 @@ export function GraphQuery({
           {way === '3b' && (
             <YourTurn>
               <p>
-                Pick a question, or write your own. Two ways to send it, both end with openCypher on the graph. Press <b>Run</b>: Neptune cannot parse plain words, so the app hands the question to an agent
-                on the Amazon Neptune MCP server, with Neptune&apos;s error. Or press <b>Ask the agent</b> to skip that attempt. The agent reads the graph&apos;s schema through the server, writes the
-                openCypher, runs it and shows you the query, so you can check it or edit it.
+                Pick a question, or write your own. Two ways to send it, both end with openCypher on the graph. Press <b>Ask the agent</b>: an agent on the Amazon Neptune MCP server reads the
+                graph&apos;s schema through the server, writes the openCypher, runs it and shows you the query, so you can check it or edit it. Or press <b>Run</b> to see why it takes an agent: Neptune
+                cannot parse plain words, so it refuses the question, as expected, and the app hands the question to the agent with Neptune&apos;s error.
               </p>
             </YourTurn>
           )}
@@ -309,7 +324,26 @@ export function GraphQuery({
             </p>
           )}
           {direct.status === 'done' && <ResultTable rows={direct.result.rows} />}
-          {direct.status === 'error' && (
+          {direct.status === 'error' && expectedRefusal && (
+            <div className="notice text query-expected">
+              <p>
+                <b>Expected:</b> Neptune reads only openCypher, so it refused the question.{' '}
+                {agent.status === 'idle' ? (
+                  agentReady ? (
+                    <button className="small" onClick={() => askAgent(ranText, direct.error, 'failed')} disabled={busy}>
+                      Hand it to the agent
+                    </button>
+                  ) : null
+                ) : (
+                  <>The app handed it to the agent below, with Neptune&apos;s message:</>
+                )}
+              </p>
+              <p className="muted small">
+                <code className="wrap">{direct.error}</code>
+              </p>
+            </div>
+          )}
+          {direct.status === 'error' && !expectedRefusal && (
             <>
               <p className="error">{direct.error}</p>
               {handOver(direct.code) ? (
