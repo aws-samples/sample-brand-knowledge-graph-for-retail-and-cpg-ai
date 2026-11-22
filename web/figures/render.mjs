@@ -3,7 +3,7 @@
 
 // Renders the README figures to ../../assets/: a 2x PNG of each, and an SVG of those listed in SVG.
 // Usage (from web/): node figures/render.mjs [name ...]   (or `make figures` at the repository root)
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
@@ -12,7 +12,10 @@ import { createServer } from 'vite';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const out = join(here, '..', '..', 'assets');
-const ALL = ['architecture', 'ingest-pipeline', 'rag-vs-graphrag', 'graph-model', 'data-layout'];
+// The README figures, then the tab figures of specs/tabs/ (two per tab; a name with a folder renders
+// into that subfolder of assets/).
+const TABS = (await readdir(join(here, 'specs', 'tabs'))).filter((f) => f.endsWith('.ts') && f !== 'index.ts').map((f) => `tabs/${f.slice(0, -3)}`).sort();
+const ALL = ['architecture', 'ingest-pipeline', 'rag-vs-graphrag', 'graph-model', 'data-layout', ...TABS];
 const SVG = new Set(ALL);
 const names = process.argv.slice(2).length ? process.argv.slice(2) : ALL;
 // Room around the canvas so the outermost tiles' badges and borders are not cut.
@@ -43,6 +46,7 @@ async function render(name) {
   await page.evaluate((m) => (document.body.style.padding = `${m}px`), MARGIN);
   await page.waitForTimeout(300);
   const box = await page.locator('#figure').boundingBox();
+  await mkdir(dirname(join(out, name)), { recursive: true });
   const png = join(out, `${name}.png`);
   await page.screenshot({ path: png, clip: { x: box.x - MARGIN, y: box.y - MARGIN, width: box.width + 2 * MARGIN, height: box.height + 2 * MARGIN } });
   console.log(`${png}`);

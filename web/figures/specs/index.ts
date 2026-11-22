@@ -7,6 +7,7 @@ import { dataLayout } from './data-layout';
 import { graphModel } from './graph-model';
 import { ingest } from './ingest';
 import { ragVsGraphrag } from './rag-vs-graphrag';
+import { TAB_FIGURES } from './tabs';
 
 export const FIGURES: Record<string, FigureSpec> = {
   architecture,
@@ -14,4 +15,5 @@ export const FIGURES: Record<string, FigureSpec> = {
   'rag-vs-graphrag': ragVsGraphrag,
   'graph-model': graphModel,
   'data-layout': dataLayout,
+  ...TAB_FIGURES,
 };
