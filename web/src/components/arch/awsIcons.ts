@@ -5,8 +5,8 @@
  * The official AWS Architecture Icons the diagrams use, as inline SVG (no network, no icon font).
  * Service icons are the 64 px "Arch_" set with their category background square; the browser and
  * the answer are General Resource icons, drawn without a tile, as in AWS reference architectures.
- * Source and terms: https://aws.amazon.com/architecture/icons/ (AWS allows customers and partners
- * to use these assets to create architecture diagrams). Only <title> and id attributes are removed.
+ * Source and terms: https://aws.amazon.com/architecture/icons/ (the icons are provided for use in
+ * architecture diagrams). Only <title> and id attributes are removed.
  */
 export type AwsIcon = { viewBox: string; tile: boolean; body: string };
 

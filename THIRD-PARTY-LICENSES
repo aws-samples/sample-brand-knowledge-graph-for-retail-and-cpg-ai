@@ -255,8 +255,8 @@ source-map-support 0.5.21 (MIT), cdk-nag 3.0.2 (Apache-2.0); build and test tool
 Node (web/package.json), build and test tools only (not in the bundle): vite 7.3.7 (MIT),
 @vitejs/plugin-react 4.7.0 (MIT), typescript 5.7.3 (Apache-2.0), vitest 5.0.3 (MIT),
 playwright 1.65.0 (Apache-2.0, renders the figures). The service icons in the architecture diagrams (web/src/components/arch/awsIcons.ts
-and web/figures/icons.ts) and in the figures under assets/ are AWS Architecture Icons, which AWS
-allows customers and partners to use in architecture diagrams: https://aws.amazon.com/architecture/icons/
+and web/figures/icons.ts) and in the figures under assets/ are AWS Architecture Icons, used in
+architecture diagrams under the terms on https://aws.amazon.com/architecture/icons/
 web/src/components/studio/__fixtures__/fashion.view.json is the parsed fashion ontology (see the
 Fashionpedia attribution above), stored for the layout tests;
 web/src/components/arch/__fixtures__/classify.opus55.json is one recorded
