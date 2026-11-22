@@ -99,6 +99,13 @@ export interface MultimodalAiKnowledgeGraphStackProps extends cdk.StackProps {
    */
   readonly explorerLogs?: boolean;
   /**
+   * Empty the graph and the catalog index before this deploy's load (default false). Use it once
+   * after renaming or removing a data set, because the load merges and would otherwise leave the
+   * old set's nodes and products next to the new ones. The next deploy without it loads again,
+   * which changes nothing: the load is idempotent.
+   */
+  readonly resetGraph?: boolean;
+  /**
    * The domain whose ontology the graph is built from: the functions' ONTOLOGY_PATH, and the
    * folder whose files re-run the loader when they change. A folder of ontologies/ (default `fashion`).
    */
@@ -208,6 +215,7 @@ interface Settings {
   readonly answerModelIds: string[];
   readonly allowWriteQueries: boolean;
   readonly explorerLogs: boolean;
+  readonly resetGraph: boolean;
   readonly defaultDomain: string;
   readonly agentPlatformVersion?: 'V1' | 'V2' | 'auto';
   readonly agentTracing?: boolean;
@@ -226,6 +234,7 @@ function withDefaults(props: MultimodalAiKnowledgeGraphStackProps): Settings {
     answerModelIds: props.answerModelIds ?? visionModelIds,
     allowWriteQueries: props.allowWriteQueries ?? false,
     explorerLogs: props.explorerLogs ?? false,
+    resetGraph: props.resetGraph ?? false,
     defaultDomain: props.defaultDomain ?? DEFAULT_DOMAIN,
     agentPlatformVersion: props.agentPlatformVersion,
     agentTracing: props.agentTracing,
@@ -987,9 +996,13 @@ function addLoader(
   readsDataBucket(loaderFn, buckets.data);
   // The product catalog: the loader writes each data set's products, the precomputed vectors of a
   // set's catalog.json (payoff.put_catalog_vectors) or the products of its items.json embedded at
-  // deploy (payoff.index_catalog_items). PutVectors only: it never reads, queries or deletes.
+  // deploy (payoff.index_catalog_items). PutVectors only, unless this deploy resets the graph: then
+  // it also lists and deletes the index's vectors first (payoff.clear_catalog).
   loaderFn.addToRolePolicy(
-    new iam.PolicyStatement({ actions: ['s3vectors:PutVectors'], resources: [vectors.index.attrIndexArn] }),
+    new iam.PolicyStatement({
+      actions: settings.resetGraph ? ['s3vectors:PutVectors', 's3vectors:ListVectors', 's3vectors:DeleteVectors'] : ['s3vectors:PutVectors'],
+      resources: [vectors.index.attrIndexArn],
+    }),
   );
   loaderFn.addEnvironment('VECTOR_BUCKET', vectors.bucketName);
   loaderFn.addEnvironment('CATALOG_INDEX', vectors.indexName);
@@ -1001,7 +1014,8 @@ function addLoader(
     type: 'Custom::GraphLoader',
     properties: {
       ServiceToken: loaderFn.functionArn,
-      Reset: 'false',
+      // -c resetGraph=true: empty the graph and the catalog index, then load (see StackProps).
+      Reset: settings.resetGraph ? 'true' : 'false',
       WithEmbeddings: 'true',
       // Changing this value re-runs the (idempotent) load on the next deploy: the ontology (its
       // .ttl and the example manifests) and every data set of the domain (the .json files under

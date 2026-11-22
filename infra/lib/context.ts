@@ -26,6 +26,7 @@ export function stackProps(app: cdk.App): MultimodalAiKnowledgeGraphStackProps {
     answerModelIds: list(app, 'answerModelIds'),
     allowWriteQueries: flag(app, 'allowWriteQueries'),
     explorerLogs: flag(app, 'explorerLogs'),
+    resetGraph: flag(app, 'resetGraph'),
     defaultDomain: text(app, 'defaultDomain'),
     agentPlatformVersion: platformVersion(app),
     agentTracing: flag(app, 'agentTracing'),

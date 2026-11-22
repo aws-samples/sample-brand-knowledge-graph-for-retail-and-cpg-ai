@@ -76,6 +76,7 @@ Every setting is a `-c key=value` on `npx cdk deploy` and has a default. The key
 | `answerModelIds` | The vision list | The answer models tabs 4 to 6 and the agents offer | Comma-separated |
 | `defaultDomain` | `fashion` | The folder of `ontologies/` the graph is loaded with | Its changes re-run the loader |
 | `allowWriteQueries` | `false` | Lets tab 3's query panel run write clauses and `POST /api/admin/clear-graph` empty the graph; gives the API's role the graph's write and delete actions | Only for an account where you work alone |
+| `resetGraph` | `false` | Empties the graph and the catalog index before this deploy's load, and gives the loader the index's list and delete actions for it | Once, after renaming or removing a data set; the load merges otherwise and would keep the old set next to the new one. Tab 2's additions go too |
 | `explorerLogs` | `false` | Lets the architecture panel show the API's log lines for the request just made (`EXPLORER_LOGS`) | The lines are not redacted: only where every signed-in user may read the API's logs |
 | `agentPlatformVersion` | `auto` | The AgentCore Runtime platform version: `V1`, `V2` or `auto` | `auto` picks V2 where it exists |
 | `agentTracing` | `false` | Sends the runtimes' traces to AWS X-Ray | Needs CloudWatch Transaction Search, an account-wide setting the stack leaves alone |

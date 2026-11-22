@@ -506,6 +506,29 @@ def index_data_set(svc, folder, embed: bool = True) -> int | None:
     return None
 
 
+def clear_catalog(svc) -> dict:
+    """Delete every vector of the catalog index (ListVectors, then DeleteVectors, 500 keys at a
+    time), so a load that starts from scratch leaves no product of a data set that was renamed or
+    removed. The graph loader calls it on a reset deploy (``-c resetGraph=true``)."""
+    _require_catalog(svc)
+    deleted, token = 0, None
+    while True:
+        page = _catalog_call(
+            svc,
+            svc.s3vectors.list_vectors,
+            maxResults=500,
+            **({"nextToken": token} if token else {}),
+        )
+        keys = [v["key"] for v in page.get("vectors", [])]
+        if keys:
+            _catalog_call(svc, svc.s3vectors.delete_vectors, keys=keys)
+            deleted += len(keys)
+        token = page.get("nextToken")
+        if not token:
+            break
+    return {"deleted": deleted}
+
+
 def catalog_info(svc) -> dict:
     """The catalog index: where it is, its shape, and how many items it holds."""
     _require_catalog(svc)

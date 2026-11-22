@@ -94,8 +94,10 @@ cd infra && npx cdk deploy
 A deploy runs the graph loader again when a `.ttl` or `.json` file of the graph's domain folder
 changed, so a new set (its `.json` files) is loaded on the next deploy. The loader embeds the set's
 items, looks and statements with Amazon Nova Multimodal Embeddings and writes its products into the
-catalog index. It never empties the graph: what
-the graph already holds stays next to the new brand. The set's photos (`media/<sub>/`) are
+catalog index. It never empties the graph on its own: what the graph already holds stays next to
+the new brand. After you rename or remove a set, deploy once with `-c resetGraph=true`, which empties
+the graph and the catalog index before the load (see [deploy.md](deploy.md#configuration)); the next
+deploy without the flag loads again and changes nothing. The set's photos (`media/<sub>/`) are
 uploaded with the `ontologies/` folder to the data bucket, where the API reads one when the app
 shows it.
 

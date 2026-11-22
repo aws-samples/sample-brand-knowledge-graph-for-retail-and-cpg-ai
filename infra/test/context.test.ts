@@ -36,7 +36,7 @@ describe('context.ts: what bin/app.ts reads from -c key=value', () => {
     const props = stackProps(appWith({}));
     expect(props.graphMemory).toBe(16);
     expect(props.embeddingDimension).toBe(1024);
-    for (const key of ['embeddingModelId', 'llmModelId', 'visionModelIds', 'answerModelIds', 'allowWriteQueries', 'defaultDomain', 'agentPlatformVersion', 'agentTracing', 'frameAncestors', 'vpcAzIds', 'synthesizer'] as const) {
+    for (const key of ['embeddingModelId', 'llmModelId', 'visionModelIds', 'answerModelIds', 'allowWriteQueries', 'resetGraph', 'defaultDomain', 'agentPlatformVersion', 'agentTracing', 'frameAncestors', 'vpcAzIds', 'synthesizer'] as const) {
       expect(props[key]).toBeUndefined();
     }
     expect(props.env).toEqual({ account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION ?? 'us-east-1' });
@@ -54,6 +54,21 @@ describe('context.ts: what bin/app.ts reads from -c key=value', () => {
       'http://localhost:3030',
       'http://127.0.0.1:3030',
     ]);
+  });
+
+  test('-c resetGraph=true makes the loader empty the graph and the catalog index before it loads', () => {
+    const t = Template.fromStack(new MultimodalAiKnowledgeGraphStack(appWith({ resetGraph: 'true' }), 'MultimodalAiKnowledgeGraph', stackProps(appWith({ resetGraph: 'true' }))));
+    t.hasResourceProperties('Custom::GraphLoader', { Reset: 'true' });
+    t.hasResourceProperties('AWS::IAM::Policy', {
+      PolicyDocument: Match.objectLike({
+        Statement: Match.arrayWith([Match.objectLike({ Action: ['s3vectors:PutVectors', 's3vectors:ListVectors', 's3vectors:DeleteVectors'] })]),
+      }),
+    });
+    // without the flag the loader only writes, and the load merges into what is there
+    const plain = Template.fromStack(new MultimodalAiKnowledgeGraphStack(appWith({}), 'MultimodalAiKnowledgeGraph', stackProps(appWith({}))));
+    plain.hasResourceProperties('Custom::GraphLoader', { Reset: 'false' });
+    const statements = JSON.stringify(plain.findResources('AWS::IAM::Policy'));
+    expect(statements).not.toContain('s3vectors:DeleteVectors');
   });
 
   test('-c vpcAzIds= takes exactly two different AZ IDs and reaches the subnets', () => {

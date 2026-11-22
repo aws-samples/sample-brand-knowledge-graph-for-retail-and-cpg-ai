@@ -389,6 +389,34 @@ def test_every_set_of_the_domain_is_loaded_into_one_graph(tiny_service):
     assert len(rows["utility-trench"]["data"]["float32"]) == 8  # embedded from its text
 
 
+def test_a_reset_load_leaves_no_product_of_a_renamed_data_set_behind(tiny_service):
+    """``-c resetGraph=true``: the graph and the catalog index are emptied before the load, so
+    the products a renamed or removed data set wrote earlier are gone, and the rest is as before."""
+    svc = tiny_service
+    svc.load_sample(reset=True)
+    stale = {
+        "key": "atlas-trench",
+        "data": {"float32": [0.1] * 8},
+        "metadata": {"product_id": "atlas-trench", "name": "Stone coat", "image_key": ""},
+    }
+    svc.s3vectors.put_vectors(
+        vectorBucketName=svc.settings.vector_bucket,
+        indexName=svc.settings.catalog_index,
+        vectors=[stale],
+    )
+    svc.store.merge_nodes("Brand", [{"id": "brand:velloway", "props": {"name": "Velloway"}}])
+    before = len(svc.s3vectors.vectors)
+    out = svc.load_sample(reset=False)  # a plain redeploy keeps the stale rows
+    assert "atlas-trench" in svc.s3vectors.vectors and len(svc.s3vectors.vectors) == before
+    assert svc.store.summary()["nodes"]["Brand"] == 4
+    out = svc.load_sample(reset=True)
+    assert "atlas-trench" not in svc.s3vectors.vectors
+    assert len(svc.s3vectors.vectors) == before - 1
+    assert svc.store.summary()["nodes"]["Brand"] == 3
+    assert "utility-trench" in svc.s3vectors.vectors and out["sets"]["tiny"]["catalog"] == 1
+    assert ("DeleteVectors", svc.settings.catalog_index) in svc.s3vectors.calls
+
+
 def test_every_look_of_every_format_is_for_an_occasion_of_the_ontology(tiny_service):
     """The deploy writes the ontology's 9 occasions; a catalog set's looks link to them by their
     occasion text (AnyCompany Apparel's "evening / formal" is Evening), a DNA set's by its own FOR edges

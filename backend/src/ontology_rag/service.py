@@ -481,6 +481,10 @@ class Service:
         must hold the sets' data files (MIRROR_SAMPLE_DATA), else the load fails rather than load
         the graph without them.
 
+        With ``reset`` the graph is emptied first, and so is the catalog index when a vector
+        bucket is configured, so a data set that was renamed or removed leaves nothing behind
+        (the stack's ``-c resetGraph=true``).
+
         ``{"ontology": counts, "sets": {set: counts}, "seconds": n}``; a set with neither file
         is reported as skipped."""
         t0 = time.time()
@@ -502,6 +506,8 @@ class Service:
             )
         if reset:
             self.store.delete_all()
+            if self.s3vectors and self.settings.vector_bucket:
+                payoff.clear_catalog(self)
         out = {"ontology": self.loader.load_ontology(), "sets": {}}
         for set_id in entry.data_sets():
             out["sets"][set_id] = self._load_set(entry.set_dir(set_id), with_embeddings)

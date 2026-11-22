@@ -11,7 +11,7 @@ import threading
 import time
 
 import pytest
-from fakes import TEST_MODEL, FakeBedrock
+from fakes import TEST_MODEL, FakeBedrock, FakeS3Vectors
 
 from ontology_rag import jobs, lambda_handler, query_agent, trends
 from ontology_rag.api import dispatch
@@ -30,6 +30,7 @@ def svc(settings):
         embedder=MockEmbedder(256),
         bedrock=FakeBedrock(),
         blobs=MemoryBlobStore(),
+        s3vectors=FakeS3Vectors(),  # a reset load empties the catalog index first
     )
     s.load_sample(reset=True, with_embeddings=False)
     return s
