@@ -22,7 +22,7 @@ full photos.
 
 ## How they were chosen
 
-Each piece is a product shot of the Whimsikora catalog of the IND416 workshop, picked because it
+Each piece is a product shot of the AnyCompany Fashion House catalog of the IND416 workshop, picked because it
 is close to a garment in one of the example photos. Each photo is a 512 x 512 px JPEG. Before it
 was committed, it was checked twice with the default vision model:
 
@@ -38,7 +38,7 @@ model, and the result of both checks.
 
 ## Provenance and license
 
-Synthetic images generated with Amazon Nova Canvas on Amazon Bedrock for the Whimsikora catalog
+Synthetic images generated with Amazon Nova Canvas on Amazon Bedrock for the AnyCompany Fashion House catalog
 (the product shot of each file is named in `manifest.json`), redistributed under the same license
 as the sample. They show no real person and contain no third-party photography (see
 [`../images/README.md`](../images/README.md)).

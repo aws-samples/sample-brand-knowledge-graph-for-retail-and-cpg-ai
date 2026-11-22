@@ -4,7 +4,7 @@
 import { Fragment } from 'react';
 import type { OntologySummary } from '../../api';
 
-/** A domain's data sets as a list of ids (`velloway, whimsikora`). */
+/** A domain's data sets as a list of ids (`anycompany-apparel, anycompany-fashion-house`). */
 function SetIds({ ids }: { ids: string[] }) {
   return (
     <>

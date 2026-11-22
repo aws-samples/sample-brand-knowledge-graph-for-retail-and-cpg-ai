@@ -67,8 +67,8 @@ is the data's own field, named like the class's concept id (`occasion`).
   (`gala` is Formal), else one of those labels as whole words in it, the longest first. It writes
   `Look -FOR-> Occasion` and keeps the text as the look's `occasion` property. A look that resolves
   to nothing gets no edge, and the load lists it under `unresolved`. On the sample's deploy,
-  Velloway's looks and Whimsikora's one resolve to Evening 6, Resort 5, Casual 3, Outdoor 2,
-  Professional 2 and Smart casual 1, and Velloway's "cold weather" look to none.
+  AnyCompany Apparel's looks and AnyCompany Fashion House's one resolve to Evening 6, Resort 5, Casual 3, Outdoor 2,
+  Professional 2 and Smart casual 1, and AnyCompany Apparel's "cold weather" look to none.
 * **A style DNA export** carries its own `Occasion` nodes and `FOR` edges, with the same ids
   (`dna.py`).
 * **Tab 2** asks the model for the photo as a whole: the classification prompt lists the photo
@@ -84,7 +84,7 @@ look is for do not show as empty rows.
 ## Ids
 
 Node ids are caller-assigned (`~id`, a Neptune openCypher extension) and namespaced by type:
-`item:atlas-field-jacket`, `look:meridian-black-tie`, `category:jacket`, `attribute:neckline-type:crew`,
+`item:utility-field-jacket`, `look:evening-black-tie`, `category:jacket`, `attribute:neckline-type:crew`,
 `occasion:evening`, `st:layering-2`. This makes every load idempotent (`MERGE` on `~id`) and every
 path readable.
 Neptune Analytics does not support custom ids on edges; edges are identified by
@@ -120,7 +120,7 @@ vectors in separate, idempotent `neptune.algo.vectors.upsert` statements after t
   trousers"). It is written once and resolved at query time to concrete items, preferring items
   from the same line, so it covers every current and future product without curation.
 
-The query agent's worked examples (Velloway's `domain.json`) walk both, for example
+The query agent's worked examples (AnyCompany Apparel's `domain.json`) walk both, for example
 `Item(jacket) -IS_CATEGORY-> Category(jacket) -PAIRS_WITH-> Category(pants) <-IS_CATEGORY- Item(cargo pants)`.
 GraphRAG in tabs 4 and 5 counts what the brand's looks wear instead (`CONTAINS`, `FOR`), and the
 catalog index holds no rules: a product is embedded from its own text only.

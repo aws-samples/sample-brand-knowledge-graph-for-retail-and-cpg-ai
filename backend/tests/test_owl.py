@@ -374,9 +374,9 @@ def test_catalog_lists_fashion_with_examples():
     assert detail["domain"]["name"] == "Fashion"
     assert detail["domain"]["subject"] == "garment, accessory and garment component"
     assert detail["domain"]["scene"] == "an outfit"
-    assert len(detail["domain"]["example_questions"]) == 5  # 1 of the domain, 4 of velloway
+    assert len(detail["domain"]["example_questions"]) == 5  # 1 of the domain, 4 of anycompany-apparel
     # the sample's data sets: its own brand, and one look of a second brand (white sneakers)
-    assert detail["data_sets"] == ["velloway", "whimsikora"]
+    assert detail["data_sets"] == ["anycompany-apparel", "anycompany-fashion-house"]
     assert "rule_examples" not in detail["domain"]  # the rule editor and its placeholders are gone
 
 

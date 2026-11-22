@@ -6,7 +6,7 @@ import { visibleText } from './visibleText';
 
 describe('visibleText', () => {
   it('leaves the tags out and puts the escaped characters back', () => {
-    expect(visibleText('<p class="note">Meet the <b>brands</b>: Velloway &amp; Whimsikora</p>')).toBe('Meet the brands: Velloway & Whimsikora');
+    expect(visibleText('<p class="note">Meet the <b>brands</b>: AnyCompany Apparel &amp; AnyCompany Fashion House</p>')).toBe('Meet the brands: AnyCompany Apparel & AnyCompany Fashion House');
     expect(visibleText('<code>datasets/&lt;set&gt;/</code> &quot;new&quot; it&#x27;s')).toBe('datasets/<set>/ "new" it\'s');
   });
 

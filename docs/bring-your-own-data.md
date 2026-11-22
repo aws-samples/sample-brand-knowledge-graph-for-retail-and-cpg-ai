@@ -4,7 +4,7 @@ The graph's data comes in **data sets**: one folder per brand under
 `ontologies/<domain>/datasets/<set>/`. To bring your own catalog and photos, add a folder there and
 deploy again. The stack's graph loader loads every data set of the graph's domain at deploy, into
 the graph and the catalog index (the products), and combines the brands in one graph. The
-repository ships synthetic sets only, Velloway and one look of Whimsikora, so it can be published
+repository ships synthetic sets only, AnyCompany Apparel and one look of AnyCompany Fashion House, so it can be published
 anywhere.
 
 A domain folder holds two kinds of input, and they go to different places:
@@ -42,7 +42,7 @@ catalog format:
 [`ontologies/fashion/datasets/README.md`](../ontologies/fashion/datasets/README.md) has the same
 layout as a text tree.
 
-`ontologies/fashion/datasets/velloway/` has every file and `ontology-rag synth` writes its shape
+`ontologies/fashion/datasets/anycompany-apparel/` has every file and `ontology-rag synth` writes its shape
 (`backend/src/ontology_rag/synth.py`).
 
 An `items.json` entry:
@@ -52,7 +52,7 @@ An `items.json` entry:
   "id": "item:my-coat-01",
   "name": "Camel duffle coat",
   "category_id": "coat",
-  "line_id": "line:atlas",
+  "line_id": "line:utility",
   "description": "Knee-length duffle coat with horn toggles.",
   "color": "camel",
   "material": "wool",

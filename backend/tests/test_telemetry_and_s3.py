@@ -94,11 +94,11 @@ def test_catalog_serves_from_s3_cache_and_falls_back(tmp_path):
     assert entries[0].path == tmp_path / "cache" / "fashion" / "fashion.ttl"
     assert len(entries[0].examples()) == 8 and len(entries[0].articles()) == 6
     # the sets' READMEs and domain.json, not their data, and never the photos under media/<sub>/
-    assert entries[0].data_sets() == ["velloway", "whimsikora"]
+    assert entries[0].data_sets() == ["anycompany-apparel", "anycompany-fashion-house"]
     sets = tmp_path / "cache" / "fashion" / "datasets"
-    assert not (sets / "velloway" / "items.json").exists()
-    assert not (sets / "whimsikora" / "items.json").exists()
-    assert not any((sets / "whimsikora").rglob("*.jpg"))
+    assert not (sets / "anycompany-apparel" / "items.json").exists()
+    assert not (sets / "anycompany-fashion-house" / "items.json").exists()
+    assert not any((sets / "anycompany-fashion-house").rglob("*.jpg"))
     assert cat.view("fashion").stats["classes"] == 83  # 1.2.0 adds fo:Occasion
     assert cat.location()["serving"] == str(tmp_path / "cache")
 

@@ -23,11 +23,11 @@ jeans, white sneakers"), and tab 2's step 1 counts the photos whose title names 
 
 ## Provenance and license
 
-All images are **synthetic**: lookbook photos of the fictional brand Whimsikora, generated with
+All images are **synthetic**: lookbook photos of the fictional brand AnyCompany Fashion House, generated with
 Amazon Nova Canvas on Amazon Bedrock and taken from the data set of the IND416 workshop built on
 this sample (the original file name of each photo is in `manifest.json`). The sample's own
-Whimsikora data set holds one more photo of the same lookbook
-([`../../datasets/whimsikora/`](../../datasets/whimsikora/)). The photos depict no real person and
+AnyCompany Fashion House data set holds one more photo of the same lookbook
+([`../../datasets/anycompany-fashion-house/`](../../datasets/anycompany-fashion-house/)). The photos depict no real person and
 contain no third-party photography, so they can be redistributed with this sample under its
 license. To try other outfits, add your own photos (below).
 

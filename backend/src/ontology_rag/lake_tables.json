@@ -4,7 +4,7 @@
     "items": {
       "description": "One row per Item node of the graph: the brand's lookbook and every garment tab 2 ingested.",
       "fields": [
-        { "name": "item_id", "type": "string", "required": true, "doc": "the node id, e.g. item:atlas-field-jacket" },
+        { "name": "item_id", "type": "string", "required": true, "doc": "the node id, e.g. item:utility-field-jacket" },
         { "name": "name", "type": "string", "doc": "the item's name" },
         { "name": "category_id", "type": "string", "doc": "its Category node, e.g. category:jacket" },
         { "name": "category", "type": "string", "doc": "the category's name" },

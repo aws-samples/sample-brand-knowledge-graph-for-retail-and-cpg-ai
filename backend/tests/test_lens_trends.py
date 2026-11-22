@@ -51,7 +51,7 @@ def walk_row(look, garment, name, category, new=False, occasion="Professional", 
     return {
         "look": look,
         "look_name": f"{look} name",
-        "image_key": f"whimsikora/looks/{look[5:]}.jpg",
+        "image_key": f"anycompany-fashion-house/looks/{look[5:]}.jpg",
         "occasion": occasion,
         "garment": garment,
         "garment_name": name,

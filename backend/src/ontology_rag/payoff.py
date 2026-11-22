@@ -269,7 +269,7 @@ def _json_of(text: str) -> dict:
 
 
 def _brand(svc) -> str:
-    """Every Brand node's name in one phrase ("Velloway", "Velloway and Whimsikora", "A, B and
+    """Every Brand node's name in one phrase ("AnyCompany Apparel", "AnyCompany Apparel and AnyCompany Fashion House", "A, B and
     C"): the graph holds the brands of every data set its domain has. "the brand" when none."""
     names = sorted(str(b.props.get("name") or b.id) for b in svc.store.get_nodes("Brand", 50))
     if not names:
@@ -376,7 +376,7 @@ def _vector_preview(vec: list[float]) -> dict:
 
 # ---------------------------------------------------------------------- stage 1: the catalog
 def catalog_name(item: dict) -> str:
-    """'Whimsikora Sneakers' says little; 'White leather sneakers' says what it is."""
+    """'AnyCompany Fashion House Sneakers' says little; 'White leather sneakers' says what it is."""
     words = [item.get("color", ""), item.get("material", ""), item.get("type", "")]
     return (
         " ".join(w for w in words if w and w.lower() not in ("unknown", "n/a")).strip().capitalize()

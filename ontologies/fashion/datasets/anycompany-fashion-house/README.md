@@ -1,11 +1,11 @@
-# Whimsikora: one look of a second brand (synthetic)
+# AnyCompany Fashion House: one look of a second brand (synthetic)
 
-One look of the fictional brand Whimsikora, in the catalog format of [`../README.md`](../README.md).
+One look of the fictional brand AnyCompany Fashion House, in the catalog format of [`../README.md`](../README.md).
 It is here for one reason: the sample's example question is "What should I wear with white
-sneakers?", and Velloway sells no sneakers. With this look the graph holds one look that wears
+sneakers?", and AnyCompany Apparel sells no sneakers. With this look the graph holds one look that wears
 white sneakers, so tabs 2, 4 and 5 have something to find, count and cite.
 
-**All content is fictional.** Whimsikora, the look and its photo are synthetic: the photo was
+**All content is fictional.** AnyCompany Fashion House, the look and its photo are synthetic: the photo was
 generated with Amazon Nova Canvas and the pieces were read from it by the sample's own classify
 step (Claude Sonnet 5.5 against the fashion ontology). No real brand, product or person is shown.
 The fashion domain's example photos and single pieces
@@ -17,11 +17,11 @@ are more photos of the same lookbook and catalog; the deploy does not load them.
 | `brand.json`, `lines.json` | The brand; it has no product lines |
 | `items.json` | The look's seven pieces, each a product of the catalog |
 | `looks.json` | The look: Professional, a beige trench coat over a black double-breasted blazer, black tailored trousers, a black leather tote, a gold chain necklace, cat-eye sunglasses and white lace-up sneakers |
-| `media/looks/` | The look's photo, which the look and its pieces name as `image_key` (`whimsikora/looks/<file>`) |
+| `media/looks/` | The look's photo, which the look and its pieces name as `image_key` (`anycompany-fashion-house/looks/<file>`) |
 
 ## Where it comes from
 
-This look is `look:58f0a33d` of a larger synthetic Whimsikora set in the style DNA format,
+This look is `look:58f0a33d` of a larger synthetic AnyCompany Fashion House set in the style DNA format,
 converted to the catalog format so the deploy embeds it with the stack's own embedding model and
 dimension. Ids, names, categories, attributes and the photo key are the export's. Three things
 changed:

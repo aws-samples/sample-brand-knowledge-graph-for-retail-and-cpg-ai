@@ -1,0 +1,244 @@
+[
+  {
+    "id": "look:utility-site-day",
+    "name": "Site day",
+    "occasion": "work / outdoors",
+    "description": "The working uniform: waxed field jacket over a thermal henley, cargo pants, moc-toe boots.",
+    "item_ids": [
+      "item:utility-field-jacket",
+      "item:utility-henley",
+      "item:utility-cargo-pants",
+      "item:utility-work-boot",
+      "item:utility-boot-sock"
+    ]
+  },
+  {
+    "id": "look:utility-weekend-layers",
+    "name": "Weekend layers",
+    "occasion": "casual weekend",
+    "description": "Flannel overshirt under the corduroy chore coat with selvedge jeans and suede chukkas.",
+    "item_ids": [
+      "item:utility-chore-coat",
+      "item:utility-flannel-shirt",
+      "item:utility-selvedge-jeans",
+      "item:utility-suede-chukka",
+      "item:utility-beanie"
+    ]
+  },
+  {
+    "id": "look:utility-cold-snap",
+    "name": "Cold snap",
+    "occasion": "cold weather",
+    "description": "Fisherman sweater over the henley, quilted vest on top, carpenter pants and boots; herringbone scarf.",
+    "item_ids": [
+      "item:utility-fisherman-sweater",
+      "item:utility-henley",
+      "item:utility-quilted-vest",
+      "item:utility-carpenter-pants",
+      "item:utility-work-boot",
+      "item:utility-wool-scarf"
+    ]
+  },
+  {
+    "id": "look:utility-soft-shell",
+    "name": "Soft shell",
+    "occasion": "casual",
+    "description": "Shawl-collar cardigan as the outer layer with a flannel shirt, jeans and a bridle belt.",
+    "item_ids": [
+      "item:utility-shawl-cardigan",
+      "item:utility-flannel-shirt",
+      "item:utility-selvedge-jeans",
+      "item:utility-belt",
+      "item:utility-suede-chukka"
+    ]
+  },
+  {
+    "id": "look:utility-summer-utility",
+    "name": "Summer utility",
+    "occasion": "warm weather / outdoors",
+    "description": "Work shorts with the thermal henley, boots and the waxed tote.",
+    "item_ids": [
+      "item:utility-work-shorts",
+      "item:utility-henley",
+      "item:utility-work-boot",
+      "item:utility-tote"
+    ]
+  },
+  {
+    "id": "look:resort-harbour",
+    "name": "Harbour walk",
+    "occasion": "resort / daytime",
+    "description": "Camp-collar linen shirt open over the ribbed tank, drawstring pants, espadrilles and the straw hat.",
+    "item_ids": [
+      "item:resort-linen-shirt",
+      "item:resort-tank",
+      "item:resort-drawstring-pants",
+      "item:resort-espadrille",
+      "item:resort-straw-hat"
+    ]
+  },
+  {
+    "id": "look:resort-terrace-lunch",
+    "name": "Terrace lunch",
+    "occasion": "resort / daytime",
+    "description": "Striped linen shirt with pleated linen shorts, leather slides and round sunglasses.",
+    "item_ids": [
+      "item:resort-stripe-shirt",
+      "item:resort-pleated-shorts",
+      "item:resort-leather-sandal",
+      "item:resort-sunglasses",
+      "item:resort-basket-bag"
+    ]
+  },
+  {
+    "id": "look:resort-golden-hour",
+    "name": "Golden hour",
+    "occasion": "resort / evening",
+    "description": "The slip dress under the unlined linen blazer with leather slides and a silk scarf at the neck.",
+    "item_ids": [
+      "item:resort-slip-dress",
+      "item:resort-linen-blazer",
+      "item:resort-leather-sandal",
+      "item:resort-silk-scarf"
+    ]
+  },
+  {
+    "id": "look:resort-market",
+    "name": "Market morning",
+    "occasion": "resort / daytime",
+    "description": "Linen wrap skirt with the ribbed tank and open-knit polo over it, espadrilles, basket bag.",
+    "item_ids": [
+      "item:resort-wrap-skirt",
+      "item:resort-tank",
+      "item:resort-knit-polo",
+      "item:resort-espadrille",
+      "item:resort-basket-bag"
+    ]
+  },
+  {
+    "id": "look:resort-shirt-dress-day",
+    "name": "Shirt dress day",
+    "occasion": "resort / daytime",
+    "description": "Linen shirt dress belted with the braided belt, sandals and the straw hat.",
+    "item_ids": [
+      "item:resort-shirt-dress",
+      "item:resort-woven-belt",
+      "item:resort-leather-sandal",
+      "item:resort-straw-hat"
+    ]
+  },
+  {
+    "id": "look:resort-jumpsuit-city",
+    "name": "Jumpsuit in the city",
+    "occasion": "casual / city",
+    "description": "Utility jumpsuit with espadrilles and round sunglasses; the linen blazer over the shoulders.",
+    "item_ids": [
+      "item:resort-jumpsuit",
+      "item:resort-espadrille",
+      "item:resort-sunglasses",
+      "item:resort-linen-blazer"
+    ]
+  },
+  {
+    "id": "look:evening-black-tie",
+    "name": "Black tie",
+    "occasion": "evening / formal",
+    "description": "Satin-lapel tuxedo jacket, tuxedo trousers, cashmere turtleneck instead of a shirt, patent loafers.",
+    "item_ids": [
+      "item:evening-tux-jacket",
+      "item:evening-tux-trousers",
+      "item:evening-cashmere-turtleneck",
+      "item:evening-patent-loafer",
+      "item:evening-dress-watch"
+    ]
+  },
+  {
+    "id": "look:evening-gala",
+    "name": "Gala",
+    "occasion": "evening / formal",
+    "description": "Column gown under the velvet cape with strappy heels, the box clutch and opera gloves.",
+    "item_ids": [
+      "item:evening-column-dress",
+      "item:evening-velvet-cape",
+      "item:evening-strappy-heel",
+      "item:evening-clutch",
+      "item:evening-evening-gloves"
+    ]
+  },
+  {
+    "id": "look:evening-dinner",
+    "name": "Dinner",
+    "occasion": "evening / smart",
+    "description": "Silk tie-neck blouse tucked into the satin pencil skirt, sheer tights and patent loafers.",
+    "item_ids": [
+      "item:evening-silk-blouse",
+      "item:evening-pencil-skirt",
+      "item:evening-sheer-tights",
+      "item:evening-patent-loafer",
+      "item:evening-clutch"
+    ]
+  },
+  {
+    "id": "look:evening-boardroom",
+    "name": "Boardroom",
+    "occasion": "business / smart",
+    "description": "Double-breasted blazer over the cashmere turtleneck with fluid wide-leg trousers and loafers.",
+    "item_ids": [
+      "item:evening-db-blazer",
+      "item:evening-cashmere-turtleneck",
+      "item:evening-wide-trousers",
+      "item:evening-patent-loafer",
+      "item:evening-dress-watch"
+    ]
+  },
+  {
+    "id": "look:evening-cocktail",
+    "name": "Cocktail hour",
+    "occasion": "evening / smart",
+    "description": "Satin camisole under the double-breasted blazer, tuxedo trousers, strappy heels.",
+    "item_ids": [
+      "item:evening-cami",
+      "item:evening-db-blazer",
+      "item:evening-tux-trousers",
+      "item:evening-strappy-heel",
+      "item:evening-clutch"
+    ]
+  },
+  {
+    "id": "look:evening-winter-evening",
+    "name": "Winter evening",
+    "occasion": "evening / cold weather",
+    "description": "Camel overcoat over the black-tie look; slim silk tie with the tuxedo jacket.",
+    "item_ids": [
+      "item:evening-overcoat",
+      "item:evening-tux-jacket",
+      "item:evening-tux-trousers",
+      "item:evening-silk-tie",
+      "item:evening-patent-loafer"
+    ]
+  },
+  {
+    "id": "look:cross-tux-and-denim",
+    "name": "Tuxedo and denim",
+    "occasion": "evening / relaxed",
+    "description": "The Evening line's tuxedo jacket worn with the Utility line's selvedge jeans and suede chukkas; an AnyCompany Apparel signature mix.",
+    "item_ids": [
+      "item:evening-tux-jacket",
+      "item:utility-selvedge-jeans",
+      "item:utility-suede-chukka",
+      "item:evening-cashmere-turtleneck"
+    ]
+  },
+  {
+    "id": "look:cross-linen-and-tailoring",
+    "name": "Linen and tailoring",
+    "occasion": "smart casual",
+    "description": "The Resort camp shirt under the Evening line's double-breasted blazer, with drawstring linen pants and loafers.",
+    "item_ids": [
+      "item:resort-linen-shirt",
+      "item:evening-db-blazer",
+      "item:resort-drawstring-pants",
+      "item:evening-patent-loafer"
+    ]
+  }
+]

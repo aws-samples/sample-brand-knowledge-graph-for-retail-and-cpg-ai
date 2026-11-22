@@ -59,22 +59,22 @@ Bundled content
    OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 2. Example images (ontologies/fashion/examples/images/*.jpg)
-   Synthetic lookbook photos of the fictional brand Whimsikora, generated with Amazon Nova Canvas
+   Synthetic lookbook photos of the fictional brand AnyCompany Fashion House, generated with Amazon Nova Canvas
    on Amazon Bedrock (model ID amazon.nova-canvas-v1:0; the original file name per file in
    manifest.json). They depict no real person and contain no third-party photography. MIT-0.
 
    Single-piece product photos (ontologies/fashion/examples/items/*.jpg)
-   Synthetic product shots of the fictional brand Whimsikora's catalog, generated with Amazon Nova
+   Synthetic product shots of the fictional brand AnyCompany Fashion House's catalog, generated with Amazon Nova
    Canvas on Amazon Bedrock (model ID amazon.nova-canvas-v1:0; the product shot per file in
    manifest.json). They depict no real person, carry no logo or lettering and contain no
    third-party photography. MIT-0.
 
-3. Synthetic data set (ontologies/fashion/datasets/velloway/)
+3. Synthetic data set (ontologies/fashion/datasets/anycompany-apparel/)
    Authored for this repository; fictional brand, products, looks and editorial copy. MIT-0.
 
-4. Whimsikora data set (ontologies/fashion/datasets/whimsikora/)
+4. AnyCompany Fashion House data set (ontologies/fashion/datasets/anycompany-fashion-house/)
    One look of a fictional brand, synthetic. The photo (media/looks/) is one more photo of the
-   Whimsikora lookbook, generated with Amazon Nova Canvas on Amazon Bedrock; it shows no real
+   AnyCompany Fashion House lookbook, generated with Amazon Nova Canvas on Amazon Bedrock; it shows no real
    person, and the pieces were read from it by the sample's own classify step. MIT-0.
 
 Python packages vendored into the Lambda deployment package

@@ -13,7 +13,7 @@
       "opening-type": "opening-type:double-breasted",
       "silhouette": "silhouette:oversized"
     },
-    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+    "image_key": "anycompany-fashion-house/looks/fashion_professional_20241206_162449_1.jpg"
   },
   {
     "id": "item:58f0a33d-e2-jacket",
@@ -29,7 +29,7 @@
       "nickname": "nickname:blazer",
       "opening-type": "opening-type:double-breasted"
     },
-    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+    "image_key": "anycompany-fashion-house/looks/fashion_professional_20241206_162449_1.jpg"
   },
   {
     "id": "item:58f0a33d-e3-pants",
@@ -44,7 +44,7 @@
       "silhouette": "silhouette:straight",
       "textile-pattern": "textile-pattern:plain"
     },
-    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+    "image_key": "anycompany-fashion-house/looks/fashion_professional_20241206_162449_1.jpg"
   },
   {
     "id": "item:58f0a33d-e4-bag",
@@ -55,7 +55,7 @@
     "color": "black",
     "material": "leather",
     "attributes": {},
-    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+    "image_key": "anycompany-fashion-house/looks/fashion_professional_20241206_162449_1.jpg"
   },
   {
     "id": "item:58f0a33d-e5-necklace",
@@ -68,7 +68,7 @@
     "attributes": {
       "non-textile-material-type": "non-textile-material-type:metal"
     },
-    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+    "image_key": "anycompany-fashion-house/looks/fashion_professional_20241206_162449_1.jpg"
   },
   {
     "id": "item:58f0a33d-e6-glasses",
@@ -79,7 +79,7 @@
     "color": "",
     "material": "",
     "attributes": {},
-    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+    "image_key": "anycompany-fashion-house/looks/fashion_professional_20241206_162449_1.jpg"
   },
   {
     "id": "item:58f0a33d-e7-shoe",
@@ -92,6 +92,6 @@
     "attributes": {
       "opening-type": "opening-type:lace-up"
     },
-    "image_key": "whimsikora/looks/fashion_professional_20241206_162449_1.jpg"
+    "image_key": "anycompany-fashion-house/looks/fashion_professional_20241206_162449_1.jpg"
   }
 ]

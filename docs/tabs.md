@@ -209,7 +209,7 @@ Its first step shows where you start: the graph's counts before the batch.
 
 1. **Pick sources.** The domain is the one chosen in tab 0 (the control opens that tab). Its example
    photos and example texts (`ontologies/fashion/examples/articles/`: an editorial on the trench coat,
-   social posts bylined "Whimsikora · social post", fitting-room notes on a pinstripe suit, a
+   social posts bylined "AnyCompany Fashion House · social post", fitting-room notes on a pinstripe suit, a
    journal piece on layering knits) or your own photos and `.md`/`.txt` files. A domain with a new
    shoot (examples marked `"batch": "new-shoot"`) starts with the shoot selected; the sample has
    none and starts with its first batch (`"batch": "first"`: photos 01, 04 and 08 and the texts about
@@ -446,7 +446,7 @@ Tab 6 hands the same graph to a buyer, a merchandiser and a creative director, e
 of their own. Most are a count in the graph, then a model that explains the numbers citing only
 them. The lenses that count per occasion (*What does each occasion lean on?*, *Which pieces hold
 the most looks together?*, *What is our style, per occasion?*, *Where is the lookbook thin?*) count
-Velloway's looks too on the sample's own deploy: the loader links them to the ontology's occasions
+AnyCompany Apparel's looks too on the sample's own deploy: the loader links them to the ontology's occasions
 (see [graph-model.md](graph-model.md#occasions)), and *Where is the lookbook thin?* starts from the
 occasions that have a look.
 

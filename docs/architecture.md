@@ -216,7 +216,7 @@ config.py       Settings from the environment, DEFAULT_DOMAIN, the model lists, 
 service.py      facade used by api.py and the Lambda handlers (Service: the graph, the embedder, the indexes, the domain wording, invoke_runtime for both
                 agents, the data sets' load)     api.py   framework-neutral routes and the error mapping
 lambda_handler  api / pipeline / loader / auth-setup handlers        network_cleanup.py  the VPC a destroyed stack leaves (`ontology-rag network-cleanup`)
-synth.py        deterministic synthetic catalog (Velloway)
+synth.py        deterministic synthetic catalog (AnyCompany Apparel)
 cli.py          `ontology-rag`: synth, check-models, network-cleanup
 ```
 
@@ -267,7 +267,7 @@ Design constraints:
 2. `PutVectors` 200 at a time, key the product id (a second run overwrites); `index_catalog` writes
    the metadata `product_id`, `name` (`catalog_name`), `category`, `type`, `color`, `image_key` and `text`
    (`name` and `text` are non-filterable: filterable metadata is capped at 2 KB per vector). The
-   sample's deploy writes 62 products (Velloway 55, the Whimsikora excerpt 7); the loader's result
+   sample's deploy writes 62 products (AnyCompany Apparel 55, the AnyCompany Fashion House excerpt 7); the loader's result
    reports `catalog` per set
 3. nothing else writes the index: tab 2's ingest writes the graph only, and
    `POST /api/admin/clear-graph` empties the graph and leaves the catalog as it is (only with

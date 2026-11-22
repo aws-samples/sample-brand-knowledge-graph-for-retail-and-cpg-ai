@@ -1,6 +1,6 @@
 # Weekend uniform
 
-_Whimsikora · social post · 2026-08-30_
+_AnyCompany Fashion House · social post · 2026-08-30_
 
 Weekend uniform, no notes. The black leather biker jacket, cropped at the waist with an
 asymmetric zip front and zipped cuffs, worn open over a light-blue denim shirt, buttoned up
@@ -12,4 +12,4 @@ after all.
 
 Denim on denim works when the two blues are close and the jacket breaks them up.
 
-#whimsikora #weekend #bikerjacket #denim #sneakers
+#anycompany-fashion-house #weekend #bikerjacket #denim #sneakers

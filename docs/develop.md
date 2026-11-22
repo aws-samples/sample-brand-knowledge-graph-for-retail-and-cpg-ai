@@ -28,7 +28,7 @@ make build && (cd infra && npx cdk deploy)    # build the site, then deploy the 
 
 `backend/.venv/bin/ontology-rag` has three commands. None of them needs the graph.
 
-* `synth` regenerates the Velloway data set (`ontologies/fashion/datasets/velloway/`) from
+* `synth` regenerates the AnyCompany Apparel data set (`ontologies/fashion/datasets/anycompany-apparel/`) from
   `backend/src/ontology_rag/synth.py`. `make sample-data` runs it.
 * `check-models` sends every Bedrock model the sample uses one small request. It exits with 1 when
   one of them fails. Run it before a deploy, with the deploy's credentials and `AWS_REGION`.

@@ -106,7 +106,7 @@ describe('the API client: every request signed, sent to the function URL', () =>
 
   it('retries a GET the API refused with 429 (its concurrency), but never a POST', async () => {
     fetchMock.mockResolvedValueOnce(reply(429, { message: 'Too Many Requests' })).mockResolvedValueOnce(reply(200, { key: 'k', data_url: 'data:x' }));
-    await expect(api.photo('whimsikora/looks/a.jpg')).resolves.toMatchObject({ data_url: 'data:x' });
+    await expect(api.photo('anycompany-fashion-house/looks/a.jpg')).resolves.toMatchObject({ data_url: 'data:x' });
     expect(fetchMock).toHaveBeenCalledTimes(2);
     fetchMock.mockReset();
     fetchMock.mockResolvedValue(reply(429, { message: 'Too Many Requests' }));

@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT-0
 
 """Tab 5's example pieces (``ontologies/fashion/examples/items/``): synthetic product photos of
-single garments like those worn in the example photos (product shots of the Whimsikora catalog),
+single garments like those worn in the example photos (product shots of the AnyCompany Fashion House catalog),
 listed by ``OntologyEntry.items`` and served by the examples routes with ``set=items``; tabs 1 and
 2 keep the whole photos (the default set)."""
 
@@ -39,8 +39,8 @@ def test_the_manifest_describes_every_piece_and_where_it_comes_from():
         # like a garment of an example photo, numbered after it
         assert item["source"] in photos and item["file"][:2] == item["source"][:2]
         assert item["category"] in PIECE_CATEGORIES and item["title"]
-        # a product shot of the Whimsikora catalog, made with Amazon Nova Canvas
-        assert item["image_model_id"] == "amazon.nova-canvas-v1:0" and "Whimsikora" in item["product"]
+        # a product shot of the AnyCompany Fashion House catalog, made with Amazon Nova Canvas
+        assert item["image_model_id"] == "amazon.nova-canvas-v1:0" and "AnyCompany Fashion House" in item["product"]
         # classified the way tab 3 decomposes a photo: one main garment of the expected class
         assert item["check"]["passed"] and item["check"]["model_id"]
         assert not any(int(a.rsplit(", ", 1)[1].rstrip("%)")) >= 30 for a in item["check"]["also"])

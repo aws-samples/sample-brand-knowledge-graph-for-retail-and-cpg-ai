@@ -1,6 +1,6 @@
 # Cold snap
 
-_Whimsikora · social post · 2026-09-26_
+_AnyCompany Fashion House · social post · 2026-09-26_
 
 Cold snap ready. The long wool coat in charcoal grey: single breasted, oversized, below the
 knee, worn open with both hands in the pockets. Under it, a white shirt with the collar open
@@ -12,4 +12,4 @@ only color in the look. A black leather shoulder bag on a heavy gold chain.
 
 Yes, the gold chain on the bag matches the one at the neck. That was the point.
 
-#whimsikora #coldsnap #woolcoat #ankleboots
+#anycompany-fashion-house #coldsnap #woolcoat #ankleboots

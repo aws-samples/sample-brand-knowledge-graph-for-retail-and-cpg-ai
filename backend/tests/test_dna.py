@@ -23,12 +23,12 @@ def _with_ontology(ontology) -> InMemoryStore:
 
 def _write_export(folder) -> None:
     """Two lookbook looks with a garment each, their occasion and the brand, in the files'
-    format (the export that made Whimsikora's set wrote them like this)."""
+    format (the export that made AnyCompany Fashion House's set wrote them like this)."""
     nodes = [
-        {"id": "brand:whimsikora", "label": "Brand", "props": {"name": "Whimsikora"}},
+        {"id": "brand:anycompany-fashion-house", "label": "Brand", "props": {"name": "AnyCompany Fashion House"}},
         {"id": "occasion:dress", "label": "Occasion", "props": {"name": "Dress"}},
     ]
-    edges = [{"type": "HAS_OCCASION", "source": "brand:whimsikora", "target": "occasion:dress"}]
+    edges = [{"type": "HAS_OCCASION", "source": "brand:anycompany-fashion-house", "target": "occasion:dress"}]
     vectors = {}
     for lid, name in (
         ("look:aaaa1111", "fashion_dress_1.png"),

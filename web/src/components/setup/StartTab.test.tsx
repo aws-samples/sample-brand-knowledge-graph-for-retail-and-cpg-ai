@@ -10,17 +10,17 @@ import { visibleText } from '../../visibleText';
 /** The box as a reader sees it: tags dropped, the escaped characters back. */
 const text = (html: string) => visibleText(html);
 
-const velloway = { name: 'Velloway', description: 'Velloway is a contemporary label built on three lines.' };
-const whimsikora = { name: 'Whimsikora', description: 'A fictional luxury brand.' };
+const apparel = { name: 'AnyCompany Apparel', description: 'AnyCompany Apparel is a contemporary label built on three lines.' };
+const fashionHouse = { name: 'AnyCompany Fashion House', description: 'A fictional luxury brand.' };
 const photo = (file: string, batch?: string) => ({ file, title: file, ...(batch ? { batch } : {}) }) as ExampleInfo;
 
 describe('MeetTheBrand (tab 0)', () => {
   it('names every brand of the graph with its description and the counts it has read', () => {
-    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[velloway, whimsikora]} looks={20} products={62} examples={[photo('01.jpg', 'first'), photo('02.jpg')]} />));
-    expect(html).toContain('Meet the brands: Velloway and Whimsikora');
-    expect(html).toContain('Velloway is a contemporary label built on three lines.');
+    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[apparel, fashionHouse]} looks={20} products={62} examples={[photo('01.jpg', 'first'), photo('02.jpg')]} />));
+    expect(html).toContain('Meet the brands: AnyCompany Apparel and AnyCompany Fashion House');
+    expect(html).toContain('AnyCompany Apparel is a contemporary label built on three lines.');
     // a description that does not say the name is led by it
-    expect(html).toContain('Whimsikora: A fictional luxury brand.');
+    expect(html).toContain('AnyCompany Fashion House: A fictional luxury brand.');
     expect(html).toContain("The stylists' taste is in the brands' lookbooks: 20 looks, already in the graph as each brand's style DNA");
     expect(html).toContain('The catalog of 62 products sits in a separate vector store.');
     expect(html).toContain('Image models on Amazon Bedrock made the photos.');
@@ -30,8 +30,8 @@ describe('MeetTheBrand (tab 0)', () => {
 
   it('says the new shoot only with new-shoot photos, with their count', () => {
     const examples = [photo('a.jpg', 'new-shoot'), photo('b.jpg', 'new-shoot'), photo('c.jpg', 'new-work')];
-    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[velloway]} looks={120} products={527} examples={examples} />));
-    expect(html).toContain('Meet the brand: Velloway');
+    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[apparel]} looks={120} products={527} examples={examples} />));
+    expect(html).toContain('Meet the brand: AnyCompany Apparel');
     expect(html).toContain("The stylists' taste is in the lookbook: 120 looks, already in the graph as the brand's style DNA");
     expect(html).toContain('A new shoot of 2 looks is waiting for you to add in tab 2.');
   });
@@ -48,9 +48,9 @@ describe('MeetTheBrand (tab 0)', () => {
   });
 
   it('says nothing of how photos were made when the domain has none', () => {
-    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[{ name: 'Velloway', description: '' }]} looks={19} products={55} examples={[]} />));
-    expect(html).toContain('Meet the brand: Velloway');
-    expect(html).not.toContain('Velloway:');
+    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[{ name: 'AnyCompany Apparel', description: '' }]} looks={19} products={55} examples={[]} />));
+    expect(html).toContain('Meet the brand: AnyCompany Apparel');
+    expect(html).not.toContain('AnyCompany Apparel:');
     expect(html).not.toContain('image model');
   });
 });

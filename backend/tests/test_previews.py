@@ -112,7 +112,7 @@ def test_an_example_photo_is_read_from_the_domain(tab2_service):
 
 
 def test_a_stored_photo_of_the_brand_is_read_by_its_key():
-    look = Node("look:x", ["Look"], {"image_key": "whimsikora/looks/fashion_1.jpg"})
+    look = Node("look:x", ["Look"], {"image_key": "anycompany-fashion-house/looks/fashion_1.jpg"})
     p = previews.source_of(
         look, MemoryBlobStore(), lambda f: (b"", ""), stored_photo=lambda k: (JPEG, "image/jpeg")
     )
@@ -160,22 +160,22 @@ def test_the_route_checks_its_input(loaded_service):
         400,
         {"error": "id must be a graph node id"},
     )
-    st, body = _get(loaded_service, {"id": "item:atlas-trench", "domain": "../fashion"})
+    st, body = _get(loaded_service, {"id": "item:utility-trench", "domain": "../fashion"})
     assert (st, body) == (400, {"error": "domain must be an ontology folder id"})
     assert _get(loaded_service, {"id": "item:nothing-like-it"})[0] == 404
-    assert _get(loaded_service, {"id": "item:atlas-trench", "domain": "no-such-domain"})[0] == 404
-    assert _get(loaded_service, {"id": "item:atlas-trench", "domain": "fashion"})[0] == 200
+    assert _get(loaded_service, {"id": "item:utility-trench", "domain": "no-such-domain"})[0] == 404
+    assert _get(loaded_service, {"id": "item:utility-trench", "domain": "fashion"})[0] == 200
 
 
 # --- a category, an attribute value or a line: where it was seen (previews.origins_of)
 
 
 def test_the_trees_nodes_come_first(loaded_service):
-    _, plain = _get(loaded_service, {"id": "line:atlas"})
-    seen_in = [m for _, m in loaded_service.store.neighbors("line:atlas", direction="in")]
+    _, plain = _get(loaded_service, {"id": "line:utility"})
+    seen_in = [m for _, m in loaded_service.store.neighbors("line:utility", direction="in")]
     last = max(seen_in, key=lambda m: (m.name.lower(), m.id)).id  # shown last without near
     assert last not in [o["id"] for o in plain["origins"]]
-    _, near = _get(loaded_service, {"id": "line:atlas", "near": f"look:nothing,{last}"})
+    _, near = _get(loaded_service, {"id": "line:utility", "near": f"look:nothing,{last}"})
     assert near["origins"][0]["id"] == last and near["origins"][0]["via"][0]["edge"] == "FROM_LINE"
 
 
@@ -225,7 +225,7 @@ def test_nodes_of_one_photo_share_its_preview_and_photos_share_the_budget(
 
 
 def test_a_node_with_a_source_of_its_own_has_no_origins(loaded_service):
-    _, item = _get(loaded_service, {"id": "item:atlas-field-jacket"})
+    _, item = _get(loaded_service, {"id": "item:utility-field-jacket"})
     assert "origins" not in item
     _, part = _get(loaded_service, {"id": "category:pocket"})  # a part no catalog item names
     assert (part["origins"], part["origins_total"]) == ([], 0)

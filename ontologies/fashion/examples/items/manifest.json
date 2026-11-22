@@ -1,5 +1,5 @@
 {
-  "license": "Synthetic product photos generated with Amazon Nova Canvas on Amazon Bedrock: product shots of the fictional brand Whimsikora's catalog, each like a garment of the sample's own example photos (../images/). No real people and no third-party photos.",
+  "license": "Synthetic product photos generated with Amazon Nova Canvas on Amazon Bedrock: product shots of the fictional brand AnyCompany Fashion House's catalog, each like a garment of the sample's own example photos (../images/). No real people and no third-party photos.",
   "items": [
     {
       "file": "01-trench-coat.jpg",
@@ -9,7 +9,7 @@
       "category_id": "category:coat",
       "label": "beige double-breasted trench coat with tie belt",
       "source": "01-trench-coat-sweater-dress.jpg",
-      "product": "Whimsikora catalog product shot item_684670969407776488.jpg, \"Beige cotton gabardine trench coat\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_684670969407776488.jpg, \"Beige cotton gabardine trench coat\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -40,7 +40,7 @@
       "category_id": "category:dress",
       "label": "grey knit turtleneck sweater dress, long sleeves, fitted",
       "source": "01-trench-coat-sweater-dress.jpg",
-      "product": "Whimsikora catalog product shot item_7127861816028842007.jpg, \"Grey wool turtleneck dress\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_7127861816028842007.jpg, \"Grey wool turtleneck dress\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -69,7 +69,7 @@
       "category_id": "category:jacket",
       "label": "navy double-breasted wool blazer",
       "source": "03-navy-blazer-pleated-skirt.jpg",
-      "product": "Whimsikora catalog product shot item_550733363225108534.jpg, \"Navy wool blazer\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_550733363225108534.jpg, \"Navy wool blazer\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -98,7 +98,7 @@
       "category_id": "category:jacket",
       "label": "black leather biker jacket with asymmetric zip front",
       "source": "04-biker-jacket-jeans-sneakers.jpg",
-      "product": "Whimsikora catalog product shot item_-6620743761785415851.jpg, \"Black leather leather jacket\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_-6620743761785415851.jpg, \"Black leather leather jacket\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -127,7 +127,7 @@
       "category_id": "category:shoe",
       "label": "white leather low-top sneaker",
       "source": "04-biker-jacket-jeans-sneakers.jpg",
-      "product": "Whimsikora catalog product shot item_5553995774842627541.jpg, \"White leather sneakers\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_5553995774842627541.jpg, \"White leather sneakers\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -156,7 +156,7 @@
       "category_id": "category:skirt",
       "label": "light blue denim midi skirt with gathered tiered flared body and yoked waist",
       "source": "05-turtleneck-denim-skirt.jpg",
-      "product": "Whimsikora catalog product shot item_-7354085852109461728.jpg, \"Light blue denim denim midi skirt\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_-7354085852109461728.jpg, \"Light blue denim denim midi skirt\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -185,7 +185,7 @@
       "category_id": "category:sweater",
       "label": "cream ribbed knit turtleneck sweater with raglan sleeves",
       "source": "05-turtleneck-denim-skirt.jpg",
-      "product": "Whimsikora catalog product shot item_-3864915341363054192.jpg, \"Cream ribbed knit turtleneck sweater\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_-3864915341363054192.jpg, \"Cream ribbed knit turtleneck sweater\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -214,7 +214,7 @@
       "category_id": "category:cardigan",
       "label": "cream chunky knit oversized button-front cardigan",
       "source": "06-cardigan-wide-leg-trousers.jpg",
-      "product": "Whimsikora catalog product shot item_6307494221355781618.jpg, \"Cream wool cardigan\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_6307494221355781618.jpg, \"Cream wool cardigan\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -243,7 +243,7 @@
       "category_id": "category:pants",
       "label": "cream wide-leg high-waist trousers",
       "source": "06-cardigan-wide-leg-trousers.jpg",
-      "product": "Whimsikora catalog product shot item_-963071435846246229.jpg, \"Cream cotton blend wide-leg trousers\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_-963071435846246229.jpg, \"Cream cotton blend wide-leg trousers\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -272,7 +272,7 @@
       "category_id": "category:shoe",
       "label": "pair of orange and black lace-up leather boots",
       "source": "07-wool-coat-ankle-boots.jpg",
-      "product": "Whimsikora catalog product shot item_-3853025595038071796.jpg, \"Orange and black leather ankle boots\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_-3853025595038071796.jpg, \"Orange and black leather ankle boots\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -301,7 +301,7 @@
       "category_id": "category:coat",
       "label": "charcoal grey wool coat with notched lapels, hanging",
       "source": "07-wool-coat-ankle-boots.jpg",
-      "product": "Whimsikora catalog product shot item_-2813480358453350953.jpg, \"Charcoal grey wool wool coat\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_-2813480358453350953.jpg, \"Charcoal grey wool wool coat\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,
@@ -330,7 +330,7 @@
       "category_id": "category:pants",
       "label": "navy pinstriped tailored trousers, cropped, pleated front",
       "source": "08-pinstripe-suit.jpg",
-      "product": "Whimsikora catalog product shot item_3890595591619287808.jpg, \"Navy wool pinstripe trousers\" (from the IND416 workshop's data set)",
+      "product": "AnyCompany Fashion House catalog product shot item_3890595591619287808.jpg, \"Navy wool pinstripe trousers\" (from the IND416 workshop's data set)",
       "image_model_id": "amazon.nova-canvas-v1:0",
       "size": [
         512,

@@ -43,7 +43,7 @@ CloudFront distribution take most of that time.
 The `ontologies/` folder goes to the data bucket and `web/dist` to the site bucket. Then the
 `GraphLoader` custom resource, a Lambda function in the VPC, loads the ontology and every data set
 of the graph's domain into the graph. It also writes the sets' products into the catalog index in
-Amazon S3 Vectors. For the two sets the sample ships, Velloway and one look of Whimsikora, that is
+Amazon S3 Vectors. For the two sets the sample ships, AnyCompany Apparel and one look of AnyCompany Fashion House, that is
 about 105 Nova embeddings for the graph and one for each of their 62 products.
 
 The loader needs Amazon Bedrock access to the embedding model. If it fails, it reports the reason and

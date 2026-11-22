@@ -1,10 +1,10 @@
 [
   {
-    "id": "item:atlas-field-jacket",
+    "id": "item:utility-field-jacket",
     "name": "Waxed field jacket",
     "category_id": "jacket",
-    "line_id": "line:atlas",
-    "description": "Four-pocket waxed cotton field jacket with corduroy collar and brass zip; the Atlas anchor piece.",
+    "line_id": "line:utility",
+    "description": "Four-pocket waxed cotton field jacket with corduroy collar and brass zip; the Utility line's anchor piece.",
     "color": "olive",
     "material": "waxed cotton",
     "attributes": {
@@ -17,10 +17,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-trench",
+    "id": "item:utility-trench",
     "name": "Cotton gabardine trench coat",
     "category_id": "coat",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Double-breasted trench with a storm flap and a belt meant to be tied; the piece that survives every edit of the line.",
     "color": "stone",
     "material": "cotton gabardine",
@@ -34,10 +34,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-chore-coat",
+    "id": "item:utility-chore-coat",
     "name": "Corduroy chore coat",
     "category_id": "coat",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Relaxed chore coat in wide-wale corduroy with patch pockets; layers over knitwear.",
     "color": "rust",
     "material": "corduroy",
@@ -50,10 +50,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-quilted-vest",
+    "id": "item:utility-quilted-vest",
     "name": "Quilted liner vest",
     "category_id": "vest",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Lightweight quilted vest designed to sit under the field jacket or over a flannel shirt.",
     "color": "navy",
     "material": "recycled nylon",
@@ -66,10 +66,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-flannel-shirt",
+    "id": "item:utility-flannel-shirt",
     "name": "Brushed flannel overshirt",
     "category_id": "shirt",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Heavyweight brushed flannel in a forest-green check; worn open as an overshirt or buttoned as a layer.",
     "color": "forest green",
     "material": "brushed cotton",
@@ -83,11 +83,11 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-henley",
+    "id": "item:utility-henley",
     "name": "Thermal henley",
     "category_id": "top",
-    "line_id": "line:atlas",
-    "description": "Waffle-knit henley with a three-button placket; the base layer of the Atlas line.",
+    "line_id": "line:utility",
+    "description": "Waffle-knit henley with a three-button placket; the base layer of the Utility line.",
     "color": "ecru",
     "material": "waffle cotton",
     "attributes": {
@@ -100,10 +100,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-fisherman-sweater",
+    "id": "item:utility-fisherman-sweater",
     "name": "Fisherman rib sweater",
     "category_id": "sweater",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Chunky rib-knit crew neck in undyed wool; sized to sit over shirts.",
     "color": "oatmeal",
     "material": "wool",
@@ -116,10 +116,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-shawl-cardigan",
+    "id": "item:utility-shawl-cardigan",
     "name": "Shawl-collar cardigan",
     "category_id": "cardigan",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Heavy shawl-collar cardigan with horn buttons; a soft alternative to the chore coat.",
     "color": "charcoal",
     "material": "wool blend",
@@ -132,10 +132,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-cargo-pants",
+    "id": "item:utility-cargo-pants",
     "name": "Ripstop cargo pants",
     "category_id": "pants",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Straight-leg cargo pants in tear-resistant ripstop with bellows pockets.",
     "color": "khaki",
     "material": "cotton ripstop",
@@ -150,10 +150,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-carpenter-pants",
+    "id": "item:utility-carpenter-pants",
     "name": "Duck canvas carpenter pants",
     "category_id": "pants",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Wide-leg carpenter pants in stiff duck canvas with hammer loop; softens with wear.",
     "color": "tan",
     "material": "cotton duck canvas",
@@ -166,10 +166,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-selvedge-jeans",
+    "id": "item:utility-selvedge-jeans",
     "name": "Selvedge denim jeans",
     "category_id": "pants",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Rinse-washed selvedge jeans with a high rise and straight leg.",
     "color": "indigo",
     "material": "selvedge denim",
@@ -184,10 +184,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-work-shorts",
+    "id": "item:utility-work-shorts",
     "name": "Canvas work shorts",
     "category_id": "shorts",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Knee-length canvas shorts with utility pockets for warm-weather site days.",
     "color": "stone",
     "material": "cotton canvas",
@@ -200,11 +200,11 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-work-boot",
+    "id": "item:utility-work-boot",
     "name": "Moc-toe work boot",
     "category_id": "shoe",
-    "line_id": "line:atlas",
-    "description": "Goodyear-welted moc-toe boot on a rubber lug sole; the Atlas footwear staple.",
+    "line_id": "line:utility",
+    "description": "Goodyear-welted moc-toe boot on a rubber lug sole; the Utility line's footwear staple.",
     "color": "brown",
     "material": "full-grain leather",
     "attributes": {
@@ -214,10 +214,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-suede-chukka",
+    "id": "item:utility-suede-chukka",
     "name": "Suede chukka boot",
     "category_id": "shoe",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Two-eyelet suede chukka on a crepe sole; dresses the cargo pants up.",
     "color": "sand",
     "material": "suede",
@@ -228,10 +228,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-beanie",
+    "id": "item:utility-beanie",
     "name": "Rib-knit watch cap",
     "category_id": "hat",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Close-fitting ribbed watch cap in merino.",
     "color": "charcoal",
     "material": "merino wool",
@@ -241,10 +241,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-tote",
+    "id": "item:utility-tote",
     "name": "Waxed canvas tote",
     "category_id": "bag",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Structured waxed canvas tote with brass rivets and leather handles.",
     "color": "olive",
     "material": "waxed canvas",
@@ -254,10 +254,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-belt",
+    "id": "item:utility-belt",
     "name": "Bridle leather belt",
     "category_id": "belt",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Thick bridle leather belt with a solid brass buckle.",
     "color": "brown",
     "material": "bridle leather",
@@ -267,10 +267,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-wool-scarf",
+    "id": "item:utility-wool-scarf",
     "name": "Herringbone wool scarf",
     "category_id": "scarf",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Long lambswool scarf woven in a herringbone twill.",
     "color": "gray",
     "material": "lambswool",
@@ -278,10 +278,10 @@
     "image_key": ""
   },
   {
-    "id": "item:atlas-boot-sock",
+    "id": "item:utility-boot-sock",
     "name": "Boot sock",
     "category_id": "sock",
-    "line_id": "line:atlas",
+    "line_id": "line:utility",
     "description": "Cushioned wool-blend boot sock.",
     "color": "oatmeal",
     "material": "wool blend",
@@ -291,11 +291,11 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-linen-shirt",
+    "id": "item:resort-linen-shirt",
     "name": "Camp-collar linen shirt",
     "category_id": "shirt",
-    "line_id": "line:solstice",
-    "description": "Boxy camp-collar shirt in washed linen; the Solstice signature.",
+    "line_id": "line:resort",
+    "description": "Boxy camp-collar shirt in washed linen; the Resort line's signature.",
     "color": "white",
     "material": "linen",
     "attributes": {
@@ -308,10 +308,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-stripe-shirt",
+    "id": "item:resort-stripe-shirt",
     "name": "Striped linen shirt",
     "category_id": "shirt",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Relaxed button-front shirt in a navy stripe on linen-cotton.",
     "color": "navy",
     "material": "linen cotton",
@@ -325,10 +325,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-knit-polo",
+    "id": "item:resort-knit-polo",
     "name": "Open-knit polo",
     "category_id": "top",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Airy open-knit polo with a soft collar; wears like a t-shirt.",
     "color": "sage",
     "material": "cotton",
@@ -341,11 +341,11 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-tank",
+    "id": "item:resort-tank",
     "name": "Ribbed tank",
     "category_id": "top",
-    "line_id": "line:solstice",
-    "description": "Fine ribbed scoop-neck tank; the layer under every Solstice shirt.",
+    "line_id": "line:resort",
+    "description": "Fine ribbed scoop-neck tank; the layer under every Resort shirt.",
     "color": "ivory",
     "material": "organic cotton",
     "attributes": {
@@ -357,10 +357,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-linen-blazer",
+    "id": "item:resort-linen-blazer",
     "name": "Unlined linen blazer",
     "category_id": "jacket",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Unstructured single-breasted blazer in slubby linen; creases are part of the look.",
     "color": "sand",
     "material": "linen",
@@ -374,10 +374,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-drawstring-pants",
+    "id": "item:resort-drawstring-pants",
     "name": "Drawstring linen pants",
     "category_id": "pants",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Wide-leg linen pants with an elasticated drawstring waist.",
     "color": "stone",
     "material": "linen",
@@ -390,10 +390,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-pleated-shorts",
+    "id": "item:resort-pleated-shorts",
     "name": "Pleated linen shorts",
     "category_id": "shorts",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "High-waisted pleated shorts that pair with knit polos and camp shirts.",
     "color": "white",
     "material": "linen",
@@ -407,10 +407,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-wrap-skirt",
+    "id": "item:resort-wrap-skirt",
     "name": "Linen wrap skirt",
     "category_id": "skirt",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Midi wrap skirt with a self-tie waist in sun-faded terracotta.",
     "color": "terracotta",
     "material": "linen",
@@ -424,10 +424,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-shirt-dress",
+    "id": "item:resort-shirt-dress",
     "name": "Linen shirt dress",
     "category_id": "dress",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Relaxed shirt dress in washed linen; belt it or wear it open over the tank.",
     "color": "white",
     "material": "linen",
@@ -441,10 +441,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-slip-dress",
+    "id": "item:resort-slip-dress",
     "name": "Bias-cut slip dress",
     "category_id": "dress",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Fluid bias-cut slip dress with a cowl neck; day to evening.",
     "color": "sage",
     "material": "cupro",
@@ -459,10 +459,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-jumpsuit",
+    "id": "item:resort-jumpsuit",
     "name": "Utility linen jumpsuit",
     "category_id": "jumpsuit",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "One-piece linen jumpsuit with a belted waist and zip front.",
     "color": "olive",
     "material": "linen",
@@ -476,10 +476,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-espadrille",
+    "id": "item:resort-espadrille",
     "name": "Canvas espadrille",
     "category_id": "shoe",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Slip-on canvas espadrille on a jute-wrapped sole.",
     "color": "natural",
     "material": "canvas",
@@ -490,10 +490,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-leather-sandal",
+    "id": "item:resort-leather-sandal",
     "name": "Leather slide sandal",
     "category_id": "shoe",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Minimal leather slide with a brass buckle.",
     "color": "tan",
     "material": "leather",
@@ -504,10 +504,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-straw-hat",
+    "id": "item:resort-straw-hat",
     "name": "Wide-brim straw hat",
     "category_id": "hat",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Wide-brim raffia hat with a cotton band.",
     "color": "natural",
     "material": "raffia",
@@ -517,10 +517,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-sunglasses",
+    "id": "item:resort-sunglasses",
     "name": "Round acetate sunglasses",
     "category_id": "glasses",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Round tortoiseshell acetate frames.",
     "color": "tortoise",
     "material": "acetate",
@@ -530,10 +530,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-basket-bag",
+    "id": "item:resort-basket-bag",
     "name": "Woven basket bag",
     "category_id": "bag",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Hand-woven palm basket bag with leather handles.",
     "color": "natural",
     "material": "palm leaf",
@@ -543,10 +543,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-woven-belt",
+    "id": "item:resort-woven-belt",
     "name": "Braided leather belt",
     "category_id": "belt",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Braided tan leather belt with a matte buckle.",
     "color": "tan",
     "material": "leather",
@@ -556,10 +556,10 @@
     "image_key": ""
   },
   {
-    "id": "item:solstice-silk-scarf",
+    "id": "item:resort-silk-scarf",
     "name": "Printed silk scarf",
     "category_id": "scarf",
-    "line_id": "line:solstice",
+    "line_id": "line:resort",
     "description": "Square silk scarf with a sun-faded botanical print; wear at the neck or on a bag.",
     "color": "coral",
     "material": "silk",
@@ -567,11 +567,11 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-tux-jacket",
+    "id": "item:evening-tux-jacket",
     "name": "Satin-lapel tuxedo jacket",
     "category_id": "jacket",
-    "line_id": "line:meridian",
-    "description": "Slim single-breasted tuxedo jacket with satin lapels; the Meridian centerpiece.",
+    "line_id": "line:evening",
+    "description": "Slim single-breasted tuxedo jacket with satin lapels; the Evening line's centerpiece.",
     "color": "black",
     "material": "wool",
     "attributes": {
@@ -585,10 +585,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-db-blazer",
+    "id": "item:evening-db-blazer",
     "name": "Double-breasted blazer",
     "category_id": "jacket",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Sharp double-breasted blazer in midnight wool with peak lapels.",
     "color": "midnight",
     "material": "wool",
@@ -602,10 +602,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-silk-blouse",
+    "id": "item:evening-silk-blouse",
     "name": "Silk tie-neck blouse",
     "category_id": "shirt",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Fluid silk blouse with a high neck and a self-tie bow.",
     "color": "ivory",
     "material": "silk",
@@ -620,10 +620,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-cashmere-turtleneck",
+    "id": "item:evening-cashmere-turtleneck",
     "name": "Fine cashmere turtleneck",
     "category_id": "sweater",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Fine-gauge cashmere turtleneck; the understated base under tailoring.",
     "color": "black",
     "material": "cashmere",
@@ -636,10 +636,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-cami",
+    "id": "item:evening-cami",
     "name": "Satin camisole",
     "category_id": "top",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Bias-cut satin camisole with fine straps.",
     "color": "champagne",
     "material": "satin",
@@ -652,10 +652,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-tux-trousers",
+    "id": "item:evening-tux-trousers",
     "name": "Satin-stripe tuxedo trousers",
     "category_id": "pants",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "High-waisted straight tuxedo trousers with a satin side stripe.",
     "color": "black",
     "material": "wool",
@@ -669,10 +669,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-wide-trousers",
+    "id": "item:evening-wide-trousers",
     "name": "Fluid wide-leg trousers",
     "category_id": "pants",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Fluid wide-leg crepe trousers that move like a skirt.",
     "color": "midnight",
     "material": "crepe",
@@ -685,10 +685,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-pencil-skirt",
+    "id": "item:evening-pencil-skirt",
     "name": "Satin pencil skirt",
     "category_id": "skirt",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "High-waisted satin pencil skirt with a back slit.",
     "color": "burgundy",
     "material": "satin",
@@ -702,10 +702,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-column-dress",
+    "id": "item:evening-column-dress",
     "name": "Column gown",
     "category_id": "dress",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Floor-length column dress with a boat neck and clean back.",
     "color": "black",
     "material": "crepe",
@@ -720,10 +720,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-velvet-cape",
+    "id": "item:evening-velvet-cape",
     "name": "Velvet evening cape",
     "category_id": "cape",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Short velvet cape with a stand collar; worn over the column gown or tuxedo.",
     "color": "oxblood",
     "material": "velvet",
@@ -736,10 +736,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-overcoat",
+    "id": "item:evening-overcoat",
     "name": "Tailored wool overcoat",
     "category_id": "coat",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Knee-length single-breasted overcoat in camel wool-cashmere.",
     "color": "camel",
     "material": "wool cashmere",
@@ -753,10 +753,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-patent-loafer",
+    "id": "item:evening-patent-loafer",
     "name": "Patent leather loafer",
     "category_id": "shoe",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Slim patent loafer with a low stacked heel.",
     "color": "black",
     "material": "patent leather",
@@ -766,10 +766,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-strappy-heel",
+    "id": "item:evening-strappy-heel",
     "name": "Strappy satin heel",
     "category_id": "shoe",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Strappy satin sandal on a slender heel.",
     "color": "black",
     "material": "satin",
@@ -780,10 +780,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-clutch",
+    "id": "item:evening-clutch",
     "name": "Box clutch",
     "category_id": "bag",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Rigid box clutch in brushed gold metal.",
     "color": "gold",
     "material": "metal",
@@ -793,10 +793,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-silk-tie",
+    "id": "item:evening-silk-tie",
     "name": "Slim silk tie",
     "category_id": "tie",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Slim black silk tie with a subtle sheen.",
     "color": "black",
     "material": "silk",
@@ -804,10 +804,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-dress-watch",
+    "id": "item:evening-dress-watch",
     "name": "Slim dress watch",
     "category_id": "watch",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Thin gold-tone dress watch on a black leather strap.",
     "color": "gold",
     "material": "steel",
@@ -817,10 +817,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-sheer-tights",
+    "id": "item:evening-sheer-tights",
     "name": "Sheer tights",
     "category_id": "tights",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Sheer black tights.",
     "color": "black",
     "material": "nylon",
@@ -830,10 +830,10 @@
     "image_key": ""
   },
   {
-    "id": "item:meridian-evening-gloves",
+    "id": "item:evening-evening-gloves",
     "name": "Opera gloves",
     "category_id": "glove",
-    "line_id": "line:meridian",
+    "line_id": "line:evening",
     "description": "Elbow-length satin opera gloves.",
     "color": "black",
     "material": "satin",

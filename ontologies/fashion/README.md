@@ -9,8 +9,8 @@ attributes, plus the brand knowledge-graph schema used by the rest of this sampl
 | Size | 83 classes, 303 named individuals, 22 object properties, 3 datatype properties, ~2,600 triples (version 1.2.0) |
 | Built by | [`build_fashion_ontology.py`](build_fashion_ontology.py) (rdflib) from the Fashionpedia category/attribute catalog |
 | Domain | [`domain.json`](domain.json): the name shown in tab 0, the words of the classification instruction ("garment, accessory and garment component", "an outfit"), the wording of the prompts and the worked examples of tab 3's agent |
-| Examples | Inputs to try in the app; the deploy does not load them. [`examples/images/`](examples/images/): 8 synthetic model photos to classify against it (lookbook photos of the fictional brand Whimsikora, made with Amazon Nova Canvas); [`examples/items/`](examples/items/): 12 product photos of single garments like those in them, for tab 5's Style recommendation; [`examples/articles/`](examples/articles/): 6 synthetic texts about the same outfits for the ingest pipeline |
-| Data sets | Data loaded into the graph at deploy, one folder per brand ([`datasets/README.md`](datasets/README.md)): [`datasets/velloway/`](datasets/velloway/) (synthetic catalog) and [`datasets/whimsikora/`](datasets/whimsikora/) (one look) |
+| Examples | Inputs to try in the app; the deploy does not load them. [`examples/images/`](examples/images/): 8 synthetic model photos to classify against it (lookbook photos of the fictional brand AnyCompany Fashion House, made with Amazon Nova Canvas); [`examples/items/`](examples/items/): 12 product photos of single garments like those in them, for tab 5's Style recommendation; [`examples/articles/`](examples/articles/): 6 synthetic texts about the same outfits for the ingest pipeline |
+| Data sets | Data loaded into the graph at deploy, one folder per brand ([`datasets/README.md`](datasets/README.md)): [`datasets/anycompany-apparel/`](datasets/anycompany-apparel/) (synthetic catalog) and [`datasets/anycompany-fashion-house/`](datasets/anycompany-fashion-house/) (one look) |
 
 ## Attribution
 
@@ -138,8 +138,8 @@ Annotation properties: `fo:conceptId` (the stable id the pipeline uses: `coat`, 
 * **Graph loader**: `ontology.load_ontology()` maps the OWL onto the flat model the graph uses
   (`Group` / `Category` / `AttributeFamily` / `Attribute` nodes with `IN_GROUP`, `IN_FAMILY`,
   `APPLIES_TO` edges), keyed by `fo:conceptId`, so the domain's data sets in [`datasets/`](datasets/)
-  (the sample ships [`datasets/velloway/`](datasets/velloway/) and
-  [`datasets/whimsikora/`](datasets/whimsikora/)) join on it; a catalog's attributes are
+  (the sample ships [`datasets/anycompany-apparel/`](datasets/anycompany-apparel/) and
+  [`datasets/anycompany-fashion-house/`](datasets/anycompany-fashion-house/)) join on it; a catalog's attributes are
   validated against the applicability matrix. The individuals of a photo property's range become
   shared nodes labeled with their class (`(:Occasion {id: "occasion:evening"})`), and a look's
   occasion text (`"evening / formal"`) is matched against their labels: `Look -FOR-> Occasion`.

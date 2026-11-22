@@ -62,9 +62,9 @@ describe('labels and lift', () => {
   });
 
   it('leaves out words that are in more than half of all items (the brand, page fields)', () => {
-    const texts = Array.from({ length: 12 }, (_, i) => `velloway material ${i < 6 ? 'trench gabardine' : 'linen terrace'}`);
+    const texts = Array.from({ length: 12 }, (_, i) => `anycompany-apparel material ${i < 6 ? 'trench gabardine' : 'linen terrace'}`);
     const labels = groupLabels(texts, texts.map((_, i) => (i < 6 ? 0 : 1)), 3);
-    expect(labels.flat()).not.toContain('velloway');
+    expect(labels.flat()).not.toContain('anycompany-apparel');
     expect(labels.flat()).not.toContain('material');
     expect(labels[0]).toEqual(['gabardine', 'trench']);
   });

@@ -11,7 +11,7 @@ import { visibleText } from '../../visibleText';
 const summary = (id: string, name: string, data_sets: string[]) =>
   ({ id, name: `${name} ontology`, stats: { classes: 10, individuals: 20 }, examples: 8, articles: 6, domain: { name, description: '' }, data_sets }) as unknown as OntologySummary;
 
-const fashion = summary('fashion', 'Fashion', ['velloway', 'whimsikora']);
+const fashion = summary('fashion', 'Fashion', ['anycompany-apparel', 'anycompany-fashion-house']);
 const furniture = summary('furniture', 'Furniture', []);
 /** The card as a reader sees it: tags dropped, the escaped characters back. */
 const text = (html: string) => visibleText(html);
@@ -19,10 +19,10 @@ const text = (html: string) => visibleText(html);
 describe('DomainCard', () => {
   it('lists the data sets of each domain and their folder', () => {
     const html = renderToStaticMarkup(<DomainCard domain="fashion" ontologies={[fashion, furniture]} onDomain={() => {}} graphDomain="fashion" />);
-    expect(text(html)).toContain('Data sets: velloway, whimsikora, each a folder ontologies/fashion/datasets/<set>/, loaded into the graph at deploy');
+    expect(text(html)).toContain('Data sets: anycompany-apparel, anycompany-fashion-house, each a folder ontologies/fashion/datasets/<set>/, loaded into the graph at deploy');
     expect(text(html)).toContain('No data sets yet: add one as a folder ontologies/furniture/datasets/<set>/');
     expect(text(html)).toContain('the ontology file, its examples in examples/, and its data sets (brands) in datasets/<set>/.');
-    expect(text(html)).toContain('the Fashion ontology (fashion), and every data set of that domain (velloway, whimsikora), loaded at deploy.');
+    expect(text(html)).toContain('the Fashion ontology (fashion), and every data set of that domain (anycompany-apparel, anycompany-fashion-house), loaded at deploy.');
     expect(html).not.toContain('Style recommendation');
   });
 

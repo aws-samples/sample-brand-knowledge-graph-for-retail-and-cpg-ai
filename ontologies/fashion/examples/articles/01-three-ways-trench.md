@@ -1,6 +1,6 @@
 # Three ways to wear the trench this autumn
 
-_Whimsikora Journal · editorial · 2026-09-14_
+_AnyCompany Fashion House Journal · editorial · 2026-09-14_
 
 The trench coat is the one piece that survives every edit of our lookbook. Ours is cut double
 breasted and knee length in a beige cotton gabardine, with wide lapels, epaulettes and a

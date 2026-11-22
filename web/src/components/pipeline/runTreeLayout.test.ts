@@ -94,7 +94,7 @@ describe('runTreeLayout', () => {
     const want = g1.edges.filter((e) => e.source === coat.id && ['IS_CATEGORY', 'HAS_PART', 'HAS_ATTRIBUTE'].includes(e.type)).map((e) => e.target);
     expect(feats.map((f) => f.id).sort()).toEqual([...new Set(want)].sort());
     expect(feats.every((f) => f.stacked && f.x - f.w / 2 > coat.x - coat.w / 2)).toBe(true);
-    expect(l.lines).toEqual(['Atlas']);
+    expect(l.lines).toEqual(['Utility']);
   });
 
   it('marks vocabulary several garments share (×N) and lays the forest out without overlaps or crossings', () => {
@@ -183,7 +183,7 @@ describe('runTreeLayout', () => {
   });
 
   it('reads the words of a statement, not its heading and byline', () => {
-    expect(statementSnippet('# Title\n\n_Velloway Journal · editorial · 2026-09-14_\n\nThe **trench** coat is cut\ndouble breasted.')).toBe('The trench coat is cut double breasted.');
+    expect(statementSnippet('# Title\n\n_AnyCompany Apparel Journal · editorial · 2026-09-14_\n\nThe **trench** coat is cut\ndouble breasted.')).toBe('The trench coat is cut double breasted.');
   });
 });
 
@@ -192,7 +192,7 @@ describe('runTreeLayout: an article about a look', () => {
     const graph = {
       centers: ['article:9f8e7d6c', 'st:9f8e7d6c-1', 'item:9f8e7d6c-e1-shoe'],
       nodes: [
-        { id: 'article:9f8e7d6c', labels: ['Article'], props: { title: 'White sneakers with a denim skirt', source: 'Whimsikora Journal' } },
+        { id: 'article:9f8e7d6c', labels: ['Article'], props: { title: 'White sneakers with a denim skirt', source: 'AnyCompany Fashion House Journal' } },
         { id: 'st:9f8e7d6c-1', labels: ['Statement'], props: { text: 'The look we kept coming back to…', article: 'article:9f8e7d6c' } },
         { id: 'item:9f8e7d6c-e1-shoe', labels: ['Item'], props: { name: 'white leather sneaker' } },
         { id: 'look:1a2b3c4d', labels: ['Look'], props: { name: 'denim skirt look', image_key: 'example:fashion_1.jpg' } },

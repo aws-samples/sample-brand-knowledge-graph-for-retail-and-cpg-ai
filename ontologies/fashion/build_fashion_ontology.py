@@ -420,7 +420,7 @@ def build(catalog: dict) -> Graph:
         "Statement": "A single editorial claim extracted from an article (e.g. a styling rule or trend note).",
         "Article": "An editorial source document: magazine feature, brand blog post, lookbook text.",
         "Line": "A brand's product line or collection.",
-        "Brand": "A brand (the fictional 'Velloway' in the sample data).",
+        "Brand": "A brand (the fictional 'AnyCompany Apparel' in the sample data).",
     }
     for local, comment in schema.items():
         add_class(g, FO[local], local, comment=comment)

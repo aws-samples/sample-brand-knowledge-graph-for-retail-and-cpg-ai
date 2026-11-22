@@ -12,7 +12,7 @@ const text = (file: string, pairs = '', batch?: string): ArticleInfo => ({
   file,
   title: `title of ${file}`,
   kind: 'social post',
-  source: 'Velloway',
+  source: 'AnyCompany Apparel',
   published: '2026-09-01',
   chars: 900,
   pairs_with_image: pairs,
@@ -59,7 +59,7 @@ describe('batchEntries', () => {
       ['up:1', 'your photo'],
       ['up:2', 'your text'],
     ]);
-    expect(entries[2]).toMatchObject({ label: 'social post', meta: 'Velloway · 2026-09-01' });
+    expect(entries[2]).toMatchObject({ label: 'social post', meta: 'AnyCompany Apparel · 2026-09-01' });
     expect(entries[4]).toMatchObject({ title: 'My note', meta: '1,200 chars' });
   });
 

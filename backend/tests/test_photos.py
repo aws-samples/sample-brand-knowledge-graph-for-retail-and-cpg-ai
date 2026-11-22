@@ -49,20 +49,20 @@ def svc(settings, tmp_path):
 @pytest.mark.parametrize(
     "key,ok",
     [
-        ("whimsikora/looks/fashion_dress_1.jpg", True),
-        ("whimsikora/products/item_-123.jpg", True),
+        ("anycompany-fashion-house/looks/fashion_dress_1.jpg", True),
+        ("anycompany-fashion-house/products/item_-123.jpg", True),
         ("tiny/looks/l1.jpeg", True),
-        ("velloway/other_sub-2/a.PNG.webp", True),  # any set, any sub folder (safe ids)
-        ("whimsikora/looks/../runs/x.jpg", False),
-        ("whimsikora/looks/a..jpg", False),  # no ".." anywhere
-        ("Whimsikora/looks/a.jpg", False),  # a set id is lower case
-        ("whimsikora/Looks/a.jpg", False),
+        ("anycompany-apparel/other_sub-2/a.PNG.webp", True),  # any set, any sub folder (safe ids)
+        ("anycompany-fashion-house/looks/../runs/x.jpg", False),
+        ("anycompany-fashion-house/looks/a..jpg", False),  # no ".." anywhere
+        ("AnyCompany Fashion House/looks/a.jpg", False),  # a set id is lower case
+        ("anycompany-fashion-house/Looks/a.jpg", False),
         ("_tiny/looks/a.jpg", False),
         ("tiny/looks/.a.jpg", False),
         ("runs/run-1/run.json", False),
-        ("whimsikora/looks/a.json", False),
-        ("whimsikora/looks/a.gif", False),
-        ("whimsikora/looks/sub/a.jpg", False),  # three segments, not four
+        ("anycompany-fashion-house/looks/a.json", False),
+        ("anycompany-fashion-house/looks/a.gif", False),
+        ("anycompany-fashion-house/looks/sub/a.jpg", False),  # three segments, not four
         ("looks/a.jpg", False),  # nor two
         ("example:01-trench-coat-sweater-dress.jpg", False),
         ("upload:uploads/run-20261109-101010-abcd/00.jpg", False),

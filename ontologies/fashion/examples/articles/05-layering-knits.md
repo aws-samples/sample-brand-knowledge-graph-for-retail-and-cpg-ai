@@ -1,6 +1,6 @@
 # Layering knits without the bulk
 
-_Whimsikora Journal · editorial · 2026-09-21_
+_AnyCompany Fashion House Journal · editorial · 2026-09-21_
 
 The trick to layering knits is to change the weight, not the color. Start with a fine rib-knit
 top in cream: a round neck, hip length, a tight fit. Over it, the cardigan: V-neck, single

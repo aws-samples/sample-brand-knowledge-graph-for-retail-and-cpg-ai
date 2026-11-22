@@ -18,7 +18,7 @@ import { MultimodalAiKnowledgeGraphStack } from '../lib/multimodal-ai-knowledge-
  */
 const REPO = path.resolve(__dirname, '..', '..');
 const FASHION = path.join(REPO, 'ontologies', 'fashion');
-const SET = path.join('datasets', 'velloway');
+const SET = path.join('datasets', 'anycompany-apparel');
 const ITEMS = path.join('examples', 'items');
 const PIECES = fs.readdirSync(path.join(FASHION, ITEMS)).filter((f) => f.endsWith('.jpg'));
 

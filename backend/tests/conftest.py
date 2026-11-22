@@ -18,14 +18,14 @@ from ontology_rag.service import Service
 REPO = Path(__file__).resolve().parents[2]
 ONTOLOGIES = REPO / "ontologies"
 ONTOLOGY = ONTOLOGIES / "fashion" / "fashion.ttl"
-VELLOWAY = ONTOLOGIES / "fashion" / "datasets" / "velloway"  # the sample's own data set (synth.py)
+VELLOWAY = ONTOLOGIES / "fashion" / "datasets" / "anycompany-apparel"  # the sample's own data set (synth.py)
 # A second data set of the fashion domain, small enough to read (fixtures/sets/tiny/README.md).
 TINY = Path(__file__).resolve().parent / "fixtures" / "sets" / "tiny"
 
 
 def ontologies_with_tiny(root: Path) -> Path:
     """A copy of the repository's ``ontologies/`` folder under ``root`` with the tiny data set
-    as ``fashion/datasets/tiny/``, next to velloway; the copy's path."""
+    as ``fashion/datasets/tiny/``, next to anycompany-apparel; the copy's path."""
     out = root / "ontologies"
     shutil.copytree(ONTOLOGIES, out, ignore=shutil.ignore_patterns("__pycache__"))
     shutil.copytree(TINY, out / "fashion" / "datasets" / "tiny")
@@ -89,7 +89,7 @@ def loaded_service(settings):
 @pytest.fixture()
 def tiny_service(settings, tmp_path):
     """A service on a copy of the ontologies folder with two data sets of the fashion domain
-    (velloway and tiny), both loaded into its in-memory graph; Bedrock and S3 Vectors are fakes."""
+    (anycompany-apparel and tiny), both loaded into its in-memory graph; Bedrock and S3 Vectors are fakes."""
     svc = Service(
         tiny_settings(settings, ontologies_with_tiny(tmp_path)),
         store=InMemoryStore(),

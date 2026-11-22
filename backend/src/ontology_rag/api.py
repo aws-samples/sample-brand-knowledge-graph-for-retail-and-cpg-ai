@@ -56,7 +56,7 @@ _LOG_STREAM = re.compile(
 )
 # AgentCore Runtime session ids: at least 33 characters (one per browser tab, see GraphQuery.tsx).
 _SESSION_ID = re.compile(r"^[A-Za-z0-9-]{33,100}$")
-# A graph node id (item:atlas-trench, st:1a2b3c4d-1, attribute:dressy-(nickname)).
+# A graph node id (item:utility-trench, st:1a2b3c4d-1, attribute:dressy-(nickname)).
 _NODE_ID = re.compile(r"^[A-Za-z0-9_.:#()-]{1,200}$")
 # Neptune Analytics ExecuteQuery errors that mean "this query is wrong", not "the service is down".
 _BAD_QUERY = {"ValidationException", "MalformedQueryException", "UnprocessableException"}

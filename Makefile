@@ -34,7 +34,7 @@ figures:          ## render the README figures into assets/ from the app's diagr
 synth:            ## the CloudFormation template (needs a bootstrapped account to deploy)
 	cd infra && npx cdk synth --quiet
 
-sample-data:      ## regenerate ontologies/fashion/datasets/velloway from backend/src/ontology_rag/synth.py
+sample-data:      ## regenerate ontologies/fashion/datasets/anycompany-apparel from backend/src/ontology_rag/synth.py
 	$(PY)/ontology-rag synth
 
 ontology:         ## rebuild ontologies/fashion/fashion.ttl from the Fashionpedia catalog (downloads it)

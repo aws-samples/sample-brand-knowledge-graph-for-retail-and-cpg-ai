@@ -3,7 +3,7 @@
 
 """``ontology-rag`` command line: the developer and deploy-time tools that need no graph.
 
-ontology-rag synth                 # regenerate ontologies/fashion/datasets/velloway from synth.py
+ontology-rag synth                 # regenerate ontologies/fashion/datasets/anycompany-apparel from synth.py
 ontology-rag check-models          # pre-flight: one tiny request per Bedrock model the sample uses
 ontology-rag network-cleanup [--stack NAME] [--delete] [--wait MINUTES]  # after `cdk destroy`: the VPC the stack kept
 
@@ -36,7 +36,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser(
-        "synth", help="regenerate the Velloway data set (ontologies/fashion/datasets/velloway)"
+        "synth", help="regenerate the AnyCompany Apparel data set (datasets/anycompany-apparel)"
     ).set_defaults(run=cmd_synth)
     cleanup = (
         "after `cdk destroy`: report the VPC the stack kept and what still holds it; with "

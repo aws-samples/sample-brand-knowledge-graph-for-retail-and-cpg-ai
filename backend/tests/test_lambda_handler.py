@@ -131,7 +131,7 @@ def test_loader_custom_resource_protocol(loaded_service, monkeypatch):
     lambda_handler.loader_handler(_LOADER_EVENT, _Context())
     assert sent["body"]["Status"] == "SUCCESS"
     loaded = json.loads(sent["body"]["Data"]["Loaded"])
-    assert loaded["ontology"]["Category"] == 50 and loaded["sets"]["velloway"]["Item"] == 55
+    assert loaded["ontology"]["Category"] == 50 and loaded["sets"]["anycompany-apparel"]["Item"] == 55
     # a result past CloudFormation's 4 KB for response data: node totals per set
     monkeypatch.setattr(lambda_handler, "LOADED_MAX_CHARS", 50)
     lambda_handler.loader_handler(_LOADER_EVENT, _Context())

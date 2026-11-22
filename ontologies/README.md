@@ -129,7 +129,7 @@ A data set may carry a `domain.json` of its own (`datasets/<set>/domain.json`) w
 lists, set by set in name order, and an entry that is already listed is dropped; the other keys
 come from the domain's file only.
 
-A data set may also carry a `brand.json` (`{"id": "brand:velloway", "name": "Velloway",
+A data set may also carry a `brand.json` (`{"id": "brand:anycompany-apparel", "name": "AnyCompany Apparel",
 "description": "..."}`). Whatever the set's format, the deploy gives the set's `Brand` node that
 description, `GET /api/summary` returns every brand with its description (`brands`), and tab 0's
 *Meet the brand* shows them.
@@ -189,7 +189,7 @@ fetches anything), RDF/XML must be UTF-8 and must not declare a DOCTYPE, and an 
 
 The graph holds one vocabulary: the ontology `ONTOLOGY_PATH` points at (the fashion ontology),
 loaded together with every data set of that domain (`fashion/datasets/<set>/`; the sample ships
-`velloway/` and `whimsikora/`) when the stack is deployed. Another data set is one more folder
+`anycompany-apparel/` and `anycompany-fashion-house/`) when the stack is deployed. Another data set is one more folder
 under `ontologies/<domain>/datasets/`; the loader combines them in one graph, and the
 app lists each set's example photos and texts. Choosing another domain in tab 0 does not reload
 the graph. What happens per tab:

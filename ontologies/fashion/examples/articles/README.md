@@ -24,9 +24,9 @@ is the signal an ontology owner acts on.
 
 ## Provenance and license
 
-All texts are **synthetic**: written for this sample about the fictional brand Whimsikora, whose
+All texts are **synthetic**: written for this sample about the fictional brand AnyCompany Fashion House, whose
 lookbook photos are the example photos (see
-[`../../datasets/whimsikora/README.md`](../../datasets/whimsikora/README.md)). They describe no real
+[`../../datasets/anycompany-fashion-house/README.md`](../../datasets/anycompany-fashion-house/README.md)). They describe no real
 brand, product, person or dataset and are distributed under this sample's license (MIT-0).
 
 ## Add your own

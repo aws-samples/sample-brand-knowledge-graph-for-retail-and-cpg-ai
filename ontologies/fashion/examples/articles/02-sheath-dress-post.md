@@ -1,6 +1,6 @@
 # Last of the summer light
 
-_Whimsikora · social post · 2026-09-02_
+_AnyCompany Fashion House · social post · 2026-09-02_
 
 Last of the summer light and the black sheath dress is doing all the work. Sleeveless, round
 neck, fitted from the shoulder to just below the knee, in a heavy crepe that holds its line
@@ -13,4 +13,4 @@ optional; the boots do most of the warming.
 Styling note from the studio: keep everything else plain. One dark base, one warm color (the
 tan), one metal. That is the whole formula.
 
-#whimsikora #sheathdress #kneehighboots #goldchains
+#anycompany-fashion-house #sheathdress #kneehighboots #goldchains

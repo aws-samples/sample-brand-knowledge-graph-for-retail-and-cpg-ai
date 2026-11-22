@@ -4,7 +4,7 @@
 """A domain's data sets (``ontologies/<id>/datasets/<set>/``, design A1): how they are found, how
 their example photos and texts join the domain's lists, what the S3 mirror takes of them, how
 the graph loader loads every set into one graph and the catalog index, and how a set's photos
-are served. The tests run on a copy of the ontologies folder with the tiny set next to velloway
+are served. The tests run on a copy of the ontologies folder with the tiny set next to anycompany-apparel
 (conftest.ontologies_with_tiny)."""
 
 import base64
@@ -96,9 +96,9 @@ def test_the_sets_are_the_safe_named_folders_with_a_readme(tree):
     (sets / "loose.json").write_text("{}")
     cat = OntologyCatalog(tree)
     entry = cat.entry("fashion")
-    assert entry.data_sets() == ["aaa", "tiny", "velloway", "whimsikora"]  # sorted
+    assert entry.data_sets() == ["aaa", "anycompany-apparel", "anycompany-fashion-house", "tiny"]  # sorted
     assert entry.set_dir("tiny") == sets / "tiny"
-    assert cat.summary(entry)["data_sets"] == ["aaa", "tiny", "velloway", "whimsikora"]
+    assert cat.summary(entry)["data_sets"] == ["aaa", "anycompany-apparel", "anycompany-fashion-house", "tiny"]
     assert parse_upload("@prefix : <http://x/> . <http://x/o> a <http://x/C> .")["data_sets"] == []
 
 
@@ -119,7 +119,7 @@ def test_a_set_in_the_old_layout_lists_nothing(tree):
     old.mkdir(parents=True)
     (old / "README.md").write_text("# an old set\n")
     entry = _entry(tree)
-    assert entry.data_sets() == ["tiny", "velloway", "whimsikora"]
+    assert entry.data_sets() == ["anycompany-apparel", "anycompany-fashion-house", "tiny"]
     assert len(entry.examples()) == DOMAIN_PHOTOS and len(entry.articles()) == DOMAIN_ARTICLES
 
 
@@ -192,22 +192,22 @@ def test_a_set_file_resolves_and_an_unlisted_one_raises(tree):
 
 
 def test_the_sets_lists_are_added_to_the_domains_without_duplicates(tree):
-    """In set order (tiny, then velloway), after the domain's own."""
+    """In set order (anycompany-apparel, then tiny), after the domain's own."""
     domain = _entry(tree).domain()
     own = json.loads((tree / "fashion" / "domain.json").read_text())
-    velloway = json.loads((tree / "fashion" / "datasets" / "velloway" / "domain.json").read_text())
+    apparel = json.loads((tree / "fashion" / "datasets" / "anycompany-apparel" / "domain.json").read_text())
     assert domain["example_questions"] == (
         own["example_questions"]
+        + apparel["example_questions"]
         + ["What goes with the camel coat?"]
-        + velloway["example_questions"]
     )  # the tiny set's trench question is the domain's: once
-    assert domain["photo_questions"] == own["photo_questions"] + velloway["photo_questions"]
+    assert domain["photo_questions"] == own["photo_questions"] + apparel["photo_questions"]
     questions = [e["question"] for e in domain["query_examples"]]
     tiny = "Which looks of the brand Tiny are for a dress occasion?"
     assert questions == (
         [e["question"] for e in own["query_examples"]]
+        + [e["question"] for e in apparel["query_examples"]]
         + [tiny]
-        + [e["question"] for e in velloway["query_examples"]]
     )
     assert domain["name"] == "Fashion"  # a set's other keys are not read
     # a worked example whose question is listed already is dropped, whatever its query
@@ -273,7 +273,7 @@ def test_the_mirror_leaves_out_set_data_and_media(tree, tmp_path):
     for left_out in ("graph.json", "vectors.json", "catalog.json", "media/looks/l1.jpg"):
         assert not (tiny / left_out).exists(), left_out
     assert (cache / "fashion" / "datasets" / "README.md").is_file()  # not a set's file
-    assert not (cache / "fashion" / "datasets" / "velloway" / "items.json").exists()
+    assert not (cache / "fashion" / "datasets" / "anycompany-apparel" / "items.json").exists()
     assert (cache / "fashion" / "examples" / "images" / "01-trench-coat-sweater-dress.jpg").is_file()
     assert not any("/looks/" in k or k.endswith("graph.json") for k in bucket.downloads)
 
@@ -292,7 +292,7 @@ def test_the_mirror_leaves_out_set_data_and_media(tree, tmp_path):
     ):
         assert (tiny / kept).is_file(), kept
     assert not (tiny / "media" / "looks" / "l1.jpg").exists()  # never the media
-    assert (loader_cache / "fashion" / "datasets" / "velloway" / "items.json").is_file()
+    assert (loader_cache / "fashion" / "datasets" / "anycompany-apparel" / "items.json").is_file()
 
 
 def test_a_skipped_key_counts_as_absent(tree, tmp_path):
@@ -325,7 +325,7 @@ def test_a_skipped_key_counts_as_absent(tree, tmp_path):
         ("fashion/datasets/tiny/examples/articles/a1.md", True, True),
         ("fashion/datasets/tiny/graph.json", False, True),
         ("fashion/datasets/tiny/holdouts.json", False, True),
-        ("fashion/datasets/velloway/items.json", False, True),
+        ("fashion/datasets/anycompany-apparel/items.json", False, True),
         ("fashion/datasets/tiny/media/looks/l1.jpg", False, False),
         ("fashion/datasets/tiny/media/products/p1.jpg", False, False),
         ("fashion/datasets/tiny/examples/README.md", False, False),
@@ -346,7 +346,7 @@ def test_every_set_of_the_domain_is_loaded_into_one_graph(tiny_service):
     svc = tiny_service
     out = svc.load_sample(reset=True)
     assert set(out) == {"ontology", "sets", "seconds"}
-    assert list(out["sets"]) == ["tiny", "velloway", "whimsikora"]
+    assert list(out["sets"]) == ["anycompany-apparel", "anycompany-fashion-house", "tiny"]
     assert out["ontology"]["Category"] == 50
     assert out["sets"]["tiny"] == {
         "Brand": 1,
@@ -356,34 +356,34 @@ def test_every_set_of_the_domain_is_loaded_into_one_graph(tiny_service):
         "vectors": 5,
         "catalog": 1,
     }
-    velloway = out["sets"]["velloway"]
-    assert velloway["Item"] == 55 and velloway["Look"] == 19 and velloway["catalog"] == 55
+    apparel = out["sets"]["anycompany-apparel"]
+    assert apparel["Item"] == 55 and apparel["Look"] == 19 and apparel["catalog"] == 55
     nodes = svc.store.summary()["nodes"]
     # the ontology's 9 occasions; the tiny set's Dress is one of them (the same id)
     assert nodes["Brand"] == 3 and nodes["Look"] == 2 + 19 + 1 and nodes["Occasion"] == 9
-    assert payoff._brand(svc) == "Tiny, Velloway and Whimsikora"
+    assert payoff._brand(svc) == "AnyCompany Apparel, AnyCompany Fashion House and Tiny"
     # the catalog index holds the products of both formats
     rows = svc.s3vectors.vectors
     assert rows["tiny-p1"]["metadata"]["image_key"] == "tiny/products/p1.jpg"  # as exported
-    trench = rows["atlas-trench"]["metadata"]
+    trench = rows["utility-trench"]["metadata"]
     assert trench["image_key"] == "" and trench["type"] == "coat" and trench["category"]
     assert trench["name"] == payoff.catalog_name(
         {"color": "stone", "material": "cotton gabardine", "type": "coat"}
     )
-    assert len(rows["atlas-trench"]["data"]["float32"]) == 8  # embedded from its text
+    assert len(rows["utility-trench"]["data"]["float32"]) == 8  # embedded from its text
 
 
 def test_every_look_of_every_format_is_for_an_occasion_of_the_ontology(tiny_service):
     """The deploy writes the ontology's 9 occasions; a catalog set's looks link to them by their
-    occasion text (velloway's "evening / formal" is Evening), a DNA set's by its own FOR edges
-    (tiny's Dress). One look of velloway is for "cold weather": no occasion, reported."""
+    occasion text (AnyCompany Apparel's "evening / formal" is Evening), a DNA set's by its own FOR edges
+    (tiny's Dress). One look of AnyCompany Apparel is for "cold weather": no occasion, reported."""
     svc = tiny_service
     out = svc.load_sample(reset=True)
     assert out["ontology"]["Occasion"] == 9
-    assert out["sets"]["velloway"]["unresolved"] == [
-        {"look": "look:atlas-cold-snap", "text": "cold weather"}
+    assert out["sets"]["anycompany-apparel"]["unresolved"] == [
+        {"look": "look:utility-cold-snap", "text": "cold weather"}
     ]
-    assert out["sets"]["whimsikora"]["unresolved"] == []
+    assert out["sets"]["anycompany-fashion-house"]["unresolved"] == []
     looks_for: dict[str, int] = {}
     for occasion in svc.store.get_nodes("Occasion", 50):
         n = sum(1 for e, _ in svc.store.neighbors(occasion.id, ["FOR"], "in"))
@@ -394,13 +394,13 @@ def test_every_look_of_every_format_is_for_an_occasion_of_the_ontology(tiny_serv
         "Resort": 5,
         "Casual": 3,
         "Outdoor": 2,
-        "Professional": 2,  # velloway's "business / smart" and the excerpt's look
+        "Professional": 2,  # AnyCompany Apparel's "business / smart" and the excerpt's look
         "Smart casual": 1,
         "Dress": 2,  # tiny's two looks
     }
     # one FOR per look; the catalog look keeps its own words
     assert svc.store.summary()["edges"]["FOR"] == 21
-    evening = svc.store.get_node("look:meridian-black-tie")
+    evening = svc.store.get_node("look:evening-black-tie")
     assert evening.props["occasion"] == "evening / formal"
 
 
@@ -410,7 +410,7 @@ def test_a_set_without_data_is_reported_skipped(tiny_service):
     (empty / "README.md").write_text("# no data yet\n")
     out = tiny_service.load_sample()
     assert out["sets"]["empty"] == {"skipped": "no graph.json or items.json"}
-    assert list(out["sets"]) == ["empty", "tiny", "velloway", "whimsikora"]
+    assert list(out["sets"]) == ["anycompany-apparel", "anycompany-fashion-house", "empty", "tiny"]
 
 
 def test_without_a_vector_bucket_the_sets_load_into_the_graph_only(settings, tmp_path):
@@ -423,7 +423,7 @@ def test_without_a_vector_bucket_the_sets_load_into_the_graph_only(settings, tmp
     )
     assert svc.s3vectors is None
     out = svc.load_sample(reset=True)
-    assert "catalog" not in out["sets"]["tiny"] and "catalog" not in out["sets"]["velloway"]
+    assert "catalog" not in out["sets"]["tiny"] and "catalog" not in out["sets"]["anycompany-apparel"]
 
 
 def test_the_deployed_loader_reads_the_sets_from_its_mirror(settings, tmp_path):
@@ -502,9 +502,9 @@ def test_a_stored_photo_comes_from_the_bucket_else_the_local_folder(tiny_service
     "names,phrase",
     [
         ([], "the brand"),
-        (["Velloway"], "Velloway"),
-        (["Whimsikora", "Velloway"], "Velloway and Whimsikora"),
-        (["Velloway", "Tiny", "Whimsikora"], "Tiny, Velloway and Whimsikora"),
+        (["AnyCompany Apparel"], "AnyCompany Apparel"),
+        (["AnyCompany Fashion House", "AnyCompany Apparel"], "AnyCompany Apparel and AnyCompany Fashion House"),
+        (["AnyCompany Apparel", "Tiny", "AnyCompany Fashion House"], "AnyCompany Apparel, AnyCompany Fashion House and Tiny"),
     ],
 )
 def test_the_brand_names_every_brand_node(names, phrase):
@@ -526,7 +526,7 @@ def test_the_photo_to_check_is_a_listed_example_or_an_upload(tiny_service):
     upload = {"image_base64": base64.b64encode(png).decode(), "format": "png"}
     assert api._check_photo(svc, upload) == (png, "png")
     for bad, words in [
-        ({"photo_key": "whimsikora/new-work/a.jpg"}, "ontology_id and example"),
+        ({"photo_key": "anycompany-fashion-house/new-work/a.jpg"}, "ontology_id and example"),
         ({"ontology_id": "../x", "example": "nw1.jpg"}, "ontology_id"),
         ({"ontology_id": "fashion", "example": "../images/nw1.jpg"}, "example"),
     ]:
@@ -557,9 +557,9 @@ def test_the_summary_names_each_brand_with_its_brand_json_description(loaded_ser
     """Tab 0's "Meet the brand" reads the graph's Brand nodes: every set's brand with the
     description of its ``brand.json``, sorted by name."""
     sets = loaded_service.settings.ontologies_dir / "fashion" / "datasets"
-    files = [json.loads((sets / s / "brand.json").read_text()) for s in ("velloway", "whimsikora")]
+    files = [json.loads((sets / s / "brand.json").read_text()) for s in ("anycompany-apparel", "anycompany-fashion-house")]
     expected = [{"name": raw["name"], "description": raw["description"]} for raw in files]
     status, summary = dispatch(loaded_service, "GET", "/api/summary", {}, {})
     assert status == 200 and summary["brands"] == expected
-    assert [b["name"] for b in expected] == ["Velloway", "Whimsikora"]
+    assert [b["name"] for b in expected] == ["AnyCompany Apparel", "AnyCompany Fashion House"]
     assert all(b["description"] for b in expected) and summary["nodes"]["Brand"] == 2

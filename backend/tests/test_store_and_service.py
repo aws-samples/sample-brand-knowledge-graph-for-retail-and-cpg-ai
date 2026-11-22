@@ -12,7 +12,7 @@ from ontology_rag.graph.neptune import NeptuneAnalyticsStore, is_write_query, re
 
 def test_explore_and_nodes(loaded_service):
     svc = loaded_service
-    sub = svc.explore(ids=["item:atlas-field-jacket"], hops=1)
+    sub = svc.explore(ids=["item:utility-field-jacket"], hops=1)
     assert any(n["id"] == "category:jacket" for n in sub["nodes"])
     assert any(e["type"] == "LAYERED_WITH" for e in sub["edges"])
     assert len(svc.nodes("Line")) == 3

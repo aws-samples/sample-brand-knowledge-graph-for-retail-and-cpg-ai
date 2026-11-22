@@ -1,6 +1,6 @@
 # Fitting-room notes: the pinstripe suit
 
-_Whimsikora fitting-room notes · product · 2026-08-27_
+_AnyCompany Fashion House fitting-room notes · product · 2026-08-27_
 
 The pinstripe suit jacket is single breasted with one button and a notched lapel. Fit is
 oversized through the shoulders and the chest; the sleeves are wrist-length and the jacket is

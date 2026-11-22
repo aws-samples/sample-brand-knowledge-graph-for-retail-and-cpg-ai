@@ -51,10 +51,10 @@ describe('lenses', () => {
   it('offers the domain’s new work as the outfits to check, in listing order, and no hard-coded list', () => {
     const listed = [
       example('01-office.jpg'),
-      example('sage-tailoring.jpg', 'new-work', { data_set: 'whimsikora', title: 'Sage blazer, cream trousers, white sneakers', origin: 'New shoot' }),
-      example('fashion_1.jpg', 'new-shoot', { data_set: 'whimsikora' }),
-      example('trench-midi.jpg', 'new-work', { data_set: 'whimsikora', origin: 'Supplier sample' }),
-      example('athleisure.jpg', 'new-work', { data_set: 'whimsikora' }),
+      example('sage-tailoring.jpg', 'new-work', { data_set: 'anycompany-fashion-house', title: 'Sage blazer, cream trousers, white sneakers', origin: 'New shoot' }),
+      example('fashion_1.jpg', 'new-shoot', { data_set: 'anycompany-fashion-house' }),
+      example('trench-midi.jpg', 'new-work', { data_set: 'anycompany-fashion-house', origin: 'Supplier sample' }),
+      example('athleisure.jpg', 'new-work', { data_set: 'anycompany-fashion-house' }),
     ];
     const outfits = newWorkPhotos(listed);
     expect(outfits.map((x) => x.file)).toEqual(['sage-tailoring.jpg', 'trench-midi.jpg', 'athleisure.jpg']);

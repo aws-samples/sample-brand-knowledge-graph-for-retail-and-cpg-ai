@@ -32,7 +32,7 @@ def test_write_catalog_is_deterministic(ontology, tmp_path):
 
 
 def test_committed_sample_matches_generator(ontology, settings):
-    """ontologies/fashion/datasets/velloway must be regenerated with `ontology-rag synth` whenever
+    """ontologies/fashion/datasets/anycompany-apparel must be regenerated with `ontology-rag synth` whenever
     synth.py changes."""
     assert VELLOWAY == settings.ontologies_dir / "fashion" / "datasets" / synth.SET_ID
     committed = json.loads((VELLOWAY / "items.json").read_text())
@@ -65,17 +65,17 @@ def test_loader_builds_expected_graph(loaded_service):
 
 
 def test_the_load_reports_the_ontology_and_each_set(loaded_service):
-    """The sample's domain has two data sets in the catalog format: velloway, and whimsikora (one
+    """The sample's domain has two data sets in the catalog format: anycompany-apparel, and anycompany-fashion-house (one
     look of a second brand, the one with white sneakers): their items, looks and articles in the
     graph and their products in the catalog index (the fake vector bucket)."""
     out = loaded_service.load_sample(reset=False)
     assert set(out) == {"ontology", "sets", "seconds"}
-    assert list(out["sets"]) == ["velloway", "whimsikora"]
+    assert list(out["sets"]) == ["anycompany-apparel", "anycompany-fashion-house"]
     assert out["ontology"]["Category"] == 50 and out["ontology"]["Attribute"] == 294
-    velloway = out["sets"]["velloway"]
-    assert velloway["Item"] == 55 and velloway["Look"] >= 15 and velloway["catalog"] == 55
-    whimsikora = out["sets"]["whimsikora"]
-    assert whimsikora["Item"] == 7 and whimsikora["Look"] == 1 and whimsikora["catalog"] == 7
+    apparel = out["sets"]["anycompany-apparel"]
+    assert apparel["Item"] == 55 and apparel["Look"] >= 15 and apparel["catalog"] == 55
+    fashion_house = out["sets"]["anycompany-fashion-house"]
+    assert fashion_house["Item"] == 7 and fashion_house["Look"] == 1 and fashion_house["catalog"] == 7
 
 
 def test_loading_twice_is_idempotent(loaded_service):
@@ -85,10 +85,10 @@ def test_loading_twice_is_idempotent(loaded_service):
 
 
 def test_the_white_sneakers_look_is_one_look_in_words_of_the_ontology(ontology):
-    """``whimsikora/``: one look of the workshop's second brand, in the catalog format, so the
+    """``anycompany-fashion-house/``: one look of the workshop's second brand, in the catalog format, so the
     sample's question about white sneakers has a look to answer from. Every piece is in the look,
     in the ontology's words, and the photo the look and its pieces name is in the set."""
-    folder = VELLOWAY.parent / "whimsikora"
+    folder = VELLOWAY.parent / "anycompany-fashion-house"
     items = json.loads((folder / "items.json").read_text())
     (look,) = json.loads((folder / "looks.json").read_text())
     assert look["item_ids"] == [i["id"] for i in items] and len(items) == 7

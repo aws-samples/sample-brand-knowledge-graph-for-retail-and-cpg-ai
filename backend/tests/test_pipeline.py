@@ -108,9 +108,9 @@ def test_run_classifies_photos_and_texts_and_merges_them_into_the_graph(loaded_s
                 "name": "my photo",
             },
         ],
-        line_id="line:atlas",
+        line_id="line:utility",
     )
-    assert run["ontology_id"] == "fashion" and run["line_id"] == "line:atlas"
+    assert run["ontology_id"] == "fashion" and run["line_id"] == "line:utility"
     # the run input carries names and keys, never bytes
     assert run["sources"][0] == {"index": 0, "kind": "image", "example": "01-trench-coat-sweater-dress.jpg"}
     assert (
@@ -251,7 +251,7 @@ def test_start_validates_the_request(loaded_service):
         (
             {
                 "model_id": TEST_MODEL,
-                "line_id": "item:atlas-beanie",
+                "line_id": "item:utility-beanie",
                 "sources": [{"kind": "text", "text": POST}],
             },
             "not a Line node",
@@ -334,7 +334,7 @@ def _run_for(svc, sources: list[dict], model_id="global.anthropic.claude-sonnet-
         "ontology_id": "fashion",
         "model_id": model_id,
         "prompt_caching": True,
-        "line_id": "line:atlas",
+        "line_id": "line:utility",
         "sources": [{"index": i, **s} for i, s in enumerate(sources)],
         "graph_before": svc.store.summary()["nodes"],
     }
@@ -463,7 +463,7 @@ def test_ingest_keeps_only_what_the_ontology_knows(bedrock_service):
         ("IS_CATEGORY", "category:coat"),
         ("HAS_ATTRIBUTE", "attribute:silhouette:a-line"),
         ("HAS_PART", "category:lapel"),
-        ("FROM_LINE", "line:atlas"),
+        ("FROM_LINE", "line:utility"),
     } <= edges
     assert [
         n["edge"]["props"] for n in node["neighbors"] if n["edge"]["type"] == "HAS_ATTRIBUTE"
@@ -474,7 +474,7 @@ def test_ingest_keeps_only_what_the_ontology_knows(bedrock_service):
     # the text became an Article with one Statement illustrating the item
     art = svc.node(compact["article"])
     assert (
-        art["props"]["source"] == "Whimsikora Journal" and art["props"]["published"] == "2026-09-14"
+        art["props"]["source"] == "AnyCompany Fashion House Journal" and art["props"]["published"] == "2026-09-14"
     )
 
 
@@ -761,7 +761,7 @@ def test_failed_sources_reach_the_browser_without_trace_or_arn():
 
 def test_a_run_without_a_line_gets_none_even_when_the_graph_has_lines(loaded_service):
     """The app never names a line, and a graph with two brands has lines of one of them only
-    (the workshop's new shoot is Whimsikora's, the first Line node Velloway's Atlas): the batch
+    (the workshop's new shoot is AnyCompany Fashion House's, the first Line node AnyCompany Apparel's Utility): the batch
     gets no line, and its items no line property. Last in this file: its run adds items to the
     shared graph the counting tests above start from."""
     assert loaded_service.store.get_nodes("Line", 1)  # the graph has lines

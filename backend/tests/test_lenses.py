@@ -33,7 +33,7 @@ class StubStore:
     def topk(self, embedding, k, labels):
         if labels == ["Look"]:
             return [
-                (N("lk1", {"image_key": "whimsikora/looks/a.jpg"}), 0.6),
+                (N("lk1", {"image_key": "anycompany-fashion-house/looks/a.jpg"}), 0.6),
                 (N("stray", {"run": "r1"}), 0.65),  # a tab 2 upload
                 (N("lk2"), 0.7),
             ]
@@ -250,7 +250,7 @@ def test_routes(loaded_service):
     )
     # the old field: a 400 that names the new ones (ontology_id and example, tests in
     # test_data_sets.py)
-    old_key = {"photo_key": "whimsikora/new-work/a.jpg", "looks": [{"letter": "A"}]}
+    old_key = {"photo_key": "anycompany-fashion-house/new-work/a.jpg", "looks": [{"letter": "A"}]}
     status, body = dispatch(loaded_service, "POST", "/api/lenses/check/pieces", {}, old_key)
     assert status == 400 and "ontology_id and example" in body["error"]
 

@@ -22,7 +22,7 @@ when deployed) and `dev` (pytest, ruff).
 ## Command line
 
 ```bash
-ontology-rag synth                 # regenerate ../ontologies/fashion/datasets/velloway from synth.py
+ontology-rag synth                 # regenerate ../ontologies/fashion/datasets/anycompany-apparel from synth.py
 ontology-rag check-models          # pre-flight before `cdk deploy`: one small request per Bedrock model; exit 1 when one fails
 ontology-rag network-cleanup       # after `cdk destroy`: report the VPC the stack keeps; --delete deletes it once AgentCore has released its interfaces (--stack NAME, --wait MINUTES; exit 3 while they are held)
 ```

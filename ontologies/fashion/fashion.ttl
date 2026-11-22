@@ -2720,7 +2720,7 @@ fo:Article a owl:Class ;
 fo:Brand a owl:Class ;
     rdfs:label "Brand"@en ;
     fo:visual false ;
-    rdfs:comment "A brand (the fictional 'Velloway' in the sample data)."@en .
+    rdfs:comment "A brand (the fictional 'AnyCompany Apparel' in the sample data)."@en .
 
 fo:Closure a owl:Class ;
     rdfs:label "Closures"@en ;

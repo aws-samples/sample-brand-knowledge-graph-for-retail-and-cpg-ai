@@ -1,22 +1,22 @@
 [
   {
-    "id": "line:atlas",
-    "name": "Atlas",
-    "brand_id": "brand:velloway",
+    "id": "line:utility",
+    "name": "Utility",
+    "brand_id": "brand:anycompany-apparel",
     "description": "Utility and workwear heritage: waxed cotton, corduroy, brass hardware.",
     "season": "AW"
   },
   {
-    "id": "line:solstice",
-    "name": "Solstice",
-    "brand_id": "brand:velloway",
+    "id": "line:resort",
+    "name": "Resort",
+    "brand_id": "brand:anycompany-apparel",
     "description": "Warm-weather resort: linen, airy silhouettes, sun-faded color.",
     "season": "SS"
   },
   {
-    "id": "line:meridian",
-    "name": "Meridian",
-    "brand_id": "brand:velloway",
+    "id": "line:evening",
+    "name": "Evening",
+    "brand_id": "brand:anycompany-apparel",
     "description": "Evening tailoring and occasion wear: sharp lines, satin, deep tones.",
     "season": "AW"
   }

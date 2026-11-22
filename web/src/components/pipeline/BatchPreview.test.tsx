@@ -9,7 +9,7 @@ import type { BatchEntry } from './batchView';
 const entries: BatchEntry[] = [
   { key: 'img:04.jpg', kind: 'photo', title: 'hoodie shorts white sneakers', file: '04.jpg' },
   { key: 'up:1', kind: 'your photo', title: 'mine.png', dataUrl: 'data:image/png;base64,AA' },
-  { key: 'txt:04.md', kind: 'text', title: 'Weekend uniform', file: '04.md', label: 'social post', meta: 'Velloway · 2026-08-30' },
+  { key: 'txt:04.md', kind: 'text', title: 'Weekend uniform', file: '04.md', label: 'social post', meta: 'AnyCompany Apparel · 2026-08-30' },
   { key: 'up:2', kind: 'your text', title: 'My note', meta: '1,200 chars' },
 ];
 
