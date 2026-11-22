@@ -29,14 +29,17 @@ The app opens on this tab, in six numbered steps, then the link to tab 1.
    collar". Choosing one runs the catalog's similarity search on the deployed catalog (`POST
    /api/catalog/search {query, k: 6}`, the read-only search tab 4's stage 1 opens up) and lists the
    six nearest products: name, kind and colour, with the product photo when the catalog has one
-   (`image_key`; the sample's own text catalog has none). Under the list, one fixed line per
-   request says what the shopper wanted and what came back (an outfit, and more white shoes; a
-   colour ruled out, and how many of the products are black anyway; two pieces in one order, and
-   the two words matched apart; a colour per part, and shirts in one colour each). The lines are
-   written in the component (`web/src/components/setup/ShopItYourself.tsx`), not by a model; only
-   the second one reads the results, because the number of black pieces depends on the catalog. The results of all
-   four requests and the request on show are kept for the browser tab; the step counts as done
-   once one request ran, and a failed search shows its error and keeps the line.
+   (`image_key`; the sample's own text catalog has none). Under the list, one line per request
+   says what the shopper wanted and what came back (an outfit, and more shoes; a colour ruled out,
+   and how many of the products are black anyway; two pieces in one order, and coats, denim or
+   both, matched apart; a colour per part, and shirts in one colour each). The lines are written
+   in the component (`web/src/components/setup/ShopItYourself.tsx`), not by a model; the first
+   three read the results, because what comes back depends on the catalog (the sample's own 62
+   products return a white shoe with shoes in other colours, a black dress first and coats with
+   denim pants; a larger catalog returns six white sneakers, six black dresses and six trench
+   coats). The results of all four requests and the request on show are kept for the browser tab;
+   the step counts as done once one request ran, and a failed search shows its error and keeps
+   the line.
 
    Once a request ran, the step gives the business problem (*What to notice*): the brand's
    stylists chose the pairings in every look they shot, that knowledge sits in photos nothing can

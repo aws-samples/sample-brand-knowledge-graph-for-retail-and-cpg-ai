@@ -91,14 +91,14 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     expect(seen).not.toContain('Next, tab 1');
   });
 
-  it('lists the kept products of the request on show, with the fixed line under them', () => {
+  it('lists the kept products of the request on show, with the line under them', () => {
     setKept('shopIt.results', { [SNEAKERS]: DONE(result(SNEAKERS, sneakerHits)) });
     setKept('shopIt.picked', SNEAKERS);
     const html = renderToStaticMarkup(<ShopItYourself />);
     const seen = spaced(html);
     for (const h of sneakerHits) expect(seen).toContain(h.name);
     expect(seen).toContain('White shoe shoe, white');
-    expect(seen).toContain('The shopper wanted an outfit. The search returned more white shoes, because it finds what looks or sounds alike.');
+    expect(seen).toContain('The shopper wanted an outfit. The search returned 4 more shoes, because it finds what looks or sounds alike.');
     // the request on show is the pressed toggle; a text catalog has no photos, so no thumbnail
     expect(html).toMatch(/<button[^>]*aria-pressed="true"[^>]*>What goes with white sneakers\?<\/button>/);
     expect(html).not.toContain('stored-photo');
@@ -151,6 +151,36 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain("has no way to say 'not': one of the products is black.");
     setKept('shopIt.results', { [dress]: DONE(result(dress, hits('Sage', 'White'))) });
     expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('it matched "dress" and ignored the rest.');
+  });
+
+  it('says what the first request returned: only white shoes on a larger catalog, no shoes at all, or how many shoes', () => {
+    const sneakers = (...names: string[]) => names.map((name) => hit(name, /platform/.test(name) ? 'platform sneakers' : 'sneakers', 'white'));
+    setKept('shopIt.picked', SNEAKERS);
+    setKept('shopIt.results', { [SNEAKERS]: DONE(result(SNEAKERS, sneakers('White leather sneakers', 'White leather sneakers', 'White leather platform sneakers', 'White leather sneakers', 'White leather sneakers', 'White leather sneakers'))) });
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned only more white shoes, because it finds what looks or sounds alike.');
+    setKept('shopIt.results', { [SNEAKERS]: DONE(result(SNEAKERS, [hit('Tan leather boots', 'boots', 'tan'), hit('Black mules', 'mules', 'black')])) });
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned only more shoes, because');
+    setKept('shopIt.results', { [SNEAKERS]: DONE(result(SNEAKERS, [hit('White linen shorts', 'shorts', 'white'), hit('White tee', 'tee', 'white')])) });
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The shopper wanted an outfit. The search returned no outfit, only what looks or sounds alike.');
+  });
+
+  it('says whether the third request returned coats, denim or both, because that depends on the catalog', () => {
+    const trench = 'A trench over denim';
+    setKept('shopIt.picked', trench);
+    // the sample's own catalog: coats and denim pants among the six
+    const mixed = [hit('Stone cotton gabardine coat', 'coat', 'stone'), hit('Beige coat', 'coat', 'beige'), hit('White linen dress', 'dress', 'white'), hit('Indigo selvedge denim pants', 'pants', 'indigo'), hit('Olive linen jumpsuit', 'jumpsuit', 'olive'), hit('Navy linen cotton shirt', 'shirt', 'navy')];
+    setKept('shopIt.results', { [trench]: DONE(result(trench, mixed)) });
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The shopper wanted two pieces worn in one order. The search matched the two words and ignored how they combine.');
+    // a larger catalog: six trench coats, no denim
+    const coats = ['Beige cotton gabardine trench coat', 'Beige cotton gabardine trench coat', 'Beige cotton sleeveless trench coat', 'Cream cotton blend trench coat', 'Navy wool trench coat', 'Beige cotton gabardine trench coat'].map((n) => hit(n, 'trench coat', 'beige'));
+    setKept('shopIt.results', { [trench]: DONE(result(trench, coats)) });
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned only coats and no denim: it matched one word and ignored how the two pieces combine.');
+    setKept('shopIt.results', { [trench]: DONE(result(trench, [coats[0], hit('White linen dress', 'dress', 'white')])) });
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned coats and no denim: it matched one word');
+    setKept('shopIt.results', { [trench]: DONE(result(trench, [hit('Indigo denim jacket', 'jacket', 'indigo')])) });
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned denim and no coat: it matched one word');
+    setKept('shopIt.results', { [trench]: { status: 'error', error: 'HTTP 500' } });
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search matched what looks or sounds alike and ignored how the two pieces combine.');
   });
 
   it("says 'Searching…' on the request that still runs and shows the other requests as run", () => {

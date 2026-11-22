@@ -7,20 +7,36 @@ import { GoodToKnow, Lead, Notice, YourTurn } from '../retriever/Callouts';
 import { useKept } from '../shared/kept';
 import { StoredPhoto } from '../shared/StoredPhoto';
 
+/** The words that make a product a shoe, in its kind or its name. */
+const SHOE = /\b(shoe|sneaker|trainer|boot|mule|loafer|sandal|pump|heel)s?\b/i;
+const isShoe = (h: CatalogHit) => SHOE.test(`${h.type} ${h.name}`);
+/** How many of the products a request returned are shoes, and how many of those are white. */
+export const shoeHits = (hits: CatalogHit[]) => ({ shoes: hits.filter(isShoe).length, white: hits.filter((h) => isShoe(h) && /\bwhite\b/i.test(`${h.color} ${h.name}`)).length });
 /** How many of the products a request returned are black (the colour the second request rules out). */
 export const blackHits = (hits: CatalogHit[]) => hits.filter((h) => /\bblack\b/i.test(`${h.color} ${h.name}`)).length;
+/** How many of the products a request returned are coats, and how many are denim (the third request's two pieces). */
+export const pieceHits = (hits: CatalogHit[]) => ({
+  coats: hits.filter((h) => /\b(trench|coat)s?\b/i.test(`${h.type} ${h.name}`)).length,
+  denim: hits.filter((h) => /\bdenim\b/i.test(`${h.type} ${h.name}`)).length,
+});
 
 /**
  * The four requests a shopper might type into a product search, in the order the buttons show
- * them, each with the fixed line that says what the shopper wanted and what came back. The lines
- * are written here, not by a model: they hold for the sample's own catalog and for a larger one,
- * because they describe what a similarity search does, not one product list. The second line
- * reads the results, because how many black pieces come back depends on the catalog.
+ * them, each with the line that says what the shopper wanted and what came back. The lines are
+ * written here, not by a model. The first three read the results, because what comes back depends
+ * on the catalog: the sample's own 62 products return a white shoe and shoes in other colours, a
+ * black dress first, coats and denim pants; a larger catalog returns six white sneakers, six black
+ * dresses and six trench coats. The fourth line holds for both: shirts in one colour each.
  */
 export const SHOP_REQUESTS: { request: string; line: string | ((hits: CatalogHit[]) => string) }[] = [
   {
     request: 'What goes with white sneakers?',
-    line: 'The shopper wanted an outfit. The search returned more white shoes, because it finds what looks or sounds alike.',
+    line: (hits) => {
+      const { shoes, white } = shoeHits(hits);
+      if (shoes === 0) return 'The shopper wanted an outfit. The search returned no outfit, only what looks or sounds alike.';
+      const came = white === hits.length ? 'only more white shoes' : shoes === hits.length ? 'only more shoes' : `${shoes} more shoes`;
+      return `The shopper wanted an outfit. The search returned ${came}, because it finds what looks or sounds alike.`;
+    },
   },
   {
     request: 'A sleeveless dress, not black',
@@ -32,7 +48,13 @@ export const SHOP_REQUESTS: { request: string; line: string | ((hits: CatalogHit
   },
   {
     request: 'A trench over denim',
-    line: 'The shopper wanted two pieces worn in one order. The search matched the two words and ignored how they combine.',
+    line: (hits) => {
+      const { coats, denim } = pieceHits(hits);
+      const one = 'it matched one word and ignored how the two pieces combine';
+      const came =
+        coats && denim ? 'matched the two words and ignored how they combine' : coats ? `returned ${coats === hits.length ? 'only coats' : 'coats'} and no denim: ${one}` : denim ? `returned denim and no coat: ${one}` : 'matched what looks or sounds alike and ignored how the two pieces combine';
+      return `The shopper wanted two pieces worn in one order. The search ${came}.`;
+    },
   },
   {
     request: 'A blue shirt with a white collar',
@@ -88,11 +110,11 @@ function Products({ hits }: { hits: CatalogHit[] }) {
  * Tab 0's step 2, "Shop it yourself": the shopper's problem, felt before any technology is named.
  * Four requests, each a button; choosing one runs the catalog's similarity search
  * (`POST /api/catalog/search`, the read-only search tab 4's stage 1 opens up) on the deployed
- * catalog and lists the six nearest products, then one fixed line on what the shopper wanted and
- * what came back. The results of all four requests and the request on show are kept (kept.ts), so
- * they survive a tab switch and a reload. Once one request ran, the step shows the business
+ * catalog and lists the six nearest products, then one line on what the shopper wanted and what
+ * came back (SHOP_REQUESTS). The results of all four requests and the request on show are kept
+ * (kept.ts), so they survive a tab switch and a reload. Once one request ran, the step shows the business
  * problem (What to notice, with its sources), the three terms (Good to know) and the tease into
- * tab 1. A failed search shows its error in the app's small style and keeps the fixed line.
+ * tab 1. A failed search shows its error in the app's small style and keeps the line.
  */
 export function ShopItYourself() {
   const [results, setResults] = useKept<Results>(RESULTS_KEY, {});
