@@ -7,7 +7,7 @@ import { GoodToKnow, Notice } from './Callouts';
 import { Vector } from './StageCatalog';
 
 /**
- * Stage 3a, the way in: what the button does, in three steps, each with its result once it ran.
+ * Stage 3a, the starting garments: what the button does, in three steps, each with its result once it ran.
  * (1) the question becomes a vector, (2) one openCypher call finds the nearest garments in Neptune
  * Analytics' vector index (the query is shown before and after it runs), (3) the API picks the
  * garments to start from.
@@ -73,7 +73,7 @@ export function WayIn({ question, templates, anchors, onRun }: { question: strin
           <b>Keep the closest ones</b>
           <p className="small">
             The app keeps every garment that is almost as close as the best match (a score within {p?.band ?? 0.1} of it), whatever its type, as long as a look wears it: stage 4 starts at the
-            anchors&apos; looks, so a garment in no look leads nowhere.
+            looks of the starting garments, so a garment in no look leads nowhere.
           </p>
           <Notice>
             <p>
@@ -100,7 +100,7 @@ export function WayIn({ question, templates, anchors, onRun }: { question: strin
       </ol>
 
       <button onClick={onRun} disabled={anchors.status === 'running'}>
-        Find the way in
+        Find the starting garments
       </button>
       <Busy state={anchors} text="Searching the graph…" />
     </>

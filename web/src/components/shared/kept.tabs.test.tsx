@@ -77,7 +77,7 @@ describe('the answers a tab keeps', () => {
     expect(html).toContain('Wear it with charcoal trousers');
     expect(html).not.toContain('Run a catalog search in stage 1 first.');
     expect(html).not.toContain('Get a RAG answer in stage 2 first.');
-    expect(html).toContain('Find the way in in stage 3 first.');
+    expect(html).toContain('Find the starting garments in stage 3 first.');
   });
 
   it('tab 4 starts stages 2 to 5 over for a new question, and keeps stage 1 done', () => {

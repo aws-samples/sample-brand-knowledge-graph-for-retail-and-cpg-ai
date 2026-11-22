@@ -26,9 +26,9 @@ const IDLE = { status: 'idle' } as const;
 
 /**
  * "Same question, three answers": three answers side by side (the model on its own, RAG on the
- * product catalog, GraphRAG on the brand's looks), each with its receipts. The shopper asks with a
+ * product catalog, GraphRAG on the brand's looks), each with its sources. The shopper asks with a
  * question, or with a photo of one piece (Style recommendation): all three see the photo, and
- * GraphRAG's way in is the photo's own embedding in the same vector search.
+ * GraphRAG's starting garments come from the photo's own embedding in the same vector search.
  */
 export function AskStylist({ domain }: { domain: string }) {
   // the inputs, the three answers and the photo they were asked with are kept across tab switches
@@ -65,6 +65,7 @@ export function AskStylist({ domain }: { domain: string }) {
           This tab puts it all together. A shopper can ask in two ways: with a question, or with a photo of a piece they already have. You try both, and each time three answers come back side by side:
           the model on its own, RAG on the product catalog, and GraphRAG on the brand&apos;s looks.
         </Lead>
+        <p className="muted tab-uses">Uses the smart retriever of tab 4.</p>
         <ol className="po-intro-steps">
           <li>
             <b>Ask with a question.</b> Start with the white sneakers question you asked in tab 0. GraphRAG uses the smart retriever you saw at the end of the last tab. Compare what each answer can show you to
@@ -96,7 +97,7 @@ export function AskStylist({ domain }: { domain: string }) {
               Shoppers often have the piece already. They show it instead of describing it: here is my coat, what goes with it? This is <b>Style recommendation</b>. Pick a photo of one piece, then ask all
               three.
             </Lead>
-            <GoodToKnow title="How a photo finds the way in">
+            <GoodToKnow title="How a photo finds the starting garments">
               <ul>
                 <li>
                   The embedding model you used for questions (Amazon Nova multimodal embeddings) reads images too. Images and text land in the same vector space, so a photo of white sneakers sits close to

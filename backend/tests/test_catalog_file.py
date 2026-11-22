@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-"""The catalog index as a file (a style DNA set's ``catalog.json``): put back at deploy without
+"""The catalog index as a file (a graph-export set's ``catalog.json``): put back at deploy without
 embedding."""
 
 import json
@@ -19,7 +19,7 @@ def _svc(dim: int = 4):
 
 
 def _write(path, n: int, dim: int = 4):
-    """A ``catalog.json`` as a style DNA set ships it: key, metadata, base64 float32 vector."""
+    """A ``catalog.json`` as a graph-export set ships it: key, metadata, base64 float32 vector."""
     items = [
         {
             "key": f"p{i:04d}",

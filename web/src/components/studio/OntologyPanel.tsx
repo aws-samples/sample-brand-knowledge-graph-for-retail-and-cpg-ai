@@ -48,7 +48,7 @@ export function OntologyDetails({
 }
 
 /**
- * One box of the photo in the ontology's words, as the same flow as step 1: the kind the model
+ * One box of the photo, named with the ontology's terms, as the same flow as step 1: the kind the model
  * chose (and what it is a kind of), then one arrow per detail to the value it picked, and the parts
  * it found. A part box shows its garment ─ relation → the part. Anything the model said that has no
  * ontology term is listed apart. Every name opens its details in step 1.
@@ -98,7 +98,7 @@ export function BoxInOntology({ detail, box, onNavigate }: { detail: OntologyDet
   return (
     <div className="box-onto">
       <p className="small" style={{ marginTop: 0 }}>
-        <b>{e.label || e.class}</b>, in the ontology&apos;s words:
+        <b>{e.label || e.class}</b>, as the model named it:
       </p>
       <div className="connects-hub">
         <div className="connects-hub-self">{kindBox('the kind', kind?.id ?? e.class_iri, e.class)}</div>

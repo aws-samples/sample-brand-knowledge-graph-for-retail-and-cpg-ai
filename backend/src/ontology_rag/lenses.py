@@ -1,7 +1,8 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-"""Tab 6, "What else the graph knows": the same style DNA graph, a different person asking.
+"""Tab 6, "What else the graph knows": the same graph of the brand's looks, a different person
+asking.
 
 Ten questions ("lenses"): three for the buyer, three for the merchandiser, four for the creative
 director. Each is a count in the graph (openCypher, shown and editable in the tab), then a model that
@@ -13,9 +14,10 @@ their looks, and a model describes the pieces, then the looks.
 
 **Pieces, not categories.** The ontology's kinds are broad ("shoe" is in almost every look), so the
 lenses count finer pieces (sneakers, loafers, a blazer…). A piece's garments are found the way tab 4
-finds its way in: the piece's words embedded, a vector search on the graph's garments, every garment
-worn in a look within ANCHOR_BAND of the closest worn one (measured on the brand's graph: almost no
-wrong piece, some missed, so counts are a little low). They go into the openCypher as ``$pieces``: ``[{piece, ids}]``.
+finds its starting garments: the piece's words embedded, a vector search on the graph's garments,
+every garment worn in a look within ANCHOR_BAND of the closest worn one (measured on the brand's
+graph: almost no wrong piece, some missed, so counts are a little low). They go into the openCypher
+as ``$pieces``: ``[{piece, ids}]``.
 Colors are not counted: garments have no color field, and a color is too small a part of a
 garment's vector to find it reliably. Details (wide leg, pleat, midi) are the ontology's own
 attributes, the same word in every look, so they are counted directly.
@@ -182,8 +184,8 @@ RETURN id(l) AS look, l.name AS look_name, l.image_key AS image_key, o.name AS o
 
 TRENDS_VECTORS = (
     "Every garment worn in at least one look, with its vector from the graph's vector index (the "
-    "same vectors tab 4's way in searches). The lookbook's garments and the new shoot's (tab 2) "
-    "travel together, as int8 to keep the response small."
+    "same vectors tab 4's search for the starting garments uses). The lookbook's garments and the "
+    "new shoot's (tab 2) travel together, as int8 to keep the response small."
 )
 TRENDS_CLOUDS = (
     "In the browser: a PCA start, an exact t-SNE on cosine distances, a kNN graph cut into groups "
@@ -300,10 +302,11 @@ def _embed(svc, text: str) -> list[float]:
 
 
 def _band(svc, text: str) -> list[tuple[str, float]]:
-    """The garments one piece finds, with how far each is from the closest: tab 4's way in. Only
-    garments worn in a look count, as there: tab 2's articles put the pieces they describe into
-    the graph with no look, and an article about sneakers would otherwise take the whole band,
-    so every count (and "next to", which starts from these garments) would find no look."""
+    """The garments one piece finds, with how far each is from the closest: tab 4's starting
+    garments. Only garments worn in a look count, as there: tab 2's articles put the pieces they
+    describe into the graph with no look, and an article about sneakers would otherwise take the
+    whole band, so every count (and "next to", which starts from these garments) would find no
+    look."""
     near = svc.store.topk(_embed(svc, text), PIECE_CANDIDATES, ["Item"])
     looks_of = svc.store.neighbor_ids([n.id for n, _ in near], ["CONTAINS"], direction="in")
     worn = [(n, d) for n, d in near if looks_of.get(n.id)]
@@ -314,7 +317,7 @@ def _band(svc, text: str) -> list[tuple[str, float]]:
 
 
 def garments_of(svc, text: str) -> list[str]:
-    """The garments one piece finds: tab 4's way in (the vector search, the band)."""
+    """The garments one piece finds: tab 4's starting garments (the vector search, the band)."""
     return [i for i, _ in _band(svc, text)]
 
 

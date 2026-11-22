@@ -185,7 +185,7 @@ export function StageCatalog({ domain, subject, onDone }: { domain: string; subj
           <Hits hits={search.value.hits} />
           <Notice>
             <p>
-              Every hit is <b>similar</b> to what you asked for. None of them tells you what <b>goes with</b> it. Similarity is a good way in; it is not an answer about pairings.
+              Every hit is <b>similar</b> to what you asked for. None of them tells you what <b>goes with</b> it. Similarity is a good start; it is not an answer about pairings.
             </p>
             <p>Try another search, then go on to stage 2.</p>
           </Notice>

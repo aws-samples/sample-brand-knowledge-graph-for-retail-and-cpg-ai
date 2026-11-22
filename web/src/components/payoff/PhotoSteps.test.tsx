@@ -43,7 +43,7 @@ describe('PhotoSteps', () => {
     expect(html).toContain('reading the question');
   });
 
-  it('renders nothing without a photo way in', () => {
+  it('renders nothing when the photo found no starting garments', () => {
     expect(renderToStaticMarkup(<PhotoSteps graph={column({ photo_way_in: undefined })} photo={null} />)).toBe('');
   });
 });

@@ -44,14 +44,14 @@ const SUGGESTED: [string, string][] = [
  *                           click in the map: OntologyGraph, one name at a time), and everything
  *                           the ontology says about it (OntologyDetails, inline)
  *   2 one photo           : the photo and the vision model, one button each (PhotoBar), Classify; the photo with its
- *                           boxes, and next to it the selected box in the ontology's words
+ *                           boxes, and next to it the selected box, named with the ontology's terms
  *                           (BoxInOntology)
- *   3 what came back      : the entities in the ontology's words with the check's removals struck
+ *   3 what came back      : the entities named with the ontology's terms, the check's removals struck
  *                           through, the check, what the ontology could not express, and the
  *                           prompt, reply and request (RunDetails)
  *
  * then how it works, other aisles (the same shape in the browse-only domains of ontologies/, read
- * from the API: OtherAisles) and, last, the hand-off to tab 2. Prompt caching is always on. Click a box → it shows in the ontology's words next to the photo; click a
+ * from the API: OtherAisles) and, last, the hand-off to tab 2. Prompt caching is always on. Click a box → it shows next to the photo, named with the ontology's terms; click a
  * name (there, in the map or the details) → the boxes that use it light up on the photo. The server
  * round trips live in three hooks: the ontology (useOntologyChoice), the image (useImageChoice) and
  * the classify calls, cached per (ontology, image, model, caching) (useClassification). The
@@ -147,17 +147,18 @@ export function OntologyStudio({ domain }: { domain: string }) {
 
       {/* ------------------------------------------------------------ the intro */}
       <div className="card">
-        <h2>What the model sees: one photo, in the ontology&apos;s words</h2>
+        <h2>What the model sees in one photo, named with the ontology&apos;s terms</h2>
         <Lead>
           It starts with one photo and one question: what can a vision model see in it? In this tab you meet the ontology, send one photo to a model on Amazon Bedrock with the ontology as its
           instructions, and check what came back. Tab 2 then does the same for a whole shoot, into the graph.
         </Lead>
+        <p className="muted tab-uses">Uses the domain's ontology (fashion here). Feeds tab 2, which sends a whole shoot through the same prompt and check.</p>
         <ol className="po-intro-steps">
           <li>
             <b>Meet the ontology:</b> look up a few words, in the list or on the map. These are the only words the model may use.
           </li>
           <li>
-            <b>One photo, through a vision model:</b> pick a photo and a model, press Classify, then click a box to see it in the ontology&apos;s words. Try another model on the same photo.
+            <b>One photo, through a vision model:</b> pick a photo and a model, press Classify, then click a box to see how the model named that garment. Try another model on the same photo.
           </li>
           <li>
             <b>What came back:</b> everything the model found, what the check removed, and what the ontology could not express. Inspect shows the exact prompt and reply.
@@ -331,14 +332,14 @@ export function OntologyStudio({ domain }: { domain: string }) {
         <PhotoBar ontology={ontology} image={image} runs={runs} models={models} modelId={modelId} onModel={setModelId} promptCaching={promptCaching} />
         <div className="studio-grid">
           <div className="card">
-            <h3 style={{ margin: '0 0 0.4rem' }}>{selectedBox ? 'This box, in the ontology\'s words' : 'What a box means'}</h3>
+            <h3 style={{ margin: '0 0 0.4rem' }}>{selectedBox ? 'This box, as the model named it' : 'What a box means'}</h3>
             {selectedBox ? (
               <>
                 <BoxInOntology detail={detail} box={selectedBox} onNavigate={openDetails} />
                 <p className="muted small">Click a name to see its details in step 1. Click another box on the photo to see it here.</p>
               </>
             ) : (
-              <p className="muted">{shownResult ? 'Click a box on the photo. Its kind, each detail with the value the model picked, and its parts show here.' : 'Press Classify, then click a box on the photo to see it in the ontology\'s words.'}</p>
+              <p className="muted">{shownResult ? 'Click a box on the photo. Its kind, each detail with the value the model picked, and its parts show here.' : 'Press Classify, then click a box on the photo to see how the model named that garment.'}</p>
             )}
           </div>
 
@@ -377,7 +378,7 @@ export function OntologyStudio({ domain }: { domain: string }) {
         </div>
         <YourTurn>
           <p>
-            When the boxes appear, click one on the photo. The left side shows it in the ontology&apos;s words: its kind, each detail with the value the model picked, its parts. Click a name there:
+            When the boxes appear, click one on the photo. The left side shows how the model named it: its kind, each detail with the value it picked, and its parts. Click a name there:
             its details open in step 1, and every box that uses it lights up on the photo. Then try another photo, or your own.
           </p>
         </YourTurn>

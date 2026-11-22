@@ -81,7 +81,11 @@ class StubStore:
         ]
 
     def get_nodes(self, label, limit):
-        return [N("brand:anycompany-fashion-house", {"name": "AnyCompany Fashion House"})] if label == "Brand" else []
+        return (
+            [N("brand:anycompany-fashion-house", {"name": "AnyCompany Fashion House"})]
+            if label == "Brand"
+            else []
+        )
 
 
 class StubVectors:
@@ -545,7 +549,7 @@ def test_run_returns_three_columns_with_their_receipts():
     assert graph["receipts"] == {
         "kind": "looks",
         "count": 3,
-        "label": "3 AnyCompany Fashion House looks, the path to each claim",
+        "label": "3 AnyCompany Fashion House looks, with the walk that found them",
     }
     # GraphRAG: the patterns first (the thread), then each featured look followed by its items
     kinds = [e["kind"] for e in graph["evidence"]]

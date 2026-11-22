@@ -3,7 +3,7 @@
 
 import json
 
-from conftest import VELLOWAY
+from conftest import APPAREL
 
 from ontology_rag import synth
 from ontology_rag.synth import build_catalog, write_catalog
@@ -34,10 +34,10 @@ def test_write_catalog_is_deterministic(ontology, tmp_path):
 def test_committed_sample_matches_generator(ontology, settings):
     """ontologies/fashion/datasets/anycompany-apparel must be regenerated with `ontology-rag synth` whenever
     synth.py changes."""
-    assert VELLOWAY == settings.ontologies_dir / "fashion" / "datasets" / synth.SET_ID
-    committed = json.loads((VELLOWAY / "items.json").read_text())
+    assert APPAREL == settings.ontologies_dir / "fashion" / "datasets" / synth.SET_ID
+    committed = json.loads((APPAREL / "items.json").read_text())
     assert committed == build_catalog(ontology)["items"]
-    assert (VELLOWAY / "README.md").read_text() == synth.SAMPLE_README
+    assert (APPAREL / "README.md").read_text() == synth.SAMPLE_README
 
 
 def test_loader_builds_expected_graph(loaded_service):
@@ -75,7 +75,9 @@ def test_the_load_reports_the_ontology_and_each_set(loaded_service):
     apparel = out["sets"]["anycompany-apparel"]
     assert apparel["Item"] == 55 and apparel["Look"] >= 15 and apparel["catalog"] == 55
     fashion_house = out["sets"]["anycompany-fashion-house"]
-    assert fashion_house["Item"] == 7 and fashion_house["Look"] == 1 and fashion_house["catalog"] == 7
+    assert (
+        fashion_house["Item"] == 7 and fashion_house["Look"] == 1 and fashion_house["catalog"] == 7
+    )
 
 
 def test_loading_twice_is_idempotent(loaded_service):
@@ -87,8 +89,8 @@ def test_loading_twice_is_idempotent(loaded_service):
 def test_the_white_sneakers_look_is_one_look_in_words_of_the_ontology(ontology):
     """``anycompany-fashion-house/``: one look of the workshop's second brand, in the catalog format, so the
     sample's question about white sneakers has a look to answer from. Every piece is in the look,
-    in the ontology's words, and the photo the look and its pieces name is in the set."""
-    folder = VELLOWAY.parent / "anycompany-fashion-house"
+    named with the ontology's terms, and the photo the look and its pieces name is in the set."""
+    folder = APPAREL.parent / "anycompany-fashion-house"
     items = json.loads((folder / "items.json").read_text())
     (look,) = json.loads((folder / "looks.json").read_text())
     assert look["item_ids"] == [i["id"] for i in items] and len(items) == 7

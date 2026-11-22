@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-"""What the receipts tree and the graph views show next to a node: the photo it came from.
+"""What the sources tree and the graph views show next to a node: the photo it came from.
 
 A node keeps where its photo is in its ``image_key``:
 

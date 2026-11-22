@@ -34,7 +34,7 @@ export function GraphCard({ s }: { s: SetupStatus }) {
           other AWS services through a regional NAT gateway.
         </p>
       )}
-      <p className="muted">The brand&apos;s style DNA, preloaded: its looks, their garments and occasions, and the ontology. It has its own vector index (the way in of tab 4) and answers openCypher.</p>
+      <p className="muted">The brand&apos;s looks, preloaded: each look, its garments and its occasion, and the ontology. It has its own vector index (which finds tab 4&apos;s starting garments) and answers openCypher.</p>
       {nep?.console_url && (
         <div className="setup-actions">
           <a className="button-link" href={nep.console_url} target="_blank" rel="noopener noreferrer">

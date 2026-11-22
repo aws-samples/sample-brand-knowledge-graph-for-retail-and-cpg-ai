@@ -17,7 +17,7 @@ look of a second fictional brand with white sneakers, which the sample's example
 <set>/                 the set id: lower-case letters, digits, - and _, starting with a letter
 │                      or digit, at most 64 characters
 ├── README.md          required: the app lists a set by this file
-├── brand.json         the brand's id, name and description, shown in tab 0's Meet the brand (part of the catalog format, optional for a style DNA export)
+├── brand.json         the brand's id, name and description, shown in tab 0's Meet the brand (part of the catalog format, optional for a graph export)
 ├── domain.json        optional: example_questions, photo_questions, query_examples, added to the domain's lists
 ├── <data files>       loaded at deploy, in one of two formats (below)
 ├── media/<sub>/       optional: the data's own photos (for example looks/, products/), served by key
@@ -43,8 +43,8 @@ Two formats:
   hidden labels; a text such as `evening / formal` is tried facet by facet), and the look gets a
   `FOR` edge to the first that matches; a look that matches none keeps its text, gets no edge, and
   the load lists it as unresolved.
-- **Style DNA export**: `graph.json`, `vectors.json` and optionally `catalog.json`, a graph exported
-  with its vectors. The loader MERGEs the graph, writes the stored vectors as they are and fills the
+- **Graph export**: `graph.json`, `vectors.json` and optionally `catalog.json`, a graph exported
+  with its vectors (`dna.py`). The loader MERGEs the graph, writes the stored vectors as they are and fills the
   catalog index from `catalog.json`, so the set loads without a model call.
 
 A node's or a catalog row's `image_key` of the form `<set>/<sub>/<file>` names a photo at

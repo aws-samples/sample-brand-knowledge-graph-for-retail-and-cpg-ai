@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-"""The explorer tab's web: the whole style DNA in one response (looks, garments, kinds, occasions,
+"""The explorer tab's web: the whole graph of the brand's looks in one response (looks, garments, kinds, occasions,
 the journal's statements; with details the attribute values), and the openCypher that ran. The
 in-memory graph has no openCypher, so a stub store answers the statements."""
 

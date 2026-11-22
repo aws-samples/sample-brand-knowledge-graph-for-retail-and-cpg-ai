@@ -46,14 +46,14 @@ function Preview({ t }: { t: RetrieverTraversal }) {
   );
 }
 
-/** Where stage 4 stands: not run yet, run but nothing to count (no garment worn with the anchors), or ready for stage 5. */
+/** Where stage 4 stands: not run yet, run but nothing to count (no garment worn with the starting garments), or ready for stage 5. */
 export function walkState(walked: RetrieverTraversal | null): 'none' | 'empty' | 'ready' {
   if (!walked) return 'none';
   return walked.categories.length > 0 ? 'ready' : 'empty';
 }
 
 /**
- * GraphRAG's state across its three stages (the way in, the traversal, the answer): the anchors,
+ * GraphRAG's state across its three stages (the starting garments, the traversal, the answer): the starting garments,
  * the traversal's result, the answer. The traversal is the API's (`templates.traversal`), shown
  * read-only. All three are kept across tab switches and reloads; a new question starts them over
  * (BuildRetriever forgets the stages).
@@ -87,7 +87,7 @@ export function useGraphRetriever(question: string, domain: string) {
     walked,
     runWalk: () => runInto(setWalk, () => api.retrieverTraverse(ids, cypher)),
     state,
-    /** the traversal in the box ran and returned what can be counted: garments worn with the anchors, with their kind */
+    /** the traversal in the box ran and returned what can be counted: garments worn with the starting garments, with their kind */
     ready: state === 'ready',
     answer,
     runAnswer: async () => {
@@ -103,34 +103,34 @@ export function useGraphRetriever(question: string, domain: string) {
 }
 export type GraphRetriever = ReturnType<typeof useGraphRetriever>;
 
-/** Stage 3: the way in. Vector search on the graph's garments finds where to start. */
+/** Stage 3: the starting garments. Vector search on the graph's garments finds where to start. */
 export function StageWayIn({ g }: { g: GraphRetriever }) {
   return (
     <div className="rt-stage-body">
       <Lead>
-        Now the brand&apos;s taste. The graph holds the <b>style DNA</b> decomposed from the brand&apos;s own look photos: each look, the garments in it, and its occasion. No products. GraphRAG uses vector
-        search as the <b>way in</b>, then walks the relationships.
+        Now the brand&apos;s taste. The graph holds the <b>brand&apos;s looks</b>, decomposed from its own look photos: each look, the garments in it, and its occasion. No products. GraphRAG uses vector
+        search to find the <b>starting garments</b>, then walks the relationships.
       </Lead>
       <WayIn question={g.question} templates={g.templates} anchors={g.anchors} onRun={g.findWayIn} />
     </div>
   );
 }
 
-/** Stage 4: the walk. The traversal from the anchors, read-only: run it and see it counted. */
+/** Stage 4: the walk. The traversal from the starting garments, read-only: run it and see it counted. */
 export function StageWalk({ g }: { g: GraphRetriever }) {
   const t = g.walked;
   return (
     <div className="rt-stage-body">
       <YourTurn title="Your turn: run the traversal">
         <p>
-          The traversal below starts from the anchors (<code>$anchors</code>), finds every look they are in, then walks to the other garments of those looks, with their kind and details, and each
+          The traversal below begins at the starting garments (<code>$anchors</code>), finds every look they are in, then walks to the other garments of those looks, with their kind and details, and each
           look&apos;s occasion. Read it, then choose <b>Run the traversal</b>.
         </p>
       </YourTurn>
       {g.templatesError && <p className="error">Could not load the traversal: {g.templatesError}. Reload the page to try again.</p>}
       <textarea className="code rt-cypher" rows={9} value={g.cypher} readOnly spellCheck={false} aria-label="the traversal, openCypher (read-only)" />
       <div className="row rt-buttons">
-        <button onClick={g.runWalk} disabled={!g.ids.length || !g.cypher || g.walk.status === 'running'} title={g.ids.length ? '' : 'find the way in first (stage 3)'}>
+        <button onClick={g.runWalk} disabled={!g.ids.length || !g.cypher || g.walk.status === 'running'} title={g.ids.length ? '' : 'find the starting garments first (stage 3)'}>
           Run the traversal
         </button>
       </div>
@@ -153,7 +153,7 @@ export function StageWalk({ g }: { g: GraphRetriever }) {
 
       <SubStep n="Σ">What the traversal found, counted</SubStep>
       {!t && <p className="muted small">Run the traversal first.</p>}
-      {t && !g.ready && <p className="muted small">Nothing to count: no look wears other garments with the anchors.</p>}
+      {t && !g.ready && <p className="muted small">Nothing to count: no look wears other garments with the starting garments.</p>}
       {t && g.ready && (
         <>
           <p className="small">
@@ -185,8 +185,8 @@ export function StageWalk({ g }: { g: GraphRetriever }) {
           </table>
           <Notice>
             <p>
-              Each count is a number of distinct looks, not of rows or garments: &ldquo;shoe 3 of 5&rdquo; means 3 of the 5 looks have a shoe worn with the anchors, however many shoes or rows they have. The other shoe
-              of an anchor&apos;s pair is not counted. These counts are the brand&apos;s taste, from its own looks. The next stage hands them to the same catalog search as RAG.
+              Each count is a number of distinct looks, not of rows or garments: &ldquo;shoe 3 of 5&rdquo; means 3 of the 5 looks have a shoe worn with the starting garments, however many shoes or rows they have. The other shoe
+              of a starting garment&apos;s pair is not counted. These counts are the brand&apos;s taste, from its own looks. The next stage hands them to the same catalog search as RAG.
             </p>
           </Notice>
         </>
@@ -195,7 +195,7 @@ export function StageWalk({ g }: { g: GraphRetriever }) {
   );
 }
 
-/** Stage 5: the brand's taste through the same catalog search, and the answer with its receipts. */
+/** Stage 5: the brand's taste through the same catalog search, and the answer with its sources. */
 export function StageAnswer({ g, domain, onDone }: { g: GraphRetriever; domain: string; onDone: (cypher: string) => void }) {
   const [active, setActive] = useState<number | null>(null);
   const pick = (n: number) => setActive(active === n ? null : n);

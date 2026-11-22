@@ -27,7 +27,7 @@ import { SHOOT, useSources } from './useSources';
 const WATCH = 'white sneakers';
 
 /**
- * Tab 2, "Hydrate the graph": the participant adds the brand's new shoot to the style DNA, in four
+ * Tab 2, "Hydrate the graph": the participant adds the brand's new shoot to the brand's looks in the graph, in four
  * steps. 1 what the graph holds (the counts, and one number to watch: the looks with white
  * sneakers); 2 the batch (the new shoot, all selected; a domain without one starts with the first
  * batch its manifests mark, shown as tiles: BatchPreview); 3 the run (classify → validate → MERGE per
@@ -170,13 +170,14 @@ export function IngestPipeline({ onChanged, domain, wording }: { onChanged: () =
       <div className="card">
         <h2>{loading ? 'Hydrate the graph' : hasShoot ? 'Hydrate the graph: ingest the new shoot' : 'Hydrate the graph: ingest new photos and texts'}</h2>
         <Lead>
-          The graph already holds the brand&apos;s style DNA: every look of its lookbook, decomposed into garments with the ontology you saw in tab 1.{' '}
+          The graph already holds the brand&apos;s looks: every look of its lookbook, decomposed into garments with the ontology you saw in tab 1.{' '}
           {loading ? null : hasShoot ? (
             <>Now the brand has a new shoot, {shoot.length} looks nobody has decomposed yet. Your job is to add them to the graph.</>
           ) : (
             <>Now you add photos and texts nobody has decomposed yet. A first batch is already selected.</>
           )}
         </Lead>
+        <p className="muted tab-uses">Uses the ontology of tab 1. Feeds tabs 3 to 6 with the new shoot.</p>
         <ol className="po-intro-steps">
           <li>
             <b>Look at what the graph holds</b>, and remember one number.
@@ -311,11 +312,11 @@ export function IngestPipeline({ onChanged, domain, wording }: { onChanged: () =
             <GraphCountsView now={after} before={before} />
             <Notice>
               <p>
-                The batch is now part of the brand&apos;s DNA, counted like every other look.
+                The batch is now part of the brand&apos;s looks, counted like every other look.
                 {after.watch && before.watch && after.watch.looks !== before.watch.looks && (
                   <>
                     {' '}
-                    Looks with {WATCH}: <b>{before.watch.looks}</b> → <b>{after.watch.looks}</b>. Ask tab 4 or 5 about {WATCH} again and the new looks are in the answer&apos;s receipts.
+                    Looks with {WATCH}: <b>{before.watch.looks}</b> → <b>{after.watch.looks}</b>. Ask tab 4 or 5 about {WATCH} again and the new looks are among the answer&apos;s sources.
                   </>
                 )}
               </p>

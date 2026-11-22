@@ -75,7 +75,7 @@ Fashionpedia says what a garment is, not what a look is worn for. Version 1.2.0 
 `fo:Occasion` with nine named individuals and the object property `fo:for` (domain `fo:Look`,
 range `fo:Occasion`). Every new term carries the same `skos:editorialNote` as the jewelry; each
 occasion has an `rdfs:label`, a `skos:prefLabel`, a `skos:definition` and a `fo:conceptId`. The
-ids use underscores (`occasion:business_casual`), as the style DNA format does.
+ids use underscores (`occasion:business_casual`), as the graph-export format does.
 They are defined in `OCCASIONS` in the builder.
 
 | Individual | `fo:conceptId` | `skos:hiddenLabel` | Definition |

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 /**
- * Tab 6, "What else the graph knows": the same style DNA graph, a different person asking. Three
+ * Tab 6, "What else the graph knows": the same graph of the brand's looks, a different person asking. Three
  * personas (the buyer, the merchandiser, the creative director), three or four questions
  * ("lenses") each. Each lens is a count in the graph, then a model that explains the numbers
  * citing only them; "Is this new photo on-brand?" is a check instead (vector search, a walk, a
@@ -127,7 +127,7 @@ export const LENSES: Lens[] = [
     input: { kind: 'photo', label: 'An outfit the graph has never seen' },
     usesPieces: false,
     notice: 'The similarity score tells you how close the outfit is to the brand overall. The closest looks in the graph show what they wear, so the next step can point at the exact piece that is off.',
-    whyGraph: 'The vector search finds the closest looks, but it is one number per photo. The walk to their garments is what lets the helper say which piece is off and what the brand wears instead, with the looks as receipts.',
+    whyGraph: 'The vector search finds the closest looks, but it is one number per photo. The walk to their garments is what lets the helper say which piece is off and what the brand wears instead, with the looks as sources.',
     beauty: 'Does this new formula fit our rules: no retinol with strong acids, fragrance-free for sensitive skin?',
   },
   {

@@ -69,7 +69,7 @@ is the data's own field, named like the class's concept id (`occasion`).
   to nothing gets no edge, and the load lists it under `unresolved`. On the sample's deploy,
   AnyCompany Apparel's looks and AnyCompany Fashion House's one resolve to Evening 6, Resort 5, Casual 3, Outdoor 2,
   Professional 2 and Smart casual 1, and AnyCompany Apparel's "cold weather" look to none.
-* **A style DNA export** carries its own `Occasion` nodes and `FOR` edges, with the same ids
+* **A graph export** carries its own `Occasion` nodes and `FOR` edges, with the same ids
   (`dna.py`).
 * **Tab 2** asks the model for the photo as a whole: the classification prompt lists the photo
   properties with their allowed values, the answer's `photo_properties` is checked against the

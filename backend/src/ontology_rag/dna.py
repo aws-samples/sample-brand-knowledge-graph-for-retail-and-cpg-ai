@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-"""The brand's style DNA as files, loaded at deploy.
+"""The brand's looks as files (the graph export), loaded at deploy.
 
 The DNA is what the ingest pipeline built from the brand's lookbook: the looks, the garments in
 them (each linked to its Category, Attribute and part Categories of the ontology), the occasion of

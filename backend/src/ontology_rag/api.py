@@ -228,12 +228,12 @@ def retriever_rag(svc, q, b):
 
 
 def retriever_anchors(svc, q, b):
-    """Stage 3a: the way into the graph, by vector search on its garments."""
+    """Stage 3a: the starting garments, by vector search on the graph's garments."""
     return 200, payoff.find_anchors(svc, _question(b))
 
 
 def retriever_traverse(svc, q, b):
-    """Stage 3b: the traversal from the anchors (read-only), its rows and counts."""
+    """Stage 3b: the traversal from the starting garments (read-only), its rows and counts."""
     anchors = b.get("anchors")
     if not isinstance(anchors, list) or not anchors or len(anchors) > payoff.MAX_ANCHORS:
         return 400, {"error": f"anchors must be a list of 1 to {payoff.MAX_ANCHORS} node ids"}
@@ -261,7 +261,7 @@ def retriever_smart(svc, q, b):
 
 
 def retriever_templates(svc, q, b):
-    """Stage 3a's query before it runs and the numbers that pick the anchors; stage 3b's
+    """Stage 3a's query before it runs and the numbers that pick the starting garments; stage 3b's
     traversal, shown read-only in tab 4."""
     return 200, {
         "anchor_query": payoff.anchor_query(None, dimension=svc.settings.embedding_dimension),
@@ -275,10 +275,10 @@ def retriever_templates(svc, q, b):
 
 
 def payoff_route(svc, q, b):
-    """ "Same question, three answers": LLM only, RAG on the product catalog and GraphRAG on the style DNA
-    (the smart retriever), each with its receipts; with the participant's own traversal and
-    searches when given. Style recommendation: with the shopper's photo of one piece
-    (``image_base64``), which all three see and GraphRAG embeds to find the way in."""
+    """ "Same question, three answers": LLM only, RAG on the product catalog and GraphRAG on the
+    brand's looks (the smart retriever), each with its sources; with the participant's own
+    traversal and searches when given. Style recommendation: with the shopper's photo of one piece
+    (``image_base64``), which all three see and GraphRAG embeds to find the starting garments."""
     searches = b.get("searches")
     return 200, payoff.run(
         svc,
@@ -547,7 +547,8 @@ def pipeline_graph(svc, q, b):
 
 
 def graph_web(svc, q, b):
-    """The explorer: the whole style DNA as one web; ``details=1`` adds the attribute values."""
+    """The explorer: the whole graph of the brand's looks as one web; ``details=1`` adds the
+    attribute values."""
     return 200, svc.graph_web(str(q.get("details") or "") in ("1", "true"))
 
 

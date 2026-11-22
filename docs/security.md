@@ -192,7 +192,7 @@ The ontology folders, their `domain.json` and the manifests belong to the deploy
 file names are checked against their shapes and against the folder listing. Keys with `..`
 segments are skipped when the bucket is mirrored.
 
-`GET /api/graph/source` (the receipts tree's preview) reads only the photo a graph node names: a
+`GET /api/graph/source` (the sources tree's preview) reads only the photo a graph node names: a
 data set's photo, an example photo, or a tab 2 upload under `uploads/<run>/`, each key checked
 against its shape. Node ids are checked against their shape, and the node must exist. A request
 reads at most 8 photos and 3 MB. The route never reads run records or job records.

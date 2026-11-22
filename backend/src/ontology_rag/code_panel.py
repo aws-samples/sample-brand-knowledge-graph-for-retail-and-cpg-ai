@@ -108,13 +108,13 @@ CODE_MARKS: dict[str, list[Mark]] = {
             "output",
             "looks_of = svc.store.neighbor_ids(",
             None,
-            "only garments worn in a look can be anchors: the traversal starts at their looks",
+            "only garments worn in a look can start the walk: the traversal starts at their looks",
         ),
         (
             "ontology",
             "anchors = [(n, d) for n, d in worn if d <= best_d + ANCHOR_BAND][:MAX_ANCHORS]",
             None,
-            "the anchors: every worn garment close to the best match, whatever its type",
+            "the starting garments: every worn garment close to the best match, whatever its type",
         ),
     ],
     "rt_guard": [
@@ -128,13 +128,13 @@ CODE_MARKS: dict[str, list[Mark]] = {
             "ontology",
             'if "$anchors" not in cypher:',
             None,
-            "the traversal must start from the anchors",
+            "the traversal must start from the starting garments",
         ),
         (
             "model",
             'rows = svc.store.query(cypher, {"anchors": list(anchor_ids)[:MAX_ANCHORS]})[:MAX_ROWS]',
             None,
-            "your openCypher on Neptune Analytics, with the anchors as a parameter",
+            "your openCypher on Neptune Analytics, with the starting garments as a parameter",
         ),
     ],
     "rt_count": [
@@ -1037,7 +1037,7 @@ CODE_MARKS.update(
                 "feedback",
                 'return 400, {"error": "mode must be agent: the tested query was removed"}',
                 None,
-                "one way in: the agent",
+                "one entry point: the agent",
             ),
             (
                 "model",
@@ -2064,21 +2064,22 @@ def rt_rag_snippets() -> list[dict]:
 
 
 def rt_graph_snippets() -> list[dict]:
-    """Stage 3: GraphRAG. Vector search on the graph's garments (the way in), the participant's
-    traversal (read-only), the counts and the looks, the same catalog search, the answer."""
+    """Stage 3: GraphRAG. Vector search on the graph's garments (the starting garments), the
+    participant's traversal (read-only), the counts and the looks, the same catalog search, the
+    answer."""
     from ontology_rag import payoff
 
     return [
         snippet(
             "rt_anchors",
-            "The way in: vector search on the graph's garments, then the kind and the words",
+            "The starting garments: vector search on the graph's garments, their kind and words",
             [1, 2],
             ["embed", "neptune"],
             payoff.find_anchors,
         ),
         snippet(
             "rt_traversal",
-            "The traversal from the anchors (openCypher, read-only)",
+            "The traversal from the starting garments (openCypher, read-only)",
             [3],
             ["neptune"],
             code=payoff.TRAVERSAL,
@@ -2114,7 +2115,7 @@ def rt_graph_snippets() -> list[dict]:
 
 
 def rt_payoff_snippets() -> list[dict]:
-    """Stage 4: the payoff. LLM only, RAG and GraphRAG in parallel, and the receipts tree."""
+    """Stage 4: the payoff. LLM only, RAG and GraphRAG in parallel, and the sources tree."""
     from ontology_rag import payoff
 
     return [
@@ -2137,21 +2138,21 @@ def rt_payoff_snippets() -> list[dict]:
         ),
         snippet(
             "rt_graph_col",
-            "GraphRAG: anchors, your traversal, the looks, the catalog, the answer",
+            "GraphRAG: the starting garments, your traversal, the looks, the catalog, the answer",
             [4],
             ["neptune"],
             payoff.graphrag,
         ),
         snippet(
             "rt_photo",
-            "Style recommendation: the photo's embedding is the way in",
+            "Style recommendation: the photo's embedding finds the starting garments",
             [4],
             ["neptune"],
             payoff.photo_guidance,
         ),
         snippet(
             "rt_tree",
-            "The receipts: the traversal as a tree for the browser",
+            "The sources: the traversal as a tree for the browser",
             [5],
             ["browser"],
             payoff.tree,

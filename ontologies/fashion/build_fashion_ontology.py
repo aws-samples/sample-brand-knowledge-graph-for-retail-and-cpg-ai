@@ -143,7 +143,7 @@ SAMPLE_NOTE = "Added by this sample; not part of the Fashionpedia ontology."
 
 # What a look is worn for: a closed list this sample adds (Fashionpedia has no occasion). A model
 # answers with one of them for a photo as a whole (tab 2), and the deploy matches a data set's
-# occasion text against their labels. The ids keep the underscores of the workshop's style DNA
+# occasion text against their labels. The ids keep the underscores of the workshop's graph export
 # (occasion:business_casual), so they are written here and not made by slug(). Hidden labels
 # (skos:hiddenLabel) are other words a data set may use; they are matched, never shown.
 # (id, preferred label, hidden labels, definition)

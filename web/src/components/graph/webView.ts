@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 /**
- * The explorer's web, as data: the adjacency of the style DNA (`GET /api/graph/web`), what lights
+ * The explorer's web, as data: the adjacency of the brand's looks (`GET /api/graph/web`), what lights
  * up when a node is clicked or a word is searched, and the counts the side panel says. Pure, so it
  * is tested without a canvas.
  */

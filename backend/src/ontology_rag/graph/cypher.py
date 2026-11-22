@@ -49,7 +49,7 @@ RETURN count(success) AS upserted
 
 DELETE_ALL = "MATCH (n) DETACH DELETE n"
 
-# A node's vector, read back (the style DNA export, dna.py).
+# A node's vector, read back (the graph export, dna.py).
 GET_EMBEDDINGS = """
 MATCH (n) WHERE id(n) IN $ids
 CALL neptune.algo.vectors.get(n)

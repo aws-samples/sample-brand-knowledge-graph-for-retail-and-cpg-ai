@@ -5,7 +5,7 @@ import type { GraphColumn } from '../../api';
 import { Inspect } from './parts';
 
 /**
- * How GraphRAG found the way in from a photo (payoff.photo_graphrag), in plain steps: the photo
+ * How GraphRAG found the starting garments from a photo (payoff.photo_graphrag), in plain steps: the photo
  * embedded with the same model as a question, the same vector search on the graph's garments, the
  * same traversal, and the filter when the question asks for one kind of piece.
  */
@@ -46,7 +46,7 @@ export function PhotoSteps({ graph, photo }: { graph: GraphColumn; photo: string
         )}
       </ol>
       <Inspect
-        title="Inspect: the photo's way in"
+        title="Inspect: the photo's starting garments"
         parts={[
           ['the photo as a vector (first numbers)', `[${way.vector.first.join(', ')}, …]  (${way.vector.dimension} numbers)`],
           ['the vector search on Neptune (openCypher)', way.query],

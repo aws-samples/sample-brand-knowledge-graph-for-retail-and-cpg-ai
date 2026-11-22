@@ -4,7 +4,7 @@
 import type { PayoffTree, PayoffTreeNode } from '../../api';
 
 /**
- * GraphRAG's receipts as a left-to-right drawing: the anchor garments (found by vector search) →
+ * GraphRAG's sources as a left-to-right drawing: the starting garments (found by vector search) →
  * every look they're in → what's worn with them in those looks (with counts) → the catalog items
  * the guidance found. Four columns, each stacked top to bottom and centered on the tallest one;
  * items are ordered by their category so the links barely cross.

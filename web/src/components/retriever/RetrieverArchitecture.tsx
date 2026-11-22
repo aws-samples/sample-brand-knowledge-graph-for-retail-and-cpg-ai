@@ -83,7 +83,7 @@ export const DEFS: Record<RetrieverSet, Def<NodeId, RetrieverCtx>> = {
             <code>QueryVectors</code> returns the k nearest products and their distance (0 is the same direction, smaller is closer).
           </li>
           <li>
-            Ask for white sneakers and you get white sneakers: <b>similar</b>, which is a good way in. It does not tell you what <b>goes with</b> them.
+            Ask for white sneakers and you get white sneakers: <b>similar</b>, which is a good start. It does not tell you what <b>goes with</b> them.
           </li>
         </ul>
       ),
@@ -160,13 +160,13 @@ export const DEFS: Record<RetrieverSet, Def<NodeId, RetrieverCtx>> = {
   }),
 
   rt_graph: stageDef({
-    title: 'How it works: GraphRAG on the style DNA',
+    title: 'How it works: GraphRAG on the brand’s looks',
     summary: 'Bedrock · Neptune Analytics · S3 Vectors · Lambda',
     height: 520,
     steps: [
       { n: 1, node: 'embed', title: 'Embed the question', summary: 'Nova embeds the question, the same model as the catalog and the graph’s garments.' },
-      { n: 2, node: 'neptune', title: 'The way in', summary: 'Vector search on the graph’s garments (Neptune’s own index): the closest by meaning.' },
-      { n: 3, node: 'neptune', title: 'The traversal', summary: 'The openCypher walks from the anchors to every look and what is worn with them. Read-only.' },
+      { n: 2, node: 'neptune', title: 'The starting garments', summary: 'Vector search on the graph’s garments (Neptune’s own index): the closest by meaning.' },
+      { n: 3, node: 'neptune', title: 'The traversal', summary: 'The openCypher walks from the starting garments to every look and what is worn with them. Read-only.' },
       { n: 4, node: 'lambda', title: 'Count, pick three looks', summary: 'Rows counted per look: occasions, kinds worn with them; three typical looks, one per occasion first.' },
       { n: 5, node: 'vectors', title: 'The same catalog search', summary: 'Each piece of those looks goes through stage 2’s catalog search: one real product per piece.' },
       { n: 6, node: 'llm', title: 'The answer', summary: 'The patterns, the looks and their products go to the model with RAG’s prompt.' },
@@ -177,9 +177,9 @@ export const DEFS: Record<RetrieverSet, Def<NodeId, RetrieverCtx>> = {
         <ul>
           <li>
             Neptune Analytics keeps its own vector index on the graph&apos;s nodes. <code>find_anchors</code> asks it for the garments nearest to the question. Two vector stores, one job each: S3 Vectors
-            holds the products, Neptune&apos;s index is the way into the graph.
+            holds the products, Neptune&apos;s index finds where to start in the graph.
           </li>
-          <li>Every garment almost as close as the best match is kept, whatever its type: those are the anchors the traversal starts from.</li>
+          <li>Every garment almost as close as the best match is kept, whatever its type: those are the starting garments the traversal begins at.</li>
         </ul>
       ),
       3: (
@@ -188,13 +188,13 @@ export const DEFS: Record<RetrieverSet, Def<NodeId, RetrieverCtx>> = {
             The traversal starts at <code>$anchors</code>, finds every look they are in (<code>CONTAINS</code>), then the other garments in those looks with their kind (<code>IS_CATEGORY</code>), details (
             <code>HAS_ATTRIBUTE</code>) and each look&apos;s occasion (<code>FOR</code>).
           </li>
-          <li>The guard refuses a write before it reaches the graph, and a traversal that does not start from the anchors.</li>
+          <li>The guard refuses a write before it reaches the graph, and a traversal that does not start from the starting garments.</li>
         </ul>
       ),
       4: (
         <ul>
           <li>
-            <code>aggregate</code> counts distinct looks, not rows or garments: &ldquo;bag in 12 of 13 looks&rdquo; means 12 looks have at least one bag worn with the anchors. The other shoe of an anchor&apos;s pair is left out. Those counts are the pattern, and the receipt behind every claim.
+            <code>aggregate</code> counts distinct looks, not rows or garments: &ldquo;bag in 12 of 13 looks&rdquo; means 12 looks have at least one bag worn with the starting garments. The other shoe of a starting garment&apos;s pair is left out. Those counts are the pattern, and the source behind every claim.
           </li>
           <li><code>featured_looks</code> picks the three most typical looks, the best of each occasion first, so the three ways to wear it differ.</li>
         </ul>
@@ -206,7 +206,7 @@ export const DEFS: Record<RetrieverSet, Def<NodeId, RetrieverCtx>> = {
           </li>
         </ul>
       ),
-      6: <ul><li>The same answer prompt as RAG. GraphRAG&apos;s evidence carries the brand&apos;s own looks and counts, so its citations lead back to the looks: the receipts tree below the answer.</li></ul>,
+      6: <ul><li>The same answer prompt as RAG. GraphRAG&apos;s evidence carries the brand&apos;s own looks and counts, so its citations lead back to the looks: the sources tree below the answer.</li></ul>,
     },
     nodes: [
       box('embed', 'bedrock', 400, 0, 'Amazon Bedrock · Nova', 'question → 1,024 numbers'),
@@ -219,7 +219,7 @@ export const DEFS: Record<RetrieverSet, Def<NodeId, RetrieverCtx>> = {
     edges: [
       leg('e-q', 'browser', 's-r', 'lambda', 't-l', 'question + traversal'),
       leg('e-emb', 'lambda', 's-t', 'embed', 't-b', 'embed the question'),
-      leg('e-nep', 'lambda', 's-r', 'neptune', 't-l', 'anchors · the traversal'),
+      leg('e-nep', 'lambda', 's-r', 'neptune', 't-l', 'starting garments · the traversal'),
       leg('e-cat', 'lambda', 's-b2', 'vectors', 't-l', 'each piece → the same search'),
       leg('e-ans', 'lambda', 's-b1', 'llm', 't-t', 'looks + products + question'),
     ],
@@ -231,20 +231,20 @@ export const DEFS: Record<RetrieverSet, Def<NodeId, RetrieverCtx>> = {
     height: 520,
     steps: [
       { n: 1, node: 'lambda', title: 'Three in parallel', summary: 'One request runs the three columns at once: the same question and the same model.' },
-      { n: 2, node: 'llm', title: 'LLM only', summary: 'The question alone. No retrieval, no evidence, no receipts.' },
+      { n: 2, node: 'llm', title: 'LLM only', summary: 'The question alone. No retrieval, no evidence, no sources.' },
       { n: 3, node: 'vectors', title: 'RAG', summary: 'Your searches from stage 2 through the catalog, then the shared answer prompt.' },
       { n: 4, node: 'neptune', title: 'GraphRAG', summary: 'The traversal from stage 3, the looks, the same catalog search, the shared answer prompt.' },
-      { n: 5, node: 'browser', title: 'The receipts', summary: 'GraphRAG’s path, drawn: anchors → looks → what is worn with them → catalog items.' },
+      { n: 5, node: 'browser', title: 'The sources', summary: 'GraphRAG’s path, drawn: starting garments → looks → what is worn with them → catalog products.' },
     ],
     text: {
       1: <ul><li><code>run</code> starts the three columns in a thread pool. Each column is the function you ran in its stage; nothing new happens here.</li></ul>,
       2: <ul><li>A plain prompt and the question: the model&apos;s own taste, stated with confidence and no source. This is the answer you got in tab 0.</li></ul>,
-      3: <ul><li>RAG with the searches you kept in stage 2. Its receipts are catalog items: they exist, but nothing says they go together.</li></ul>,
-      4: <ul><li>GraphRAG with the traversal you wrote in stage 3. Its receipts are the brand&apos;s own looks, with counts.</li></ul>,
+      3: <ul><li>RAG with the searches you kept in stage 2. Its sources are catalog products: they exist, but nothing says they go together.</li></ul>,
+      4: <ul><li>GraphRAG with the traversal you wrote in stage 3. Its sources are the brand&apos;s own looks, with counts.</li></ul>,
       5: <ul><li><code>tree</code> turns GraphRAG&apos;s retrieval into the drawing under the answers. Click a citation to light its path; click a box for the look&apos;s photo and garments.</li></ul>,
     },
     nodes: [
-      box('browser', 'browser', 0, 220, 'Browser', 'stage 4 · the receipts tree'),
+      box('browser', 'browser', 0, 220, 'Browser', 'stage 4 · the sources tree'),
       box('lambda', 'lambda', 400, 220, 'AWS Lambda · API', 'payoff.run'),
       box('llm', 'bedrock', 800, 0, 'LLM only · Amazon Bedrock', 'question → answer'),
       box('vectors', 's3vectors', 800, 220, 'RAG · S3 Vectors + Bedrock', 'your searches → catalog'),

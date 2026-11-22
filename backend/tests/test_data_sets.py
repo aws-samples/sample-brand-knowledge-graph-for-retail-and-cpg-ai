@@ -96,9 +96,19 @@ def test_the_sets_are_the_safe_named_folders_with_a_readme(tree):
     (sets / "loose.json").write_text("{}")
     cat = OntologyCatalog(tree)
     entry = cat.entry("fashion")
-    assert entry.data_sets() == ["aaa", "anycompany-apparel", "anycompany-fashion-house", "tiny"]  # sorted
+    assert entry.data_sets() == [
+        "aaa",
+        "anycompany-apparel",
+        "anycompany-fashion-house",
+        "tiny",
+    ]  # sorted
     assert entry.set_dir("tiny") == sets / "tiny"
-    assert cat.summary(entry)["data_sets"] == ["aaa", "anycompany-apparel", "anycompany-fashion-house", "tiny"]
+    assert cat.summary(entry)["data_sets"] == [
+        "aaa",
+        "anycompany-apparel",
+        "anycompany-fashion-house",
+        "tiny",
+    ]
     assert parse_upload("@prefix : <http://x/> . <http://x/o> a <http://x/C> .")["data_sets"] == []
 
 
@@ -167,7 +177,9 @@ def test_a_set_file_named_like_a_listed_one_is_skipped_and_logged_once(tree, cap
     path = entry.example_path("01-trench-coat-sweater-dress.jpg")
     # the domain's own photo
     assert path == tree / "fashion" / "examples" / "images" / "01-trench-coat-sweater-dress.jpg"
-    skipped = [r for r in caplog.records if "01-trench-coat-sweater-dress.jpg is skipped" in r.getMessage()]
+    skipped = [
+        r for r in caplog.records if "01-trench-coat-sweater-dress.jpg is skipped" in r.getMessage()
+    ]
     assert len(skipped) == 1
 
 
@@ -195,11 +207,11 @@ def test_the_sets_lists_are_added_to_the_domains_without_duplicates(tree):
     """In set order (anycompany-apparel, then tiny), after the domain's own."""
     domain = _entry(tree).domain()
     own = json.loads((tree / "fashion" / "domain.json").read_text())
-    apparel = json.loads((tree / "fashion" / "datasets" / "anycompany-apparel" / "domain.json").read_text())
+    apparel = json.loads(
+        (tree / "fashion" / "datasets" / "anycompany-apparel" / "domain.json").read_text()
+    )
     assert domain["example_questions"] == (
-        own["example_questions"]
-        + apparel["example_questions"]
-        + ["What goes with the camel coat?"]
+        own["example_questions"] + apparel["example_questions"] + ["What goes with the camel coat?"]
     )  # the tiny set's trench question is the domain's: once
     assert domain["photo_questions"] == own["photo_questions"] + apparel["photo_questions"]
     questions = [e["question"] for e in domain["query_examples"]]
@@ -231,7 +243,9 @@ def test_classify_reads_a_set_photo_at_its_place_in_the_bucket(tree):
     data, image_format = classify.load_image(svc, "fashion", "h1.jpg")
     assert bucket.reads == ["ontologies/fashion/datasets/tiny/examples/images/h1.jpg"]
     assert data == (TINY / "examples" / "images" / "h1.jpg").read_bytes() and image_format == "jpeg"
-    classify.load_image(svc, "fashion", "01-trench-coat-sweater-dress.jpg")  # the domain's own, as before
+    classify.load_image(
+        svc, "fashion", "01-trench-coat-sweater-dress.jpg"
+    )  # the domain's own, as before
     assert bucket.reads[-1] == "ontologies/fashion/examples/images/01-trench-coat-sweater-dress.jpg"
     # a local run reads the same path below the local folder
     local = SimpleNamespace(
@@ -274,7 +288,9 @@ def test_the_mirror_leaves_out_set_data_and_media(tree, tmp_path):
         assert not (tiny / left_out).exists(), left_out
     assert (cache / "fashion" / "datasets" / "README.md").is_file()  # not a set's file
     assert not (cache / "fashion" / "datasets" / "anycompany-apparel" / "items.json").exists()
-    assert (cache / "fashion" / "examples" / "images" / "01-trench-coat-sweater-dress.jpg").is_file()
+    assert (
+        cache / "fashion" / "examples" / "images" / "01-trench-coat-sweater-dress.jpg"
+    ).is_file()
     assert not any("/looks/" in k or k.endswith("graph.json") for k in bucket.downloads)
 
     loader_cache = tmp_path / "loader"
@@ -423,7 +439,9 @@ def test_without_a_vector_bucket_the_sets_load_into_the_graph_only(settings, tmp
     )
     assert svc.s3vectors is None
     out = svc.load_sample(reset=True)
-    assert "catalog" not in out["sets"]["tiny"] and "catalog" not in out["sets"]["anycompany-apparel"]
+    assert (
+        "catalog" not in out["sets"]["tiny"] and "catalog" not in out["sets"]["anycompany-apparel"]
+    )
 
 
 def test_the_deployed_loader_reads_the_sets_from_its_mirror(settings, tmp_path):
@@ -503,8 +521,14 @@ def test_a_stored_photo_comes_from_the_bucket_else_the_local_folder(tiny_service
     [
         ([], "the brand"),
         (["AnyCompany Apparel"], "AnyCompany Apparel"),
-        (["AnyCompany Fashion House", "AnyCompany Apparel"], "AnyCompany Apparel and AnyCompany Fashion House"),
-        (["AnyCompany Apparel", "Tiny", "AnyCompany Fashion House"], "AnyCompany Apparel, AnyCompany Fashion House and Tiny"),
+        (
+            ["AnyCompany Fashion House", "AnyCompany Apparel"],
+            "AnyCompany Apparel and AnyCompany Fashion House",
+        ),
+        (
+            ["AnyCompany Apparel", "Tiny", "AnyCompany Fashion House"],
+            "AnyCompany Apparel, AnyCompany Fashion House and Tiny",
+        ),
     ],
 )
 def test_the_brand_names_every_brand_node(names, phrase):
@@ -557,7 +581,10 @@ def test_the_summary_names_each_brand_with_its_brand_json_description(loaded_ser
     """Tab 0's "Meet the brand" reads the graph's Brand nodes: every set's brand with the
     description of its ``brand.json``, sorted by name."""
     sets = loaded_service.settings.ontologies_dir / "fashion" / "datasets"
-    files = [json.loads((sets / s / "brand.json").read_text()) for s in ("anycompany-apparel", "anycompany-fashion-house")]
+    files = [
+        json.loads((sets / s / "brand.json").read_text())
+        for s in ("anycompany-apparel", "anycompany-fashion-house")
+    ]
     expected = [{"name": raw["name"], "description": raw["description"]} for raw in files]
     status, summary = dispatch(loaded_service, "GET", "/api/summary", {}, {})
     assert status == 200 and summary["brands"] == expected

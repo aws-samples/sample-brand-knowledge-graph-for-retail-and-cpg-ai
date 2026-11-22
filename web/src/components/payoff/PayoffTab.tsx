@@ -44,7 +44,7 @@ function Section({ n, label, hint, children }: { n: number; label: string; hint?
 }
 
 /**
- * The payoff: one question three ways, side by side, each with its receipts, then GraphRAG's tree.
+ * The payoff: one question three ways, side by side, each with its sources, then GraphRAG's tree.
  * `photo`: the shopper's photo when the question came with one (Style recommendation).
  */
 export function PayoffView({ result, domain, photo = null }: { result: PayoffResult; domain: string; photo?: string | null }) {
@@ -128,7 +128,7 @@ export function PayoffView({ result, domain, photo = null }: { result: PayoffRes
         </p>
         {result.input === 'photo' && (
           <p>
-            All three saw the same photo. GraphRAG&apos;s step 2 shows how the photo found the way in: no description, no words. The photo&apos;s own embedding went into the same vector search a question
+            All three saw the same photo. GraphRAG&apos;s step 2 shows how the photo found the starting garments: no description, no words. The photo&apos;s own embedding went into the same vector search a question
             uses, and from there everything ran exactly as before.
           </p>
         )}

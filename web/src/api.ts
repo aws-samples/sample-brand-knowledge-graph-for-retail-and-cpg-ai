@@ -105,7 +105,7 @@ export type PayoffTree = { nodes: PayoffTreeNode[]; edges: { source: string; tar
 export type PayoffReceipts = { kind: 'none' | 'catalog' | 'looks'; count: number; label: string };
 type PayoffBase = { answer: string; cited?: number[]; evidence: PayoffEvidence[]; receipts: PayoffReceipts; metrics: Record<string, number> };
 export type PayoffGuidance = {
-  /** The way in: every garment within `band` of the closest one; `types` counts them, `category` is the most common. */
+  /** The starting garments: every garment within `band` of the closest one; `types` counts them, `category` is the most common. */
   anchor: { category: string; label: string; nearest: string; types?: Record<string, number>; band?: number; garments: { id: string; name: string; distance: number }[] };
   looks: { id: string; name: string; occasion: string }[];
   occasion: { name: string; count: number }[];
@@ -143,10 +143,10 @@ export type GraphColumn = PayoffBase & {
   notes?: string[];
   /** The filter after the traversal, in words ("" when the question looks for nothing in particular). */
   target_rule?: string;
-  /** Style recommendation (payoff.photo_graphrag): the photo's embedding found the way in. */
+  /** Style recommendation (payoff.photo_graphrag): the photo's embedding found the starting garments. */
   photo_way_in?: PhotoWayIn;
 };
-/** How a photo found the way in: its embedding, the same vector search and band, the same traversal. */
+/** How a photo found the starting garments: its embedding, the same vector search and band, the same traversal. */
 export type PhotoWayIn = {
   garments: number;
   label: string;
@@ -175,7 +175,7 @@ export type SmartStart = {
   query?: string;
   inspect?: ModelCall;
 };
-/** `POST /api/payoff`: one question, three answers, each with its receipts (payoff.py). */
+/** `POST /api/payoff`: one question, three answers, each with its sources (`receipts`; payoff.py). */
 export type PayoffResult = {
   question: string;
   /** What the shopper gave: a question alone, or a photo of one piece with it (Style recommendation). */
@@ -205,14 +205,14 @@ export type CatalogQuery = { query: string; k: number; vector: VectorPreview; hi
 export type RetrieverTemplates = {
   /** Stage 3a's statement before it runs (a placeholder where the question's vector goes). */
   anchor_query: string;
-  /** How 3a picks the anchors: the hits it asks for, how many it lists, the distance band it keeps. */
+  /** How 3a picks the starting garments (`anchors`): the hits it asks for, how many it lists, the distance band it keeps. */
   anchor: { candidates: number; shown: number; band: number };
-  /** Stage 3b's traversal, shown read-only: from the anchors to every look and what is worn with them. */
+  /** Stage 3b's traversal, shown read-only: from the starting garments to every look and what is worn with them. */
   traversal: string;
 };
 export type RetrieverPlan = { searches: string[]; why: string; inspect: { system: string; user: string; reply: string }; metrics: Record<string, number> };
 export type RetrieverAnchors = PayoffGuidance['anchor'] & {
-  /** The closest garments as the search returned them; `in_look` false: in no look (an article's garment), never an anchor. */
+  /** The closest garments as the search returned them; `in_look` false: in no look (an article's garment), never a starting garment. */
   candidates: { id: string; name: string; category: string; distance: number; in_look: boolean }[];
   /** How many of the closest garments were skipped because no look wears them. */
   unworn: number;
@@ -898,7 +898,7 @@ export const api = {
   query: (cypher: string, params: Record<string, unknown> = {}) => request<QueryResult>('POST', '/api/graph/query', { cypher, params }),
   graphAgent: (text: string, error: string | null, modelId: string, sessionId?: string) =>
     request<AgentResult>('POST', '/api/graph/agent', { text, error, model_id: modelId, session_id: sessionId }),
-  /** The explorer: the whole style DNA as one web (`details`: the attribute values too), and the openCypher that loaded it. */
+  /** The explorer: the whole graph of the brand's looks as one web (`details`: the attribute values too), and the openCypher that loaded it. */
   graphWeb: (details = false) => request<Web>('GET', `/api/graph/web${details ? '?details=1' : ''}`),
   graphCounts: (watch = 'white sneakers') => request<GraphCounts>('GET', `/api/graph/counts?watch=${encodeURIComponent(watch)}`),
   // tab 6 · the trends question: method 1 (the graph agent) and method 2 (the Iceberg tables and the data agent)

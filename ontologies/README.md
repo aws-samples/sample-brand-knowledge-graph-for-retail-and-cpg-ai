@@ -47,7 +47,7 @@ ontologies/
             ├── brand.json          optional
             ├── domain.json         optional: lists added to the domain's
             ├── <data files>        catalog format (brand.json, lines.json, items.json, looks.json,
-            │                       pairing_rules.json, articles.json) or style DNA format
+            │                       pairing_rules.json, articles.json) or graph-export format
             │                       (graph.json, vectors.json, catalog.json)
             ├── media/<sub>/        the data's own photos (looks/, products/), served by key
             └── examples/           optional, the same shape as the domain's examples/

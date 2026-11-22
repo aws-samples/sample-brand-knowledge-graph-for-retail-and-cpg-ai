@@ -76,7 +76,7 @@ export function garmentsOf(description: string): { name: string; n: number }[] {
 }
 
 export function Receipts({ kind, label }: { kind: string; label: string }) {
-  return <span className={`po-receipts po-receipts-${kind}`}>{kind === 'none' ? 'Receipts: none' : `Receipts: ${label}`}</span>;
+  return <span className={`po-receipts po-receipts-${kind}`}>{kind === 'none' ? 'Sources: none' : `Sources: ${label}`}</span>;
 }
 
 /** What exactly ran: prompts, messages, queries. Collapsed until opened. */
@@ -160,7 +160,7 @@ export function Chips({ items, kind = 'rag' }: { items: string[]; kind?: 'rag' |
 }
 
 /**
- * GraphRAG's receipts: the traversal tree. `active`: the selected evidence number (from the
+ * GraphRAG's sources: the traversal tree. `active`: the selected evidence number (from the
  * answer's citations or the evidence list), which lights its path; clicking a box selects the
  * evidence that ends there, or lights the box and its neighbours.
  */
@@ -278,11 +278,11 @@ function NodeDetail({ graph, id, sources, onPick }: { graph: GraphColumn; id: st
   }
   return (
     <aside className="po-detail">
-      <div className="po-detail-kind po-k-anchor">The way in · vector search</div>
+      <div className="po-detail-kind po-k-anchor">Starting garments · vector search</div>
       <p>
         <b>{g.anchor.garments.length}</b> “{g.anchor.label}” garments, the {g.anchor.category} nearest to the question, in <b>{n}</b> looks.
       </p>
-      <div className="po-inspect-label">the anchor garments (cosine distance to the question)</div>
+      <div className="po-inspect-label">the starting garments (cosine distance to the question)</div>
       <ul className="po-detail-list">
         {g.anchor.garments.slice(0, 12).map((x) => (
           <li key={x.id}>
@@ -328,7 +328,7 @@ export function GraphReceipts({ graph, domain, active, onActive, title, children
   };
   return (
     <div className="card">
-      <h3>{title ?? "GraphRAG's receipts: the traversal behind the answer"}</h3>
+      <h3>{title ?? "GraphRAG's sources: the looks behind the answer and the walk that found them"}</h3>
       <p className="muted small">Click a citation or an evidence line to light up its path back to the brand's looks. Click a box to see its details.</p>
       {children}
       <div className="po-receipts-grid">

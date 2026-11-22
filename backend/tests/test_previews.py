@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-"""The receipts tree and the graph views preview a node with the photo it came from (previews.py,
+"""The sources tree and the graph views preview a node with the photo it came from (previews.py,
 GET /api/graph/source), found by its own ``image_key``: one of the brand's stored photos, an
 example photo, or a photo uploaded in tab 2; otherwise what the graph itself holds."""
 

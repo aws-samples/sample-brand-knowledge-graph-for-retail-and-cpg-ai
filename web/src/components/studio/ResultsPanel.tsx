@@ -21,7 +21,7 @@ export function inputTokensText(m: Pick<ClassifyResult['metrics'], 'total_input_
 /**
  * Tab 1's results, in the pieces its steps use: the run tabs (one per model and caching setting,
  * when more than one ran), what came back for the run shown (step 3: the entities in the
- * ontology's words with what the check removed, the check, what the ontology could not express,
+ * ontology's terms with what the check removed, the check, what the ontology could not express,
  * and the prompt, the reply and the request behind expanders).
  */
 export function RunTabs({ runs, models, activeKey, onSelect }: { runs: RunRow[]; models: VisionModel[]; activeKey: string; onSelect: (key: string) => void }) {
@@ -58,7 +58,7 @@ export function RunDetails({
   const unknownKinds = result.entities.filter((e) => !e.class_iri).length;
   return (
     <>
-      <ResultSection title={`What ${result.model.name} found, in the ontology's words (${result.entities.length})`} first>
+      <ResultSection title={`What ${result.model.name} found, named with the ontology's terms (${result.entities.length})`} first>
         <PhotoProperties result={result} detail={detail} />
         <EntitiesTable result={result} detail={detail} removed={removed} />
       </ResultSection>
@@ -280,7 +280,7 @@ function FeedbackTable({ items }: { items: OntologyFeedback[] }) {
 }
 
 /**
- * The entities in the ontology's words, in step 1's colors (kinds and parts blue, details purple,
+ * The entities named with the ontology's terms, in step 1's colors (kinds and parts blue, details purple,
  * values green; not clickable). The check's removals are struck through in their row.
  */
 function EntitiesTable({ result, detail, removed }: { result: ClassifyResult; detail: OntologyDetail | null; removed: Record<string, Removed[]> }) {
@@ -293,7 +293,7 @@ function EntitiesTable({ result, detail, removed }: { result: ClassifyResult; de
           <tr>
             <th>Kind (the ontology&apos;s word)</th>
             <th>Label (the model&apos;s own words)</th>
-            <th>Details (the ontology&apos;s words)</th>
+            <th>Details (ontology terms)</th>
             <th>Parts</th>
             <th>Conf.</th>
           </tr>

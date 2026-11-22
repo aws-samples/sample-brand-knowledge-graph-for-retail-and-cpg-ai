@@ -25,7 +25,7 @@ export function subjectOf(question: string): string {
  * "Build the retriever": the catalog (a vector store of products), RAG on it, GraphRAG with the
  * participant's own traversal, then where that simple version breaks and the smart one. Each
  * stage unlocks when the one before it has run; changing the question restarts stages 2 to 5
- * (GraphRAG is three of them: the way in, the traversal, the answer; useGraphRetriever). All of it
+ * (GraphRAG is three of them: the starting garments, the traversal, the answer; useGraphRetriever). All of it
  * is kept across tab switches and reloads (keys.ts), so an answer is still there when you return.
  * The three answers side by side are the next tab, "Same question, three answers" (AskStylist).
  */
@@ -59,9 +59,10 @@ export function BuildRetriever({ domain }: { domain: string }) {
       <div className="card">
         <h2>Build the retriever</h2>
         <p className="muted">
-          Build the retrieval behind a style answer, one step at a time. You&apos;ll search the product catalog, build plain RAG on it, build GraphRAG yourself on the brand&apos;s style DNA, then see where
+          Build the retrieval behind a style answer, one step at a time. You&apos;ll search the product catalog, build plain RAG on it, build GraphRAG yourself on the brand&apos;s looks, then see where
           your simple version breaks and how a smarter one fixes it.
         </p>
+        <p className="muted tab-uses">Uses the graph and the product catalog. Feeds tab 5 with the smart retriever of stage 6.</p>
         <div className="row po-ask">
           <input className="po-question" value={draft} onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && ask(draft)} aria-label="the customer's question" />
           <button onClick={() => ask(draft)} disabled={!draft.trim()}>
@@ -96,19 +97,19 @@ export function BuildRetriever({ domain }: { domain: string }) {
         <StageRag domain={domain} question={question} onDone={setSearches} />
       </Stage>
 
-      <Stage n={3} title="GraphRAG, the way in: vector search on the graph" sub="Find the garments in the brand's looks that the question is about." locked={searches ? null : 'Get a RAG answer in stage 2 first.'} done={g.anchors.status === 'done'}>
+      <Stage n={3} title="GraphRAG, the starting garments: vector search on the graph" sub="Find the garments in the brand's looks that the question is about." locked={searches ? null : 'Get a RAG answer in stage 2 first.'} done={g.anchors.status === 'done'}>
         <StageWayIn g={g} />
       </Stage>
 
-      <Stage n={4} title="Walk the graph" sub="The traversal from those garments to every look and what is worn with them." locked={g.anchors.status === 'done' ? null : 'Find the way in in stage 3 first.'} done={g.ready}>
+      <Stage n={4} title="Walk the graph" sub="The traversal from those garments to every look and what is worn with them." locked={g.anchors.status === 'done' ? null : 'Find the starting garments in stage 3 first.'} done={g.ready}>
         <StageWalk g={g} />
       </Stage>
 
-      <Stage n={5} title="GraphRAG's answer, with receipts" sub="The brand's taste through the same catalog search as RAG." locked={g.ready ? null : 'Run the traversal in stage 4 first.'} done={!!cypher}>
+      <Stage n={5} title="GraphRAG's answer, with sources" sub="The brand's taste through the same catalog search as RAG." locked={g.ready ? null : 'Run the traversal in stage 4 first.'} done={!!cypher}>
         <StageAnswer g={g} domain={domain} onDone={setCypher} />
         <InCpg>
           <p>
-            &ldquo;What goes with this vitamin C serum?&rdquo; takes the same way in (the closest products in the brand&apos;s regimens) and the same walk (every regimen it is in, and what else is in
+            &ldquo;What goes with this vitamin C serum?&rdquo; takes the same starting products (the closest products in the brand&apos;s regimens) and the same walk (every regimen it is in, and what else is in
             them). A catalog search alone would return more serums.
           </p>
         </InCpg>
@@ -119,7 +120,7 @@ export function BuildRetriever({ domain }: { domain: string }) {
       </Stage>
       <NextTab to="stylist">
         <p>
-          Ask the white sneakers question from tab 0 again, and see three answers side by side (the model on its own, RAG, and GraphRAG with the smart retriever), with the receipts behind each.
+          Ask the white sneakers question from tab 0 again, and see three answers side by side (the model on its own, RAG, and GraphRAG with the smart retriever), with the sources behind each.
         </p>
       </NextTab>
     </div>

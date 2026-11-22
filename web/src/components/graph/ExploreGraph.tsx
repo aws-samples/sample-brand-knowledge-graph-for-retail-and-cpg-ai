@@ -13,7 +13,7 @@ import { loadStoredPhoto } from '../shared/StoredPhoto';
 import { GraphWeb, WEB_COLORS } from './GraphWeb';
 import { adjacency, describe, lightUp, search, type Web } from './webView';
 
-// The style DNA (what the brand's looks are made of) and the ontology (the vocabulary), as labels.
+// The brand's looks (what they are made of) and the ontology (the vocabulary), as labels.
 const DNA = ['Look', 'Item', 'Occasion', 'Article', 'Statement', 'Brand'];
 const LABEL_NAME: Record<string, string> = { Item: 'garments', Look: 'looks', Occasion: 'occasions', Article: 'articles', Statement: 'statements', Brand: 'brand', Category: 'categories', Attribute: 'details (attribute values)', AttributeFamily: 'attribute families', Group: 'groups' };
 const KIND: Record<string, string> = { Look: 'Look', Item: 'Garment', Category: 'Kind of garment', Occasion: 'Occasion', Attribute: 'Detail', Statement: 'Text about a look', Article: 'Article' };
@@ -29,7 +29,7 @@ async function photoOf(domain: string, key: string | null): Promise<string | nul
 }
 
 /**
- * "Explore the graph": the whole style DNA, the brand's lookbook and what tab 2 added. Three
+ * "Explore the graph": the whole graph, the brand's lookbook and what tab 2 added. Three
  * steps: what the graph holds (looks and garments next to the ontology's vocabulary); the web
  * (every look, garment, kind of garment, occasion and text as one graph: search a garment or click
  * a node and what it connects lights up); query it yourself, in openCypher or in plain words (the
@@ -122,14 +122,15 @@ export function ExploreGraph({ domain, dataVersion }: { domain: string; wording:
           You saw one photo become nodes in tab 1, and a batch of them land in tab 2. This tab is the whole graph: the brand&apos;s lookbook and everything you added. See what it holds, explore it as one
           web of relationships, then query it yourself, in openCypher or in plain words.
         </Lead>
+        <p className="muted tab-uses">Uses the graph, with the looks tab 2 added.</p>
         {error && <p className="error">{error}</p>}
       </div>
 
       {/* ------------------------------------------------------------ 1. what the graph holds */}
-      <Stage n={1} title="What the graph holds" sub="The brand's style DNA and the ontology's vocabulary, in one graph." locked={null} done={!!summary}>
+      <Stage n={1} title="What the graph holds" sub="The brand's looks and the ontology's vocabulary, in one graph." locked={null} done={!!summary}>
         {summary ? (
           <>
-            <div className="po-sec-label">The style DNA: what the brand&apos;s looks are made of</div>
+            <div className="po-sec-label">The brand&apos;s looks: what they are made of</div>
             <dl className="counts">
               {dna.map((l) => (
                 <div key={l} className="count">

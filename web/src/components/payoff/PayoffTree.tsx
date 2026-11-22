@@ -10,7 +10,7 @@ import { safeImageUrl } from './safeImage';
 /** The kinds' colors, the evidence tree's palette (Garment, Look, Category, Item). */
 const COLOR = { anchor: '#c7158a', look: '#0d7f8f', category: '#0972d3', item: '#ff9900' } as const;
 const HEADINGS = {
-  anchor: '1 · vector search: the way in',
+  anchor: '1 · vector search: the starting garments',
   look: '2 · every look they are in',
   category: '3 · worn with them, in how many looks',
   item: '4 · the same catalog search',
@@ -24,7 +24,7 @@ function cut(text: string, max: number): string {
 }
 
 /**
- * GraphRAG's receipts: the traversal behind the answer, drawn. `lit`: the nodes the selected
+ * GraphRAG's sources: the traversal behind the answer, drawn. `lit`: the nodes the selected
  * evidence line points at (everything else dims); `thumbs`: look photos by node id, loaded lazily.
  */
 export function PayoffTree({
@@ -93,7 +93,7 @@ export function PayoffTree({
 
   return (
     <div className="po-canvas">
-      <svg viewBox={`0 0 ${layout.width} ${layout.height}`} width="100%" style={{ minWidth: 760 }} role="img" aria-label="GraphRAG's traversal: anchor garments, their looks, what is worn with them, and catalog items">
+      <svg viewBox={`0 0 ${layout.width} ${layout.height}`} width="100%" style={{ minWidth: 760 }} role="img" aria-label="GraphRAG's traversal: the starting garments, their looks, what is worn with them, and catalog products">
         {layout.columns.map((col) => (
           <text key={col.kind} x={col.x} y={12 + HEADER_H / 2} className="po-heading">
             {HEADINGS[col.kind]}

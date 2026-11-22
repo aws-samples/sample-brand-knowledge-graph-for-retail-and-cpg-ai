@@ -41,7 +41,7 @@ function radius(n: GNode): number {
 const idOf = (end: string | GNode) => (typeof end === 'string' ? end : end.id);
 
 /**
- * The style DNA as one web (react-force-graph-2d): every look, garment, kind of garment, occasion
+ * The brand's looks as one web (react-force-graph-2d): every look, garment, kind of garment, occasion
  * and text, and with details the attribute values. `lit` is what to light up (a click or a search);
  * the rest fades. Lit looks show their photo (`photoOf`, loaded as data URLs). Clicking a node calls
  * `onPick`; clicking the background clears.

@@ -249,6 +249,7 @@ export function LensesTab({ domain, health, dataVersion }: { domain: string; hea
           Until now one person asked the graph one kind of question: a shopper, asking what goes with a piece. But the graph holds the brand&apos;s whole style, counted and connected. This tab keeps
           the same graph and changes who is asking.
         </Lead>
+        <p className="muted tab-uses">Uses the graph. Methods 1 and 2 of the trends question need the new shoot of tab 2.</p>
         <ol className="po-intro-steps">
           <li>
             <b>Pick who is asking:</b> the buyer, the merchandiser or the creative director.
@@ -361,7 +362,7 @@ export function LensesTab({ domain, health, dataVersion }: { domain: string; hea
           <GoodToKnow title="Pieces, not categories">
             <p>
               The ontology&apos;s kinds are broad: &quot;shoe&quot; is in almost every look. So this counts finer pieces (sneakers, loafers, a blazer…). Each piece finds its garments two ways: the
-              way tab 4 finds its way in (its words embedded, a vector search on the graph&apos;s garments, everything within 0.10 of the closest), and the garments whose name says the piece, if
+              way tab 4 finds its starting garments (its words embedded, a vector search on the graph&apos;s garments, everything within 0.10 of the closest), and the garments whose name says the piece, if
               they are in the same ontology category (a tote &quot;with ring hardware&quot; is not a ring). In production you would add these pieces to the ontology as subclasses.
             </p>
           </GoodToKnow>

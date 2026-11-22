@@ -1,6 +1,6 @@
 # Data set "tiny" (test fixture)
 
-A data set of the fashion domain in the style DNA format, small enough to read in full: the
+A data set of the fashion domain in the graph-export format, small enough to read in full: the
 fictional brand Tiny, one occasion, two looks and three garments (`graph.json`, vectors of
 dimension 8 in `vectors.json`), one catalog row (`catalog.json`), two example photos
 (`examples/images/h1.jpg` from the new shoot, `examples/images/nw1.jpg` marked as new work), one

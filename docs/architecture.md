@@ -194,11 +194,11 @@ models.py       the catalog's dataclasses (Item, Look, PairingRule, Article, Sta
 embeddings.py   Nova / Mock, INDEX vs *_RETRIEVAL purposes
 loader.py       MERGE ontology (with its vocabulary values) + catalog (each look linked to its occasion), upsert vectors     graph/  store protocol, neptune
                 (openCypher), memory (the tests), cypher statements
-dna.py          a style DNA export (graph.json, vectors.json, catalog.json) MERGEd at deploy with the vectors it ships, no model call
+dna.py          a graph export (graph.json, vectors.json, catalog.json) MERGEd at deploy with the vectors it ships, no model call
 payoff.py       tabs 4 and 5: the catalog index (index_data_set, catalog_info / catalog_browse / catalog_item / catalog_query, catalog_search), RAG
                 (PLANNER_SYSTEM, plan, rag), GraphRAG (find_anchors, TRAVERSAL, traverse, aggregate, graphrag), the smart retriever (understand,
-                choose, smart_graphrag), the photo way in (photo_graphrag), LLM only, the three side by side (run); one answer prompt
-previews.py     the receipts tree's previews: the photo a node names (a data set's, an example, a tab 2 upload), origins_of for a vocabulary node
+                choose, smart_graphrag), the starting garments from a photo (photo_graphrag), LLM only, the three side by side (run); one answer prompt
+previews.py     the sources tree's previews: the photo a node names (a data set's, an example, a tab 2 upload), origins_of for a vocabulary node
 look.py         a photo's garments in the graph's vocabulary (no route calls it; test_look.py does)
 trends.py       tab 6's trends question, methods 1 and 2: the new items against the catalog (_items), the graph agent's question (AGENT_QUESTION) and its job,
                 the data agent's question (LAKE_QUESTION), the groups counted again from the agents' rows (groups_from_rows), lift
@@ -232,7 +232,7 @@ Design constraints:
   semantics, so the test suite runs offline and deterministically.
 * **Explicit evidence.** RAG and GraphRAG return numbered evidence rows (`n`, `kind`, `label`,
   `text`, `tree_ids`); the model sees the numbered lines and must cite them. The UI renders a
-  citation as the product it came from (RAG) or as its path in the receipts tree (GraphRAG).
+  citation as the product it came from (RAG) or as its path in the sources tree (GraphRAG).
 
 ## Request flows
 
@@ -260,9 +260,9 @@ Design constraints:
 
 **The catalog index** (`payoff.py`; filled at deploy only)
 1. at deploy, `Service._load_set` calls `payoff.index_data_set` for every data set, after the
-   graph: a style DNA set's `catalog.json` goes in as it is (`put_catalog_vectors`, its precomputed
-   vectors, the dimension checked first, no model call); a catalog-format set's `items.json` is
-   embedded from text (`index_catalog_items`, then `index_catalog`: each product's
+   graph: a graph-export set's `catalog.json` goes in as it is (`put_catalog_vectors`, its
+   precomputed vectors, the dimension checked first, no model call); a catalog-format set's
+   `items.json` is embedded from text (`index_catalog_items`, then `index_catalog`: each product's
    `catalog_text`, embedded with Nova `INDEX`, 6 workers)
 2. `PutVectors` 200 at a time, key the product id (a second run overwrites); `index_catalog` writes
    the metadata `product_id`, `name` (`catalog_name`), `category`, `type`, `color`, `image_key` and `text`
@@ -290,29 +290,32 @@ Design constraints:
    products of the kind the search names (its head noun), names de-duplicated, so at most 18
    products. The evidence lines are `[n] Item: <name>. <text>`, and `_answer` writes the cited
    answer with `ANSWER_SYSTEM`, the prompt GraphRAG uses too. Evidence rows `kind: "item"` with
-   the search that found them, the distance and the `image_key`; receipts "N catalog items (they
-   exist; nothing says they go together)"; `inspect` carries the planner prompt as well
+   the search that found them, the distance and the `image_key`; sources (`receipts`) "N catalog
+   products (they exist; nothing says they go together)"; `inspect` carries the planner prompt as
+   well
 3. GraphRAG, the participant's version: `find_anchors` embeds the question and runs
-   `topK.byEmbedding` over the graph's garments (`ANCHOR_CANDIDATES`), the anchors are the garments
-   worn in a look within `ANCHOR_BAND` of the closest such garment; `traverse` runs `TRAVERSAL` (from the anchors
-   to every look that `CONTAINS` them, its `FOR` occasion, the other garments with their category
+   `topK.byEmbedding` over the graph's garments (`ANCHOR_CANDIDATES`); the starting garments (the
+   `anchors` of the API) are the garments worn in a look within `ANCHOR_BAND` of the closest such
+   garment; `traverse` runs `TRAVERSAL` (from the starting garments to every look that `CONTAINS`
+   them, its `FOR` occasion, the other garments with their category
    and attributes; read-only, an edited query checked by `clean_cypher`); `aggregate` counts it per
    kind of garment; `graphrag` turns the occasions and the "worn with" counts into style patterns,
    features three of the looks, matches up to four of their pieces (one per kind, `LOOK_PIECES`) to
    one product each with `catalog_search` on the catalog index (a piece with no hit stays
    unmatched) and answers with `ANSWER_SYSTEM`. The response carries the evidence, the
-   featured looks and the receipts tree
+   featured looks and the sources tree
 4. the smart retriever (`smart_graphrag`, stage 6 and tab 5): `understand` (one model call: the
    start pieces, what is looked for, the words that must match), `choose` (one model call per start
    piece: the closest garments graded exact, similar or no), then the same traversal with a filter
-   that keeps only the kind looked for. With a photo (`photo_graphrag`) the photo's embedding is
-   the way in, the traversal is the same, and `understand` gives only what is looked for
+   that keeps only the kind looked for. With a photo (`photo_graphrag`) the photo's embedding
+   finds the starting garments, the traversal is the same, and `understand` gives only what is
+   looked for
 5. `POST /api/payoff` → `payoff.run`: LLM only, RAG (the participant's edited `searches` when
    given, else the planner's; with a photo, the planner and the answer see it) and GraphRAG (the
    smart retriever; the photo's with a photo; the simple one with a participant's `cypher`) in
    three threads, with one answer model (`ANSWER_MODEL_IDS`, default `LLM_MODEL_ID`). Only
-   GraphRAG embeds the photo, for its way in
-6. `GET /api/graph/source?id=<node>&domain=<ontology>&near=` (`previews.py`): what the receipts
+   GraphRAG embeds the photo, to find its starting garments
+6. `GET /api/graph/source?id=<node>&domain=<ontology>&near=` (`previews.py`): what the sources
    tree shows next to a box. The node is read from the graph, and only the photo its `image_key`
    names is read: a data set's photo (`<set>/<sub>/<file>`, in the set's `media/<sub>/`), an
    example photo of the domain's or a set's `examples/images/` (`example:<file>`) or a tab 2
@@ -652,7 +655,7 @@ the data bucket under data/, all expiring after 30 days.
 
 Deploy time: the ontologies/ folder is uploaded to the data bucket and the web build to the site bucket
 (BucketDeployment, from CDK assets); then Custom::GraphLoader (Lambda) reads from the bucket and loads the ontology and
-every data set of the graph's domain into the graph (catalog-format sets with embeddings computed at deploy, style-DNA
+every data set of the graph's domain into the graph (catalog-format sets with embeddings computed at deploy, graph-export
 sets as exported, no model call) and the sets' products into the catalog index (S3 Vectors); Custom::AuthSetup
 (Lambda) sets the generated password on the Cognito user.
 ```

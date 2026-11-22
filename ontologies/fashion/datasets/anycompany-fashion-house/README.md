@@ -21,7 +21,7 @@ are more photos of the same lookbook and catalog; the deploy does not load them.
 
 ## Where it comes from
 
-This look is `look:58f0a33d` of a larger synthetic AnyCompany Fashion House set in the style DNA format,
+This look is `look:58f0a33d` of a larger synthetic AnyCompany Fashion House set in the graph-export format,
 converted to the catalog format so the deploy embeds it with the stack's own embedding model and
 dimension. Ids, names, categories, attributes and the photo key are the export's. Three things
 changed:

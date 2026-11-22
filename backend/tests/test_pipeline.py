@@ -112,7 +112,11 @@ def test_run_classifies_photos_and_texts_and_merges_them_into_the_graph(loaded_s
     )
     assert run["ontology_id"] == "fashion" and run["line_id"] == "line:utility"
     # the run input carries names and keys, never bytes
-    assert run["sources"][0] == {"index": 0, "kind": "image", "example": "01-trench-coat-sweater-dress.jpg"}
+    assert run["sources"][0] == {
+        "index": 0,
+        "kind": "image",
+        "example": "01-trench-coat-sweater-dress.jpg",
+    }
     assert (
         run["sources"][2]["key"].startswith(f"uploads/{run['run_id']}/02")
         and "text" not in run["sources"][2]
@@ -232,7 +236,10 @@ def test_start_validates_the_request(loaded_service):
     bad = [
         ({}, "sources"),
         ({"sources": []}, "sources"),
-        ({"sources": [{"kind": "image", "example": "01-trench-coat-sweater-dress.jpg"}]}, "model_id"),
+        (
+            {"sources": [{"kind": "image", "example": "01-trench-coat-sweater-dress.jpg"}]},
+            "model_id",
+        ),
         ({"model_id": TEST_MODEL, "sources": [{"kind": "video", "example": "x"}]}, "kind"),
         (
             {"model_id": TEST_MODEL, "sources": [{"kind": "image", "example": "nope.jpg"}]},
@@ -474,7 +481,8 @@ def test_ingest_keeps_only_what_the_ontology_knows(bedrock_service):
     # the text became an Article with one Statement illustrating the item
     art = svc.node(compact["article"])
     assert (
-        art["props"]["source"] == "AnyCompany Fashion House Journal" and art["props"]["published"] == "2026-09-14"
+        art["props"]["source"] == "AnyCompany Fashion House Journal"
+        and art["props"]["published"] == "2026-09-14"
     )
 
 
@@ -767,9 +775,20 @@ def test_a_run_without_a_line_gets_none_even_when_the_graph_has_lines(loaded_ser
     assert loaded_service.store.get_nodes("Line", 1)  # the graph has lines
     run = _start(
         loaded_service,
-        [{"kind": "text", "title": "No line", "text": POST + " A grey wool coat.", "source": "test"}],
+        [
+            {
+                "kind": "text",
+                "title": "No line",
+                "text": POST + " A grey wool coat.",
+                "source": "test",
+            }
+        ],
     )
     assert run["line_id"] == ""
     assert _wait(loaded_service, run["run_id"])["status"] == "SUCCEEDED"
-    items = [i for i in loaded_service.store.get_nodes("Item", 5000) if i.props.get("run") == run["run_id"]]
+    items = [
+        i
+        for i in loaded_service.store.get_nodes("Item", 5000)
+        if i.props.get("run") == run["run_id"]
+    ]
     assert items and all(not i.props.get("line") for i in items)

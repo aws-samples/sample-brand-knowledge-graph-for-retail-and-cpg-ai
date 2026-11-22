@@ -1,7 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
-"""The style DNA files (dna.py): that they load into the graph as they are."""
+"""The graph export files (dna.py): that they load into the graph as they are."""
 
 import json
 import shutil

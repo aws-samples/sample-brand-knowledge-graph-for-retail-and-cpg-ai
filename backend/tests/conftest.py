@@ -18,7 +18,9 @@ from ontology_rag.service import Service
 REPO = Path(__file__).resolve().parents[2]
 ONTOLOGIES = REPO / "ontologies"
 ONTOLOGY = ONTOLOGIES / "fashion" / "fashion.ttl"
-VELLOWAY = ONTOLOGIES / "fashion" / "datasets" / "anycompany-apparel"  # the sample's own data set (synth.py)
+APPAREL = (
+    ONTOLOGIES / "fashion" / "datasets" / "anycompany-apparel"
+)  # the sample's own data set (synth.py)
 # A second data set of the fashion domain, small enough to read (fixtures/sets/tiny/README.md).
 TINY = Path(__file__).resolve().parent / "fixtures" / "sets" / "tiny"
 

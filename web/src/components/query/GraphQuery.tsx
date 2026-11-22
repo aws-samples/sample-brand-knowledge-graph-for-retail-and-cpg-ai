@@ -211,7 +211,7 @@ export function GraphQuery({
             <>
               <p className="small">
                 Every garment also has a vector: its name and details embedded by Amazon Nova, stored in the same Neptune Analytics graph. 3a followed links, which is exact. Vector search finds the
-                garments closest in meaning, which is similar, not exact. It is how GraphRAG finds its way into the graph in tab 4.
+                garments closest in meaning, which is similar, not exact. It is how GraphRAG finds its starting garments in tab 4.
               </p>
               <YourTurn>
                 <ol className="po-intro-steps">
@@ -220,7 +220,7 @@ export function GraphQuery({
                     blazers come back too: close in meaning, the color is not a filter.
                   </li>
                   <li>
-                    Run <b>Vector search, then the graph</b>: the same search, then one hop to the looks those garments are in. Vector search finds the way in, the graph does the rest.
+                    Run <b>Vector search, then the graph</b>: the same search, then one hop to the looks those garments are in. Vector search finds the starting garments, and the graph walk does the rest.
                   </li>
                 </ol>
               </YourTurn>

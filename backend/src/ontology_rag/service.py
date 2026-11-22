@@ -49,7 +49,7 @@ log = logging.getLogger(__name__)
 # Centres of one subgraph walk (``explore``, ``run_graph``): the statement unwinds the ids and
 # walks ``hops`` edges from each, so its cost grows with every id a request names.
 MAX_EXPLORE_IDS = 100
-# The explorer tab's web: the brand's style DNA as one graph (looks, their garments, the kinds and
+# The explorer tab's web: the brand's looks as one graph (looks, their garments, the kinds and
 # occasions they share, the journal's statements), and with ``details`` the attribute values too.
 # Every occasion of the ontology is in the graph; the web draws only those with a look.
 WEB_NODES = """MATCH (n) WHERE n:Look OR n:Item OR n:Category OR n:Statement OR n:Article
@@ -473,7 +473,7 @@ class Service:
     # ------------------------------------------------------------------ loading
     def load_sample(self, reset: bool = False, with_embeddings: bool = True) -> dict:
         """The ontology, then every data set of the graph's domain
-        (``ontologies/<id>/datasets/<set>/``), MERGEd into one graph: a style DNA export
+        (``ontologies/<id>/datasets/<set>/``), MERGEd into one graph: a graph export
         (``graph.json``: its nodes and stored vectors, no model call) or a catalog (``items.json``
         and the files next to it, embedded here). Each set's products also go into the catalog
         index when a vector bucket is configured (payoff.index_data_set; a catalog's only with
@@ -511,7 +511,7 @@ class Service:
     def _load_set(self, folder: Path, with_embeddings: bool) -> dict:
         """One data set into the graph, then its products into the catalog index."""
         if (folder / dna.GRAPH_FILE).exists():
-            # A brand's style DNA, exported once (dna.py): MERGE plus the stored vectors, and the
+            # A brand's looks, exported once (dna.py): MERGE plus the stored vectors, and the
             # catalog index from its file. No model is called for the graph.
             loaded = dna.load(self.store, folder, self.settings.embedding_dimension)
             counts = {**loaded["nodes"], "vectors": loaded["vectors"]}
@@ -528,7 +528,7 @@ class Service:
 
     def _brand_text(self, folder: Path) -> None:
         """A set's ``brand.json`` gives its Brand node the description, whatever the set's format
-        (a style DNA export carries the brand's name only)."""
+        (a graph export carries the brand's name only)."""
         path = folder / "brand.json"
         if not path.exists():
             return
@@ -619,7 +619,7 @@ class Service:
 
     def graph_web(self, details: bool = False) -> dict:
         """The explorer's web (WEB_NODES, WEB_EDGES; with ``details`` WEB_DETAILS and the attribute
-        nodes): every node and edge of the style DNA in one response, and the statements that ran,
+        nodes): every node and edge of the brand's looks in one response, and the statements that ran,
         so the tab can show them. Edges only between nodes it returns."""
         try:
             nodes = self.store.query(WEB_NODES, {})

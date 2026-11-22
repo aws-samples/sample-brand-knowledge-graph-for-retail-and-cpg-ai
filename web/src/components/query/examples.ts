@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 /**
- * Starting points for the query console of the explorer tab (written for the brand's style DNA:
+ * Starting points for the query console of the explorer tab (written for the brand's looks:
  * looks, their garments, occasions and the journal articles linked to them). `cypher` runs as is;
  * `broken` fails on Neptune on purpose (a typo, a Neo4j-only procedure) so the agent has something
  * to fix; `question` is plain words, which Neptune cannot parse, so the agent writes the query;

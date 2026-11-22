@@ -51,10 +51,10 @@ that ran. [docs/tabs.md](docs/tabs.md) walks through each tab.
   graph. The tab shows the batch, the counts before and after, and the graph the run wrote.
 * **3 · Explore the graph.** The whole graph as one web, and questions in plain words answered by an
   agent that writes openCypher through the Amazon Neptune MCP server.
-* **4 · Build the retriever.** The catalog search, RAG with searches the model plans, the way into
-  the graph by vector search, the traversal and GraphRAG's answer, stage by stage.
+* **4 · Build the retriever.** The catalog search, RAG with searches the model plans, the starting
+  garments found by vector search on the graph, the traversal and GraphRAG's answer, stage by stage.
 * **5 · Same question, three answers.** One question, or a photo, answered by a model on its own, by
-  RAG and by GraphRAG with the same model, side by side with their receipts.
+  RAG and by GraphRAG with the same model, side by side with their sources.
 * **6 · What else the graph knows.** The same graph for a buyer, a merchandiser and a creative
   director, and three ways to find this season's emerging trends.
 
@@ -153,7 +153,7 @@ aws secretsmanager get-secret-value --secret-id <SignInPasswordSecret> --query S
 1. Open the `SiteUrl` output and sign in on the Cognito page. The header shows *signed in as* and the
    user's email, and tab 0 lists the stack's resources.
 2. In tab 5, choose *Ask all three* with the default question. Three answers appear side by side,
-   each with its receipts. GraphRAG's receipts draw the traversal behind its citations.
+   each with its sources. GraphRAG's sources draw the traversal behind its citations.
 3. `curl -i <ApiUrl>api/health` (the output ends with a slash) returns `403` with
    `{"Message":"Forbidden"}`. The function URL runs the API only for requests signed by the
    signed-in user's role.
@@ -263,7 +263,7 @@ backend/      Python package and tests: the API, the pipeline steps, retrieval, 
 infra/        CDK app and tests
 web/          React app; web/figures/ renders the figures in assets/
 docs/         the pages listed above
-assets/       the figures of this README and the docs
+assets/       the figures of this README and the docs; assets/tabs/ has two per tab
 ```
 
 `make test` runs every suite offline, and `make scan` runs the secret, static-analysis and

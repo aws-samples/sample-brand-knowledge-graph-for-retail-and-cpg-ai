@@ -16,25 +16,55 @@ step again replaces its answer. Signing out clears all of it; so does closing th
 
 ## 0 · Start here
 
-The app opens on this tab, in six numbered steps, then the way into tab 1.
+The app opens on this tab, in six numbered steps, then the link to tab 1.
 
 1. **One question, asked to a model on its own.** The white sneakers question ("What should I wear
    with white sneakers?") goes to the answer model with no brand behind it (`POST
    /api/retriever/llm`, the same call as tab 5's first column), then what to notice. The answer is
    kept for the browser tab, so it is still there after a visit to another tab. Come back while the
    model is still answering, and the step shows "Asking…", then the answer when it lands.
-2. **What you'll build, and why**, with **Meet the brand**: the brands in the graph, from the
-   `Brand` nodes `GET /api/summary` returns (`brands`: name and description, sorted by name). The
-   title is "Meet the brand: <name>", or "Meet the brands: <a> and <b>" with several. Each brand's
-   description comes from its data set's `brand.json`. The box adds the looks counted in the graph
-   and the products in the catalog index, a sentence on the new shoot only when the domain has
-   example photos marked `"batch": "new-shoot"` (with their count), and one on how the photos
-   were made only when the domain has example photos. A count not read yet is left out; no name or
-   count is written in the code.
-3. **The tabs, one after another**: what you do in each tab and the point it makes (click a row to
-   open that tab), then what you take away.
+2. **Shop it yourself.** The shopper's problem, felt before any technology is named. Four requests
+   a shopper might type into a product search, as buttons in this order: "What goes with white
+   sneakers?", "A sleeveless dress, not black", "A trench over denim", "A blue shirt with a white
+   collar". Choosing one runs the catalog's similarity search on the deployed catalog (`POST
+   /api/catalog/search {query, k: 6}`, the read-only search tab 4's stage 1 opens up) and lists the
+   six nearest products: name, kind and colour, with the product photo when the catalog has one
+   (`image_key`; the sample's own text catalog has none). Under the list, one fixed line per
+   request says what the shopper wanted and what came back (an outfit, and more white shoes; a
+   colour ruled out, and how many of the products are black anyway; two pieces in one order, and
+   the two words matched apart; a colour per part, and shirts in one colour each). The lines are
+   written in the component (`web/src/components/setup/ShopItYourself.tsx`), not by a model; only
+   the second one reads the results, because the number of black pieces depends on the catalog. The results of all
+   four requests and the request on show are kept for the browser tab; the step counts as done
+   once one request ran, and a failed search shows its error and keeps the line.
+
+   Once a request ran, the step gives the business problem (*What to notice*): the brand's
+   stylists chose the pairings in every look they shot, that knowledge sits in photos nothing can
+   query, and a larger embedding model does not close the gap, with the three sources as links
+   (SugarCrepe on attribute binding, NegBench on negation, RAGSearch on multi-hop questions).
+   Then *Good to know: Three terms* defines taxonomy (the tree of kinds), ontology (the taxonomy
+   plus the details, values, relations and rules: the fixed list of words the vision model has to
+   use) and graph data (the brand's looks and garments as nodes and edges in those words), and one
+   sentence teases tab 1 (the ontology the photos are read with) and tabs 2 and 3 (the graph built
+   from them, and shown).
+3. **What you'll build**: the graph (a vision model on Amazon Bedrock describes each look photo
+   with the ontology's terms only; an AWS Step Functions pipeline stores every look, its garments
+   and its occasion in Amazon Neptune Analytics; GraphRAG answers from those looks, and the graph
+   is a new data source), a three-row table **The same question, three answers** (LLM only, RAG,
+   GraphRAG: who chose what to suggest, and what each can show you), and **Meet the brand**: the
+   brands in the graph, from the `Brand` nodes `GET /api/summary` returns (`brands`: name and
+   description, sorted by name). The title is "Meet the brand: <name>", or "Meet the brands: <a>
+   and <b>" with several. Each brand's description comes from its data set's `brand.json`. The box
+   adds the looks counted in the graph and the products in the catalog index, a sentence on the
+   new shoot only when the domain has example photos marked `"batch": "new-shoot"` (with their
+   count), and one on how the photos were made only when the domain has example photos. A count
+   not read yet is left out; no name or count is written in the code. The step closes with **The
+   tabs, one after another**: what you do in each tab and the point it makes (click a row to open
+   that tab), then what you take away.
 4. **How to read every tab**: the numbered steps, the callouts (*Your turn*, *What to notice*,
-   *Good to know*, *In CPG*), the *Inspect* and *How it works* expanders and the optional parts.
+   *Good to know*, *In CPG*), the *Inspect* and *How it works* expanders (open *How it works* as
+   you go: the AWS services behind the step as a numbered diagram, with the code of each step) and
+   the optional parts.
 5. **Same shape, another aisle**: the same graph for beauty, home and food (what the brand shows,
    one piece in it, what it is for, the curatorial rule), with a link to tab 1, step 4, where the
    three browse-only ontologies are.
@@ -43,6 +73,9 @@ The app opens on this tab, in six numbered steps, then the way into tab 1.
    anything (`GET /api/setup`, `backend/src/ontology_rag/setup.py`; the routes `POST /api/setup/*`
    are gone and answer 404). A checklist on top shows the domain, the graph, the query agent and
    the product catalog at a glance.
+
+The closing line says the app guides you with numbered steps, so you can follow it without the
+workshop guide; the guide explains the ideas behind each tab when you want more.
 
 The cards of step 6:
 
@@ -280,10 +313,10 @@ after a day and run records after a week (S3 lifecycle rules).
 
 The whole graph: the brand's lookbook and everything tab 2 added, in three steps.
 
-1. **What the graph holds**: the node counts from `GET /api/summary`, the style DNA (brands, looks,
-   garments, occasions, articles and their statements) apart from the rest (the ontology's groups,
-   categories, attribute families and values, and the product lines), and the number of looks added
-   in tab 2.
+1. **What the graph holds**: the node counts from `GET /api/summary`, the brand's looks (brands,
+   looks, garments, occasions, articles and their statements) apart from the rest (the ontology's
+   groups, categories, attribute families and values, and the product lines), and the number of
+   looks added in tab 2.
 2. **The web: every look, connected** (`GET /api/graph/web`): every look and every garment in
    them as one graph, with the kinds of garment and the occasions that have a look (an occasion no
    look is for is left out). Search a garment (*white sneaker*, *black blazer*, *gold hoop*) and
@@ -348,7 +381,7 @@ Two stores, one job each:
 | Store | What it holds | Who reads it |
 |---|---|---|
 | the catalog index (Amazon S3 Vectors, `catalog`) | the products the shop sells, embedded from their text (`payoff.catalog_name`, `payoff.catalog_text`); no styling knowledge, no price. In production this is the retailer's product search (often OpenSearch) | RAG and GraphRAG, through the same catalog search |
-| the graph (Neptune Analytics) and its vector index | the style DNA: looks, the garments in them in the ontology's vocabulary, their occasions (a catalog set's products are in it as items) | GraphRAG |
+| the graph (Neptune Analytics) and its vector index | the brand's looks: each look, the garments in it named with the ontology's terms, its occasion (a catalog set's products are in it as items) | GraphRAG |
 
 1. **The catalog: a vector store of products.** What the index holds (`GET /api/catalog`: the
    index, how many products, their dimension, the distance metric and the embedding model), a
@@ -358,7 +391,7 @@ Two stores, one job each:
    route, default 6): the search embedded, its vector shown, the nearest products with their
    cosine distance. A search for white sneakers returns more white sneakers. No answer: this is
    what similarity search returns. The graph loader fills the index at deploy, one data set after
-   the other: a style DNA set's `catalog.json` as it is (precomputed vectors), or a
+   the other: a graph-export set's `catalog.json` as it is (precomputed vectors), or a
    catalog-format set's `items.json` embedded from text.
 2. **RAG: real products, the model's taste.** *Plan the searches* (`POST /api/retriever/plan`):
    the model reads the question and plans 3 to 6 catalog searches from its own taste
@@ -370,23 +403,24 @@ Two stores, one job each:
    de-duplicated, so up to 18 products. The model answers from those, citing lines of the form
    `[n] Item: <name>. <text>`. The result shows the searches, the products with the search that
    found them and their distance, the answer with its citations and, under *Inspect*, the system
-   prompt and the user message (the question and the numbered products). Its receipts: "N catalog
-   items (they exist; nothing says they go together)". No one at the brand chose these searches.
-3. **GraphRAG, the way in: vector search on the graph.** The question embedded and matched against
-   the garments in Neptune Analytics' own vector index (`POST /api/retriever/anchors`): the nearest
-   garments, and every garment worn in a look within a band of the closest such garment becomes an
-   anchor.
-4. **Walk the graph.** The traversal (`payoff.TRAVERSAL`, shown read-only): from the anchor garments
-   to every look they are in (`CONTAINS`), each look's occasion (`FOR`), and the other garments in
-   those looks with their kind and details (`POST /api/retriever/traverse`). Then the result counted
-   per kind of garment: what is worn with the anchors, in how many of the looks. A count is a
-   number of distinct looks, not of rows or garments ("shoe 3 of 5": 3 of the 5 looks have a shoe
-   worn with the anchors), and the other shoe of an anchor's pair is not counted.
-5. **GraphRAG's answer, with receipts** (`POST /api/retriever/graphrag`): the occasions and the
+   prompt and the user message (the question and the numbered products). Its sources: "N catalog
+   products (they exist; nothing says they go together)". No one at the brand chose these searches.
+3. **GraphRAG, the starting garments: vector search on the graph.** The question embedded and
+   matched against the garments in Neptune Analytics' own vector index
+   (`POST /api/retriever/anchors`): the nearest garments, and every garment worn in a look within a
+   band of the closest such garment becomes a starting garment (an `anchor` in the API).
+4. **Walk the graph.** The traversal (`payoff.TRAVERSAL`, shown read-only): from the starting
+   garments to every look they are in (`CONTAINS`), each look's occasion (`FOR`), and the other
+   garments in those looks with their kind and details (`POST /api/retriever/traverse`). Then the
+   result counted per kind of garment: what is worn with the starting garments, in how many of the looks. A count
+   is a number of distinct looks, not of rows or garments ("shoe 3 of 5": 3 of the 5 looks have a
+   shoe worn with the starting garments), and the other shoe of a starting garment's pair is not
+   counted.
+5. **GraphRAG's answer, with sources** (`POST /api/retriever/graphrag`): the occasions and the
    "worn with" counts as style patterns, three of the brand's looks with up to four of their pieces
    (one per kind) each matched to one product through the same catalog search as RAG (no product
    when the catalog sells nothing of that kind), and the answer
-   built on those looks, with the receipts tree (the
+   built on those looks, with the sources tree (the
    traversal behind each citation).
 6. **Where it breaks, and the fix.** A question with two pieces and a color ("What sneakers go with
    a blue pleated midi dress?"): the simple version starts from what is closest to the whole
@@ -400,8 +434,8 @@ RAG and GraphRAG share the catalog, the search and the answer prompt
 (`payoff.ANSWER_SYSTEM`); they differ only in where the guidance comes from (the model's own taste
 for RAG, the brand's looks for GraphRAG). Each stage has its **How it works** panel with the code
 that ran: what is embedded for a product, the index write and the query for stage 1; the planner
-prompt, the plan, the catalog search and the answer prompt for stage 2; the way in, the traversal,
-the count, the catalog search and the answer for stages 3 to 5.
+prompt, the plan, the catalog search and the answer prompt for stage 2; the starting garments, the
+traversal, the count, the catalog search and the answer for stages 3 to 5.
 
 ## 5 · Same question, three answers
 
@@ -415,10 +449,10 @@ of tab 0. Each column says first who chose what to suggest, then:
 - **LLM only**: the answer, and "Where it came from": nothing to show.
 - **RAG** ("The model's own taste, on real products"): the answer, **The searches the model made
   up, from its own taste**, and **What the catalog returned**: the products each search found,
-  with the search and the distance. Its receipts: "N catalog items (they exist; nothing says they
+  with the search and the distance. Its sources: "N catalog products (they exist; nothing says they
   go together)".
-- **GraphRAG**: the answer, what the brand's looks say (the way in, the occasions with their
-  counts), three of the brand's looks matched to the catalog, and the evidence it was given.
+- **GraphRAG**: the answer, what the brand's looks say (the starting garments, the occasions with
+  their counts), three of the brand's looks matched to the catalog, and the evidence it was given.
 
 Every column has *Inspect: exactly what the model was given* (the system prompt and the user
 message; RAG's also the search planner prompt, GraphRAG's also the traversal). A notice under the
@@ -427,14 +461,14 @@ products, and the difference is who chose what to look for. RAG's searches come 
 own taste, the internet's average, so no one at the brand chose them. GraphRAG's come from the
 brand's own looks: it walks the graph from the garments the question names to every look they are
 in, counts, and sends the pieces of three of those looks through the same catalog search. Below,
-**GraphRAG's receipts: the traversal behind the answer**: click a citation or an evidence line and
-its path back to the brand's looks lights up.
+**GraphRAG's sources: the looks behind the answer and the walk that found them**: click a citation
+or an evidence line and its path back to the brand's looks lights up.
 
 **Style recommendation: ask with a photo.** Switch to *A photo (Style recommendation)*, pick one of the
 domain's single pieces (`ontologies/fashion/examples/items/`, `GET /api/ontologies/examples?id=fashion&set=items`)
 or drop your own photo of one piece, and ask again ("What goes with this?", "Which shoes go with
 this?", "Which bag goes with this?"). All three columns see the photo; RAG's planner sees it when
-it plans the searches. Only GraphRAG embeds the photo, for its way in (Amazon Nova
+it plans the searches. Only GraphRAG embeds the photo, to find its starting garments (Amazon Nova
 multimodal embeddings put images and text in one space): the same vector search on the graph's
 garments and the same traversal, keeping only the kind of piece the question asks for. No vision
 model describes the photo first. A photo of a whole outfit becomes one vector for everything in
