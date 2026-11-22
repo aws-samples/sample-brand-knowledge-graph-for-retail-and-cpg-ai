@@ -31,9 +31,12 @@ resource, route and role in one block.
   APIs they call (AgentCore, Neptune Analytics, CloudWatch Logs, Amazon S3 Vectors, Amazon S3
   Tables, Step Functions and Lambda) through one regional NAT gateway. Interface endpoints (AWS
   PrivateLink) would keep those calls off the internet, but they take one endpoint per service, each
-  billed in both Availability Zones: eight endpoints cost about $3.80 per day, the NAT gateway about
-  $2.40 (us-east-1, November 2026). A new AWS client in the code would also need its own endpoint
-  before its calls work. The sample is about ontologies and GraphRAG, not network isolation, so it
+  billed in both Availability Zones: eight endpoints cost about $3.80 per day ($0.01 per endpoint
+  per Availability Zone-hour, [AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/)),
+  the regional NAT gateway about $2.40 ($0.045 per hour in each of the two Availability Zones plus
+  two public IPv4 addresses at $0.005 per hour, [Amazon VPC pricing](https://aws.amazon.com/vpc/pricing/));
+  both before data processing, us-east-1 list prices read in November 2026. A new AWS client in the
+  code would also need its own endpoint before its calls work. The sample is about ontologies and GraphRAG, not network isolation, so it
   takes the simpler path. The price is that the functions and agents can reach any HTTPS host
   through the NAT gateway ([security.md](security.md#network-and-delivery)). In production, give
   the private subnets interface endpoints for the services they call and no route to the internet,
@@ -157,7 +160,8 @@ resource, route and role in one block.
   version V2 restores a snapshot for consistent cold starts.
 * **Startup cost moved out of the request.** Starting the MCP server in a new session's microVM took
   17 s on the first deployment (a cold disk), so the server starts when the session starts.
-  Because `/var/task` is read-only, the zip ships precompiled CPython 3.14 bytecode (a warm start went from 2.7 s to 0.8 s). A request the agent cannot serve is answered with HTTP 200 and
+  Because `/var/task` is read-only, the zip ships precompiled CPython 3.14 bytecode (measured in
+  the runtime's CloudWatch logs during development: a warm start went from 2.7 s to 0.8 s). A request the agent cannot serve is answered with HTTP 200 and
   `{error, status}`: a non-2xx from the agent would reach the API as a bare `RuntimeClientError`.
 * **Observability stays opt-in.** The runtimes' X-Ray trace delivery needs CloudWatch Transaction
   Search, an account-wide switch; the stack leaves it alone and `-c agentTracing=true` enables the

@@ -56,8 +56,8 @@ The app opens on this tab, in six numbered steps, then the link to tab 1.
    is a new data source), a three-row table **The same question, three answers** (LLM only, RAG,
    GraphRAG: who chose what to suggest, and what each can show you), and **Meet the brand**: the
    brands in the graph, from the `Brand` nodes `GET /api/summary` returns (`brands`: name and
-   description, sorted by name). The title is "Meet the brand: <name>", or "Meet the brands: <a>
-   and <b>" with several. Each brand's description comes from its data set's `brand.json`. The box
+   description, sorted by name). The title is "Meet the brand: `<name>`", or "Meet the brands: `<a>`
+   and `<b>`" with several. Each brand's description comes from its data set's `brand.json`. The box
    adds the looks counted in the graph and the products in the catalog index, a sentence on the
    new shoot only when the domain has example photos marked `"batch": "new-shoot"` (with their
    count), and one on how the photos were made only when the domain has example photos. A count
@@ -572,7 +572,7 @@ definition in one sentence, and the side-by-side card's caption repeats it:
    on empty space keeps the selection. With a cloud selected, the other clouds' heat stays visible at
    35 % of its usual opacity, so the next cloud can be picked on the map as well as in the table. The
    badges (clouds of 5 or more garments, and the selected one) are also buttons over the canvas,
-   reachable with the keyboard and labeled "Cloud <n>: <size> garments, lift <x>" (or "new shoot
+   reachable with the keyboard and labeled "Cloud `<n>`: `<size>` garments, lift `<x>`" (or "new shoot
    only"); smaller clouds are picked from the table.
 4. **Side by side**: one row per finished run. Methods 1 and 2 keep their latest finished run and the
    one before it, the older row marked "(earlier run)" in the Method cell; method 3 keeps its last
@@ -592,7 +592,7 @@ definition in one sentence, and the side-by-side card's caption repeats it:
   the API process) and the trace id;
 - a time bar with one segment per step, placed at the step's start and as long as the step, colored
   by kind (model turn, tool call, guard);
-- two lanes, "Model · <name> on Amazon Bedrock" and "MCP server · <server>", with one box per step
+- two lanes, "Model · `<name>` on Amazon Bedrock" and "MCP server · `<server>`", with one box per step
   in order and an arrow to the next. A model turn shows what it asked for (for example
   "→ run_opencypher_query"), its tokens and seconds, its stop reason when it is neither a tool call
   nor the answer (for example `max_tokens`), and the summary of its reasoning when the model returns
@@ -601,7 +601,7 @@ definition in one sentence, and the side-by-side card's caption repeats it:
 
 Each box is a button: a click opens its details under the trace (the full query, what went back to
 the model, the model's text, the reasoning summary), and a second click or Escape closes them. Under
-the trace of a model whose reasoning is not readable, the card says "<name> does not return its
+the trace of a model whose reasoning is not readable, the card says "`<name>` does not return its
 reasoning as text."
 
 **The deep dives.** Methods 1 and 2 each have *Deep dive: the agent's model and reasoning effort*,
@@ -627,7 +627,7 @@ that actually ran, as the backend reports them, and the side-by-side card shows 
 The control shows Default with the level it stands for, for example "Default (high)". In place of
 the control, Kimi K3 says "Reasoning effort: set by the model. Kimi K3 always reasons at its highest
 level through the Converse API, so this agent cannot change it." Any other model without levels says
-"Reasoning effort: this sample offers no setting for <name>; it runs at the model's own default."
+"Reasoning effort: this sample offers no setting for `<name>`; it runs at the model's own default."
 
 The effort reaches the model in the agent's Converse request, as `additionalModelRequestFields`
 merged over the model's own request fields (`vision.with_effort`): for Claude, adaptive `thinking`
@@ -651,8 +651,8 @@ edited queries stay.
 
 **Nothing to count yet.** Before tab 2's first batch, methods 1 and 2 say "Nothing new in the graph
 yet: ingest the first batch in tab 2 first." with an **Open tab 2** button. When an agent is not
-available, method 1 says "The graph agent is not available: <reason>." and method 2 "The lakehouse
-is not set up: <reason>." Method 3 still draws the map and ranks the clouds by size.
+available, method 1 says "The graph agent is not available: `<reason>`." and method 2 "The lakehouse
+is not set up: `<reason>`." Method 3 still draws the map and ranks the clouds by size.
 
 Each method has its **How it works** panel: a numbered diagram, the steps and the code, including
 the TypeScript that runs in the browser. Method 1's has three steps: **1** new items against the

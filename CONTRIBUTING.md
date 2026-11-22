@@ -1,4 +1,4 @@
-# Contributing Guidelines
+# Contributing guidelines
 
 Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional
 documentation, we greatly value feedback and contributions from our community.
@@ -7,7 +7,7 @@ Please read through this document before submitting any issues or pull requests 
 information to effectively respond to your bug report or contribution.
 
 
-## Reporting Bugs/Feature Requests
+## Reporting bugs and feature requests
 
 We welcome you to use the GitHub issue tracker to report bugs or suggest features.
 
@@ -20,7 +20,7 @@ reported the issue. Please try to include as much information as you can. Detail
 * Anything unusual about your environment or deployment
 
 
-## Contributing via Pull Requests
+## Contributing via pull requests
 Contributions via pull requests are much appreciated. Before sending us a pull request, please ensure that:
 
 1. You are working against the latest source on the *main* branch.
