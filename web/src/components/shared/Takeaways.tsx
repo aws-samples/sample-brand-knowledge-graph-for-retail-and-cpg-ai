@@ -10,7 +10,7 @@ export function Takeaways() {
         between looks, and you follow it in the graph.
       </li>
       <li>
-        <b>Every GraphRAG suggestion has a source.</b> Each one links to the brand&apos;s own looks: the receipts.
+        <b>Every GraphRAG suggestion has a source.</b> Each one links to the brand&apos;s own looks it came from.
       </li>
       <li>
         <b>The photos already hold the stylists&apos; taste.</b> A vision model and an ontology turn photos and texts into a graph you can count and query.

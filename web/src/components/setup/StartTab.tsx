@@ -11,10 +11,11 @@ import { Stage } from '../shared/Stage';
 import { Takeaways } from '../shared/Takeaways';
 import { ColdOpen, useColdOpen } from './ColdOpen';
 import { SetupDetails } from './SetupTab';
+import { ShopItYourself, useShopItYourself } from './ShopItYourself';
 
 /** Tab 0's list: what you do in each tab, and the point it makes. */
 const PATH: { id: Tab; what: string; point: string }[] = [
-  { id: 'explore', what: 'Send one photo through a vision model and read its answer in the ontology’s words.', point: 'Every photo gets the same words for the same garment.' },
+  { id: 'explore', what: 'Send one photo through a vision model and read its answer, written with the ontology’s terms.', point: 'Every photo gets the same words for the same garment.' },
   { id: 'ingest', what: 'Add new photos and texts to the graph with an AWS Step Functions pipeline.', point: 'The pipeline turns photos into looks you can query.' },
   { id: 'graph', what: 'See every look as one web, then query it in openCypher and in plain words.', point: 'Looks connect through what they share.' },
   { id: 'ask', what: 'Search the product catalog, build RAG on it, walk the graph, then see where it breaks.', point: 'A similarity search finds what sounds alike; the graph finds what is worn together.' },
@@ -28,6 +29,13 @@ const SAME_SHAPE: [string, string, string, string, string][] = [
   ['One piece in it', 'Garment', 'Product', 'Piece', 'Product'],
   ['What it is for', 'Occasion', 'Skin type or concern', 'Room', 'Meal occasion'],
   ['The curatorial rule', 'pairs with', 'applied before, conflicts with', 'placed with', 'served with'],
+];
+
+/** Tab 0's "The same question, three answers": who chose what each answer suggests, and what it can show. */
+const THREE_ANSWERS: [string, string, string][] = [
+  ['LLM only', "The model's own taste", 'Nothing: no source behind any of it'],
+  ['RAG', "The model's own taste, on real products", 'Products that exist, and nothing that says they go together'],
+  ['GraphRAG', "The brand's own looks", 'The looks each suggestion comes from, with counts'],
 ];
 
 /** Tab 2's row when the domain has a new shoot (example photos marked `"batch": "new-shoot"`). */
@@ -84,7 +92,7 @@ export function MeetTheBrand({
             : <b>{looks.toLocaleString()} looks</b>
           </>
         ) : null}
-        , already in the graph as {several ? "each brand's" : "the brand's"} style DNA (each look, its garments and its occasion). The catalog
+        , already in the graph (each look, its garments and its occasion). The catalog
         {products ? (
           <>
             {' '}
@@ -114,11 +122,13 @@ export function MeetTheBrand({
 
 /**
  * Tab 0, "Start here", in six numbered steps: 1 the cold open (the white sneakers question asked
- * to a model on its own), 2 what you will build, why it is needed and the difference you will see
- * at the end (and the brand), 3 the tabs one after another and what you will take away, 4 how to
- * read every tab (the step, the callouts, the Inspect and How it works expanders, the optional
- * parts), 5 the same shape in other aisles, 6 what is deployed in the account (SetupDetails: John's
- * setup cards, status only). Then the way into tab 1. Step 2's brand box is MeetTheBrand.
+ * to a model on its own), 2 "Shop it yourself" (four shopper requests through the catalog's
+ * similarity search, the business problem, the three terms and the tease into tab 1), 3 what you
+ * will build (the graph, the same question three ways, the brand, then the tabs one after another
+ * and what you will take away), 4 how to read every tab (the step, the callouts, the Inspect and
+ * How it works expanders, the optional parts), 5 the same shape in other aisles, 6 what is deployed
+ * in the account (SetupDetails: the setup cards, status only). Then the link to tab 1. Step 3's
+ * brand box is MeetTheBrand.
  */
 export function StartTab({
   domain,
@@ -162,6 +172,7 @@ export function StartTab({
   const shoot = (examples ?? []).filter((e) => e.batch === SHOOT).length;
   const [coldOpen] = useColdOpen();
   const asked = coldOpen !== null;
+  const shopped = useShopItYourself().done;
 
   return (
     <div className="stack start-tab">
@@ -169,44 +180,47 @@ export function StartTab({
       <Stage n={1} title="One question, asked to a model on its own" sub="What a model says when no brand is behind it." locked={null} done={asked}>
         <ColdOpen />
       </Stage>
-      {/* ------------------------------------------------------------ 2 what you will build, and why */}
-      <Stage n={2} title="What you’ll build, and why" sub="A brand knowledge graph, the gap it fills, and the difference you will see at the end." locked={null} done={false}>
+      {/* ------------------------------------------------------------ 2 shop it yourself */}
+      <Stage n={2} title="Shop it yourself" sub="Four requests a shopper might type, and what a product search returns." locked={null} done={shopped}>
+        <ShopItYourself />
+      </Stage>
+      {/* ------------------------------------------------------------ 3 what you will build, then the tabs */}
+      <Stage n={3} title="What you’ll build" sub="A brand knowledge graph, the three answers you will compare at the end, and the tabs that get you there." locked={null} done={false}>
         <h4>The graph</h4>
         <p>
-          A brand knowledge graph. A vision model on Amazon Bedrock reads the brand&apos;s look photos in the words of an ontology. An AWS Step Functions pipeline stores what it finds in Amazon
-          Neptune Analytics: every look, the garments in it and its occasion. That is the brand&apos;s style DNA. Then you build a retriever that answers from those looks: GraphRAG.
+          A brand knowledge graph. A vision model on Amazon Bedrock describes each of the brand&apos;s look photos with the garment kinds, parts and details that the ontology lists, and
+          nothing else. An AWS Step Functions pipeline stores what it finds in Amazon Neptune Analytics: every look, the garments in it and its occasion. Then you build a retriever that
+          answers from those looks: GraphRAG.
         </p>
         <p>
           The graph is also a new data source. Once the stylists&apos; taste is a graph, you can count it and walk it, and it answers more than &ldquo;what goes with this?&rdquo;: what the stylists
           use that the brand doesn&apos;t sell, which pairings are the brand&apos;s signature, whether a new photo is on-brand.
         </p>
-        <h4>Why a graph</h4>
-        <p>
-          A brand&apos;s own answer to that question is in its looks: the pairings its stylists chose, for each occasion. They sit in thousands of photos, and you
-          can&apos;t query a photo. The usual tools don&apos;t fill the gap:
-        </p>
-        <ul>
-          <li>
-            <b>Vector search, and RAG built on it,</b> finds what is similar. Ask a product search what goes with white sneakers and it returns more white sneakers.
-          </li>
-          <li>
-            <b>Recommendation engines</b> suggest what other shoppers bought. That says little about the pairings the brand&apos;s stylists chose.
-          </li>
-          <li>
-            <b>Fine-tuning</b> on the brand&apos;s content changes the model&apos;s voice. The model can still make things up, and it can&apos;t show where a suggestion came from.
-          </li>
-        </ul>
-        <h4>What you&apos;ll see at the end</h4>
-        <p>
-          You ask the white sneakers question again, three ways: a model on its own, RAG on the brand&apos;s product catalog, and GraphRAG on the brand&apos;s looks. All three can suggest outfits
-          that look fine. RAG finds real products, but the model chose what to search for. GraphRAG answers from the brand&apos;s looks that contain the garment, and shows which look each suggestion
-          comes from.
-        </p>
+        <h4>The same question, three answers</h4>
+        <table className="metrics compact start-answers">
+          <thead>
+            <tr>
+              <th>Answer</th>
+              <th>Who chose what to suggest</th>
+              <th>What it can show you</th>
+            </tr>
+          </thead>
+          <tbody>
+            {THREE_ANSWERS.map(([answer, who, shows]) => (
+              <tr key={answer} className="static">
+                <td>
+                  <b>{answer}</b>
+                </td>
+                <td>{who}</td>
+                <td>{shows}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <p>Everything is already deployed in your own AWS account, with the {several ? "brands'" : "brand's"} data loaded.</p>
         <MeetTheBrand brands={brands} looks={looks} products={products} examples={examples} />
-      </Stage>
-      {/* ------------------------------------------------------------ 3 the tabs, and what you will take away */}
-      <Stage n={3} title="The tabs, one after another" sub="What you do in each tab and the point it makes. Click a row to open that tab." locked={null} done={false}>
+        <h4>The tabs, one after another</h4>
+        <p className="muted small">What you do in each tab and the point it makes. Click a row to open that tab.</p>
         <table className="metrics start-path">
           <thead>
             <tr>
@@ -291,8 +305,8 @@ export function StartTab({
             </details>
           </div>
           <p>
-            <b>Inspect</b> and <b>How it works</b> (blue label): exactly what was sent and what came back, and the AWS services behind a step with their code. Open them when you want to see what
-            really happened.
+            <b>Inspect</b> and <b>How it works</b> (blue label): exactly what was sent and what came back, and the AWS services behind a step with their code. Open How it works as you
+            go: it shows the AWS services behind the step as a numbered diagram, with the code of each step.
           </p>
 
           <div className="legend-sample">
@@ -346,7 +360,10 @@ export function StartTab({
 
       {/* ------------------------------------------------------------ begin */}
       <NextTab to="explore" lead="Begin with">
-        <p>Go through the tabs in order, at your own pace. Start with tab 1.</p>
+        <p>
+          Go through the tabs in order, at your own pace. The app guides you with numbered steps, so you can follow it without the workshop guide; the guide explains the ideas behind each
+          tab when you want more.
+        </p>
       </NextTab>
     </div>
   );
