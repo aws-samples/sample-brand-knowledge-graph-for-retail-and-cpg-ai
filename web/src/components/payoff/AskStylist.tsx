@@ -107,7 +107,10 @@ export function AskStylist({ domain }: { domain: string }) {
                   So GraphRAG embeds the photo itself and runs the same vector search on the graph&apos;s garments. No vision model describes it first. The garments were embedded from text, and the photo
                   still finds the right kind of piece.
                 </li>
-                <li>From there nothing changes: the same traversal, the same catalog search, the same answer prompt.</li>
+                <li>
+                  From there the engine is the same: the same traversal, the same catalog search, the same answer prompt. When the question names a kind of piece (<i>Which shoes go with this?</i>), the smart
+                  retriever&apos;s first call reads it and its filter keeps only that kind after the traversal, as the steps under GraphRAG&apos;s column show.
+                </li>
                 <li>LLM only and RAG get the same photo in their prompts, so the comparison stays fair.</li>
                 <li>Use a photo of one piece. A photo of a whole outfit becomes one vector for everything in it, so the search can&apos;t tell which piece you mean.</li>
               </ul>

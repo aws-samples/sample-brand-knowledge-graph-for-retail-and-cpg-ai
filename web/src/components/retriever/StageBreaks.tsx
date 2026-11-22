@@ -57,7 +57,8 @@ export function WhatChanged({ g }: { g: GraphColumn }) {
           <b>A model call reads the question</b> before anything is searched: what to start from, what you&apos;re looking for, what must match.
         </li>
         <li>
-          <b>A model call grades the closest garments</b> as exact, similar or no. Vector search still finds them; the app starts from the exact ones, or the similar ones when there&apos;s no exact match.
+          <b>A model call grades the closest garments</b> as exact, similar or no. Vector search still finds them; the app starts from the exact ones, or the similar ones when there&apos;s no exact match, or from all of them
+          when the model finds neither.
         </li>
         {g.target_rule && (
           <li>
