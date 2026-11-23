@@ -98,17 +98,22 @@ button.status-item:hover { background: none; color: var(--ink); text-decoration:
 .badge.warn { background: var(--accent-tint); color: var(--accent-ink); border-color: var(--accent-line); }
 .badge.ok { background: #eef7ef; color: #1d6b2a; border-color: #cfe6d2; }
 
-nav.tabs { position: sticky; top: 0; z-index: 30; display: flex; gap: 0.15rem; padding: 0 0.85rem; background: var(--card); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
-nav.tabs::-webkit-scrollbar { display: none; }
+/* the tabs wrap onto a second row when the window is too narrow for one (a tablet), so every tab stays in view */
+nav.tabs { position: sticky; top: 0; z-index: 30; display: flex; flex-wrap: wrap; gap: 0.15rem; padding: 0 0.85rem; background: var(--card); border-bottom: 1px solid var(--line); }
 nav.tabs button {
   flex: 0 0 auto; white-space: nowrap; background: transparent; color: var(--ink-3); border: 0; border-radius: 0; padding: 0.75rem 0.5rem 0.7rem; margin: 0 0.15rem; border-bottom: 2px solid transparent; font-size: 0.88rem; font-weight: 500;
 }
 nav.tabs button.active { color: var(--ink); border-bottom-color: var(--orange); font-weight: 600; }
 nav.tabs button:hover { background: transparent; color: var(--ink); }
 nav.tabs button:focus-visible { outline-offset: -2px; }
+/* on a notebook or a tablet in landscape the seven tabs fit one row with a little less air around each label */
+@media (max-width: 1280px) { nav.tabs { padding: 0 0.5rem; } nav.tabs button { padding: 0.7rem 0.35rem 0.65rem; margin: 0 0.1rem; font-size: 0.85rem; } }
 
-main { padding: 1.5rem 1.5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
-@media (max-width: 640px) { main { padding: 1rem 0.75rem 2rem; } .app-header { padding: 0.8rem 1rem 0.4rem; } nav.tabs { padding: 0 0.35rem; } }
+/* the column: the width of the window up to 1400 px, centered beyond that, with side padding that follows the window
+   (a 10-inch tablet, a 14-inch notebook and a desktop monitor all get the same proportions). Inside a card, running
+   text, lists and the reading boxes use the full width, like the tables, code, diagrams and photos next to them. */
+main { padding: 1.5rem clamp(0.75rem, 2.5vw, 2.25rem) 2.5rem; max-width: 1400px; margin: 0 auto; }
+@media (max-width: 640px) { .app-header { padding: 0.8rem 1rem 0.4rem; } nav.tabs { padding: 0 0.35rem; } }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem; box-shadow: var(--shadow); }
 @media (max-width: 640px) { .card { padding: 1.1rem 1rem; } }
 .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1rem; }
@@ -120,9 +125,6 @@ span.muted, td .muted, th .muted, td.muted { font-size: inherit; line-height: in
 .small, .muted.small { font-size: 0.9rem; }
 /* the one line under a tab's title that says what the tab uses and what it feeds */
 .tab-uses { font-size: 1rem; margin: -0.1rem 0 1rem; }
-/* running text wraps at about 80 characters (70ch: ch is the width of a digit, wider than the average letter);
-   tables, code, diagrams, photos and canvases keep the full width */
-main p, main li, main .rt-box, main .rt-lead, main dd { max-width: 70ch; }
 /* the example questions a participant reads and chooses: content, not a label */
 .query-examples button.small, .po-chips button.small, .ask-examples button.small { font-size: 0.95rem; }
 /* description paragraphs: one tone; inline bold is emphasis the copy no longer needs */
@@ -1136,6 +1138,7 @@ details.xp.xp-inspect > summary::before { color: var(--depth-ink); }
 pre.code-block.rt-query { margin: 0.3rem 0 0.5rem; white-space: pre; overflow-x: auto; }
 /* "Where it breaks": the simple and the smart version side by side; the garments the model kept */
 .rt-breaks { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0.6rem 0; }
+@media (max-width: 900px) { .rt-breaks { grid-template-columns: minmax(0, 1fr); } }
 .rt-kept { margin: 0.2rem 0 0.3rem; padding-left: 1.1rem; columns: 2; column-gap: 1rem; }
 .rt-kept li { break-inside: avoid; }
 .rt-graph-switch { align-items: center; gap: 0.4rem; margin: 0.6rem 0 0.3rem; }
