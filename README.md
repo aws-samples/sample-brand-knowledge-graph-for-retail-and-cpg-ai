@@ -43,8 +43,9 @@ Bedrock AgentCore Runtime, to the comparison itself. The sample is the take-home
 Every tab but tab 0 has a "How it works" panel with the architecture, the request flow and the code
 that ran. [docs/tabs.md](docs/tabs.md) walks through each tab.
 
-* **0 · Start here.** One question asked to a model on its own, what you will build, the brands in
-  the graph, and what the stack deployed in your account, read-only.
+* **0 · Start here.** A model asked on its own about fashion, a shopper's requests through the
+  product search, what you will build, how to read every tab, and what the stack deployed in your
+  account, read-only.
 * **1 · Ontology explorer.** The ontology drawn as a tree, and a photo classified against it by
   several vision models, with bounding boxes, validation and token metrics.
 * **2 · Hydrate the graph.** A batch of photos and texts goes through AWS Step Functions into the

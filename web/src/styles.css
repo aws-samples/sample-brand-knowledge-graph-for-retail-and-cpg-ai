@@ -1309,7 +1309,7 @@ button.ln-trends-badge:focus-visible { outline: 2px solid var(--blue); outline-o
 .rt-substep-n { font-size: 0.7rem; }
 .ln-cite, .at-n { width: 1.3rem; height: 1.3rem; }
 
-/* tab 0: Shop it yourself */
+/* tab 0: the shopper's search (step 2) */
 /* the four requests: one row of toggles that wraps on a narrow screen, each only as wide as its text */
 .start-shop-requests { align-items: center; margin: 0.4rem 0 0.6rem; }
 .row.start-shop-requests > button { flex: 0 1 auto; height: auto; min-height: var(--control-h); padding-top: 0.35rem; padding-bottom: 0.35rem; white-space: normal; text-align: left; }
@@ -1320,11 +1320,8 @@ button.ln-trends-badge:focus-visible { outline: 2px solid var(--blue); outline-o
 .start-shop-list li { margin: 0.15rem 0; }
 .start-shop-list li > .stored-photo { display: inline-block; vertical-align: middle; margin-right: 0.5rem; width: 32px; height: 32px; }
 .start-shop-line { margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.5; }
-/* the three terms, as a definition list */
+/* the terms to note, as a definition list */
 .start-terms { margin: 0.3rem 0 0; }
 .start-terms dt { font-weight: 600; color: var(--ink); margin-top: 0.4rem; }
 .start-terms dd { margin: 0.1rem 0 0; }
 .start-shop-tease { margin: 0.8rem 0 0; }
-/* the three answers, every cell wrapping inside the card */
-table.metrics.start-answers td { white-space: normal; vertical-align: top; }
-table.metrics.start-answers td:first-child { white-space: nowrap; }

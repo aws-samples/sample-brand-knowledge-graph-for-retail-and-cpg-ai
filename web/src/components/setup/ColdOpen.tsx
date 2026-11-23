@@ -55,7 +55,7 @@ export function ColdOpen() {
       </Lead>
       <YourTurn>
         <p>
-          Choose <b>Ask a model on its own</b>. It takes a few seconds.
+          Choose <b>Ask a model on its own</b>.
         </p>
       </YourTurn>
       <div className="row">
@@ -79,8 +79,8 @@ export function ColdOpen() {
           )}
           <Notice>
             <p>
-              The answer sounds sure of itself, but it is <b>one point of view, stated as fact, with no source</b>. Any brand would get the same list: no stylist chose these
-              pieces, and you can&apos;t check any of it.
+              The answer sounds sure of itself, but it is <b>one point of view, stated as fact, with no source</b>. Any brand would get the same list. No stylist chose these
+              pieces, and you cannot check any of it.
             </p>
           </Notice>
           {answer && (

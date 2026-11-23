@@ -16,71 +16,71 @@ step again replaces its answer. Signing out clears all of it; so does closing th
 
 ## 0 · Start here
 
-The app opens on this tab, in six numbered steps, then the link to tab 1.
+The app opens on this tab, in five numbered steps, then the link to tab 1.
 
-1. **One question, asked to a model on its own.** The white sneakers question ("What should I wear
-   with white sneakers?") goes to the answer model with no brand behind it (`POST
-   /api/retriever/llm`, the same call as tab 5's first column), then what to notice. The answer is
-   kept for the browser tab, so it is still there after a visit to another tab. Come back while the
-   model is still answering, and the step shows "Asking…", then the answer when it lands.
-2. **Shop it yourself.** The shopper's problem, felt before any technology is named. Four requests
-   a shopper might type into a product search, as buttons in this order: "What goes with white
-   sneakers?", "A sleeveless dress, not black", "A trench over denim", "A blue shirt with a white
-   collar". Choosing one runs the catalog's similarity search on the deployed catalog (`POST
-   /api/catalog/search {query, k: 6}`, the read-only search tab 4's stage 1 opens up) and lists the
-   six nearest products: name, kind and colour, with the product photo when the catalog has one
-   (`image_key`; the sample's own text catalog has none). Under the list, one line per request
-   says what the shopper wanted and what came back (an outfit, and more shoes; a colour ruled out,
-   and how many of the products are black anyway; two pieces in one order, and coats, denim or
-   both, matched apart; a colour per part, and shirts in one colour each). The lines are written
-   in the component (`web/src/components/setup/ShopItYourself.tsx`), not by a model; the first
-   three read the results, because what comes back depends on the catalog (the sample's own 62
-   products return a white shoe with shoes in other colours, a black dress first and coats with
-   denim pants; a larger catalog returns six white sneakers, six black dresses and six trench
-   coats). The results of all four requests and the request on show are kept for the browser tab;
-   the step counts as done once one request ran, and a failed search shows its error and keeps
-   the line.
+1. **What happens when you ask a model on its own about fashion?** The white sneakers question
+   ("What should I wear with white sneakers?") goes to the answer model with no brand behind it
+   (`POST /api/retriever/llm`, the same call as tab 5's first column), then what to notice: the
+   answer is one point of view with no source, and any brand would get the same list. The answer
+   is kept for the browser tab, so it is still there after a visit to another tab. Come back while
+   the model is still answering, and the step shows "Asking…", then the answer when it lands.
+2. **Similarity search alone gives confusing answers in a domain like fashion.** The shopper's
+   problem, felt before any technology is named; the subtitle says that regular RAG is built on
+   this product search. Four requests a shopper might type into a product search, as buttons in
+   this order: "What goes with white sneakers?", "A sleeveless dress, not black", "A trench over
+   denim", "A blue shirt with a white collar". Choosing one runs the catalog's similarity search on
+   the deployed catalog (`POST /api/catalog/search {query, k: 6}`, the read-only search tab 4's
+   stage 1 opens up) and lists the six nearest products: name, kind and colour, with the product
+   photo when the catalog has one (`image_key`; the sample's own text catalog has none). Under the
+   list, one line per request says what the shopper wanted and what came back (an outfit, and more
+   shoes; a colour ruled out, and how many of the products are black anyway; two pieces in one
+   order, and coats, denim or both, matched apart; a colour per part, and shirts in one colour
+   each). The lines are written in the component (`web/src/components/setup/ShopItYourself.tsx`),
+   not by a model; the first three read the results, because what comes back depends on the
+   catalog (the sample's own 62 products return a white shoe with shoes in other colours, a black
+   dress first and coats with denim pants; a larger catalog returns six white sneakers, six black
+   dresses and six trench coats). The results of all four requests and the request on show are
+   kept for the browser tab; the step counts as done once one request ran, and a failed search
+   shows its error and keeps the line.
 
    Once a request ran, the step gives the business problem (*What to notice*): the brand's
    stylists chose the pairings in every look they shot, that knowledge sits in photos nothing can
-   query, and a larger embedding model does not close the gap, with the three sources as links
-   (SugarCrepe on attribute binding, NegBench on negation, RAGSearch on multi-hop questions).
-   Then *Good to know: Three terms* defines taxonomy (the tree of kinds), ontology (the taxonomy
-   plus the details, values, relations and rules: the fixed list of words the vision model has to
-   use) and graph data (the brand's looks and garments as nodes and edges in those words), and one
-   sentence teases tab 1 (the ontology the photos are read with) and tabs 2 and 3 (the graph built
-   from them, and shown).
-3. **What you'll build**: the graph (a vision model on Amazon Bedrock describes each look photo
-   with the ontology's terms only; an AWS Step Functions pipeline stores every look, its garments
-   and its occasion in Amazon Neptune Analytics; GraphRAG answers from those looks, and the graph
-   is a new data source), a three-row table **The same question, three answers** (LLM only, RAG,
-   GraphRAG: who chose what to suggest, and what each can show you), and **Meet the brand**: the
-   brands in the graph, from the `Brand` nodes `GET /api/summary` returns (`brands`: name and
-   description, sorted by name). The title is "Meet the brand: `<name>`", or "Meet the brands: `<a>`
-   and `<b>`" with several. Each brand's description comes from its data set's `brand.json`. The box
-   adds the looks counted in the graph and the products in the catalog index, a sentence on the
-   new shoot only when the domain has example photos marked `"batch": "new-shoot"` (with their
-   count), and one on how the photos were made only when the domain has example photos. A count
-   not read yet is left out; no name or count is written in the code. The step closes with **The
-   tabs, one after another**: what you do in each tab and the point it makes (click a row to open
-   that tab), then what you take away.
+   query, and a larger embedding model does not close that gap (the scores on attribute swaps,
+   negation and multi-hop questions, as numbers; the papers behind them are in the workshop
+   guide). Then *Good to know: Terms to note* defines taxonomy (the tree of kinds), ontology (the
+   taxonomy plus the details, values, relations and rules: the fixed list of words the vision
+   model has to use) and graph data (the brand's looks and garments as nodes and edges in those
+   words), and one sentence teases tab 1 (the ontology the photos are read with) and tabs 2 and 3
+   (the graph built from them, and shown).
+3. **What you'll build**: one paragraph, then the tabs table, then the takeaways. The paragraph
+   names the brands in the graph with the looks counted in the graph and the products counted in
+   the catalog index (`brandsSentence` in `web/src/components/setup/StartTab.tsx`; the brands come
+   from the `Brand` nodes `GET /api/summary` returns, a count or a name not read yet is left out
+   and no name or count is written in the code), says what you build (a smart way to break outfits
+   down with the brand's style and AI, and a consistent way to load those breakdowns as a graph),
+   names the steps (explore the ontology, send photos through a vision model that uses its terms,
+   store the looks in Amazon Neptune Analytics, build the retriever, compare the answers) and
+   introduces the table. The table lists the tabs in order with what you do in each and the point
+   it makes (a click on a row opens that tab); tab 2's row names the brand's new shoot when the
+   domain has example photos marked `"batch": "new-shoot"`. **What you'll take away** closes the
+   step with three techniques (`web/src/components/shared/Takeaways.tsx`, also the close of tab
+   6): an ontology breaks outfits down into consistent, countable terms; graph data is what makes
+   GraphRAG work, every suggestion with its source look; the same graph answers the buyer's, the
+   merchandiser's and the creative director's own questions.
 4. **How to read every tab**: the numbered steps, the callouts (*Your turn*, *What to notice*,
    *Good to know*, *In CPG*), the *Inspect* and *How it works* expanders (open *How it works* as
    you go: the AWS services behind the step as a numbered diagram, with the code of each step) and
    the optional parts.
-5. **Same shape, another aisle**: the same graph for beauty, home and food (what the brand shows,
-   one piece in it, what it is for, the curatorial rule), with a link to tab 1, step 4, where the
-   three browse-only ontologies are.
-6. **What's deployed in your account**: one card per resource, read-only. The stack owns every
+5. **What's deployed in your account**: one card per resource, read-only. The stack owns every
    resource; the cards report them with console links and nothing here creates, starts or deletes
    anything (`GET /api/setup`, `backend/src/ontology_rag/setup.py`; the routes `POST /api/setup/*`
    are gone and answer 404). A checklist on top shows the domain, the graph, the query agent and
    the product catalog at a glance.
 
 The closing line says the app guides you with numbered steps, so you can follow it without the
-workshop guide; the guide explains the ideas behind each tab when you want more.
+workshop guide.
 
-The cards of step 6:
+The cards of step 5:
 
 **Domain.** The folder under `ontologies/` whose ontology, example photos and example texts the
 other tabs work with. The card lists every folder that is a full domain with its name, id, class

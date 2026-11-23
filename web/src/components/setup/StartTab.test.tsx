@@ -3,24 +3,21 @@
 
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { CatalogHit, CatalogQuery, ExampleInfo } from '../../api';
+import type { CatalogHit, CatalogQuery } from '../../api';
 import { visibleText } from '../../visibleText';
 import { forgetKept, resetKept, setKept } from '../shared/kept';
 import { SHOP_K, SHOP_REQUESTS, ShopItYourself } from './ShopItYourself';
-import { MeetTheBrand, StartTab } from './StartTab';
+import { brandsSentence, StartTab } from './StartTab';
 
 // Nothing here reaches the network: the searches and the cold open run only on a click, and
 // renderToStaticMarkup runs no effects.
 vi.mock('../../auth', () => ({ signIn: async () => {} }));
 
-/** The box as a reader sees it: tags dropped, the escaped characters back. */
-const text = (html: string) => visibleText(html);
-/** The same, with a space where a tag was, so the words of neighbouring elements stay apart. */
+/** The page as a reader sees it: tags dropped with a space in their place, the escaped characters back. */
 const spaced = (html: string) => visibleText(html, ' ').replace(/\s+/g, ' ');
 
 const apparel = { name: 'AnyCompany Apparel', description: 'AnyCompany Apparel is a contemporary label built on three lines.' };
 const fashionHouse = { name: 'AnyCompany Fashion House', description: 'A fictional luxury brand.' };
-const photo = (file: string, batch?: string) => ({ file, title: file, ...(batch ? { batch } : {}) }) as ExampleInfo;
 
 beforeEach(() => {
   vi.stubGlobal('localStorage', { getItem: () => null, setItem: () => {}, removeItem: () => {} });
@@ -29,44 +26,16 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 
-describe('MeetTheBrand (tab 0)', () => {
-  it('names every brand of the graph with its description and the counts it has read', () => {
-    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[apparel, fashionHouse]} looks={20} products={62} examples={[photo('01.jpg', 'first'), photo('02.jpg')]} />));
-    expect(html).toContain('Meet the brands: AnyCompany Apparel and AnyCompany Fashion House');
-    expect(html).toContain('AnyCompany Apparel is a contemporary label built on three lines.');
-    // a description that does not say the name is led by it
-    expect(html).toContain('AnyCompany Fashion House: A fictional luxury brand.');
-    expect(html).toContain("The stylists' taste is in the brands' lookbooks: 20 looks, already in the graph (each look, its garments and its occasion).");
-    expect(html).toContain('The catalog of 62 products sits in a separate vector store.');
-    expect(html).toContain('Image models on Amazon Bedrock made the photos.');
-    expect(html).not.toContain('new shoot');
-    expect(html).toContain('This sample uses fashion');
+describe('brandsSentence (tab 0, step 3)', () => {
+  it('names every brand of the graph with the counts it has read', () => {
+    expect(brandsSentence([apparel, fashionHouse], 20, 62)).toBe('Your account holds 20 looks from AnyCompany Apparel and AnyCompany Fashion House and a catalog of 62 products.');
+    expect(brandsSentence([apparel], 120, 527)).toBe('Your account holds 120 looks from AnyCompany Apparel and a catalog of 527 products.');
   });
 
-  it('says the new shoot only with new-shoot photos, with their count', () => {
-    const examples = [photo('a.jpg', 'new-shoot'), photo('b.jpg', 'new-shoot'), photo('c.jpg', 'new-work')];
-    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[apparel]} looks={120} products={527} examples={examples} />));
-    expect(html).toContain('Meet the brand: AnyCompany Apparel');
-    expect(html).toContain("The stylists' taste is in the lookbook: 120 looks, already in the graph (each look, its garments and its occasion).");
-    expect(html).toContain('A new shoot of 2 looks is waiting for you to add in tab 2.');
-  });
-
-  it('leaves out what it has not read yet, with no stand-in count, brand or shoot', () => {
-    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[]} looks={undefined} products={null} examples={null} />));
-    expect(html).toContain('Meet the brand');
-    expect(html).not.toContain('Meet the brand:');
-    expect(html).toContain("The stylists' taste is in the lookbook, already in the graph (each look, its garments and its occasion).");
-    expect(html).toContain('The catalog sits in a separate vector store.');
-    expect(html).not.toMatch(/\d/);
-    expect(html).not.toContain('new shoot');
-    expect(html).not.toContain('image model');
-  });
-
-  it('says nothing of how photos were made when the domain has none', () => {
-    const html = text(renderToStaticMarkup(<MeetTheBrand brands={[{ name: 'AnyCompany Apparel', description: '' }]} looks={19} products={55} examples={[]} />));
-    expect(html).toContain('Meet the brand: AnyCompany Apparel');
-    expect(html).not.toContain('AnyCompany Apparel:');
-    expect(html).not.toContain('image model');
+  it('leaves out what it has not read yet, with no stand-in count or brand', () => {
+    expect(brandsSentence([], undefined, null)).toBe('Your account holds the looks of the brand and a product catalog.');
+    expect(brandsSentence([apparel], undefined, null)).toBe('Your account holds the looks of AnyCompany Apparel and a product catalog.');
+    expect(brandsSentence([], 19, 55)).toBe('Your account holds 19 looks from the brand and a catalog of 55 products.');
   });
 });
 
@@ -87,7 +56,7 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     const seen = spaced(html);
     expect(seen).toContain('Choose a request.');
     expect(seen).not.toContain('What to notice');
-    expect(seen).not.toContain('Three terms');
+    expect(seen).not.toContain('Terms to note');
     expect(seen).not.toContain('Next, tab 1');
   });
 
@@ -113,17 +82,17 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     expect(html).toContain('aria-label="Navy denim jacket: loading"');
   });
 
-  it('gives the business problem with its sources, the three terms and the tease once a request ran', () => {
+  it('gives the business problem without a source list, the terms to note and the tease once a request ran', () => {
     setKept('shopIt.results', { [SNEAKERS]: DONE(result(SNEAKERS, sneakerHits)) });
     setKept('shopIt.picked', SNEAKERS);
     const html = renderToStaticMarkup(<ShopItYourself />);
     const seen = spaced(html);
     expect(seen).toContain('The brand has already answered these questions.');
-    expect(seen).toContain('score 62 to 75 on attribute swaps where people score 97 to 100');
+    expect(seen).toContain('Embedding models have gaps that a larger model does not close. Image and text embedding models score 62 to 75 on attribute swaps where people score 97 to 100');
     expect(seen).toContain('trails GraphRAG by 27 to 28 points on multi-hop questions');
-    for (const href of ['https://arxiv.org/abs/2306.14610', 'https://arxiv.org/abs/2501.09425', 'https://arxiv.org/abs/2604.09666'])
-      expect(html).toContain(`<a href="${href}" target="_blank" rel="noreferrer">`);
-    expect(seen).toContain('Three terms');
+    expect(seen).not.toContain('Sources');
+    expect(html).not.toContain('arxiv.org');
+    expect(seen).toContain('Terms to note');
     expect(seen).toContain('Taxonomy The tree of kinds.');
     expect(seen).toContain('Ontology The taxonomy plus the details each kind can have');
     expect(seen).toContain("Graph data The brand's looks and garments stored as nodes and edges");
@@ -137,8 +106,8 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     const html = renderToStaticMarkup(<ShopItYourself />);
     expect(html).toContain('<p class="error">HTTP 403</p>');
     const seen = spaced(html);
-    expect(seen).toContain("A similarity search has no way to say 'not': it matched \"dress\" and ignored the rest.");
-    expect(seen).toContain('Three terms'); // the step still teaches
+    expect(seen).toContain("A similarity search has no way to say 'not'. It matched \"dress\" and ignored the rest.");
+    expect(seen).toContain('Terms to note'); // the step still teaches
   });
 
   it('counts the black products the second request returned, because that depends on the catalog', () => {
@@ -146,11 +115,11 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     const hits = (...colors: string[]) => colors.map((color, i) => ({ key: `d${i}`, search: dress, distance: 0.8, name: `${color} dress`, category: 'wholebody', type: 'dress', color, image_key: '', text: '' }));
     setKept('shopIt.picked', dress);
     setKept('shopIt.results', { [dress]: DONE(result(dress, hits('Black', 'Sage', 'White', 'Black', 'Navy', 'Black'))) });
-    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain("has no way to say 'not': 3 of the 6 products are black.");
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain("has no way to say 'not'. 3 of the 6 products are black.");
     setKept('shopIt.results', { [dress]: DONE(result(dress, hits('Sage', 'Black'))) });
-    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain("has no way to say 'not': one of the products is black.");
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain("has no way to say 'not'. One of the products is black.");
     setKept('shopIt.results', { [dress]: DONE(result(dress, hits('Sage', 'White'))) });
-    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('it matched "dress" and ignored the rest.');
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('It matched "dress" and ignored the rest.');
   });
 
   it('says what the first request returned: only white shoes on a larger catalog, no shoes at all, or how many shoes', () => {
@@ -174,11 +143,11 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     // a larger catalog: six trench coats, no denim
     const coats = ['Beige cotton gabardine trench coat', 'Beige cotton gabardine trench coat', 'Beige cotton sleeveless trench coat', 'Cream cotton blend trench coat', 'Navy wool trench coat', 'Beige cotton gabardine trench coat'].map((n) => hit(n, 'trench coat', 'beige'));
     setKept('shopIt.results', { [trench]: DONE(result(trench, coats)) });
-    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned only coats and no denim: it matched one word and ignored how the two pieces combine.');
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned only coats and no denim. It matched one word and ignored how the two pieces combine.');
     setKept('shopIt.results', { [trench]: DONE(result(trench, [coats[0], hit('White linen dress', 'dress', 'white')])) });
-    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned coats and no denim: it matched one word');
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned coats and no denim. It matched one word');
     setKept('shopIt.results', { [trench]: DONE(result(trench, [hit('Indigo denim jacket', 'jacket', 'indigo')])) });
-    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned denim and no coat: it matched one word');
+    expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search returned denim and no coat. It matched one word');
     setKept('shopIt.results', { [trench]: { status: 'error', error: 'HTTP 500' } });
     expect(spaced(renderToStaticMarkup(<ShopItYourself />))).toContain('The search matched what looks or sounds alike and ignored how the two pieces combine.');
   });
@@ -199,25 +168,51 @@ describe('StartTab (tab 0)', () => {
   const summary = { backend: 'neptune', nodes: { Look: 20 }, edges: {}, brands: [apparel] } as unknown as Parameters<typeof StartTab>[0]['summary'];
   const page = () => renderToStaticMarkup(<StartTab domain="fashion" ontologies={[]} onDomain={() => undefined} graphDomain="fashion" summary={summary} onOpenTab={() => undefined} />);
 
-  it('has six numbered steps, Shop it yourself second, and the tabs folded into step 3', () => {
+  it('has five numbered steps, the shopper’s search second, and the tabs folded into step 3', () => {
     const html = page();
     const titles = [...html.matchAll(/<h3 id="stage-(\d)">([^<]*)<\/h3>/g)].map((m) => `${m[1]} ${visibleText(m[2])}`);
-    expect(titles).toEqual(['1 One question, asked to a model on its own', '2 Shop it yourself', '3 What you’ll build', '4 How to read every tab', '5 Same shape, another aisle', '6 What’s deployed in your account']);
+    expect(titles).toEqual([
+      '1 What happens when you ask a model on its own about fashion?',
+      '2 Similarity search alone gives confusing answers in a domain like fashion',
+      '3 What you’ll build',
+      '4 How to read every tab',
+      '5 What’s deployed in your account',
+    ]);
+    expect(html).not.toContain('id="stage-6"');
     const seen = spaced(html);
-    expect(seen).toContain('The tabs, one after another');
     expect(seen).toContain('Send one photo through a vision model and read its answer, written with the ontology’s terms.');
+    expect(seen).toContain('The table lists the tabs in order, and a click on a row opens that tab.');
+    expect(seen).not.toContain('The tabs, one after another');
+    expect(seen).not.toContain('Same shape, another aisle');
     expect(seen).not.toContain('Why a graph');
     expect(seen).not.toContain("What you'll see at the end");
   });
 
-  it('compares the three answers in a table and tells the reader the app can be followed alone', () => {
+  it('introduces what you build in one paragraph, from the brands it has read, with no separate brand box or answers table', () => {
     const seen = spaced(page());
-    expect(seen).toContain('The same question, three answers');
-    expect(seen).toContain("LLM only The model's own taste Nothing: no source behind any of it");
-    expect(seen).toContain("RAG The model's own taste, on real products Products that exist, and nothing that says they go together");
-    expect(seen).toContain("GraphRAG The brand's own looks The looks each suggestion comes from, with counts");
-    expect(seen).toContain('Open How it works as you go: it shows the AWS services behind the step as a numbered diagram, with the code of each step.');
-    expect(seen).toContain('The app guides you with numbered steps, so you can follow it without the workshop guide; the guide explains the ideas behind each tab when you want more.');
+    expect(seen).toContain('Your account holds 20 looks from AnyCompany Apparel and a product catalog.');
+    expect(seen).toContain("You will build a smart way to break outfits down with the help of the brand's style and AI, and a consistent way to load those outfit breakdowns as a graph.");
+    expect(seen).toContain('To get there, you explore the ontology, send photos through a vision model that uses its terms, store the looks in Amazon Neptune Analytics, build the retriever and compare the answers.');
+    expect(seen).not.toContain('Meet the brand');
+    expect(seen).not.toContain('The same question, three answers');
+    expect(seen).not.toContain('Everything is already deployed');
+  });
+
+  it('lists three takeaways as techniques and tells the reader the app can be followed alone', () => {
+    const html = page();
+    const seen = spaced(html);
+    expect(seen).toContain("What you'll take away");
+    const takeaways = [...html.matchAll(/<li><b>([^<]*)<\/b>/g)].map((m) => visibleText(m[1]));
+    expect(takeaways).toEqual([
+      'An ontology breaks outfits down into consistent, countable terms.',
+      'Graph data is what makes GraphRAG work.',
+      "The same graph answers the business's own questions.",
+    ]);
+    expect(seen).toContain('the creative director asks whether a new photo is on-brand.');
+    expect(seen).toContain('Open How it works as you go. It shows the services as a numbered diagram, with the code of each step.');
+    expect(seen).toContain('the same idea in another aisle, beauty mostly. One per tab.');
+    expect(seen).toContain('The app guides you with numbered steps, so you can follow it without the workshop guide.');
+    expect(seen).not.toContain('the guide explains the ideas behind each tab');
   });
 
   it('marks step 2 done once one request ran', () => {

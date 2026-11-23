@@ -238,7 +238,7 @@ export type Summary = {
   nodes: Record<string, number>;
   edges: Record<string, number>;
   embeddings?: number;
-  /** The graph's Brand nodes, sorted by name: tab 0's "Meet the brand" (description "" when the data set gives none). */
+  /** The graph's Brand nodes, sorted by name: tab 0's "What you'll build" names them (description "" when the data set gives none). */
   brands?: { name: string; description: string }[];
 };
 export type Health = {

@@ -42,35 +42,28 @@ export const SHOP_REQUESTS: { request: string; line: string | ((hits: CatalogHit
     request: 'A sleeveless dress, not black',
     line: (hits) => {
       const black = blackHits(hits);
-      const came = black === 0 ? 'it matched "dress" and ignored the rest' : black === 1 ? 'one of the products is black' : `${black} of the ${hits.length} products are black`;
-      return `The shopper ruled a colour out. A similarity search has no way to say 'not': ${came}.`;
+      const came = black === 0 ? 'It matched "dress" and ignored the rest.' : black === 1 ? 'One of the products is black.' : `${black} of the ${hits.length} products are black.`;
+      return `The shopper ruled a colour out. A similarity search has no way to say 'not'. ${came}`;
     },
   },
   {
     request: 'A trench over denim',
     line: (hits) => {
       const { coats, denim } = pieceHits(hits);
-      const one = 'it matched one word and ignored how the two pieces combine';
+      const one = 'It matched one word and ignored how the two pieces combine.';
       const came =
-        coats && denim ? 'matched the two words and ignored how they combine' : coats ? `returned ${coats === hits.length ? 'only coats' : 'coats'} and no denim: ${one}` : denim ? `returned denim and no coat: ${one}` : 'matched what looks or sounds alike and ignored how the two pieces combine';
-      return `The shopper wanted two pieces worn in one order. The search ${came}.`;
+        coats && denim ? 'matched the two words and ignored how they combine.' : coats ? `returned ${coats === hits.length ? 'only coats' : 'coats'} and no denim. ${one}` : denim ? `returned denim and no coat. ${one}` : 'matched what looks or sounds alike and ignored how the two pieces combine.';
+      return `The shopper wanted two pieces worn in one order. The search ${came}`;
     },
   },
   {
     request: 'A blue shirt with a white collar',
-    line: 'The shopper wanted each colour on its own part. The search returned shirts and tops in one colour each: it cannot pin a colour to a part.',
+    line: 'The shopper wanted each colour on its own part. The search returned shirts and tops in one colour each. It cannot pin a colour to a part.',
   },
 ];
 
 /** How many products one request shows: the same k as tab 4's first search. */
 export const SHOP_K = 6;
-
-/** The research behind the "What to notice" box, as short links. */
-const SOURCES: { label: string; href: string }[] = [
-  { label: 'SugarCrepe (NeurIPS 2023)', href: 'https://arxiv.org/abs/2306.14610' },
-  { label: 'NegBench (CVPR 2025)', href: 'https://arxiv.org/abs/2501.09425' },
-  { label: 'RAGSearch (2026)', href: 'https://arxiv.org/abs/2604.09666' },
-];
 
 type Results = Record<string, Async<CatalogQuery>>;
 const RESULTS_KEY = 'shopIt.results';
@@ -107,14 +100,14 @@ function Products({ hits }: { hits: CatalogHit[] }) {
 }
 
 /**
- * Tab 0's step 2, "Shop it yourself": the shopper's problem, felt before any technology is named.
+ * Tab 0's step 2, the shopper's search: the shopper's problem, felt before any technology is named.
  * Four requests, each a button; choosing one runs the catalog's similarity search
  * (`POST /api/catalog/search`, the read-only search tab 4's stage 1 opens up) on the deployed
  * catalog and lists the six nearest products, then one line on what the shopper wanted and what
  * came back (SHOP_REQUESTS). The results of all four requests and the request on show are kept
  * (kept.ts), so they survive a tab switch and a reload. Once one request ran, the step shows the business
- * problem (What to notice, with its sources), the three terms (Good to know) and the tease into
- * tab 1. A failed search shows its error in the app's small style and keeps the line.
+ * problem (What to notice), the terms to note (Good to know) and the tease into tab 1. A failed
+ * search shows its error in the app's small style and keeps the line.
  */
 export function ShopItYourself() {
   const [results, setResults] = useKept<Results>(RESULTS_KEY, {});
@@ -137,9 +130,7 @@ export function ShopItYourself() {
         A shopper types a request into the brand&apos;s product search. Try four of them on the products in your account, and read what comes back.
       </Lead>
       <YourTurn>
-        <p>
-          Choose a request. The search returns the six closest products. Try all four.
-        </p>
+        <p>Choose a request. Try all four.</p>
       </YourTurn>
       <div className="row start-shop-requests" role="group" aria-label="shopper requests">
         {SHOP_REQUESTS.map(({ request }) => {
@@ -178,25 +169,14 @@ export function ShopItYourself() {
           <Notice>
             <p>
               The brand has already answered these questions. Its stylists chose the pairings in every look they shot, for each occasion. That knowledge sits in thousands of photos
-              that nothing can query, so it never reaches the shopper. A larger embedding model does not close the gap: image and text embedding models score 62 to 75 on attribute
+              that nothing can query, so it never reaches the shopper. Embedding models have gaps that a larger model does not close. Image and text embedding models score 62 to 75 on attribute
               swaps where people score 97 to 100, they stay near chance on negation, and dense retrieval trails GraphRAG by 27 to 28 points on multi-hop questions.
             </p>
-            <p className="small muted">
-              Sources:{' '}
-              {SOURCES.map((s, i) => (
-                <span key={s.href}>
-                  {i > 0 && ', '}
-                  <a href={s.href} target="_blank" rel="noreferrer">
-                    {s.label}
-                  </a>
-                </span>
-              ))}
-            </p>
           </Notice>
-          <GoodToKnow title="Three terms">
+          <GoodToKnow title="Terms to note">
             <dl className="start-terms">
               <dt>Taxonomy</dt>
-              <dd>The tree of kinds. A coat is a kind of whole-body garment. The ontology has no sneaker class: a sneaker is a shoe with a name.</dd>
+              <dd>The tree of kinds. A coat is a kind of whole-body garment. The ontology has no sneaker class. A sneaker is a shoe with a name.</dd>
               <dt>Ontology</dt>
               <dd>
                 The taxonomy plus the details each kind can have, the values each detail allows, the relations between kinds and the rules. It is the fixed list of words the vision
