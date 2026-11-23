@@ -14,6 +14,6 @@ export const TABS: { id: Tab; label: string }[] = [
   { id: 'ingest', label: '2 · Hydrate the graph' },
   { id: 'graph', label: '3 · Explore the graph' },
   { id: 'ask', label: '4 · Build the retriever' },
-  { id: 'stylist', label: '5 · Same question, three answers' },
+  { id: 'stylist', label: '5 · Compare GraphRAG with traditional methods' },
   { id: 'lenses', label: '6 · What else the graph knows · BONUS' },
 ];

@@ -53,7 +53,7 @@ that ran. [docs/tabs.md](docs/tabs.md) walks through each tab.
   agent that writes openCypher through the Amazon Neptune MCP server.
 * **4 · Build the retriever.** The catalog search, RAG with searches the model plans, the starting
   garments found by vector search on the graph, the traversal and GraphRAG's answer, stage by stage.
-* **5 · Same question, three answers.** One question, or a photo, answered by a model on its own, by
+* **5 · Compare GraphRAG with traditional methods.** One question, or a photo, answered by a model on its own, by
   RAG and by GraphRAG with the same model, side by side with their sources.
 * **6 · What else the graph knows.** The same graph for a buyer, a merchandiser and a creative
   director, and three ways to find this season's emerging trends.

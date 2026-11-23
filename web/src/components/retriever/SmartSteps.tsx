@@ -9,7 +9,7 @@ const MARK: Record<SmartGrade, string> = { exact: 'exact', similar: 'similar', n
  * What the smart retriever did, in plain steps: how the model read the question, how it graded
  * the closest garments for each start piece and which ones it started from, the looks the same
  * traversal found, what the filter kept and dropped, and what the lookbook did not have. Used in
- * "Where it breaks" and in "Same question, three answers".
+ * "Where it breaks" and in tab 5, "Compare GraphRAG with traditional methods".
  */
 export function SmartSteps({ graph }: { graph: GraphColumn }) {
   if (!graph.smart || !graph.plan || !graph.starts) return null;

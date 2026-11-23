@@ -27,7 +27,7 @@ export function subjectOf(question: string): string {
  * stage unlocks when the one before it has run; changing the question restarts stages 2 to 5
  * (GraphRAG is three of them: the starting garments, the traversal, the answer; useGraphRetriever). All of it
  * is kept across tab switches and reloads (keys.ts), so an answer is still there when you return.
- * The three answers side by side are the next tab, "Same question, three answers" (AskStylist).
+ * The three answers side by side are the next tab, "Compare GraphRAG with traditional methods" (AskStylist).
  */
 export function BuildRetriever({ domain }: { domain: string }) {
   // the question, every stage and what unlocks the next are kept across tab switches and reloads (keys.ts)

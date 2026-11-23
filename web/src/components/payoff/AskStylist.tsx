@@ -25,7 +25,7 @@ const START_QUESTIONS: Record<Input, string> = { question: QUESTIONS[0], photo: 
 const IDLE = { status: 'idle' } as const;
 
 /**
- * "Same question, three answers": three answers side by side (the model on its own, RAG on the
+ * "Compare GraphRAG with traditional methods" (tab 5): three answers side by side (the model on its own, RAG on the
  * product catalog, GraphRAG on the brand's looks), each with its sources. The shopper asks with a
  * question, or with a photo of one piece (Style recommendation): all three see the photo, and
  * GraphRAG's starting garments come from the photo's own embedding in the same vector search.
@@ -60,7 +60,7 @@ export function AskStylist({ domain }: { domain: string }) {
   return (
     <div className="stack">
       <div className="card">
-        <h2>Same question, three answers</h2>
+        <h2>Compare GraphRAG with traditional methods</h2>
         <Lead>
           This tab puts it all together. A shopper can ask in two ways: with a question, or with a photo of a piece they already have. You try both, and each time three answers come back side by side:
           the model on its own, RAG on the product catalog, and GraphRAG on the brand&apos;s looks.

@@ -188,7 +188,7 @@ export function StageBreaks({ domain, onDone }: { domain: string; onDone: () => 
       )}
 
       <GoodToKnow>
-        <p>The next tab, “Same question, three answers”, uses the smart version.</p>
+        <p>Tab 5 compares this smart version with RAG and a model on its own.</p>
       </GoodToKnow>
     </div>
   );

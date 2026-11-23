@@ -29,7 +29,7 @@ describe('the app', () => {
       '2 · Hydrate the graph',
       '3 · Explore the graph',
       '4 · Build the retriever',
-      '5 · Same question, three answers',
+      '5 · Compare GraphRAG with traditional methods',
       '6 · What else the graph knows · BONUS',
     ]);
     // no buttons in the header that wipe the graph or the vector store

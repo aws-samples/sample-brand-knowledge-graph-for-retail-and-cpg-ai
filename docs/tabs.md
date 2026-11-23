@@ -440,7 +440,7 @@ that ran: what is embedded for a product, the index write and the query for stag
 prompt, the plan, the catalog search and the answer prompt for stage 2; the starting garments, the
 traversal, the count, the catalog search and the answer for stages 3 to 5.
 
-## 5 · Same question, three answers
+## 5 · Compare GraphRAG with traditional methods
 
 One question answered three ways side by side, with the same answer model
 (`POST /api/payoff {question, model_id?, searches?, image_base64?}`, the three in parallel; without

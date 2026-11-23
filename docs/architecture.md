@@ -277,7 +277,7 @@ Design constraints:
    `POST /api/admin/clear-graph` empties the graph and leaves the catalog as it is (only with
    `-c allowWriteQueries=true`; otherwise 403)
 
-**Build the retriever, Same question, three answers** (tabs 4 and 5, `payoff.py`; `GET /api/catalog`,
+**Build the retriever** and **Compare GraphRAG with traditional methods** (tabs 4 and 5, `payoff.py`; `GET /api/catalog`,
 `GET /api/catalog/items?n=`, `GET /api/catalog/item?key=`, `POST /api/catalog/search {query, k?}`,
 `POST /api/retriever/llm|plan|rag|anchors|traverse|graphrag|understand|smart`, `GET /api/retriever/templates`,
 `POST /api/payoff {question, model_id?, cypher?, searches?, image_base64?}`, `GET /api/ask/models`)
