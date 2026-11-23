@@ -4,7 +4,9 @@
 /**
  * The figures of docs/tabs.md, two per tab, rendered into assets/tabs/: the concept behind a tab
  * in the sample's own visual style, and how its steps are built (the AWS services, numbered as the
- * walk-through under the figure). The workshop guide shows the same files about 1,000 px wide.
+ * walk-through under the figure). Tab 6 has a second concept figure, the personas and the
+ * techniques that answer their questions. The workshop guide shows the same files about 1,000 px
+ * wide.
  */
 import type { FigureSpec } from '../../kit';
 import { tab0Problem } from './tab0-problem';
@@ -20,6 +22,7 @@ import { tab4Architecture } from './tab4-architecture';
 import { tab5Concept } from './tab5-concept';
 import { tab5Architecture } from './tab5-architecture';
 import { tab6Concept } from './tab6-concept';
+import { tab6Personas } from './tab6-personas';
 import { tab6Architecture } from './tab6-architecture';
 
 export const TAB_FIGURES: Record<string, FigureSpec> = {
@@ -36,5 +39,6 @@ export const TAB_FIGURES: Record<string, FigureSpec> = {
   'tabs/tab5-concept': tab5Concept,
   'tabs/tab5-architecture': tab5Architecture,
   'tabs/tab6-concept': tab6Concept,
+  'tabs/tab6-personas': tab6Personas,
   'tabs/tab6-architecture': tab6Architecture,
 };

@@ -264,7 +264,7 @@ backend/      Python package and tests: the API, the pipeline steps, retrieval, 
 infra/        CDK app and tests
 web/          React app; web/figures/ renders the figures in assets/
 docs/         the pages listed above
-assets/       the figures of this README and the docs; assets/tabs/ has two per tab
+assets/       the figures of this README and the docs; assets/tabs/ has each tab's concept and architecture
 ```
 
 `make test` runs every suite offline, and `make scan` runs the secret, static-analysis and

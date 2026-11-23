@@ -76,8 +76,8 @@ make figures     # type-checks web/figures/, then writes assets/<name>.png (2x) 
 `ServiceNode` and `ZoneNode` (`web/src/components/arch/flow.tsx`) and `web/src/styles.css`, and
 `render.mjs`, which serves the page with Vite and captures each figure with Playwright. Each figure
 is a spec in `web/figures/specs/`: tiles, groups and edges at fixed coordinates. The specs under
-`web/figures/specs/tabs/` are the two figures of each tab, the concept behind it and how its steps
-are built (the AWS Solutions Library style: numbered tiles, then one numbered line per step in the
+`web/figures/specs/tabs/` are the figures of each tab, the concept behind it (tab 6 has two) and how its
+steps are built (the AWS Solutions Library style: numbered tiles, then one numbered line per step in the
 text that shows the figure); they render into `assets/tabs/`, and a workshop built on the sample
 shows the same files. The renderer is not part of the app build or the app's tests. Playwright
 needs a Chromium build; install it once with `cd web && npx playwright install chromium`.

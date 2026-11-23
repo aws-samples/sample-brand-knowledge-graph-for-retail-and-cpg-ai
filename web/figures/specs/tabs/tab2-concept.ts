@@ -4,73 +4,77 @@
 import type { FigureSpec } from '../../kit';
 
 /**
- * Tab 2, the concept: from a photo to facts. One look photo is classified with the ontology's
- * terms, checked, written as OWL individuals and mapped by generic rules onto nodes and edges
- * (backend/src/ontology_rag/pipeline.py, kg.py). A text takes the shorter path to Statement nodes.
- * Two photos with the same kind of garment meet at the same Category node.
+ * Tab 2, the concept: one ingest flow for every kind of source. Photos, texts and photo-text pairs
+ * go through the same four steps in AWS Step Functions (build the model's context, classify,
+ * validate against the ontology, write), and land in Amazon Neptune Analytics as graph data next to
+ * one embedding per garment, so a similarity search and a graph walk use the same store.
  */
 const LOOK = '#ff9900';
 const ITEM = '#8a9ba8';
-const CATEGORY = '#2f6fb0';
 const OCCASION = '#7b3fb0';
-const ATTRIBUTE = '#2e9e6b';
-const TEXT = '#c0392b';
-const STEP = '#69717b';
+const OTHER = '#69717b';
+const SFN = '#e7157b';
+const NEPTUNE = '#8c4fff';
+const EMBED = '#2f6fb0';
 
-const GX = 760;
-const GY = 200;
+const SRC = { x: 0, y: 60, w: 240, h: 330 };
+const NOTE_W = 200;
+const ZONE = { x: 410, y: 50, w: 480, h: 370 };
+const STEP_W = 220;
+const COL1 = ZONE.x + 20;
+const COL2 = ZONE.x + 20 + STEP_W + 20;
+const ROW1 = ZONE.y + 50;
+const ROW2 = ZONE.y + 200;
+const NEP = { x: 1040, y: 0, w: 660, h: 460 };
+const GD = { x: NEP.x + 20, y: NEP.y + 50, w: 360, h: 390 };
+const EM = { x: GD.x + GD.w + 20, y: NEP.y + 50, w: 240, h: 390 };
 
 export const tab2Concept: FigureSpec = {
-  width: 1500,
-  height: 690,
+  width: 1700,
+  height: 600,
   large: true,
   nodes: [
-    { kind: 'note', id: 'photo', x: 0, y: 0, w: 220, title: 'One look photo', text: "from the brand's shoot, one source of many", color: STEP },
-    { kind: 'note', id: 'classify', x: 270, y: 0, w: 280, title: 'Classify', text: "garments, parts and details, with the ontology's terms", color: STEP },
-    { kind: 'note', id: 'check', x: 600, y: 0, w: 260, title: 'Check', text: 'every term is looked up in the ontology', color: STEP },
-    { kind: 'note', id: 'owl', x: 910, y: 0, w: 260, title: 'OWL individuals', text: 'one individual per garment, typed by its kind', color: STEP },
-    { kind: 'note', id: 'rules', x: 1220, y: 0, w: 280, title: 'Generic rules', text: 'a class becomes a Category node, a value an Attribute node, a part a HAS_PART edge', color: STEP },
+    { kind: 'group', id: 'sources', x: SRC.x, y: SRC.y, w: SRC.w, h: SRC.h, title: 'Unstructured sources', color: OTHER },
+    { kind: 'note', id: 'photos', parent: 'sources', x: SRC.x + 20, y: SRC.y + 55, w: NOTE_W, title: 'Photos', text: 'a shoot', color: OTHER },
+    { kind: 'note', id: 'texts', parent: 'sources', x: SRC.x + 20, y: SRC.y + 150, w: NOTE_W, title: 'Texts', text: 'articles, a style guide', color: OTHER },
+    { kind: 'note', id: 'pair', parent: 'sources', x: SRC.x + 20, y: SRC.y + 245, w: NOTE_W, title: 'A photo with its text', text: 'the two together', color: OTHER },
 
-    { kind: 'group', id: 'graph', x: GX, y: GY, w: 740, h: 420, title: 'The nodes and edges', sub: 'what the ingest step writes into the graph', color: LOOK },
-    { kind: 'entity', id: 'look', parent: 'graph', x: 1000, y: 260, label: 'Look', props: 'the photo, its name', color: LOOK, handles: [{ id: 't-l1', side: 'l', at: 0.5, type: 'target' }] },
-    { kind: 'entity', id: 'occasion', parent: 'graph', x: 1270, y: 260, label: 'Occasion', props: 'one of the 9', color: OCCASION },
-    { kind: 'entity', id: 'item1', parent: 'graph', x: 880, y: 390, label: 'Item', props: 'a garment in the photo', color: ITEM },
-    { kind: 'entity', id: 'item2', parent: 'graph', x: 1120, y: 390, label: 'Item', props: 'another garment', color: ITEM },
-    { kind: 'entity', id: 'category', parent: 'graph', x: 790, y: 520, label: 'Category', props: 'its kind, from the ontology', color: CATEGORY },
-    { kind: 'entity', id: 'attribute', parent: 'graph', x: 1270, y: 520, label: 'Attribute', props: 'a value, from the ontology', color: ATTRIBUTE },
+    { kind: 'zone', id: 'flow', x: ZONE.x, y: ZONE.y, w: ZONE.w, h: ZONE.h, title: 'The ingest flow (AWS Step Functions)', tone: 'sfn' },
+    { kind: 'note', id: 'step1', parent: 'flow', x: COL1, y: ROW1, w: STEP_W, title: "1 Build the model's context", text: "The ontology, the brand's lines and occasions, and the paired text or photo.", color: SFN },
+    { kind: 'note', id: 'step2', parent: 'flow', x: COL2, y: ROW1, w: STEP_W, title: '2 Classify with a multimodal model', text: 'The same call as tab 1, once per source.', color: SFN },
+    { kind: 'note', id: 'step3', parent: 'flow', x: COL1, y: ROW2, w: STEP_W, title: '3 Validate against the ontology', text: 'Only kinds, values and parts the ontology has become graph data; the rest is reported.', color: SFN },
+    { kind: 'note', id: 'step4', parent: 'flow', x: COL2, y: ROW2, w: STEP_W, title: '4 Write graph data and the sources', text: 'Each look, its garments, its occasion, and a link to the photo or text it came from.', color: SFN },
 
-    { kind: 'note', id: 'text', x: 0, y: 260, w: 240, title: 'One text', text: 'an article or a post', color: TEXT },
-    { kind: 'entity', id: 'statement', x: 300, y: 270, label: 'Statement', props: 'one claim from the text', color: TEXT },
+    { kind: 'group', id: 'neptune', x: NEP.x, y: NEP.y, w: NEP.w, h: NEP.h, title: 'Amazon Neptune Analytics', icon: 'neptune', color: NEPTUNE, dashed: false },
+    { kind: 'group', id: 'graphdata', parent: 'neptune', x: GD.x, y: GD.y, w: GD.w, h: GD.h, title: 'Graph data', color: LOOK },
+    { kind: 'entity', id: 'look', parent: 'graphdata', x: GD.x + 20, y: GD.y + 55, label: 'Look', props: 'the photo', color: LOOK },
+    { kind: 'entity', id: 'item', parent: 'graphdata', x: GD.x + 20, y: GD.y + 180, label: 'Item', props: 'a garment in the look', color: ITEM },
+    { kind: 'entity', id: 'occasion', parent: 'graphdata', x: GD.x + 140, y: GD.y + 300, label: 'Occasion', props: 'Casual', color: OCCASION },
+    { kind: 'group', id: 'embeddings', parent: 'neptune', x: EM.x, y: EM.y, w: EM.w, h: EM.h, title: 'Embeddings', sub: 'one vector per garment', color: EMBED },
+    { kind: 'entity', id: 'vec1', parent: 'embeddings', x: EM.x + 20, y: EM.y + 75, label: 'Item', props: 'white lace-up sneakers', color: ITEM, vec: true },
+    { kind: 'entity', id: 'vec2', parent: 'embeddings', x: EM.x + 20, y: EM.y + 175, label: 'Item', props: 'indigo denim pants', color: ITEM, vec: true },
+    { kind: 'entity', id: 'vec3', parent: 'embeddings', x: EM.x + 20, y: EM.y + 275, label: 'Item', props: 'navy wool blazer', color: ITEM, vec: true },
+
     {
       kind: 'note',
-      id: 'merge',
-      x: 0,
-      y: 440,
-      w: 600,
-      title: 'Where looks meet',
-      text: 'A second photo with the same kind of garment links to the SAME Category node, so looks meet through what they share.',
-      color: CATEGORY,
+      id: 'together',
+      x: NEP.x,
+      y: NEP.y + NEP.h + 25,
+      w: NEP.w,
+      title: 'One store for both',
+      text: 'Graph data and embeddings sit side by side in one graph, so a similarity search and a graph walk use the same store.',
+      color: NEPTUNE,
     },
   ],
   edges: [
-    { id: 's1', from: 'photo', fromHandle: 's-r', to: 'classify', toHandle: 't-l', kind: 'data' },
-    { id: 's2', from: 'classify', fromHandle: 's-r', to: 'check', toHandle: 't-l', kind: 'data' },
-    { id: 's3', from: 'check', fromHandle: 's-r', to: 'owl', toHandle: 't-l', kind: 'data' },
-    { id: 's4', from: 'owl', fromHandle: 's-r', to: 'rules', toHandle: 't-l', kind: 'data' },
-    { id: 's5', from: 'rules', fromHandle: 's-b', to: 'graph', toHandle: 't-t', kind: 'data', label: 'nodes and edges', labelDy: 0 },
+    { id: 'in', from: 'sources', fromHandle: 's-r', to: 'step1', toHandle: 't-l', kind: 'data', label: 'one flow\nfor every\nkind of source', labelDy: -2 },
+    { id: 's12', from: 'step1', fromHandle: 's-r', to: 'step2', toHandle: 't-l', kind: 'data' },
+    { id: 's23', from: 'step2', fromHandle: 's-b', to: 'step3', toHandle: 't-t', kind: 'data' },
+    { id: 's34', from: 'step3', fromHandle: 's-r', to: 'step4', toHandle: 't-l', kind: 'data' },
+    { id: 'out', from: 'step4', fromHandle: 's-r', to: 'neptune', toHandle: 't-l', kind: 'data', label: 'graph data plus\nthe source links', labelDy: -2 },
 
-    { id: 'for', from: 'look', fromHandle: 's-r', to: 'occasion', toHandle: 't-l', kind: 'data', label: 'FOR', labelDy: -42 },
-    { id: 'c1', from: 'look', fromHandle: 's-b1', to: 'item1', toHandle: 't-t2', kind: 'data', label: 'CONTAINS', labelDx: -60 },
-    { id: 'c2', from: 'look', fromHandle: 's-b2', to: 'item2', toHandle: 't-t1', kind: 'data' },
-    { id: 'iscat', from: 'item1', fromHandle: 's-b1', to: 'category', toHandle: 't-t2', kind: 'data', label: 'IS_CATEGORY', labelDx: -75 },
-    { id: 'hasattr', from: 'item2', fromHandle: 's-b2', to: 'attribute', toHandle: 't-t1', kind: 'data', label: 'HAS_ATTRIBUTE', labelDx: 85 },
-
-    { id: 't1', from: 'text', fromHandle: 's-r', to: 'statement', toHandle: 't-l', kind: 'data' },
-    { id: 'illustrates', from: 'statement', fromHandle: 's-r', to: 'look', toHandle: 't-l1', kind: 'data', label: 'ILLUSTRATES' },
-    { id: 'same', from: 'merge', fromHandle: 's-r', to: 'category', toHandle: 't-l', kind: 'control', label: 'same node', labelDx: -10, labelDy: 0 },
+    { id: 'contains', from: 'look', fromHandle: 's-b', to: 'item', toHandle: 't-t', kind: 'data', label: 'CONTAINS' },
+    { id: 'for', from: 'look', fromHandle: 's-r', to: 'occasion', toHandle: 't-t', kind: 'data', label: 'FOR', labelDx: 16, labelDy: 40 },
   ],
-  legend: [
-    { kind: 'data', text: 'what each step hands on' },
-    { kind: 'control', text: 'a link, not a step' },
-  ],
+  legend: [{ kind: 'data', text: 'what each step hands on' }],
 };
