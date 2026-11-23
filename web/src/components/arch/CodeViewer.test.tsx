@@ -64,4 +64,22 @@ describe('CodeViewer', () => {
     expect(html).not.toContain('ide-notes');
     expect(html.match(/token-line ide-line/g)).toHaveLength(1);
   });
+
+  it('marks the focus line, and only that one', () => {
+    const html = renderToStaticMarkup(<CodeViewer code={converseSource} language="python" highlights={[]} focusLine={3} />);
+    const focused = html.match(/class="token-line ide-line focus"[^>]*data-line="(\d+)"/g) ?? [];
+    expect(focused).toHaveLength(1);
+    expect(focused[0]).toContain('data-line="3"');
+    expect(renderToStaticMarkup(<CodeViewer code={converseSource} language="python" highlights={[]} focusLine={null} />)).not.toContain('ide-line focus');
+  });
+
+  it('wraps long lines only when asked to', () => {
+    expect(renderToStaticMarkup(<CodeViewer code={'a long line\n'} language="prompt" highlights={[]} wrap />)).toMatch(/class="ide-body prism-code language-prompt wrap"/);
+    expect(renderToStaticMarkup(<CodeViewer code={'a long line\n'} language="prompt" highlights={[]} />)).toMatch(/class="ide-body prism-code language-prompt"/);
+  });
+
+  it('knows the Turtle and prompt grammars', () => {
+    expect(renderToStaticMarkup(<CodeViewer code={'fo:Coat a owl:Class .'} language="turtle" highlights={[]} />)).toMatch(/class="token prefixed-name class-name"[^>]*>Coat</);
+    expect(renderToStaticMarkup(<CodeViewer code={'## Output\n- Coat: a coat'} language="prompt" highlights={[]} />)).toMatch(/class="token heading function"[^>]*>## Output</);
+  });
 });

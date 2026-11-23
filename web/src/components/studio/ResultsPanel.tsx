@@ -2,10 +2,14 @@
 // SPDX-License-Identifier: MIT-0
 
 import { useMemo, type ReactNode } from 'react';
-import type { ClassifyResult, OntologyDetail, OntologyFeedback, VisionModel } from '../../api';
+import type { ClassifyResult, CodeHighlight, OntologyDetail, OntologyFeedback, VisionModel } from '../../api';
 import { localName } from './treeLayout';
+import { CodeViewer } from '../arch/CodeViewer';
 import { JsonPanel } from '../arch/JsonTree';
 import type { RunRow } from './types';
+
+/** The prompt inspectors show the prompt in the code viewer without gutter marks. */
+const NO_MARKS: CodeHighlight[] = [];
 
 /**
  * A call's input tokens with the cached share: what the prompt cache served (read) and, on a
@@ -116,9 +120,9 @@ export function RunDetails({
             <code>owl.classification_prompt()</code> renders the system prompt from the ontology. It is the same for every photo, so it can be cached. The user turn is the photo and this text.
           </p>
           <div className="po-inspect-label">system prompt</div>
-          <pre className="code code-block">{result.prompt.system}</pre>
+          <CodeViewer code={result.prompt.system} language="prompt" highlights={NO_MARKS} wrap maxHeight={480} />
           <div className="po-inspect-label">user turn (with the photo)</div>
-          <pre className="code code-block">{result.prompt.user}</pre>
+          <CodeViewer code={result.prompt.user} language="prompt" highlights={NO_MARKS} wrap maxHeight={160} />
         </details>
         <details className="xp xp-inspect">
           <summary>

@@ -57,14 +57,18 @@ describe('the file viewer', () => {
     const html = renderToStaticMarkup(<OntologyFile ontologyId="fashion" file="fashion.ttl" node={null} />);
     expect(html).toContain('Inspect: the ontology file (fashion.ttl)');
     expect(html).toContain('the OWL source, as the app reads it');
-    expect(html).not.toContain('onto-file-pre'); // closed: nothing is read or shown yet
+    expect(html).not.toContain('ide-line'); // closed: nothing is read or shown yet
   });
-  it('shows the given text line by line, with the definition of the selected term highlighted', () => {
+  it('shows the given text in the code viewer, Turtle-coloured, with the definition of the selected term marked', () => {
     const html = renderToStaticMarkup(<OntologyFile ontologyId="fashion" file="fashion.ttl" node={node(`${FO}Coat`)} text={TURTLE} defaultOpen />);
     expect(html).toContain('Showing the definition of Coat (line 9).');
-    expect(html.match(/class="onto-line onto-line-hit"/g)).toHaveLength(1);
-    expect(html).toMatch(/class="onto-line onto-line-hit" data-line="9"><span class="onto-ln" aria-hidden="true">9<\/span>fo:Coat a owl:Class ;/);
-    expect(html.match(/class="onto-line"/g)).toHaveLength(TURTLE.split('\n').length - 1);
+    expect(html).toContain('language-turtle');
+    expect(html.match(/token-line ide-line/g)).toHaveLength(TURTLE.split('\n').length);
+    const focused = html.match(/class="token-line ide-line focus"[^>]*data-line="(\d+)"/g) ?? [];
+    expect(focused).toHaveLength(1);
+    expect(focused[0]).toContain('data-line="9"');
+    expect(html).toMatch(/ide-line focus"[^>]*data-line="9"[^>]*>.*?<span class="ide-no">9<\/span>.*?class="token prefixed-name class-name"[^>]*>Coat</);
+    expect(html).toMatch(/class="token keyword"[^>]*>@prefix</); // the Turtle grammar did its work
   });
   it('says so when the selected term has no line of its own, and counts the lines when nothing is selected', () => {
     expect(renderToStaticMarkup(<OntologyFile ontologyId="fashion" file="fashion.ttl" node={node(`${FO}Shoe`)} text={TURTLE} defaultOpen />)).toContain('Shoe has no definition line of its own in this file.');

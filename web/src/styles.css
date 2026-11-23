@@ -224,16 +224,8 @@ table.metrics td.good { color: var(--green); font-weight: 600; }
 table.metrics.entities td { white-space: normal; }
 table.metrics.entities tr.unknown { opacity: 0.6; }
 pre.code-block { max-height: 420px; font-size: 0.8rem; white-space: pre-wrap; word-break: break-word; }
-/* step 1's file viewer (OntologyFile.tsx): the Turtle as the app reads it, line-numbered, read-only; the box scrolls
-   on its own (position: relative, so a line's offsetTop is measured from the box), long lines scroll sideways */
+/* step 1's file viewer (OntologyFile.tsx): the note line above the code viewer (.ide) that shows the Turtle */
 .onto-file-note { margin: 0 0 0.4rem; }
-.onto-file { position: relative; max-height: 420px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--subtle); }
-.onto-file:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
-.onto-file-pre { margin: 0; padding: 0.5rem 0; background: none; border-radius: 0; overflow: visible; font-size: 0.78rem; line-height: 1.45; white-space: pre; tab-size: 4; }
-.onto-line { display: block; padding: 0 0.8rem 0 0; }
-.onto-ln { display: inline-block; width: 3.2em; padding-right: 0.8em; margin-right: 0.6em; text-align: right; color: var(--ink-3); border-right: 1px solid var(--line); user-select: none; }
-.onto-line-hit { background: #fff4e0; box-shadow: inset 3px 0 0 var(--orange); }
-.onto-line-hit .onto-ln { color: var(--accent-ink); font-weight: 600; }
 /* formatted, collapsible JSON (JsonTree.tsx): Night Owl colors, like the code viewer */
 .json-toolbar { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
 .json-toolbar button { flex: 0 0 auto; }
@@ -459,6 +451,12 @@ pre.owl-turtle { max-height: 340px; overflow: auto; font-size: 0.74rem; backgrou
 .ide-pin.static { margin-right: 0.4rem; vertical-align: middle; }
 .ide-no { flex: 0 0 2.6rem; text-align: right; padding-right: 0.9rem; color: #4b6479; user-select: none; }
 .ide-code { white-space: pre; }
+/* wrap: long lines of prose (the prompt) wrap inside the viewer instead of scrolling sideways */
+.ide-body.wrap .ide-pre { min-width: 0; }
+.ide-body.wrap .ide-code { white-space: pre-wrap; word-break: break-word; }
+/* focus: the one line a caller points at (the definition of the term selected in step 1) */
+.ide-line.focus { border-left-color: #ff9900; background: color-mix(in srgb, #ff9900 28%, transparent); }
+.ide-line.focus .ide-no { color: #ff9900; font-weight: 600; }
 .ide-notes { border-top: 1px solid #0b2942; background: #061b2f; padding: 0.5rem 0.7rem 0.6rem; color: #d6deeb; }
 .ide-kinds { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.4rem; }
 .ide-kinds .chip { background: #0b2942; color: #d6deeb; border-color: #1d3b53; }

@@ -170,7 +170,8 @@ retail domains** (the browse-only ontologies, if you have time). The pieces:
    something the ontology already has are flagged *already known*: the model missed it, which is a
    prompt problem rather than a gap.
 6. **The results panel.** Parsed entities; the model output as formatted JSON (fold and unfold,
-   expand or collapse all, copy, or the raw text); the system prompt and the request; a metrics table
+   expand or collapse all, copy, or the raw text); the system prompt and the user turn, in the app's
+   code viewer with syntax colours and wrapped lines (**Inspect: the prompt**); a metrics table
    with latency and input, cache-read, cache-write and output tokens per model (the tab always
    sends a cache checkpoint where the model takes one). The **System prompt** tab lays the prompt out for reading (the instruction, the
    class hierarchy as a tree, relations as domain to range, every attribute property with its allowed
@@ -182,13 +183,14 @@ retail domains** (the browse-only ontologies, if you have time). The pieces:
    it: superclasses and subclasses, the properties whose domain it is with their ranges and allowed
    values, the classes it connects to and through which properties, or, for a property, its domain,
    range and sub-properties. Every name is a link into the ontology. Under the details, **Inspect:
-   the ontology file (fashion.ttl)** opens a read-only, line-numbered viewer of the Turtle document
-   as the app reads it (`GET /api/ontologies/file?id=<ontology id>`, which returns `{"id", "file",
-   "format", "text"}`; the file is read once, when the expander first opens). While the viewer is
-   open, selecting a term anywhere in step 1 scrolls the viewer's own box to the line that defines
-   the term (the subject line of its Turtle block, `fo:Coat a owl:Class ;`, found through the file's
-   `@prefix` for the term's namespace, or the full IRI in angle brackets) and highlights it. The
-   license and attribution of the ontology are in the header comment of that file.
+   the ontology file (fashion.ttl)** shows the Turtle document in the app's code viewer, with syntax
+   colours and line numbers, as the app reads it (`GET /api/ontologies/file?id=<ontology id>`,
+   which returns `{"id", "file", "format", "text"}`; the file is read once, when the expander first
+   opens). While the viewer is open, selecting a term anywhere in step 1 scrolls the viewer's own
+   box to the line that defines the term (the subject line of its Turtle block,
+   `fo:Coat a owl:Class ;`, found through the file's `@prefix` for the term's namespace, or the full
+   IRI in angle brackets) and marks it. The license and attribution of the ontology are in the
+   header comment of that file.
 8. **Other retail domains** (step 4, if you have time): the same shape in other catalogs. The choices are
    the ontology of steps 1 to 3 and the browse-only domains `GET /api/ontologies` lists (beauty,
    home and food in the sample), each read once with `GET /api/ontologies/detail`: the kinds a

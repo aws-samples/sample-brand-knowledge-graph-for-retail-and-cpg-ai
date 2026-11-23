@@ -2,17 +2,20 @@
 // SPDX-License-Identifier: MIT-0
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { api, type OntoNode } from '../../api';
+import { api, type CodeHighlight, type OntoNode } from '../../api';
+import { CodeViewer } from '../arch/CodeViewer';
 import { localName } from './treeLayout';
 
 /**
  * Step 1's "Inspect: the ontology file": the OWL document as the app reads it (the Turtle of the
- * domain folder, `GET /api/ontologies/file`), in a scrollable, line-numbered, read-only viewer.
- * The text is read once, the first time the expander opens, and kept in component state. While
- * the viewer is open, selecting a term in step 1 (the search, the map, the Your turn links, a name
- * in the details) scrolls its own box to the line that defines the term and highlights it; the
- * page itself does not move.
+ * domain folder, `GET /api/ontologies/file`), in the app's code viewer, with Turtle highlighting
+ * and line numbers. The text is read once, the first time the expander opens, and kept in
+ * component state. While the viewer is open, selecting a term in step 1 (the search, the map, the
+ * Your turn links, a name in the details) scrolls the viewer's own box to the line that defines
+ * the term and marks it; the page itself does not move.
  */
+const NO_MARKS: CodeHighlight[] = [];
+
 export function OntologyFile({
   ontologyId,
   file,
@@ -32,7 +35,6 @@ export function OntologyFile({
   const [text, setText] = useState<string | null>(given);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const box = useRef<HTMLDivElement>(null);
   // whether the file has been asked for (once per ontology; again after an error)
   const asked = useRef(given !== null);
 
@@ -55,17 +57,8 @@ export function OntologyFile({
     );
   }, [open, ontologyId]);
 
-  const lines = useMemo(() => (text === null ? [] : text.replace(/\n$/, '').split('\n')), [text]);
+  const lineCount = useMemo(() => (text === null ? 0 : text.replace(/\n$/, '').split('\n').length), [text]);
   const hit = useMemo(() => (text !== null && node ? definitionLine(text, node.id) : null), [text, node]);
-
-  // scroll the viewer's own box to the definition, centred; never the page
-  useEffect(() => {
-    const el = box.current;
-    if (!open || hit === null || !el) return;
-    const line = el.querySelector<HTMLElement>(`[data-line="${hit + 1}"]`);
-    if (!line) return;
-    el.scrollTop = Math.max(0, line.offsetTop - el.clientHeight / 2 + line.offsetHeight / 2);
-  }, [open, hit, lines.length]);
 
   const term = node ? localName(node.id) : '';
   return (
@@ -84,20 +77,10 @@ export function OntologyFile({
           {text !== null && (
             <>
               <p className="muted small onto-file-note">
-                {node ? (hit !== null ? `Showing the definition of ${term} (line ${hit + 1}).` : `${term} has no definition line of its own in this file.`) : `${lines.length.toLocaleString()} lines. Select a term in step 1 to jump to its definition.`}
+                {node ? (hit !== null ? `Showing the definition of ${term} (line ${hit + 1}).` : `${term} has no definition line of its own in this file.`) : `${lineCount.toLocaleString()} lines. Select a term in step 1 to jump to its definition.`}
               </p>
-              <div className="onto-file" ref={box} tabIndex={0} role="region" aria-label={`${file}, read-only`}>
-                <pre className="onto-file-pre">
-                  {lines.map((l, i) => (
-                    <span key={i} className={`onto-line${i === hit ? ' onto-line-hit' : ''}`} data-line={i + 1}>
-                      <span className="onto-ln" aria-hidden="true">
-                        {i + 1}
-                      </span>
-                      {l}
-                      {'\n'}
-                    </span>
-                  ))}
-                </pre>
+              <div role="region" aria-label={`${file}, read-only`}>
+                <CodeViewer code={text} language="turtle" highlights={NO_MARKS} focusLine={hit === null ? null : hit + 1} maxHeight={480} />
               </div>
             </>
           )}
