@@ -379,6 +379,8 @@ export type ArticleInfo = {
   data_set?: string;
 };
 export type OntologyDetail = OntologySummary & { view: OntologyView; prompt: string; examples_list: ExampleInfo[]; articles_list: ArticleInfo[]; readme: string };
+/** `GET /api/ontologies/file`: the ontology document as the app reads it (tab 1's file viewer). */
+export type OntologyFileText = { id: string; file: string; format: string; text: string };
 /**
  * The reasoning efforts an agent may ask a model for (vision.py): `levels` are the wire ids in the
  * order the UI lists them, always `default` first; `default_means` is the level `default` stands
@@ -859,7 +861,7 @@ export const api = {
     request<{ centers: string[]; nodes: Node[]; edges: Edge[] }>('POST', '/api/graph/explore', { ids, hops, limit }),
   exploreLabel: (label: string, hops = 1) =>
     request<{ centers: string[]; nodes: Node[]; edges: Edge[] }>('POST', '/api/graph/explore', { label, hops }),
-  /** "Same question, three answers": LLM only, RAG on the product catalog and GraphRAG (the smart retriever) side by side; a traversal makes GraphRAG the simple one with it, `searches` are RAG's edited ones. */
+  /** "Compare GraphRAG with traditional methods" (tab 5): LLM only, RAG on the product catalog and GraphRAG (the smart retriever) side by side; a traversal makes GraphRAG the simple one with it, `searches` are RAG's edited ones. */
   /** With `image` (a data URL of one piece): Style recommendation, all three see the photo. */
   payoff: (question: string, opts: { cypher?: string; searches?: string[]; image?: string } = {}) => {
     const { image, ...rest } = opts;
@@ -916,6 +918,8 @@ export const api = {
   /** Every domain folder, and `default`: the one whose ontology the graph is loaded with. */
   ontologies: () => request<{ ontologies: OntologySummary[]; default: string }>('GET', '/api/ontologies'),
   ontologyDetail: (id: string) => request<OntologyDetail>('GET', `/api/ontologies/detail?id=${encodeURIComponent(id)}`),
+  /** The ontology document as text (the `.ttl` the app parses), for tab 1's file viewer. */
+  ontologyFile: (id: string) => request<OntologyFileText>('GET', `/api/ontologies/file?id=${encodeURIComponent(id)}`),
   parseOntology: (text: string, filename: string) => request<OntologyDetail>('POST', '/api/ontologies/parse', { text, filename }),
   examples: (id: string, set: ExampleSet = 'images') =>
     request<{ ontology_id: string; set: ExampleSet; examples: ExampleInfo[] }>('GET', `/api/ontologies/examples?id=${encodeURIComponent(id)}${setParam(set)}`),

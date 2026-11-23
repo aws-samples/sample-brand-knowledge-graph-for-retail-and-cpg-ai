@@ -126,8 +126,12 @@ on the model calls that carry text the participant wrote.
 
 ## 1 · Ontology explorer
 
-The tab shows three things: multimodal models on Amazon Bedrock, an ontology used as a contract, and
-several models compared on the same task.
+The tab opens on its first step; there is no intro card. Four numbered steps: **Meet the ontology**
+(the four counts, the search, the map, the details of a term, and the ontology file itself in an
+Inspect expander), **Use a multimodal vision model to break the photo down into the ontology's
+terms** (a photo, a model, **Classify**, the boxes), **The model's answer after the ontology check**
+(the entities, what the check removed, what was sent) and **Explore possible ontologies for other
+retail domains** (the browse-only ontologies, if you have time). The pieces:
 
 1. **The ontology.** The domain chosen in tab 0. It is parsed with [rdflib](https://rdflib.readthedocs.io/) and drawn as a
    top-down tree: the root classes on the top row, subclasses below them, leaf classes and values
@@ -174,11 +178,18 @@ several models compared on the same task.
    definitions, the feedback ask and the output contract) with a raw-text switch. For fashion 1.2.0
    the system prompt is 9,682 characters. Every result is
    cached in the browser per ontology, image and model until you clear it.
-7. **The Ontology panel.** The statistics of the loaded ontology and, once you select an element,
-   everything the ontology says about it: superclasses and subclasses, the properties whose domain it
-   is with their ranges and allowed values, the classes it connects to and through which properties,
-   or, for a property, its domain, range and sub-properties. Every name is a link into the ontology.
-8. **Other aisles** (step 4, if you have time): the same shape in other catalogs. The choices are
+7. **The details and the file.** Once you select an element, everything the ontology says about
+   it: superclasses and subclasses, the properties whose domain it is with their ranges and allowed
+   values, the classes it connects to and through which properties, or, for a property, its domain,
+   range and sub-properties. Every name is a link into the ontology. Under the details, **Inspect:
+   the ontology file (fashion.ttl)** opens a read-only, line-numbered viewer of the Turtle document
+   as the app reads it (`GET /api/ontologies/file?id=<ontology id>`, which returns `{"id", "file",
+   "format", "text"}`; the file is read once, when the expander first opens). While the viewer is
+   open, selecting a term anywhere in step 1 scrolls the viewer's own box to the line that defines
+   the term (the subject line of its Turtle block, `fo:Coat a owl:Class ;`, found through the file's
+   `@prefix` for the term's namespace, or the full IRI in angle brackets) and highlights it. The
+   license and attribution of the ontology are in the header comment of that file.
+8. **Other retail domains** (step 4, if you have time): the same shape in other catalogs. The choices are
    the ontology of steps 1 to 3 and the browse-only domains `GET /api/ontologies` lists (beauty,
    home and food in the sample), each read once with `GET /api/ontologies/detail`: the kinds a
    model could name, the families of detail, the allowed values, the prompt's size, the map and

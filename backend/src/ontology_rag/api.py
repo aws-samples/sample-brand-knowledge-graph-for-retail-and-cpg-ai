@@ -626,6 +626,18 @@ def ontology_detail(svc, q, b):
         return 404, {"error": f"ontology {oid!r} not found"}
 
 
+def ontology_file(svc, q, b):
+    """The ontology document as text (``{"id", "file", "format", "text"}``), read-only: the
+    ``.ttl`` the app parses for the ontology's view, so tab 1 can show the source."""
+    oid = _ontology_id(q, b)
+    if not oid:
+        return 400, {"error": "id is required"}
+    try:
+        return 200, svc.ontology_file(oid)
+    except KeyError:
+        return 404, {"error": f"ontology {oid!r} not found"}
+
+
 def ontology_parse(svc, q, b):
     text = b.get("text")
     if not isinstance(text, str) or not text.strip():
@@ -830,6 +842,7 @@ ROUTES: dict[tuple[str, str], Route] = {
     # ontology explorer
     ("GET", "/api/ontologies"): ontologies,
     ("GET", "/api/ontologies/detail"): ontology_detail,
+    ("GET", "/api/ontologies/file"): ontology_file,
     ("POST", "/api/ontologies/parse"): ontology_parse,
     ("GET", "/api/ontologies/examples"): examples,
     ("GET", "/api/ontologies/example-image"): example_image,

@@ -107,6 +107,24 @@ def test_images_above_the_limit_are_refused_before_any_model_call(loaded_service
     assert status == 400 and "not enabled" in payload["error"]  # past the size check: the model
 
 
+def test_the_ontology_file_route_returns_the_document_as_text(loaded_service):
+    """Tab 1's file viewer: the Turtle the app parses, as is, with the file's name and format;
+    an unknown id is a 404 and a missing id a 400, like ``/api/ontologies/detail``."""
+    status, payload = dispatch(loaded_service, "GET", "/api/ontologies/file", {"id": "fashion"}, {})
+    assert status == 200
+    assert payload["id"] == "fashion" and payload["file"] == "fashion.ttl"
+    assert payload["format"] == "ttl"
+    assert payload["text"].startswith("# SPDX-License-Identifier: CC-BY-4.0\n")
+    assert "\nfo:Coat a owl:Class ;\n" in payload["text"]
+    status, payload = dispatch(loaded_service, "GET", "/api/ontologies/file", {"id": "nope"}, {})
+    assert status == 404 and payload["error"] == "ontology 'nope' not found"
+    status, payload = dispatch(loaded_service, "GET", "/api/ontologies/file", {}, {})
+    assert status == 400 and payload["error"] == "id is required"
+    # a path is not an id: the id check refuses it before any file is read
+    status, _ = dispatch(loaded_service, "GET", "/api/ontologies/file", {"id": "../fashion"}, {})
+    assert status == 400
+
+
 def test_a_subgraph_walk_starts_from_at_most_100_ids(loaded_service):
     ids = [f"item:{i}" for i in range(api.MAX_EXPLORE_IDS + 1)]
     status, payload = dispatch(loaded_service, "POST", "/api/graph/explore", {}, {"ids": ids})

@@ -3,7 +3,6 @@
 
 import { useMemo, type ReactNode } from 'react';
 import type { OntoNode, OntologyDetail } from '../../api';
-import { isHttpUrl } from '../../links';
 import type { Box } from './ImageCanvas';
 import { localName } from './OntologyGraph';
 
@@ -23,7 +22,7 @@ export function OntologyDetails({
 }: {
   detail: OntologyDetail | null;
   node: OntoNode | null;
-  /** Boxes on the photo that use the element; null where there is no photo (Other aisles). */
+  /** Boxes on the photo that use the element; null where there is no photo (the other retail domains of step 4). */
   hitCount: number | null;
   onNavigate: (node: OntoNode | null) => void;
   id?: string;
@@ -142,97 +141,6 @@ export function BoxInOntology({ detail, box, onNavigate }: { detail: OntologyDet
         </p>
       )}
     </div>
-  );
-}
-
-/**
- * Step 1's one line about the file: its name and version, where it comes from, its license and
- * its size. A Creative Commons license URL reads as its short name ("CC BY 4.0").
- */
-export function FileLine({ detail }: { detail: OntologyDetail }) {
-  const cc = detail.license ? /creativecommons\.org\/licenses\/([a-z-]+)\/([\d.]+)/i.exec(detail.license) : null;
-  const host = detail.source && isHttpUrl(detail.source) ? new URL(detail.source).hostname : detail.source;
-  return (
-    <p className="muted small" style={{ margin: '-0.2rem 0 0.6rem' }}>
-      {detail.name}
-      {detail.version && <> v{detail.version}</>}
-      {detail.source && (
-        <>
-          {' '}
-          · based on{' '}
-          {isHttpUrl(detail.source) ? (
-            <a href={detail.source} target="_blank" rel="noopener noreferrer">
-              {host}
-            </a>
-          ) : (
-            host
-          )}
-        </>
-      )}
-      {detail.license && (
-        <>
-          {' '}
-          ·{' '}
-          {isHttpUrl(detail.license) ? (
-            <a href={detail.license} target="_blank" rel="noopener noreferrer">
-              {cc ? `CC ${cc[1].toUpperCase()} ${cc[2]}` : 'license'}
-            </a>
-          ) : (
-            detail.license
-          )}
-        </>
-      )}{' '}
-      · {detail.stats.triples.toLocaleString()} triples
-    </p>
-  );
-}
-
-/** The ontology file's facts: its statistics, IRI, version, license and source (step 1's Inspect). */
-export function OntologyFacts({ detail }: { detail: OntologyDetail | null }) {
-  if (!detail) return null;
-  const s = detail.stats;
-  return (
-    <>
-      <div className="stat-strip" aria-label="ontology statistics">
-        <Stat label="classes" value={s.classes} />
-        <Stat label="entity classes" value={detail.entity_classes} hint="classes the model may locate in an image" />
-        <Stat label="value classes" value={detail.value_classes} hint="classes whose individuals are the allowed values of a property" />
-        <Stat label="values" value={s.individuals} hint="named individuals" />
-        <Stat label="object properties" value={s.object_properties} />
-        <Stat label="data properties" value={s.data_properties} />
-        <Stat label="triples" value={s.triples} />
-        <Stat label="max depth" value={s.max_depth} />
-        <Stat label="prompt tokens" value={`≈ ${detail.prompt_tokens_estimate.toLocaleString()}`} hint="the ontology rendered as the system prompt (the prefix a cache checkpoint caches)" />
-      </div>
-      <p className="muted onto-meta">
-        {detail.iri && (
-          <>
-            IRI <code>{detail.iri}</code>
-          </>
-        )}
-        {detail.version && <> · v{detail.version}</>}
-        {detail.license && <> · license {detail.license}</>}
-        {detail.source && (
-          <>
-            {' '}
-            · source{' '}
-            {isHttpUrl(detail.source) ? (
-              <a href={detail.source} target="_blank" rel="noopener noreferrer">
-                {detail.source}
-              </a>
-            ) : (
-              detail.source
-            )}
-          </>
-        )}
-        {detail.view.comment && (
-          <>
-            <br />
-            {detail.view.comment}
-          </>
-        )}
-      </p>
-    </>
   );
 }
 
@@ -595,14 +503,5 @@ function Chips({ ids, index, onNavigate, max = 24, separator, plain = false }: {
       ))}
       {nodes.length > max && <span className="muted"> +{nodes.length - max} more</span>}
     </span>
-  );
-}
-
-function Stat({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
-  return (
-    <div className="stat" title={hint}>
-      <div className="stat-value">{typeof value === 'number' ? value.toLocaleString() : value}</div>
-      <div className="stat-label">{label}</div>
-    </div>
   );
 }

@@ -3,14 +3,15 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import type { OntoNode } from '../../api';
-import { GoodToKnow, InCpg, Lead, Notice, YourTurn } from '../retriever/Callouts';
+import { GoodToKnow, Lead, Notice, YourTurn } from '../retriever/Callouts';
 import { NextTab } from '../shared/NextTab';
 import { Stage } from '../shared/Stage';
 import { useModelChoice } from '../shared/useModels';
 import { ArchitecturePanel } from './ArchitecturePanel';
 import { boxesOf, ImageCanvas, type Box } from './ImageCanvas';
 import { localName, OntologyGraph } from './OntologyGraph';
-import { BoxInOntology, FileLine, OntologyDetails, OntologyFacts } from './OntologyPanel';
+import { OntologyFile } from './OntologyFile';
+import { BoxInOntology, OntologyDetails } from './OntologyPanel';
 import { RunDetails, RunTabs } from './ResultsPanel';
 import { OtherAisles } from './OtherAisles';
 import { PhotoBar } from './StudioToolbar';
@@ -36,27 +37,31 @@ const SUGGESTED: [string, string][] = [
 ];
 
 /**
- * Tab 1, "What the model sees": where the session's line starts (here's an image → what the model
- * sees → the graph). An intro with a short primer on ontologies, then three steps:
+ * Tab 1, "Ontology explorer": where the session's line starts (a photo, what the model sees in it,
+ * the graph). The tab opens on step 1; there is no intro. Four steps:
  *
- *   1 meet the ontology   : what it holds (counts, the file in one line, the rest in Inspect),
- *                           look up a word (search, suggested words, or a
- *                           click in the map: OntologyGraph, one name at a time), and everything
- *                           the ontology says about it (OntologyDetails, inline)
- *   2 one photo           : the photo and the vision model, one button each (PhotoBar), Classify; the photo with its
- *                           boxes, and next to it the selected box, named with the ontology's terms
- *                           (BoxInOntology)
- *   3 what came back      : the entities named with the ontology's terms, the check's removals struck
- *                           through, the check, what the ontology could not express, and the
- *                           prompt, reply and request (RunDetails)
+ *   1 Meet the ontology              : what it holds (the four counts), look up a word (search,
+ *                                      suggested words, or a click in the map: OntologyGraph, one
+ *                                      name at a time), everything the ontology says about it
+ *                                      (OntologyDetails, inline), and the file itself in a
+ *                                      line-numbered viewer that jumps to the selected term's
+ *                                      definition (OntologyFile, in the Inspect expander)
+ *   2 Use a multimodal vision model  : the photo and the vision model, one button each (PhotoBar),
+ *                                      Classify; the photo with its boxes, and next to it the
+ *                                      selected box, named with the ontology's terms (BoxInOntology)
+ *   3 The model's answer after the   : the entities named with the ontology's terms, the check's
+ *     ontology check                   removals struck through, what the ontology could not express,
+ *                                      and the prompt, reply and request (RunDetails)
+ *   4 Explore possible ontologies    : the same shape in the browse-only domains of ontologies/,
+ *     for other retail domains         read from the API (OtherAisles)
  *
- * then how it works, other aisles (the same shape in the browse-only domains of ontologies/, read
- * from the API: OtherAisles) and, last, the hand-off to tab 2. Prompt caching is always on. Click a box → it shows next to the photo, named with the ontology's terms; click a
- * name (there, in the map or the details) → the boxes that use it light up on the photo. The server
- * round trips live in three hooks: the ontology (useOntologyChoice), the image (useImageChoice) and
- * the classify calls, cached per (ontology, image, model, caching) (useClassification). The
- * results, the image and the result shown outlive a switch to another tab and a reload
- * (studioCache.ts); the model is remembered like the other tabs'.
+ * How it works sits between steps 3 and 4; the hand-off to tab 2 comes last. Prompt caching is
+ * always on. Click a box and it shows next to the photo, named with the ontology's terms; click a
+ * name (there, in the map or the details) and the boxes that use it light up on the photo. The
+ * server round trips live in three hooks: the ontology (useOntologyChoice), the image
+ * (useImageChoice) and the classify calls, cached per (ontology, image, model, caching)
+ * (useClassification). The results, the image and the result shown outlive a switch to another tab
+ * and a reload (studioCache.ts); the model is remembered like the other tabs'.
  */
 const MODEL_KEY = 'studio.model';
 
@@ -145,49 +150,12 @@ export function OntologyStudio({ domain }: { domain: string }) {
     <div className="stack studio">
       {error && <p className="error">{error}</p>}
 
-      {/* ------------------------------------------------------------ the intro */}
-      <div className="card">
-        <h2>What the model sees in one photo, named with the ontology&apos;s terms</h2>
-        <Lead>
-          It starts with one photo and one question: what can a vision model see in it? In this tab you meet the ontology, send one photo to a model on Amazon Bedrock with the ontology as its
-          instructions, and check what came back. Tab 2 then does the same for a whole shoot, into the graph.
-        </Lead>
-        <p className="muted tab-uses">Uses the domain's ontology (fashion here). Feeds tab 2, which sends a whole shoot through the same prompt and check.</p>
-        <ol className="po-intro-steps">
-          <li>
-            <b>Meet the ontology:</b> look up a few words, in the list or on the map. These are the only words the model may use.
-          </li>
-          <li>
-            <b>One photo, through a vision model:</b> pick a photo and a model, press Classify, then click a box to see how the model named that garment. Try another model on the same photo.
-          </li>
-          <li>
-            <b>What came back:</b> everything the model found, what the check removed, and what the ontology could not express. Inspect shows the exact prompt and reply.
-          </li>
-          <li>
-            <b>Other aisles</b> (if you have time): the same shape for beauty and skincare, home furnishings, and food and beverage, three ontologies to browse.
-          </li>
-        </ol>
-        <GoodToKnow title="What is an ontology?">
-          <p>
-            A shared vocabulary for the brand&apos;s world. It lists the kinds of garment (coat, trousers, shoe), the details each kind can have (length, neckline, silhouette), the values each detail
-            allows (mini, midi, maxi) and how they relate (a coat has a lapel).
-          </p>
-          <p>
-            Why it matters: the vision model must answer in these words. A midi skirt is <i>midi</i> in every look, never &ldquo;mid-length&rdquo; in one and &ldquo;below the knee&rdquo; in another. Because the
-            words stay the same, you can count midi skirts across the whole graph later.
-          </p>
-          <p>
-            This one is based on{' '}
-            <a href="https://fashionpedia.github.io/home/index.html" target="_blank" rel="noopener noreferrer">
-              Fashionpedia
-            </a>
-            , an open fashion vocabulary, written in OWL, the W3C standard for ontologies: classes, properties and allowed values that a program can read and check.
-          </p>
-        </GoodToKnow>
-      </div>
-
       {/* ------------------------------------------------------------ 1. meet the ontology */}
       <Stage n={1} title="Meet the ontology" sub="The kinds of garment, their details, and the values each detail allows." locked={null} done={browsed}>
+        <Lead>
+          An ontology is a shared vocabulary that lists the kinds of garment (coat, trousers, shoe), the details each kind can have (length, neckline, silhouette) and the values each detail allows
+          (mini, midi, maxi). The vision model may answer only with these words, so a midi skirt is <i>midi</i> in every look and you can count midi skirts across the whole graph later.
+        </Lead>
         {detail ? (
           <dl className="counts">
             <div className="count">
@@ -222,7 +190,6 @@ export function OntologyStudio({ domain }: { domain: string }) {
             </p>
           )
         )}
-        {detail && <FileLine detail={detail} />}
         <YourTurn>
           <ol className="po-intro-steps">
             <li>
@@ -230,7 +197,7 @@ export function OntologyStudio({ domain }: { domain: string }) {
               <button type="button" className="linklike" onClick={look('Coat')}>
                 <b>Coat</b>
               </button>
-              . The list is what the model can say about a coat: its length, silhouette, opening, parts.
+              . The list is what the model can say about a coat (its length, silhouette, opening and parts).
             </li>
             <li>
               Click{' '}
@@ -244,35 +211,35 @@ export function OntologyStudio({ domain }: { domain: string }) {
               <button type="button" className="linklike" onClick={look('Lapel')}>
                 <b>Lapel</b>
               </button>
-              : a part, linked to the garment by <code>hasPart</code>.
+              . It is a part, linked to the garment by <code>hasPart</code>.
             </li>
             <li>
               Look up{' '}
               <button type="button" className="linklike" onClick={look('nickname_blazer')}>
                 <b>blazer</b>
               </button>
-              . It is not a kind of garment here, it is a value: the model says <i>jacket</i>, with the nickname <i>blazer</i>.
+              . Here blazer is a value, not a kind of garment. The model says <i>jacket</i>, with the nickname <i>blazer</i>.
             </li>
             <li>
               Look up{' '}
               <button type="button" className="linklike" onClick={look('silhouette_wide-leg')}>
                 <b>wide leg</b>
               </button>
-              : a silhouette. See which detail accepts it and which kinds of garment can have it.
+              , a silhouette. See which detail accepts it and which kinds of garment can have it.
             </li>
             <li>
               Look up{' '}
               <button type="button" className="linklike" onClick={look('Shoe')}>
                 <b>Shoe</b>
               </button>
-              . There is no <i>sneaker</i> in this ontology: white sneakers are a shoe, and &ldquo;white sneakers&rdquo; is only the label the model writes. Remember this for tab 4.
+              . This ontology has no <i>sneaker</i>. White sneakers are a shoe, and &ldquo;white sneakers&rdquo; is only the label the model writes. Remember this for tab 4.
             </li>
             <li>
               Look up{' '}
               <button type="button" className="linklike" onClick={look('textile-finishing-manufacturing-techniques_pleat')}>
                 <b>pleat</b>
               </button>
-              : a finishing, so a pleated skirt is a skirt with the finishing <i>pleat</i>.
+              . It is a finishing, so a pleated skirt is a skirt with the finishing <i>pleat</i>.
             </li>
           </ol>
         </YourTurn>
@@ -303,36 +270,28 @@ export function OntologyStudio({ domain }: { domain: string }) {
         </div>
         {detail && <OntologyGraph view={detail.view} highlight={NO_HIGHLIGHT} focus={focusNode?.id ?? null} height={460} onNodeClick={(n) => n && selectNode(n)} />}
         <OntologyDetails detail={detail} node={focusNode} hitCount={focusNode ? activeBoxes.size : 0} onNavigate={(n) => selectNode(n)} />
-        <details className="xp xp-inspect">
-          <summary>
-            Inspect: the ontology file<span className="xp-hint">its statistics, IRI and description</span>
-          </summary>
-          <OntologyFacts detail={detail} />
-        </details>
+        {detail && !ontology.isUpload && <OntologyFile key={ontology.ontologyId} ontologyId={ontology.ontologyId} file={detail.file} node={focusNode} />}
         <Notice>
           <p>
             The vocabulary is closed. For a coat&apos;s length the model may answer only with one of the allowed values. Anything else fails the check in step 3, so the same garment gets the same words in
             every photo.
           </p>
-        </Notice>
-        <InCpg>
           <p>
-            Swap the ontology. A beauty ontology lists product types (serum, cleanser, SPF), ingredients, finishes and skin concerns, so the same call reads a product shot or a regimen photo in those words.
-            Step 4 shows one.
+            <b>In CPG:</b> swap the ontology. A beauty ontology lists product types (serum, cleanser, SPF), ingredients, finishes and skin concerns, so the same call reads a product shot or a regimen photo
+            in those words. The last step of this tab shows one.
           </p>
-        </InCpg>
+        </Notice>
       </Stage>
 
-      {/* ------------------------------------------------------------ 2. one photo */}
-      <Stage n={2} title="One photo, through a vision model" sub="The ontology is the model's instructions; the photo is the question." locked={null} done={!!shownResult}>
+      {/* ------------------------------------------------------------ 2. the photo through a vision model */}
+      <Stage n={2} title="Use a multimodal vision model to break the photo down into the ontology's terms" sub="The ontology is the model's instructions and the photo is the question." locked={null} done={!!shownResult}>
         <Lead>
-          Press <b>Classify</b>. The model on Amazon Bedrock gets the ontology as its instructions and the photo. It must name each garment with a kind from the ontology, each detail with an allowed value,
-          and draw a box around it. It takes 10 to 65 seconds, depending on the model.
+          Press <b>Classify</b>. The model on Amazon Bedrock gets the ontology as its instructions and the photo.
         </Lead>
         <PhotoBar ontology={ontology} image={image} runs={runs} models={models} modelId={modelId} onModel={setModelId} promptCaching={promptCaching} />
         <div className="studio-grid">
           <div className="card">
-            <h3 style={{ margin: '0 0 0.4rem' }}>{selectedBox ? 'This box, as the model named it' : 'What a box means'}</h3>
+            <h3 style={{ margin: '0 0 0.4rem' }}>{selectedBox ? 'How the model named this box' : 'What a box means'}</h3>
             {selectedBox ? (
               <>
                 <BoxInOntology detail={detail} box={selectedBox} onNavigate={openDetails} />
@@ -368,7 +327,7 @@ export function OntologyStudio({ domain }: { domain: string }) {
             />
             {shown?.status === 'running' && (
               <p className="muted">
-                <span className="spinner" /> Calling {models.find((m) => m.id === runs.activeKey.split('|')[2])?.name ?? 'the model'}… (large models take 20 to 65 s)
+                <span className="spinner" /> Calling {models.find((m) => m.id === runs.activeKey.split('|')[2])?.name ?? 'the model'}…
               </p>
             )}
             {shown?.status === 'error' && <p className="error">{shown.error}</p>}
@@ -378,27 +337,27 @@ export function OntologyStudio({ domain }: { domain: string }) {
         </div>
         <YourTurn>
           <p>
-            When the boxes appear, click one on the photo. The left side shows how the model named it: its kind, each detail with the value it picked, and its parts. Click a name there:
-            its details open in step 1, and every box that uses it lights up on the photo. Then try another photo, or your own.
+            When the boxes appear, click one on the photo. The left side shows how the model named it: its kind, each detail with the value it picked, and its parts. Click a name there. Its
+            details open in step 1, and every box that uses it lights up on the photo. Then try another photo, or your own.
           </p>
         </YourTurn>
       </Stage>
 
-      {/* ------------------------------------------------------------ 3. what came back */}
-      <Stage n={3} title="What came back, checked against the ontology" sub="The model's answer, what failed the check, and exactly what was sent." locked={shownResult ? null : 'Classify a photo in step 2 first.'} done={!!shownResult}>
+      {/* ------------------------------------------------------------ 3. the answer after the check */}
+      <Stage n={3} title="The model's answer after the ontology check" sub="What passed, what failed and what was sent." locked={shownResult ? null : 'Classify a photo in step 2 first.'} done={!!shownResult}>
         <RunTabs runs={runs.runList} models={models} activeKey={runs.activeKey} onSelect={runs.setActiveKey} />
         {shown?.status === 'error' && <p className="error">{shown.error}</p>}
         {shownResult && <RunDetails result={shownResult} detail={detail} onRerun={runs.rerun} />}
         <Notice>
           <p>
-            Every kind and value in the table is a word of the ontology, so it can become a node in the graph. When the model strays, the check says so instead of letting a new word in. That is how the graph
-            stays countable: the same detail always has the same name.
+            Every kind and value in the table is a word of the ontology, so it can become a node in the graph. When the model strays, the check says so instead of letting a new word in. The same detail
+            always has the same name, so the graph stays countable.
           </p>
         </Notice>
         <GoodToKnow>
           <p>
-            The model never sees the graph&apos;s own classes (Look, Item, Article, Statement, Brand). It only names what is in the photo. In tab 2 the pipeline turns its answer into a look and its garments,
-            and merges them into Amazon Neptune Analytics.
+            The model sees the ontology and the current photo only. It does not see the graph&apos;s data, that is, how other photos were classified, and it does not see the graph&apos;s own classes (Look,
+            Item, Article, Statement, Brand). In tab 2 the pipeline turns its answer into a look and its garments and merges them into Amazon Neptune Analytics.
           </p>
         </GoodToKnow>
       </Stage>
@@ -406,7 +365,7 @@ export function OntologyStudio({ domain }: { domain: string }) {
       {/* ------------------------------------------------------------ how it works */}
       <ArchitecturePanel runs={runs.allRuns} models={models} detail={detail} ontologyId={ontology.isUpload ? examples.from : ontology.ontologyId} open={archOpen} onToggle={setArchOpen} />
 
-      {/* ------------------------------------------------------------ other aisles */}
+      {/* ------------------------------------------------------------ 4. other retail domains */}
       <OtherAisles fashion={detail} />
 
       {/* ------------------------------------------------------------ next */}

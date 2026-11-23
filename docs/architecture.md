@@ -443,7 +443,7 @@ garments worn in new looks against the lookbook's:
 The tests run all of it without AWS: a fake `bedrock-runtime` client answers in the Converse shape
 and `MemoryBlobStore` stands in for S3.
 
-**Ontology explorer** (`GET /api/ontologies[/detail|/examples|/example-image|/articles|/article]`,
+**Ontology explorer** (`GET /api/ontologies[/detail|/file|/examples|/example-image|/articles|/article]`,
 `POST /api/ontologies/parse`, `GET /api/vision/models`, `POST /api/vision/classify`,
 `GET /api/explorer/code|architecture|logs`)
 0. `GET /api/ontologies` lists the domain folders (`ontologies/<domain>/<domain>.ttl` with

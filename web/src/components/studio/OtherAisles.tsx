@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { api, type OntoNode, type OntologyDetail, type OntologySummary } from '../../api';
 import { Stage } from '../shared/Stage';
 import { localName, OntologyGraph } from './OntologyGraph';
-import { FileLine, OntologyDetails } from './OntologyPanel';
+import { OntologyDetails } from './OntologyPanel';
 
 /** The key of the first choice: the ontology of steps 1 to 3 (not a folder id, so it never clashes with one). */
 const STEPS = ':steps';
@@ -27,8 +27,9 @@ function browseOnly(): Promise<OntologySummary[]> {
 }
 
 /**
- * Step 4, "Other aisles": the same approach on other catalogs, browse only (done once a word is
- * looked up in one of them). The choices are the ontology of steps 1 to 3 and the browse-only
+ * Step 4, "Explore possible ontologies for other retail domains": the same approach on other
+ * catalogs, browse only (done once a word is looked up in one of them). The choices are the
+ * ontology of steps 1 to 3 and the browse-only
  * domains of `GET /api/ontologies` (folders under ontologies/ whose domain.json says
  * `"browse_only": true`: beauty, home and food in the sample), each read with
  * `GET /api/ontologies/detail`; the words to start with are the domain's `start_with`. A picker,
@@ -93,11 +94,11 @@ export function OtherAisles({ fashion }: { fashion: OntologyDetail | null }) {
   const choices = [{ id: STEPS, label: `${fashion?.domain.name ?? 'Fashion'} (steps 1 to 3)` }, ...(aisles ?? []).map((o) => ({ id: o.id, label: o.domain.name }))];
 
   return (
-    <Stage n={4} title="Other aisles: the same shape, another ontology" sub="If you have time: other catalogs in the same shape, to browse." locked={null} done={browsed}>
+    <Stage n={4} title="Explore possible ontologies for other retail domains" sub="If you have time: beauty, home and food ontologies to browse." locked={null} done={browsed}>
       <p>
-        The same approach works for any catalog. Pick an aisle to see its ontology: the same shape as fashion (kinds, families of detail with their allowed values, parts), with other words. The other
-        aisles are folders under <code>ontologies/</code> marked browse-only in their <code>domain.json</code>: ontologies without data, so there are no photos to classify with them. The sample&apos;s
-        three (beauty and skincare, home furnishings, food and beverage) are small ontologies written by hand for it.
+        The same approach works for any catalog. Pick an aisle to see its ontology. It has the same shape as fashion (kinds, families of detail with their allowed values, parts) with other words. The
+        other aisles are folders under <code>ontologies/</code> that their <code>domain.json</code> marks browse-only. They come without data, so there are no photos to classify with them. The
+        sample&apos;s three (beauty and skincare, home furnishings, food and beverage) are small ontologies written by hand for it.
       </p>
       <div className="model-buttons" role="radiogroup" aria-label="aisle">
         {choices.map((a) => (
@@ -142,7 +143,6 @@ export function OtherAisles({ fashion }: { fashion: OntologyDetail | null }) {
               </dd>
             </div>
           </dl>
-          <FileLine detail={detail} />
           {start.length > 0 && (
             <div className="row explore-filter">
               <span className="small">Start with:</span>

@@ -307,6 +307,10 @@ class Service:
     def ontology_detail(self, ontology_id: str) -> dict:
         return self.catalog.detail(ontology_id)
 
+    def ontology_file(self, ontology_id: str) -> dict:
+        """The ontology document as text, for tab 1's file viewer."""
+        return self.catalog.file_text(ontology_id)
+
     def parse_ontology(self, text: str, filename: str | None, fmt: str | None) -> dict:
         return parse_upload(text, filename, fmt)
 

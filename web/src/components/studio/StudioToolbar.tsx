@@ -46,7 +46,8 @@ function useThumbs(from: string, files: string[]) {
 
 /**
  * Step 2's controls: the photo, as a strip of the domain's example photos (click one) with an
- * upload tile at the end; then the vision model, one button per model (a check on those already
+ * upload tile at the end (what may be uploaded is the tile's title and a note only screen readers
+ * get); then the vision model, one button per model (a check on those already
  * run on this photo: picking one shows its kept answer), and Classify.
  */
 export function PhotoBar({
@@ -100,12 +101,19 @@ export function PhotoBar({
             </button>
           );
         })}
-        <button type="button" className={`photo-tile photo-tile-upload${img?.kind === 'upload' ? ' on' : ''}`} disabled={classifying} onClick={() => document.getElementById('img-file')?.click()} title="Upload your own photo">
+        <button
+          type="button"
+          className={`photo-tile photo-tile-upload${img?.kind === 'upload' ? ' on' : ''}`}
+          disabled={classifying}
+          onClick={() => document.getElementById('img-file')?.click()}
+          title="Upload your own photo of clothing (no identifiable people, no personal or confidential information)"
+          aria-describedby="studio-upload-note"
+        >
           {img?.kind === 'upload' ? <img src={img.dataUrl} alt={img.name} /> : <span>+ your own photo</span>}
         </button>
         <input id="img-file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden onChange={(e) => e.target.files?.[0] && image.onFile(e.target.files[0])} />
       </div>
-      <UploadNote />
+      <UploadNote hidden id="studio-upload-note" />
       <div className="po-sec-label">Pick a vision model</div>
       <div className="model-buttons" role="radiogroup" aria-label="vision model">
         {models.map((m) => (

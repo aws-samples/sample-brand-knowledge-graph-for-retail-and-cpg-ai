@@ -286,6 +286,11 @@ class OntologyEntry:
         title = meta.get("title") or _first_heading(text) or path.stem
         return title, text[:MAX_ARTICLE_CHARS]
 
+    def text(self) -> str:
+        """The ontology document as the app reads it (tab 1's file viewer). Not capped: the
+        largest file in the sample is about 95 KB (``fashion.ttl``)."""
+        return self.path.read_text(encoding="utf-8", errors="replace")
+
 
 def _first_heading(text: str) -> str:
     for line in text.splitlines():
@@ -578,6 +583,17 @@ class OntologyCatalog:
             "examples_list": entry.examples(),
             "articles_list": entry.articles(),
             "readme": _readme(entry.path.parent),
+        }
+
+    def file_text(self, ontology_id: str) -> dict:
+        """The ontology document itself (``GET /api/ontologies/file``): its file name, format and
+        text, so tab 1 can show the source the app reads. An unknown id raises ``KeyError``."""
+        entry = self.entry(ontology_id)
+        return {
+            "id": entry.id,
+            "file": entry.path.name,
+            "format": entry.path.suffix.lstrip("."),
+            "text": entry.text(),
         }
 
 

@@ -190,7 +190,8 @@ reaches the browser as one short line. JSON bodies are read with `json.loads` an
 
 The ontology folders, their `domain.json` and the manifests belong to the deployer. Folder ids and
 file names are checked against their shapes and against the folder listing. Keys with `..`
-segments are skipped when the bucket is mirrored.
+segments are skipped when the bucket is mirrored. `GET /api/ontologies/file` (tab 1's file viewer)
+returns the ontology document of one folder id, the same file the app parses, and nothing else.
 
 `GET /api/graph/source` (the sources tree's preview) reads only the photo a graph node names: a
 data set's photo, an example photo, or a tab 2 upload under `uploads/<run>/`, each key checked

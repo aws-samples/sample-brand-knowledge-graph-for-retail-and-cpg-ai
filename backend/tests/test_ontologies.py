@@ -84,3 +84,14 @@ def test_tab_1_renders_the_prompt_the_model_gets_with_the_whole_photo_section():
     prompt = OntologyCatalog(ONTOLOGIES).detail("fashion")["prompt"]
     assert "## The whole photo (name: allowed values)" in prompt
     assert "## The whole photo" not in OntologyCatalog(ONTOLOGIES).detail("beauty")["prompt"]
+
+
+@pytest.mark.parametrize("oid", ["fashion", *sorted(BROWSE_ONLY)])
+def test_the_catalog_serves_each_ontology_file_as_it_is_on_disk(oid):
+    """``OntologyCatalog.file_text``: the whole document, not capped, with its name and format."""
+    served = OntologyCatalog(ONTOLOGIES).file_text(oid)
+    path = ONTOLOGIES / oid / f"{oid}.ttl"
+    assert served == {"id": oid, "file": f"{oid}.ttl", "format": "ttl", "text": path.read_text()}
+    assert "@prefix owl: <http://www.w3.org/2002/07/owl#> ." in served["text"]
+    with pytest.raises(KeyError):
+        OntologyCatalog(ONTOLOGIES).file_text("nope")
