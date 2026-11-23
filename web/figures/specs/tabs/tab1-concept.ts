@@ -6,8 +6,10 @@ import type { FigureSpec } from '../../kit';
 /**
  * Tab 1, the concept: the ontology and a photo go in, graph data and proposals come out. The
  * ontology is the system prompt of a multimodal model on Amazon Bedrock (cached, since it is the
- * same text for every photo); the photo is the question. What comes back is a classification
- * with its relations, validated against the ontology, plus proposals for terms the ontology lacks.
+ * same text for every photo); the photo is the question. Both inputs enter the model from the left
+ * on mirrored paths, one from above and one from below, since they are two parts of one request.
+ * What comes back is a classification with its relations, validated against the ontology, plus
+ * proposals for terms the ontology lacks.
  */
 const LOOK = '#ff9900';
 const ITEM = '#8a9ba8';
@@ -19,14 +21,23 @@ const FILE = '#232f3e';
 const PROPOSAL = '#c0392b';
 
 const LEFT_W = 340;
-const TILE_X = 430;
-const GX = 940;
+const TILE_X = 570;
+const TILE_Y = 300;
+const TILE_H = 62;
+// The two input notes sit the same distance above and below the tile's centre (rendered heights:
+// the ontology note 102, the photo note 66), and both paths turn at the same x.
+const TILE_CY = TILE_Y + TILE_H / 2;
+const INPUT_GAP = 160;
+const ONTOLOGY_H = 102;
+const PHOTO_H = 66;
+const BEND_X = 530;
+const GX = 1040;
 const GW = 660;
 const GY = 60;
 const GH = 470;
 
 export const tab1Concept: FigureSpec = {
-  width: 1600,
+  width: 1700,
   height: 680,
   large: true,
   nodes: [
@@ -34,21 +45,34 @@ export const tab1Concept: FigureSpec = {
       kind: 'note',
       id: 'ontology',
       x: 0,
-      y: 120,
+      y: TILE_CY - INPUT_GAP - ONTOLOGY_H / 2,
       w: LEFT_W,
-      title: 'The ontology (one OWL file)',
+      title: 'The ontology (an OWL file)',
       text: 'The kinds of garment, the details each kind can have, the values each detail allows, and how they relate. The fixed list of words the model may use.',
       color: FILE,
     },
-    { kind: 'note', id: 'photo', x: 0, y: 460, w: LEFT_W, title: 'One look photo', text: "A photo from the brand's lookbook, or your own.", color: OTHER },
+    { kind: 'note', id: 'photo', x: 0, y: TILE_CY + INPUT_GAP - PHOTO_H / 2, w: LEFT_W, title: 'A look photo', text: "A photo from the brand's lookbook, or your own.", color: OTHER },
 
-    { kind: 'tile', id: 'model', icon: 'bedrock', x: TILE_X, y: 300, title: 'Multimodal model', sub: 'on Amazon Bedrock', handles: [{ id: 's-r2', side: 'r', at: 0.75, type: 'source' }] },
+    {
+      kind: 'tile',
+      id: 'model',
+      icon: 'bedrock',
+      x: TILE_X,
+      y: TILE_Y,
+      title: 'Multimodal model',
+      sub: 'on Amazon Bedrock',
+      handles: [
+        { id: 't-l1', side: 'l', at: 0.3, type: 'target' },
+        { id: 't-l2', side: 'l', at: 0.7, type: 'target' },
+        { id: 's-r2', side: 'r', at: 0.75, type: 'source' },
+      ],
+    },
     {
       kind: 'note',
       id: 'caching',
-      x: TILE_X - 30,
+      x: TILE_X + 10,
       y: 410,
-      w: 330,
+      w: 290,
       title: 'Prompt caching',
       text: 'The ontology is the same text for every photo, so Amazon Bedrock keeps it in a cache. Later calls read it from there and cost less.',
       color: OTHER,
@@ -75,10 +99,10 @@ export const tab1Concept: FigureSpec = {
     },
   ],
   edges: [
-    { id: 'terms', from: 'ontology', fromHandle: 's-r', to: 'model', toHandle: 't-t', kind: 'data', label: 'the terms, as the system prompt', labelDx: 12, labelDy: -20 },
-    { id: 'question', from: 'photo', fromHandle: 's-t', to: 'model', toHandle: 't-l', kind: 'data', label: 'the question', labelDy: -2 },
+    { id: 'terms', from: 'ontology', fromHandle: 's-r', to: 'model', toHandle: 't-l1', kind: 'data', label: 'the terms,\nas the system prompt', centerX: BEND_X, labelDx: -101, labelDy: -100 },
+    { id: 'question', from: 'photo', fromHandle: 's-r', to: 'model', toHandle: 't-l2', kind: 'data', label: 'the photo,\nas the question', centerX: BEND_X, labelDx: -101, labelDy: 48 },
     { id: 'classification', from: 'model', fromHandle: 's-r', to: 'graph', toHandle: 't-l', kind: 'data', label: 'a classification\nwith its relations', labelDy: -2 },
-    { id: 'proposals', from: 'model', fromHandle: 's-r2', to: 'proposals', toHandle: 't-l', kind: 'data', centerX: 860 },
+    { id: 'proposals', from: 'model', fromHandle: 's-r2', to: 'proposals', toHandle: 't-l', kind: 'data', centerX: 960 },
     { id: 'validated', from: 'graph', fromHandle: 's-t', to: 'ontology', toHandle: 't-t', kind: 'control', label: 'is validated against', labelDy: -2 },
 
     { id: 'for', from: 'look', fromHandle: 's-r', to: 'occasion', toHandle: 't-l', kind: 'data', label: 'FOR' },

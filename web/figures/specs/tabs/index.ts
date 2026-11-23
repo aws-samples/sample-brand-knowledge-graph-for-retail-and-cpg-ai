@@ -9,7 +9,7 @@
  * wide.
  */
 import type { FigureSpec } from '../../kit';
-import { tab0Problem } from './tab0-problem';
+import { tab0Answer } from './tab0-answer';
 import { tab0Terms } from './tab0-terms';
 import { tab1Concept } from './tab1-concept';
 import { tab1Architecture } from './tab1-architecture';
@@ -26,7 +26,7 @@ import { tab6Personas } from './tab6-personas';
 import { tab6Architecture } from './tab6-architecture';
 
 export const TAB_FIGURES: Record<string, FigureSpec> = {
-  'tabs/tab0-problem': tab0Problem,
+  'tabs/tab0-answer': tab0Answer,
   'tabs/tab0-terms': tab0Terms,
   'tabs/tab1-concept': tab1Concept,
   'tabs/tab1-architecture': tab1Architecture,

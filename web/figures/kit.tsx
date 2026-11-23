@@ -22,11 +22,16 @@ type Base = { id: string; x: number; y: number; parent?: string };
 
 export type TileSpec = Base & { kind: 'tile'; icon: IconName; title: string; sub: string; steps?: number[]; muted?: boolean; badge?: string; handles?: HandleAt[] };
 export type ZoneSpec = Base & { kind: 'zone'; w: number; h: number; title: string; sub?: string; tone: ZoneNodeType['data']['tone']; steps?: number[] };
-export type GroupSpec = Base & { kind: 'group'; w: number; h: number; title: string; sub?: string; icon?: IconName; color: string; dashed?: boolean; steps?: number[]; handles?: HandleAt[] };
+/** `fill`: the background, when a group is a swim lane and needs more colour than the faint default tint. */
+export type GroupSpec = Base & { kind: 'group'; w: number; h: number; title: string; sub?: string; icon?: IconName; color: string; fill?: string; dashed?: boolean; steps?: number[]; handles?: HandleAt[] };
 export type EntitySpec = Base & { kind: 'entity'; label: string; props?: string; color: string; vec?: boolean; handles?: HandleAt[] };
 export type RowSpec = Base & { kind: 'row'; depth: number; name: string; note?: string; folder?: boolean; mark?: string };
 export type NoteSpec = Base & { kind: 'note'; w: number; title: string; text: string; color: string; handles?: HandleAt[] };
-export type NodeSpec = TileSpec | ZoneSpec | GroupSpec | EntitySpec | RowSpec | NoteSpec;
+/** A person: a user icon in the colour, their name under it and what they want in one line. */
+export type ActorSpec = Base & { kind: 'actor'; w: number; label: string; sub?: string; color: string; handles?: HandleAt[] };
+/** A use case: a pill with rounded ends, tinted in the colour of the person it belongs to. */
+export type BubbleSpec = Base & { kind: 'bubble'; w: number; text: string; sub?: string; color: string; handles?: HandleAt[] };
+export type NodeSpec = TileSpec | ZoneSpec | GroupSpec | EntitySpec | RowSpec | NoteSpec | ActorSpec | BubbleSpec;
 
 /** data: a request or its payload; control: a call that starts work elsewhere; deploy: only at deploy time. */
 export type EdgeKind = 'data' | 'control' | 'deploy';
@@ -48,7 +53,8 @@ export type EdgeSpec = {
   labelDy?: number;
   color?: string;
 };
-export type LegendItem = { kind: EdgeKind | 'step'; text: string };
+/** `color`: the line's colour when the figure colours its paths (a swim lane, a persona). */
+export type LegendItem = { kind: EdgeKind | 'step'; text: string; color?: string };
 /** `large`: text about a fifth larger and wider tiles, for a figure that a page shows about 1,000 px wide (the workshop guide). */
 export type FigureSpec = { width: number; height: number; nodes: NodeSpec[]; edges: EdgeSpec[]; legend: LegendItem[]; large?: boolean };
 
@@ -124,7 +130,7 @@ function ExtraTile({ data }: NodeProps<Node<TileSpec>>) {
 
 /** An AWS group box (the VPC, a set of managed services): a zone with any icon, a colour and handles. */
 function Group({ data }: NodeProps<Node<GroupSpec>>) {
-  const style: CSSProperties = { borderColor: data.color, background: `${data.color}08`, borderStyle: data.dashed === false ? 'solid' : 'dashed' };
+  const style: CSSProperties = { borderColor: data.color, background: data.fill ?? `${data.color}08`, borderStyle: data.dashed === false ? 'solid' : 'dashed' };
   return (
     <div className="zone fig-group" style={style}>
       <Handles extra={data.handles} />
@@ -181,6 +187,32 @@ function Note({ data }: NodeProps<Node<NoteSpec>>) {
   );
 }
 
+/** A person who asks: a head-and-shoulders icon drawn in the colour, the name, and one line on what they want. */
+function Actor({ data }: NodeProps<Node<ActorSpec>>) {
+  return (
+    <div className="fig-actor" style={{ width: data.w, color: data.color }}>
+      <Handles extra={data.handles} />
+      <svg className="fig-actor-icon" viewBox="0 0 48 48" aria-hidden>
+        <circle cx="24" cy="15" r="9.5" fill="none" stroke="currentColor" strokeWidth="2.6" />
+        <path d="M5.5 45a18.5 18.5 0 0 1 37 0" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+      </svg>
+      <div className="fig-actor-label">{data.label}</div>
+      {data.sub && <div className="fig-actor-sub">{data.sub}</div>}
+    </div>
+  );
+}
+
+/** A use case of a person, as the pill its arrows start from. */
+function Bubble({ data }: NodeProps<Node<BubbleSpec>>) {
+  return (
+    <div className="fig-bubble" style={{ width: data.w, borderColor: data.color, background: `${data.color}14` }}>
+      <Handles extra={data.handles} />
+      <div className="fig-bubble-text">{data.text}</div>
+      {data.sub && <div className="fig-bubble-sub">{data.sub}</div>}
+    </div>
+  );
+}
+
 export const nodeTypes: NodeTypes = {
   service: ServiceNode as NodeTypes[string],
   zone: ZoneNode as NodeTypes[string],
@@ -189,6 +221,8 @@ export const nodeTypes: NodeTypes = {
   entity: Entity as NodeTypes[string],
   row: Row as NodeTypes[string],
   note: Note as NodeTypes[string],
+  actor: Actor as NodeTypes[string],
+  bubble: Bubble as NodeTypes[string],
 };
 
 /** A smooth-step edge like the app's FlowEdge, without animation; solid for data, dashed for control and deploy. */
@@ -264,7 +298,7 @@ export function Legend({ items }: { items: LegendItem[] }) {
             <span className="step-badge fig-legend-badge">1</span>
           ) : (
             <svg width="34" height="10" aria-hidden>
-              <line x1="1" y1="5" x2="33" y2="5" className={`fig-edge ${item.kind}`} style={{ stroke: STROKE[item.kind] }} />
+              <line x1="1" y1="5" x2="33" y2="5" className={`fig-edge ${item.kind}`} style={{ stroke: item.color ?? STROKE[item.kind] }} />
             </svg>
           )}
           {item.text}

@@ -391,7 +391,7 @@ has run (`web/src/components/retriever/`, `backend/src/ontology_rag/payoff.py`).
 (white sneakers first, then a black blazer, wide-leg trousers, or your own) drives stages 2 to 5;
 stage 1 searches for what it names ("white sneakers"). A new question starts stages 2 to 5 over.
 
-![RAG and GraphRAG side by side: both search the same product catalog in Amazon S3 Vectors and answer with the same prompt; RAG plans its searches with a model, GraphRAG takes them from three of the brand's looks found by a vector search on the graph and a read-only traversal.](../assets/rag-vs-graphrag.png)
+![The question on the left enters two swim lanes of equal width: the red RAG lane, where Amazon Bedrock plans 3 to 6 catalog searches, and the blue GraphRAG lane, where Amazon Bedrock embeds the question and Neptune Analytics finds three looks and walks to their pieces. Both lanes lead into the shared tiles Amazon S3 Vectors (the product catalog) and Amazon Bedrock (the answer prompt), and from there to the answer on the right. RAG answers with products the model chose, GraphRAG with the brand's own pairings and the look each came from.](../assets/rag-vs-graphrag.png)
 Two stores, one job each:
 
 | Store | What it holds | Who reads it |

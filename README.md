@@ -63,7 +63,7 @@ RAG and GraphRAG share the catalog, the search and the answer prompt. They diffe
 searches come from: RAG's model plans them from its own taste, and GraphRAG takes them from three of
 the brand's looks in the graph.
 
-![RAG and GraphRAG side by side. Both search the same product catalog in Amazon S3 Vectors and answer with the same prompt in Amazon Bedrock. RAG plans 3 to 6 searches with a model; GraphRAG embeds the question, finds the brand's looks in Neptune Analytics and searches the catalog for their pieces.](assets/rag-vs-graphrag.png)
+![The question on the left enters two swim lanes of equal width: the red RAG lane, where Amazon Bedrock plans 3 to 6 catalog searches, and the blue GraphRAG lane, where Amazon Bedrock embeds the question and Neptune Analytics finds three looks and walks to their pieces. Both lanes lead into the shared tiles Amazon S3 Vectors (the product catalog) and Amazon Bedrock (the answer prompt), and from there to the answer on the right. RAG answers with products the model chose, GraphRAG with the brand's own pairings and the look each came from.](assets/rag-vs-graphrag.png)
 
 The IND416 session's workshop builds on this sample by adding a larger data set. The workshop is
 not part of this repository.
