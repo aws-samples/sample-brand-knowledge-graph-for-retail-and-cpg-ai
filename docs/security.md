@@ -215,7 +215,8 @@ and creates, starts or deletes nothing.
 
 The three zips are built from requirement files pinned with hashes
 (`backend/lambda-requirements.txt`, `backend/agentcore/requirements.txt`,
-`backend/agentcore-lake/requirements.txt`). `make scan` audits them.
+`backend/agentcore-lake/requirements.txt`); [backend/README.md](../backend/README.md) says how to
+regenerate and audit them.
 
 ### Ingest pipeline
 

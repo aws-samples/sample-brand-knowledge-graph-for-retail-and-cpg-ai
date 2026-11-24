@@ -248,7 +248,7 @@ report a security issue.
 | [docs/emerging-trends.md](docs/emerging-trends.md) | Tab 6's three trend methods, with measurements |
 | [docs/deploy.md](docs/deploy.md) | Permissions, configuration, outputs, sign-in, troubleshooting, cleanup |
 | [docs/security.md](docs/security.md) | Trust boundaries and residual risks |
-| [docs/develop.md](docs/develop.md) | Tests, scans, the command line and the figures |
+| [docs/develop.md](docs/develop.md) | Tests and the command line |
 | [ontologies/README.md](ontologies/README.md) | The folder layout, `domain.json`, adding a domain |
 
 The sample builds its graph from an ontology and walks it with its own code.
@@ -262,13 +262,12 @@ ontologies/   the ontologies: fashion/ (the domain the graph uses, with its exam
               beauty/, home/, food/ (browse-only)
 backend/      Python package and tests: the API, the pipeline steps, retrieval, the two agents, the CLI
 infra/        CDK app and tests
-web/          React app; web/figures/ renders the figures in assets/
+web/          React app
 docs/         the pages listed above
-assets/       the figures of this README and the docs; assets/tabs/ has each tab's concept and architecture
+assets/       the figures of this README and the docs
 ```
 
-`make test` runs every suite offline, and `make scan` runs the secret, static-analysis and
-dependency checks. [docs/develop.md](docs/develop.md) has the details.
+`make test` runs every suite offline. [docs/develop.md](docs/develop.md) has the details.
 
 ## Contributing
 

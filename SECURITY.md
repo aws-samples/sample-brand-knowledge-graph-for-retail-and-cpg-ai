@@ -16,6 +16,4 @@ not create a public GitHub issue. See also
 sign-in, IAM at the API's function URL, the per-function roles, the private
 network, the limits on every request, the agents' read-only guards and the parsers. It also lists
 the residual risks accepted for a demo, each with what to change before the site serves more than
-one trusted user. `make scan` at the repository root runs the secret, static-analysis and
-dependency checks the repository ships with (see
-[docs/develop.md](docs/develop.md#tests-and-scans)).
+one trusted user.

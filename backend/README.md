@@ -61,7 +61,7 @@ cd ../agentcore-lake && uv pip compile requirements.in --override ../src/ontolog
   -o requirements.txt
 ```
 
-`make scan` at the repository root audits the three files for known vulnerabilities (pip-audit).
+`uvx pip-audit -r <file> --require-hashes --disable-pip` audits a file for known vulnerabilities.
 The lake agent's closure overrides the S3 Tables MCP server's own pins with
 `src/ontology_rag/lake_overrides.txt` (the versions that have arm64 and Python 3.14 wheels); the same
 file drives `uvx --overrides` when the server runs outside the lake agent's runtime.

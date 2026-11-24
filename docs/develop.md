@@ -1,16 +1,15 @@
 # Develop
 
-This page covers the local loop: the test suites, the command line, the scans and the figures of
-the README. The app itself runs only as deployed. The graph is private to the stack's VPC, so a
-laptop cannot reach it, and the sample has no local server.
+This page covers the local loop: the test suites and the command line. The app itself runs only as
+deployed. The graph is private to the stack's VPC, so a laptop cannot reach it, and the sample has
+no local server.
 
 ## Contents
 
 * [Change, test, deploy](#change-test-deploy)
 * [The command line](#the-command-line)
 * [Python extras](#python-extras)
-* [Tests and scans](#tests-and-scans)
-* [Figures](#figures)
+* [Tests](#tests)
 * [Where the code is](#where-the-code-is)
 
 ## Change, test, deploy
@@ -46,44 +45,17 @@ make build && (cd infra && npx cdk deploy)    # build the site, then deploy the 
 `make setup` installs `dev` and `agent`. [backend/README.md](../backend/README.md) has the package's
 own commands and how to regenerate the pinned requirement files.
 
-## Tests and scans
+## Tests
 
-```bash
-make test        # pytest and ruff (offline), CDK assertions with cdk-nag, web tests, type-check and build
-make scan        # detect-secrets against .secrets.baseline, bandit on the Python, pip-audit on the three hashed requirement files
-```
+`make test` runs the backend's pytest suite and ruff, the CDK assertions (with cdk-nag) and the web
+tests, then type-checks and builds the site. On GitHub,
+[.github/workflows/ci.yml](../.github/workflows/ci.yml) runs `make setup` and `make test` on every
+pull request to `main` and every push to `main`, with uv 0.12.22, Python 3.14 and Node.js 26. A pull
+request merges only when its `test` check passes.
 
-On GitHub, [.github/workflows/ci.yml](../.github/workflows/ci.yml) runs `make setup` and `make test`
-on every pull request to `main` and every push to `main`, with uv 0.12.22, Python 3.14 and
-Node.js 26. A pull request merges only when its `test` check passes.
-
-`make scan` needs [uv](https://docs.astral.sh/uv/), whose `uvx` fetches the scanners. It fails on a
-secret that is not in the baseline, on a bandit finding of medium severity or above, or on a known
-vulnerability in `backend/lambda-requirements.txt`, `backend/agentcore/requirements.txt` or
-`backend/agentcore-lake/requirements.txt`. Clear a new false positive with
-`# pragma: allowlist secret` on its line, or with `uvx detect-secrets audit .secrets.baseline`.
-
-## Figures
-
-The figures under `assets/` are rendered from the app's own diagram components, so they look like
-the tabs' "How it works" panels.
-
-```bash
-make figures     # type-checks web/figures/, then writes assets/<name>.png (2x) and assets/<name>.svg
-```
-
-`web/figures/` holds the renderer: a page that draws one figure with React Flow and the app's
-`ServiceNode` and `ZoneNode` (`web/src/components/arch/flow.tsx`) and `web/src/styles.css`, and
-`render.mjs`, which serves the page with Vite and captures each figure with Playwright. Each figure
-is a spec in `web/figures/specs/`: tiles, groups and edges at fixed coordinates. The specs under
-`web/figures/specs/tabs/` are the figures of each tab, the concept behind it (tab 6 has two) and how its
-steps are built (the AWS Solutions Library style: numbered tiles, then one numbered line per step in the
-text that shows the figure); they render into `assets/tabs/`, and a workshop built on the sample
-shows the same files. The renderer is not part of the app build or the app's tests. Playwright
-needs a Chromium build; install it once with `cd web && npx playwright install chromium`.
-
-After you change a spec or the app's diagram style, run `make figures` and look at every PNG: no
-edge may cross a tile, and no text may be cut off.
+The three deployment zips are built from requirement files pinned with hashes;
+[backend/README.md](../backend/README.md) says how to regenerate them and how to audit them for
+known vulnerabilities.
 
 ## Where the code is
 
@@ -95,4 +67,3 @@ edge may cross a tile, and no text may be cut off.
 | `web/src/components/arch/` | The "How it works" panel every tab shares. A panel is a `Def`: its steps, texts and diagram geometry |
 | `web/src/components/shared/` | The model catalog, the remembered choices, the elapsed-time ticker and the agent trace |
 | `web/src/components/<tab>/` | One folder per tab: `setup`, `studio`, `pipeline`, `graph`, `query`, `retriever`, `payoff`, `lenses`; `tree` holds the SVG camera and helpers that tabs 2, 3 and 5 share |
-| `web/figures/` | The figure renderer (see [Figures](#figures)) |
