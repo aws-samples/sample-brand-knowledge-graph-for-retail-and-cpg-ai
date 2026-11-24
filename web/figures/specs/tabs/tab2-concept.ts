@@ -25,8 +25,9 @@ const NOTE_W = 200;
 const STEP_W = 300;
 const STEP_H = [84, 66, 102, 84];
 const STEP_GAP = 40;
-const ZONE = { x: 410, y: 0, w: STEP_W + 40, h: 0 };
-const COL = ZONE.x + 20;
+// The zone is wider than its column so that its title fits on one line.
+const ZONE = { x: 410, y: 0, w: STEP_W + 120, h: 0 };
+const COL = ZONE.x + 60;
 const ROWS = STEP_H.map((_, i) => ZONE.y + 50 + STEP_H.slice(0, i).reduce((a, b) => a + b + STEP_GAP, 0));
 ZONE.h = ROWS[3] + STEP_H[3] + 20 - ZONE.y;
 const STEP1_CY = ROWS[0] + STEP_H[0] / 2;
@@ -74,7 +75,7 @@ export const tab2Concept: FigureSpec = {
     },
   ],
   edges: [
-    { id: 'in', from: 'sources', fromHandle: 's-r1', to: 'step1', toHandle: 't-l', kind: 'data', label: 'one flow for\nevery kind of source', labelDx: -10 },
+    { id: 'in', from: 'sources', fromHandle: 's-r1', to: 'step1', toHandle: 't-l', kind: 'data', label: 'one flow for\nevery kind of source', labelDx: -6 },
     { id: 's12', from: 'step1', fromHandle: 's-b', to: 'step2', toHandle: 't-t', kind: 'data' },
     { id: 's23', from: 'step2', fromHandle: 's-b', to: 'step3', toHandle: 't-t', kind: 'data' },
     { id: 's34', from: 'step3', fromHandle: 's-b', to: 'step4', toHandle: 't-t', kind: 'data' },

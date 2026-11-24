@@ -8,7 +8,12 @@ body { margin: 0; background: #fff; }
 .figure .svc-node { width: var(--svc-w, 240px); box-shadow: none; cursor: default; }
 .figure .svc-node.muted { width: var(--svc-muted-w, 210px); }
 .figure .svc-node:hover { transform: none; box-shadow: none; }
-.figure .svc-title { font-size: 16px; white-space: nowrap; }
+/* ServiceNode wraps each side's handles in a span. In the tile's flex row those four spans are empty items that still
+   take a gap each (36 px of the text's width), so here they generate no box. The text takes the whole width next to
+   the icon, and a title longer than that wraps to a second line instead of running past the tile. */
+.figure .svc-node > span:not([class]) { display: contents; }
+.figure .svc-text { flex: 1 1 auto; min-width: 0; }
+.figure .svc-title { font-size: 16px; white-space: normal; }
 .figure .svc-sub { font-size: 14px; color: var(--ink-2); white-space: normal; overflow: visible; }
 .figure .svc-node.muted { opacity: 1; }
 .figure .svc-node.muted .svc-title { font-size: 14.5px; color: var(--ink-2); }
