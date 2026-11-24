@@ -448,6 +448,7 @@ pre.owl-turtle { max-height: 340px; overflow: auto; font-size: 0.74rem; backgrou
 .ide-line.flash { background: color-mix(in srgb, var(--mark) 40%, transparent); transition: background 0.3s; }
 .ide-gutter { flex: 0 0 1.6rem; display: flex; align-items: center; justify-content: center; }
 .ide-pin { display: inline-grid; place-items: center; width: 1.15rem; height: 1.15rem; border-radius: 50%; border: 0; padding: 0; background: var(--mark); color: #011627; font: 600 0.62rem/1 system-ui, sans-serif; cursor: pointer; }
+.ide-pin:hover { background: var(--mark); filter: brightness(0.9); }
 .ide-pin.static { margin-right: 0.4rem; vertical-align: middle; }
 .ide-no { flex: 0 0 2.6rem; text-align: right; padding-right: 0.9rem; color: #4b6479; user-select: none; }
 .ide-code { white-space: pre; }
@@ -1012,6 +1013,7 @@ table.trend-score tbody tr { cursor: default; }
 .po-ev.active { background: #fff4e0; }
 .po-ev-pattern { color: var(--ink); }
 .po-ev-n { background: none; border: none; padding: 0; color: var(--blue); cursor: pointer; font-weight: 600; min-width: 2.2rem; text-align: left; }
+.po-ev-n:hover { background: none; text-decoration: underline; }
 .po-inspect { margin-top: 1rem; font-size: 0.82rem; }
 /* one look for every expander (Inspect, the evidence, raw rows) and How it works: a bar with an
    arrow that turns, a bold label and a grey hint of what is inside */
@@ -1168,6 +1170,7 @@ pre.code-block.rt-query { margin: 0.3rem 0 0.5rem; white-space: pre; overflow-x:
 .po-detail-facts dd { margin: 0; }
 .po-detail-strip { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.3rem; }
 .po-detail-thumb { padding: 0; width: 40px; height: 56px; border: 1px solid var(--line); border-radius: 4px; background: #fff; cursor: pointer; display: grid; place-items: center; }
+.po-detail-thumb:hover { background: #fff; border-color: var(--line-strong); }
 .po-detail-thumb img { width: 100%; height: 100%; object-fit: contain; }
 .rt-current b { animation: rt-flash 1.2s ease-out; }
 @keyframes rt-flash { from { background: #fff1c2; } to { background: transparent; } }
@@ -1254,6 +1257,8 @@ button.linklike:hover, button.linklike:focus-visible { background: none; color: 
 .ln-step-note { margin: 0.2rem 0 0; color: var(--ink-2); }
 .ln-photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem; margin-top: 0.4rem; }
 .ln-photo { display: flex; flex-direction: column; align-items: stretch; gap: 0.25rem; padding: 0.4rem; text-align: left; background: #fff; color: var(--ink); border: 2px solid var(--line); border-radius: 8px; font-weight: 400; }
+/* card buttons hover a touch darker, not the primary button's navy (button:hover), which would hide their dark text */
+.ln-photo:hover { background: var(--subtle); border-color: var(--line-strong); }
 .ln-photo.active { border-color: #c7254e; background: #fdecef; }
 .ln-photo-source { font-size: 0.7rem; font-weight: 600; color: var(--ink-3); }
 .ln-photo-outfit { font-size: 0.82rem; line-height: 1.3; }
@@ -1264,6 +1269,7 @@ button.linklike:hover, button.linklike:focus-visible { background: none; color: 
 .ln-photo-img { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 5px; background: #f2f3f5; }
 .ln-looks { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem; }
 .ln-look { display: flex; flex-direction: column; align-items: stretch; gap: 0.25rem; padding: 0.4rem; text-align: left; background: #fff; color: var(--ink); border: 2px solid var(--line); border-radius: 8px; font-weight: 400; }
+.ln-look:hover { background: var(--subtle); border-color: var(--line-strong); }
 .ln-look.active { border-color: var(--teal); background: #e6f4f6; }
 .ln-look-img { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 5px; background: #f2f3f5; }
 .ln-look-head { font-size: 0.8rem; }
