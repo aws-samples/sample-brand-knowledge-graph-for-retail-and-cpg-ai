@@ -80,6 +80,25 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     const html = renderToStaticMarkup(<ShopItYourself />);
     expect(html).toContain('class="stored-photo thumb placeholder"');
     expect(html).toContain('aria-label="Navy denim jacket: loading"');
+    expect(html).not.toContain('no-photo');
+  });
+
+  it('marks a product without a photo as such when the other products have one (two catalogs, one of them text only)', () => {
+    // the fourth request on the workshop's two catalogs: five Fashion House shirts with photos, one Apparel top without
+    const BLUE = 'A blue shirt with a white collar';
+    const hits = [
+      hit('Light blue cotton utility shirt', 'utility shirt', 'light blue', 'anycompany-fashion-house/products/item_1.jpg'),
+      hit('White cotton button-up shirt', 'button-up shirt', 'white', 'anycompany-fashion-house/products/item_2.jpg'),
+      hit('Sage cotton top', 'top', 'sage'),
+    ];
+    setKept('shopIt.results', { [BLUE]: DONE(result(BLUE, hits)) });
+    setKept('shopIt.picked', BLUE);
+    const html = renderToStaticMarkup(<ShopItYourself />);
+    // the same square as the loading placeholder, marked and explained, so the rows stay aligned
+    expect(html).toContain('<span class="stored-photo thumb placeholder no-photo" role="img" aria-label="Sage cotton top: no photo in the catalog" title="No photo in the catalog">');
+    expect(html).toContain('aria-label="Light blue cotton utility shirt: loading"');
+    expect(html.match(/class="stored-photo thumb placeholder"/g)).toHaveLength(2);
+    expect(spaced(html)).toContain('Sage cotton top top, sage');
   });
 
   it('gives the business problem without a source list, the terms to note and the tease once a request ran', () => {

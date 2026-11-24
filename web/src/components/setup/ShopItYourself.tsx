@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { api, type CatalogHit, type CatalogQuery } from '../../api';
+import { api, isStoredPhotoKey, type CatalogHit, type CatalogQuery } from '../../api';
 import { Busy, runInto, type Async } from '../payoff/parts';
 import { GoodToKnow, Lead, Notice, YourTurn } from '../retriever/Callouts';
 import { useKept } from '../shared/kept';
@@ -79,13 +79,19 @@ export function useShopItYourself(): { results: Results; done: boolean } {
   return { results, done: Object.values(results).some(ran) };
 }
 
-/** The six products one request returned, compact: photo when the catalog has one, name, kind, colour. */
+/**
+ * The six products one request returned, compact: photo when the catalog has one, name, kind, colour.
+ * When the catalog mixes products with and without photos (two data sets, one of them text only), a
+ * product without one gets a "no photo" square, so the rows stay aligned and the gap is not read as
+ * a photo that failed to load. A catalog without any photos lists plain names.
+ */
 function Products({ hits }: { hits: CatalogHit[] }) {
+  const mixed = hits.some((h) => isStoredPhotoKey(h.image_key));
   return (
     <ol className="start-shop-list">
       {hits.map((h) => (
         <li key={h.key}>
-          <StoredPhoto photoKey={h.image_key} alt={h.name} className="stored-photo thumb" />
+          <StoredPhoto photoKey={h.image_key} alt={h.name} className="stored-photo thumb" noPhoto={mixed ? 'placeholder' : 'nothing'} />
           <span>
             <b>{h.name}</b>
             <span className="muted">

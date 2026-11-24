@@ -21,10 +21,13 @@ export function loadStoredPhoto(key: string): Promise<string | null> {
 }
 
 /**
- * A product shot or a look photo by its stable key (`<set>/<sub>/<file>`), loaded lazily. Renders nothing
- * for a key that is not a stored photo, and a quiet placeholder while it loads or when it is missing.
+ * A product shot or a look photo by its stable key (`<set>/<sub>/<file>`), loaded lazily, and a quiet
+ * placeholder while it loads or when it is missing. For a key that is not a stored photo (a product of
+ * a catalog without photos) it renders nothing, or with `noPhoto="placeholder"` a square of the same
+ * size that says so: a list that mixes products with and without photos keeps its rows aligned, and
+ * the gap reads as "no photo", not as a photo that failed to load.
  */
-export function StoredPhoto({ photoKey, alt, className = 'stored-photo' }: { photoKey?: string; alt: string; className?: string }) {
+export function StoredPhoto({ photoKey, alt, className = 'stored-photo', noPhoto = 'nothing' }: { photoKey?: string; alt: string; className?: string; noPhoto?: 'nothing' | 'placeholder' }) {
   const [src, setSrc] = useState<string | null | undefined>(undefined);
   useEffect(() => {
     if (!isStoredPhotoKey(photoKey)) return;
@@ -35,7 +38,10 @@ export function StoredPhoto({ photoKey, alt, className = 'stored-photo' }: { pho
       live = false;
     };
   }, [photoKey]);
-  if (!isStoredPhotoKey(photoKey)) return null;
+  if (!isStoredPhotoKey(photoKey)) {
+    if (noPhoto === 'nothing') return null;
+    return <span className={`${className} placeholder no-photo`} role="img" aria-label={`${alt}: no photo in the catalog`} title="No photo in the catalog" />;
+  }
   if (!src) return <span className={`${className} placeholder`} role="img" aria-label={src === null ? `${alt}: no photo stored` : `${alt}: loading`} />;
   return <img className={className} src={src} alt={alt} loading="lazy" />;
 }

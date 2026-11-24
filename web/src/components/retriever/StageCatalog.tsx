@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 
 import { useEffect, useState } from 'react';
-import { api, type CatalogHit, type CatalogInfo, type CatalogItem, type CatalogQuery, type VectorPreview } from '../../api';
+import { api, isStoredPhotoKey, type CatalogHit, type CatalogInfo, type CatalogItem, type CatalogQuery, type VectorPreview } from '../../api';
 import { Busy, runInto, type Async } from '../payoff/parts';
 import { useKept } from '../shared/kept';
 import { StoredPhoto } from '../shared/StoredPhoto';
@@ -27,7 +27,9 @@ export function Vector({ v }: { v: VectorPreview }) {
   );
 }
 
+/** The products a search returned; a product without a photo gets a "no photo" square when others have one (see tab 0's list). */
 function Hits({ hits }: { hits: CatalogHit[] }) {
+  const mixed = hits.some((h) => isStoredPhotoKey(h.image_key));
   return (
     <table className="rt-table">
       <thead>
@@ -45,7 +47,7 @@ function Hits({ hits }: { hits: CatalogHit[] }) {
           <tr key={h.key}>
             <td>{i + 1}</td>
             <td>
-              <StoredPhoto photoKey={h.image_key} alt={h.name} className="stored-photo thumb" />
+              <StoredPhoto photoKey={h.image_key} alt={h.name} className="stored-photo thumb" noPhoto={mixed ? 'placeholder' : 'nothing'} />
             </td>
             <td>{h.name}</td>
             <td>{h.type}</td>
