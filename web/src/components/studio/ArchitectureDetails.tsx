@@ -38,13 +38,13 @@ export function NodeDetails({
   const consoleLink = (key: string, label: string) =>
     arch?.console[key] ? (
       <a className="button-link" href={arch.console[key]} target="_blank" rel="noopener noreferrer">
-        {label} ↗
+        {label} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
       </a>
     ) : null;
   const s3Link = (suffix: string, label: string) =>
     arch?.console.s3_prefix_template && s3 ? (
       <a className="button-link" href={arch.console.s3_prefix_template.replace('{prefix}', encodeURIComponent(`${s3.prefix}${ontologyId}/${suffix}`))} target="_blank" rel="noopener noreferrer">
-        {label} ↗
+        {label} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
       </a>
     ) : null;
 
@@ -267,7 +267,7 @@ function LogDump({ inv, arch }: { inv: ClassifyResult['invocation'] | undefined;
           Log lines of request <code>{inv.request_id}</code>
           {logs && <> · from {logs.source === 'cloudwatch' ? 'CloudWatch Logs' : 'the container’s in-memory buffer'}</>}
           {logs?.pending && <> · REPORT line not delivered yet (CloudWatch delivers it a few seconds after the call)</>}
-          {loading && <span className="spinner" />}
+          {loading && <span className="spinner" aria-hidden="true" />}
         </span>
         <button className="small secondary" style={{ flex: '0 0 auto' }} onClick={refresh} disabled={loading}>
           Refresh

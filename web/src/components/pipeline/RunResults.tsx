@@ -20,7 +20,7 @@ export function RunResults({ rows, selected, onSelect, imageFor }: { rows: Sourc
         <ol className="plain">
           {rows.map((r) => (
             <li key={r.index}>
-              <button className={`source-row${row?.index === r.index ? ' active' : ''} st-${r.status}`} onClick={() => onSelect(r.index)}>
+              <button className={`source-row${row?.index === r.index ? ' active' : ''} st-${r.status}`} onClick={() => onSelect(r.index)} aria-pressed={row?.index === r.index}>
                 <span className="source-kind">{r.kind === 'image' ? 'photo' : 'text'}</span>
                 <span className="source-title">{r.label}</span>
                 <RowStatus row={r} />
@@ -40,13 +40,13 @@ function RowStatus({ row }: { row: SourceRow }) {
     case 'pending':
       return (
         <span className="muted source-meta">
-          <span className="spinner" /> waiting · classify → ingest
+          <span className="spinner" aria-hidden="true" /> waiting · classify → ingest
         </span>
       );
     case 'classified':
       return (
         <span className="muted source-meta">
-          <span className="spinner" /> classified · ingesting…
+          <span className="spinner" aria-hidden="true" /> classified · ingesting…
         </span>
       );
     case 'error':
@@ -76,8 +76,8 @@ function RowDetail({ row, src }: { row: SourceRow; src: string | null }) {
     return (
       <>
         <h3>{row.label}</h3>
-        <p className="muted">
-          <span className="spinner" /> Waiting for the classify step (one Bedrock call) and the ingest step (MERGE + embeddings).
+        <p className="muted" role="status">
+          <span className="spinner" aria-hidden="true" /> Waiting for the classify step (one Bedrock call) and the ingest step (MERGE + embeddings).
         </p>
       </>
     );
@@ -86,7 +86,7 @@ function RowDetail({ row, src }: { row: SourceRow; src: string | null }) {
     return (
       <>
         <h3>{row.label}</h3>
-        <p className="error">{row.error ?? 'failed'}</p>
+        <p className="error" role="alert">{row.error ?? 'failed'}</p>
         <p className="muted">This source failed. The other sources carried on, and the summary counts this one under “failed”. The state machine retries throttling errors. It does not retry model access errors.</p>
       </>
     );
@@ -195,7 +195,7 @@ function EntityRows({ entities, ingested, digest, active, onHover }: { entities:
             const id = itemIdOf(digest, e, ingested);
             const isActive = active?.entity.id === e.id;
             return (
-              <tr key={e.id} className={`${isActive ? 'active' : ''}${!id ? ' unknown' : ''}`} onMouseEnter={() => onHover(e.bbox ? { key: e.id, kind: 'entity', entity: e, bbox: e.bbox, label: e.label } : null)} onMouseLeave={() => onHover(null)}>
+              <tr key={e.id} className={`${isActive ? 'active' : ''}${!id ? ' unknown' : ''}`} tabIndex={0} onMouseEnter={() => onHover(e.bbox ? { key: e.id, kind: 'entity', entity: e, bbox: e.bbox, label: e.label } : null)} onMouseLeave={() => onHover(null)} onFocus={() => onHover(e.bbox ? { key: e.id, kind: 'entity', entity: e, bbox: e.bbox, label: e.label } : null)} onBlur={() => onHover(null)}>
                 <td>{e.id}</td>
                 <td>
                   <b>{e.class}</b>

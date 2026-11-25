@@ -96,134 +96,140 @@ export function StartTab({
   const shopped = useShopItYourself().done;
 
   return (
-    <div className="stack start-tab">
-      {/* ------------------------------------------------------------ 1 the cold open */}
-      <Stage n={1} title="What happens when you ask a model on its own about fashion?" sub="What a model says when no brand is behind it." locked={null} done={asked}>
-        <ColdOpen />
-      </Stage>
-      {/* ------------------------------------------------------------ 2 the shopper's search */}
-      <Stage
-        n={2}
-        title="Similarity search alone gives confusing answers in a domain like fashion"
-        sub="Try requests a shopper might type into the product search that regular RAG is built on."
-        locked={null}
-        done={shopped}
-      >
-        <ShopItYourself />
-      </Stage>
-      {/* ------------------------------------------------------------ 3 what you will build, then the tabs */}
-      <Stage n={3} title="What you’ll build" sub="A brand knowledge graph and the tabs that get you there." locked={null} done={false}>
-        <p>
-          {brandsSentence(brands, looks, products)} You will build a smart way to break outfits down with the help of the brand&apos;s style and AI, and a consistent way to load those
-          outfit breakdowns as a graph. To get there, you explore the ontology, send photos through a vision model that uses its terms, store the looks in Amazon Neptune Analytics,
-          build the retriever and compare the answers. The table lists the tabs in order, and a click on a row opens that tab.
-        </p>
-        <table className="metrics start-path">
-          <thead>
-            <tr>
-              <th>Tab</th>
-              <th>What you do</th>
-              <th>The point it makes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {PATH.map((p) => (
-              <tr key={p.id} onClick={() => onOpenTab(p.id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && onOpenTab(p.id)}>
-                <td>
-                  <b>{labelOf(p.id)}</b>
-                </td>
-                <td>{p.id === 'ingest' && shoot ? PATH_SHOOT : p.what}</td>
-                <td>{p.point}</td>
+    <>
+      {/* the other tabs open with a visible h2; kept outside .stack so its sibling spacing does not move step 1 */}
+      <h2 className="sr-only">Start here</h2>
+      <div className="stack start-tab">
+        {/* ------------------------------------------------------------ 1 the cold open */}
+        <Stage n={1} title="What happens when you ask a model on its own about fashion?" sub="What a model says when no brand is behind it." locked={null} done={asked}>
+          <ColdOpen />
+        </Stage>
+        {/* ------------------------------------------------------------ 2 the shopper's search */}
+        <Stage
+          n={2}
+          title="Similarity search alone gives confusing answers in a domain like fashion"
+          sub="Try requests a shopper might type into the product search that regular RAG is built on."
+          locked={null}
+          done={shopped}
+        >
+          <ShopItYourself />
+        </Stage>
+        {/* ------------------------------------------------------------ 3 what you will build, then the tabs */}
+        <Stage n={3} title="What you’ll build" sub="A brand knowledge graph and the tabs that get you there." locked={null} done={false}>
+          <p>
+            {brandsSentence(brands, looks, products)} You will build a smart way to break outfits down with the help of the brand&apos;s style and AI, and a consistent way to load those
+            outfit breakdowns as a graph. To get there, you explore the ontology, send photos through a vision model that uses its terms, store the looks in Amazon Neptune Analytics,
+            build the retriever and compare the answers. The table lists the tabs in order, and a click on a row opens that tab.
+          </p>
+          <table className="metrics start-path">
+            <thead>
+              <tr>
+                <th>Tab</th>
+                <th>What you do</th>
+                <th>The point it makes</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <h4>What you&apos;ll take away</h4>
-        <Takeaways />
-      </Stage>
-      {/* ------------------------------------------------------------ 4 how to read every tab */}
-      <Stage n={4} title="How to read every tab" sub="How to tell the main path from the optional parts." locked={null} done={false}>
-        <p>Every tab works the same way. Follow the numbered steps and the orange boxes. Open the rest when you want to go deeper.</p>
-        <div className="legend-grid">
-          <div className="legend-sample">
-            <div className="rt-stage-head">
-              <span className="rt-step">1</span>
-              <span className="rt-step done">1</span>
+            </thead>
+            <tbody>
+              {PATH.map((p) => (
+                <tr key={p.id} onClick={() => onOpenTab(p.id)}>
+                  <td>
+                    <button type="button" className="linklike" onClick={() => onOpenTab(p.id)}>
+                      <b>{labelOf(p.id)}</b>
+                    </button>
+                  </td>
+                  <td>{p.id === 'ingest' && shoot ? PATH_SHOOT : p.what}</td>
+                  <td>{p.point}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <h4>What you&apos;ll take away</h4>
+          <Takeaways />
+        </Stage>
+        {/* ------------------------------------------------------------ 4 how to read every tab */}
+        <Stage n={4} title="How to read every tab" sub="How to tell the main path from the optional parts." locked={null} done={false}>
+          <p>Every tab works the same way. Follow the numbered steps and the orange boxes. Open the rest when you want to go deeper.</p>
+          <div className="legend-grid">
+            <div className="legend-sample">
+              <div className="rt-stage-head">
+                <span className="rt-step">1</span>
+                <span className="rt-step done">1</span>
+              </div>
             </div>
+            <p>
+              <b>A numbered step.</b> It turns green when you finish it. Some steps unlock when the one before is done.
+            </p>
+
+            <div className="legend-sample">
+              <YourTurn>
+                <p>Search white sneaker.</p>
+              </YourTurn>
+            </div>
+            <p>
+              <b>Your turn:</b> something to do or try. This is the main path.
+            </p>
+
+            <div className="legend-sample">
+              <Notice>
+                <p>A similarity search finds what sounds alike.</p>
+              </Notice>
+            </div>
+            <p>
+              <b>What to notice:</b> the point of the step.
+            </p>
+
+            <div className="legend-sample">
+              <GoodToKnow>
+                <p>A side fact.</p>
+              </GoodToKnow>
+            </div>
+            <p>
+              <b>Good to know:</b> background. Skip it if you are short of time.
+            </p>
+
+            <div className="legend-sample">
+              <InCpg>
+                <p>The same point for a beauty brand.</p>
+              </InCpg>
+            </div>
+            <p>
+              <b>In CPG</b> (green): the same idea in another aisle, beauty mostly. One per tab.
+            </p>
+
+            <div className="legend-sample">
+              <details className="xp xp-inspect">
+                <summary>Inspect: exactly what ran</summary>
+                <pre className="code po-pre">the prompt, the query or the reply, as sent</pre>
+              </details>
+              <details className="card panel arch-panel">
+                <summary>How it works: the AWS services and the code</summary>
+                <p className="muted small">The service diagram, with the live code of each step.</p>
+              </details>
+            </div>
+            <p>
+              <b>Inspect</b> and <b>How it works</b> (blue label): exactly what was sent and what came back, and the AWS services behind a step. Open How it works as you go. It shows
+              the services as a numbered diagram, with the code of each step.
+            </p>
+
+            <div className="legend-sample">
+              <span className="muted small">If you have time · Deep dives</span>
+            </div>
+            <p>
+              <b>Optional parts:</b> steps marked <i>if you have time</i>, and deep dives at the bottom of a tab. Tab 6 is a bonus.
+            </p>
           </div>
-          <p>
-            <b>A numbered step.</b> It turns green when you finish it. Some steps unlock when the one before is done.
-          </p>
+        </Stage>
 
-          <div className="legend-sample">
-            <YourTurn>
-              <p>Search white sneaker.</p>
-            </YourTurn>
-          </div>
-          <p>
-            <b>Your turn:</b> something to do or try. This is the main path.
-          </p>
+        {/* ------------------------------------------------------------ 5 what is deployed */}
+        <Stage n={5} title="What’s deployed in your account" sub="If you have time: the AWS resources behind the app." locked={null} done={false}>
+          <SetupDetails domain={domain} ontologies={ontologies} onDomain={onDomain} graphDomain={graphDomain} />
+        </Stage>
 
-          <div className="legend-sample">
-            <Notice>
-              <p>A similarity search finds what sounds alike.</p>
-            </Notice>
-          </div>
-          <p>
-            <b>What to notice:</b> the point of the step.
-          </p>
-
-          <div className="legend-sample">
-            <GoodToKnow>
-              <p>A side fact.</p>
-            </GoodToKnow>
-          </div>
-          <p>
-            <b>Good to know:</b> background. Skip it if you are short of time.
-          </p>
-
-          <div className="legend-sample">
-            <InCpg>
-              <p>The same point for a beauty brand.</p>
-            </InCpg>
-          </div>
-          <p>
-            <b>In CPG</b> (green): the same idea in another aisle, beauty mostly. One per tab.
-          </p>
-
-          <div className="legend-sample">
-            <details className="xp xp-inspect">
-              <summary>Inspect: exactly what ran</summary>
-              <pre className="code po-pre">the prompt, the query or the reply, as sent</pre>
-            </details>
-            <details className="card panel arch-panel">
-              <summary>How it works: the AWS services and the code</summary>
-              <p className="muted small">The service diagram, with the live code of each step.</p>
-            </details>
-          </div>
-          <p>
-            <b>Inspect</b> and <b>How it works</b> (blue label): exactly what was sent and what came back, and the AWS services behind a step. Open How it works as you go. It shows
-            the services as a numbered diagram, with the code of each step.
-          </p>
-
-          <div className="legend-sample">
-            <span className="muted small">If you have time · Deep dives</span>
-          </div>
-          <p>
-            <b>Optional parts:</b> steps marked <i>if you have time</i>, and deep dives at the bottom of a tab. Tab 6 is a bonus.
-          </p>
-        </div>
-      </Stage>
-
-      {/* ------------------------------------------------------------ 5 what is deployed */}
-      <Stage n={5} title="What’s deployed in your account" sub="If you have time: the AWS resources behind the app." locked={null} done={false}>
-        <SetupDetails domain={domain} ontologies={ontologies} onDomain={onDomain} graphDomain={graphDomain} />
-      </Stage>
-
-      {/* ------------------------------------------------------------ begin */}
-      <NextTab to="explore" lead="Begin with">
-        <p>Go through the tabs in order, at your own pace. The app guides you with numbered steps, so you can follow it without the workshop guide.</p>
-      </NextTab>
-    </div>
+        {/* ------------------------------------------------------------ begin */}
+        <NextTab to="explore" lead="Begin with">
+          <p>Go through the tabs in order, at your own pace. The app guides you with numbered steps, so you can follow it without the workshop guide.</p>
+        </NextTab>
+      </div>
+    </>
   );
 }

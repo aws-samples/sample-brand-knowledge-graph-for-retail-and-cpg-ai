@@ -72,6 +72,7 @@ export function CodeViewer({
   maxHeight = 560,
   wrap = false,
   focusLine = null,
+  label,
 }: {
   code: string;
   language: string;
@@ -81,6 +82,8 @@ export function CodeViewer({
   wrap?: boolean;
   /** A 1-based line to mark and bring into view inside the viewer, or null. */
   focusLine?: number | null;
+  /** The name of the scroll box for assistive technology; defaults to "<language> code". */
+  label?: string;
 }) {
   const [flash, setFlash] = useState<number | null>(null); // index of the highlight being pointed at
   const [only, setOnly] = useState<CodeHighlight['kind'] | null>(null);
@@ -118,7 +121,7 @@ export function CodeViewer({
     <div className="ide">
       <Highlight theme={themes.nightOwl} code={code.replace(/\n$/, '')} language={LANGS[language] ?? 'markdown'}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <div className={`ide-body ${className}${wrap ? ' wrap' : ''}`} style={{ ...style, maxHeight }} ref={bodyRef} tabIndex={0}>
+          <div className={`ide-body ${className}${wrap ? ' wrap' : ''}`} style={{ ...style, maxHeight }} ref={bodyRef} tabIndex={0} role="region" aria-label={label ?? `${language} code`}>
             <pre className="ide-pre">
               {tokens.map((line, i) => {
                 const ln = i + 1;
@@ -132,11 +135,11 @@ export function CodeViewer({
       {highlights.length > 0 && (
         <div className="ide-notes">
           <div className="ide-kinds" role="group" aria-label="filter highlights">
-            <button type="button" className={`chip${only ? '' : ' active'}`} onClick={() => setOnly(null)}>
+            <button type="button" className={`chip${only ? '' : ' active'}`} aria-pressed={!only} onClick={() => setOnly(null)}>
               all {highlights.length}
             </button>
             {kindsPresent.map((k) => (
-              <button type="button" key={k} className={`chip${only === k ? ' active' : ''}`} style={{ ['--mark' as string]: KIND_META[k].color }} onClick={() => setOnly(only === k ? null : k)}>
+              <button type="button" key={k} className={`chip${only === k ? ' active' : ''}`} aria-pressed={only === k} style={{ ['--mark' as string]: KIND_META[k].color }} onClick={() => setOnly(only === k ? null : k)}>
                 <i className="dot" style={{ background: KIND_META[k].color }} /> {KIND_META[k].label}
               </button>
             ))}

@@ -3,6 +3,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ForceGraph2D from 'react-force-graph-2d';
+import { prefersReducedMotion } from '../shared/motion';
 import { useElementWidth } from '../tree/useTreeCamera';
 import type { Adjacency, Web } from './webView';
 
@@ -68,6 +69,12 @@ export function GraphWeb({
   const fg = useRef<any>(null);
   const { ref: wrap, width } = useElementWidth<HTMLDivElement>(900);
   const [expanded, setExpanded] = useState(false);
+  useEffect(() => {
+    if (!expanded) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setExpanded(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [expanded]);
   const images = useRef(new Map<string, HTMLImageElement>());
   const [decoded, setDecoded] = useState(0);
 
@@ -192,27 +199,29 @@ export function GraphWeb({
         </button>
       </div>
       <div className="graph-wrap" ref={wrap} style={expanded ? undefined : { height: HEIGHT }}>
-        <ForceGraph2D
-          ref={fg}
-          width={expanded ? window.innerWidth - 40 : width}
-          height={expanded ? window.innerHeight - 120 : HEIGHT}
-          graphData={data}
-          backgroundColor="#ffffff"
-          cooldownTicks={250}
-          warmupTicks={40}
-          onEngineStop={() => !lit && fg.current?.zoomToFit(400, 30)}
-          nodeRelSize={1}
-          nodeVal={(n: any) => radius(n) ** 2}
-          nodeLabel={(n: any) => `${n.label === 'Item' ? 'Garment' : n.label === 'Category' ? 'Kind' : n.label === 'Attribute' ? 'Detail' : n.label}: ${n.name}`}
-          nodeCanvasObjectMode={() => 'replace'}
-          nodeCanvasObject={drawNode as any}
-          linkColor={linkColor as any}
-          linkWidth={(l: any) => (lit && lit.has(idOf(l.source)) && lit.has(idOf(l.target)) ? 0.8 : 0.3)}
-          onNodeClick={(n: any) => onPick(n.id)}
-          onBackgroundClick={() => onPick(null)}
-          enableNodeDrag={false}
-        />
-        <div className="graph-legend" aria-hidden>
+        <div role="img" aria-label={`${web.nodes.length} nodes and ${web.edges.length} relationships: looks, garments, kinds of garment and occasions; use the search box and the side panel to move through them`}>
+          <ForceGraph2D
+            ref={fg}
+            width={expanded ? window.innerWidth - 40 : width}
+            height={expanded ? window.innerHeight - 120 : HEIGHT}
+            graphData={data}
+            backgroundColor="#ffffff"
+            cooldownTicks={prefersReducedMotion() ? 0 : 250}
+            warmupTicks={40}
+            onEngineStop={() => !lit && fg.current?.zoomToFit(400, 30)}
+            nodeRelSize={1}
+            nodeVal={(n: any) => radius(n) ** 2}
+            nodeLabel={(n: any) => `${n.label === 'Item' ? 'Garment' : n.label === 'Category' ? 'Kind' : n.label === 'Attribute' ? 'Detail' : n.label}: ${n.name}`}
+            nodeCanvasObjectMode={() => 'replace'}
+            nodeCanvasObject={drawNode as any}
+            linkColor={linkColor as any}
+            linkWidth={(l: any) => (lit && lit.has(idOf(l.source)) && lit.has(idOf(l.target)) ? 0.8 : 0.3)}
+            onNodeClick={(n: any) => onPick(n.id)}
+            onBackgroundClick={() => onPick(null)}
+            enableNodeDrag={false}
+          />
+        </div>
+        <div className="graph-legend">
           {WEB_LEGEND.filter(([label]) => web.nodes.some((n) => n.label === label)).map(([label, text]) => (
             <span key={label}>
               <i className="dot" style={{ background: WEB_COLORS[label] }} /> {text}

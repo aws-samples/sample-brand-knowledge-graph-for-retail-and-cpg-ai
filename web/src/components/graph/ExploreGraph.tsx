@@ -123,7 +123,7 @@ export function ExploreGraph({ domain, dataVersion }: { domain: string; wording:
           web of relationships, then query it yourself, in openCypher or in plain words.
         </Lead>
         <p className="muted tab-uses">Uses the graph, with the looks tab 2 added.</p>
-        {error && <p className="error">{error}</p>}
+        {error && <p className="error" role="alert">{error}</p>}
       </div>
 
       {/* ------------------------------------------------------------ 1. what the graph holds */}
@@ -163,8 +163,8 @@ export function ExploreGraph({ domain, dataVersion }: { domain: string; wording:
           </>
         ) : (
           !error && (
-            <p className="muted">
-              <span className="spinner" /> Counting the graph…
+            <p className="muted" role="status">
+              <span className="spinner" aria-hidden="true" /> Counting the graph…
             </p>
           )
         )}
@@ -226,13 +226,13 @@ export function ExploreGraph({ domain, dataVersion }: { domain: string; wording:
           </label>
         </div>
         {hits && !selected && (
-          <p className="small">
+          <p className="small" role="status">
             <b>“{searched}”</b>: {hits.garments.length} garment{hits.garments.length === 1 ? '' : 's'} in <b>{hits.looks.length}</b> look{hits.looks.length === 1 ? '' : 's'}.
           </p>
         )}
         {!web && !error && (
-          <p className="muted">
-            <span className="spinner" /> Loading the whole graph…
+          <p className="muted" role="status">
+            <span className="spinner" aria-hidden="true" /> Loading the whole graph…
           </p>
         )}
         {web && adj && (
@@ -283,7 +283,7 @@ function WebDetails({ adj, id, photos, onPick }: { adj: ReturnType<typeof adjace
   const listed = (d.looks.length ? d.looks : d.garments).slice(0, 24);
   return (
     <aside className="po-detail">
-      <div className="po-detail-kind" style={{ background: WEB_COLORS[n.label] ?? '#999', color: '#fff' }}>
+      <div className="po-detail-kind" style={{ background: WEB_COLORS[n.label] ?? '#999', color: ['Look', 'Item', 'Attribute'].includes(n.label) || !WEB_COLORS[n.label] ? 'var(--ink)' : '#fff' }}>
         {KIND[n.label] ?? n.label}
         {n.run && n.label === 'Look' ? ' · added in tab 2' : ''}
       </div>
@@ -301,6 +301,7 @@ function WebDetails({ adj, id, photos, onPick }: { adj: ReturnType<typeof adjace
               return (
                 <li key={x}>
                   <button type="button" className="linklike" onClick={() => onPick(x)}>
+                    {m?.run && m.label === 'Look' ? 'added in tab 2: ' : ''}
                     {m?.name ?? x}
                   </button>
                 </li>

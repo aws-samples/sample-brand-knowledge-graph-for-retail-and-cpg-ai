@@ -331,7 +331,7 @@ export function LensesTab({ domain, health, dataVersion }: { domain: string; hea
             </div>
             <div className="row po-chips">
               {lens.input.chips.map((c) => (
-                <button key={c} className={`secondary small${c === garmentValue ? ' active' : ''}`} onClick={() => setGarment((g) => ({ ...g, [lens.id]: c }))}>
+                <button key={c} className={`secondary small${c === garmentValue ? ' active' : ''}`} onClick={() => setGarment((g) => ({ ...g, [lens.id]: c }))} aria-pressed={c === garmentValue}>
                   {c}
                 </button>
               ))}
@@ -370,11 +370,11 @@ export function LensesTab({ domain, health, dataVersion }: { domain: string; hea
 
         <div className="po-sec-label">What runs</div>
         {catalog.status === 'running' && (
-          <p className="muted small">
-            <span className="spinner" /> Loading the queries…
+          <p className="muted small" role="status">
+            <span className="spinner" aria-hidden="true" /> Loading the queries…
           </p>
         )}
-        {catalog.status === 'error' && <p className="error">{catalog.error}</p>}
+        {catalog.status === 'error' && <p className="error" role="alert">{catalog.error}</p>}
         {steps.map((step, i) =>
           step.editable ? (
             <div key={step.label} className="field ln-step">
@@ -704,7 +704,7 @@ function useLookPhotos(looks: CheckLook[], domain: string): Record<string, strin
 /** One of the closest looks: its photo, letter, occasion, distance and what it wears. */
 function LookCard({ look, photo, active, onClick }: { look: CheckLook; photo: string | null | undefined; active: boolean; onClick: () => void }) {
   return (
-    <button type="button" className={`ln-look${active ? ' active' : ''}`} onClick={onClick}>
+    <button type="button" className={`ln-look${active ? ' active' : ''}`} onClick={onClick} aria-pressed={active}>
       {photo ? (
         <img className="ln-look-img" src={photo} alt={`look ${look.letter}`} loading="lazy" />
       ) : (
@@ -756,7 +756,7 @@ function PieceCheck({ result, looks, domain, active, onActive }: { result: Check
               </td>
               <td>
                 {x.looks.map((l) => (
-                  <button key={l} type="button" className={`ln-cite${active === l ? ' active' : ''}`} onClick={() => onActive(active === l ? null : l)} title={`look ${l}`}>
+                  <button key={l} type="button" className={`ln-cite${active === l ? ' active' : ''}`} onClick={() => onActive(active === l ? null : l)} title={`look ${l}`} aria-label={`look ${l}`} aria-pressed={active === l}>
                     {l}
                   </button>
                 ))}
@@ -786,7 +786,7 @@ function Finding({ text, active, onCite }: { text: string; active: number | null
       <p>
         {splitCitations(text).map((part, i) =>
           typeof part === 'number' ? (
-            <button key={i} type="button" className={`ln-cite${active === part ? ' active' : ''}`} onClick={() => onCite(active === part ? null : part)} title={`row ${part}`}>
+            <button key={i} type="button" className={`ln-cite${active === part ? ' active' : ''}`} onClick={() => onCite(active === part ? null : part)} title={`row ${part}`} aria-label={`row ${part}`} aria-pressed={active === part}>
               {part}
             </button>
           ) : (

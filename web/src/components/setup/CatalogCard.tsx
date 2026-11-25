@@ -27,7 +27,7 @@ export function CatalogCard({ s }: { s: SetupStatus }) {
           {c.vector_bucket && (
             <div className="setup-actions">
               <a className="button-link" href={vectorBucketConsoleUrl(s.region, c.vector_bucket)} target="_blank" rel="noopener noreferrer">
-                S3 Vectors console ↗
+                S3 Vectors console <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
               </a>
             </div>
           )}

@@ -34,11 +34,11 @@ export function RunTabs({ runs, models, activeKey, onSelect }: { runs: RunRow[];
   const hasCheckpoint = (id: string) => models.find((m) => m.id === id)?.explicit_cache === true;
   if (runs.length < 2) return null;
   return (
-    <div className="run-tabs" role="tablist" aria-label="model runs">
+    <div className="run-tabs" role="group" aria-label="model runs">
       {runs.map((r) => (
-        <button key={r.key} role="tab" aria-selected={r.key === activeKey} className={r.key === activeKey ? 'active' : ''} onClick={() => onSelect(r.key)}>
+        <button key={r.key} aria-pressed={r.key === activeKey} className={r.key === activeKey ? 'active' : ''} onClick={() => onSelect(r.key)}>
           {modelName(r.modelId)} {hasCheckpoint(r.modelId) && <span className="muted">{r.caching ? 'cache on' : 'cache off'}</span>}
-          {r.state.status === 'running' && <span className="spinner" aria-label="running" />}
+          {r.state.status === 'running' && <><span className="spinner" aria-hidden="true" /><span className="sr-only"> (running)</span></>}
           {r.state.status === 'error' && <span className="badge warn">error</span>}
         </button>
       ))}

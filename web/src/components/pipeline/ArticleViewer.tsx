@@ -71,8 +71,8 @@ export function ArticleViewer({ ontologyId, file, onClose, id = ARTICLE_PREVIEW_
             ✕ Close
           </button>
         </header>
-        {error && <p className="error blog-loading">Could not load {file}: {error}</p>}
-        {!loaded && !error && <p className="muted blog-loading">Loading the article…</p>}
+        {error && <p className="error blog-loading" role="alert">Could not load {file}: {error}</p>}
+        {!loaded && !error && <p className="muted blog-loading" role="status">Loading the article…</p>}
         {loaded && <ArticleBody loaded={loaded} source={source} file={file} ontologyId={ontologyId} />}
       </div>
     </section>

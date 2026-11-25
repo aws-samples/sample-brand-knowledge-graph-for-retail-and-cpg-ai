@@ -71,7 +71,9 @@ export function TrendsCloud({
               <tr key={item.id} id={`ln-trends-item-${i + 1}`} className={activeItem === i + 1 ? 'active' : ''} onClick={() => onItem(activeItem === i + 1 ? null : i + 1)}>
                 <td className="muted">{i + 1}</td>
                 <td>
-                  {item.name}
+                  <button type="button" className="linklike" aria-pressed={activeItem === i + 1} onClick={() => onItem(activeItem === i + 1 ? null : i + 1)}>
+                    {item.name}
+                  </button>
                   {item.new && <span className="ln-trends-chip">new shoot</span>}
                 </td>
                 <td>{item.category}</td>
@@ -101,7 +103,7 @@ function CloudLook({ look, photo, active, onClick }: { look: TrendsCloudLook; ph
   const mine = new Set(look.from_cloud);
   const shown = [...look.garments.filter((g) => mine.has(g)), ...look.garments.filter((g) => !mine.has(g))];
   return (
-    <button type="button" id={`ln-trends-look-${look.letter}`} className={`ln-look${active ? ' active' : ''}`} onClick={onClick}>
+    <button type="button" id={`ln-trends-look-${look.letter}`} className={`ln-look${active ? ' active' : ''}`} onClick={onClick} aria-pressed={active}>
       {photo ? (
         <img className="ln-look-img" src={photo} alt={`look ${look.letter}`} loading="lazy" />
       ) : (
@@ -152,6 +154,8 @@ export function TrendsFindings({
               if (!on) reveal(`ln-trends-item-${part.n}`);
             }}
             title={`garment ${part.n}`}
+            aria-label={`garment ${part.n}`}
+            aria-pressed={on}
           >
             {part.n}
           </button>
@@ -168,6 +172,8 @@ export function TrendsFindings({
             if (!on) reveal(`ln-trends-look-${part.letter}`);
           }}
           title={`look ${part.letter}`}
+          aria-label={`look ${part.letter}`}
+          aria-pressed={on}
         >
           {part.letter}
         </button>

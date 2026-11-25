@@ -18,8 +18,9 @@ describe('the app', () => {
     const { default: App } = await import('./App');
     const html = renderToStaticMarkup(<App />);
     vi.unstubAllGlobals();
-    expect(html).toContain('<button class="active">0 · Start here</button>');
+    expect(html).toContain('<button class="active" aria-current="page">0 · Start here</button>');
     expect(html.match(/class="active"/g)).toHaveLength(1);
+    expect(html.match(/aria-current="page"/g)).toHaveLength(1);
     // tab 3 explores the graph, tab 4 builds the retriever, tab 5 asks with it (a question or a photo)
     // tab 6 asks the graph other questions (who is asking), the emerging trends among them: no tab of their own
     const nav = html.slice(html.indexOf('<nav'), html.indexOf('</nav>'));
@@ -49,6 +50,6 @@ describe('the app', () => {
     vi.stubGlobal('location', { search: '?tab=explore', href: 'https://d111.cloudfront.net/?tab=explore' });
     const html = renderToStaticMarkup(<App />);
     vi.unstubAllGlobals();
-    expect(html).toContain('<button class="active">1 · Ontology explorer</button>');
+    expect(html).toContain('<button class="active" aria-current="page">1 · Ontology explorer</button>');
   });
 });

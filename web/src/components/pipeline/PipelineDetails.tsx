@@ -63,7 +63,7 @@ export function PipelineDetails({ id, arch, status, models, detail }: { id: Node
             <Stat label="concurrency" value={p?.max_concurrency ?? 4} hint="MaxConcurrency of the Map state. It sets how many sources, and so how many Bedrock calls, run at once." />
             <Stat label="elapsed" value={elapsedLabel(ex?.started_at, ex?.stopped_at)} />
           </div>
-          {ex?.error && <p className="error">{ex.error}</p>}
+          {ex?.error && <p className="error" role="alert">{ex.error}</p>}
         </Detail>
       );
     case 'classify':

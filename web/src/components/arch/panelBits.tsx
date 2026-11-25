@@ -52,10 +52,14 @@ export function Detail({ title, links, children }: { title: string; links: React
 }
 
 export function Stat({ label, value, hint, mono }: { label: string; value: string | number; hint?: string; mono?: boolean }) {
+  // the hint stays a tooltip for the mouse and is read after the label by screen readers
   return (
     <div className="stat" title={hint}>
       <div className={`stat-value${mono ? ' mono' : ''}`}>{value}</div>
-      <div className="stat-label">{label}</div>
+      <div className="stat-label">
+        {label}
+        {hint && <span className="sr-only">, {hint}</span>}
+      </div>
     </div>
   );
 }
@@ -65,7 +69,7 @@ export function ConsoleLink({ href, label }: { href: string | undefined; label: 
   if (!href) return null;
   return (
     <a className="button-link" href={href} target="_blank" rel="noopener noreferrer">
-      {label} ↗
+      {label} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
     </a>
   );
 }
@@ -155,12 +159,12 @@ export function CodeBrowser({ step, node, snippets, extra, detail }: { step: num
           <nav className="code-nav" aria-label="code snippets">
             {list.map((s, i) => (
               <Fragment key={s.id}>
-                <button className={`${!rendered && s.id === current?.id ? 'active' : ''}${s.id === PROMPT_ID ? ' prompt-tab' : ''}`} onClick={() => setActive(s.id)}>
+                <button className={`${!rendered && s.id === current?.id ? 'active' : ''}${s.id === PROMPT_ID ? ' prompt-tab' : ''}`} aria-pressed={!rendered && s.id === current?.id} onClick={() => setActive(s.id)}>
                   <span className="muted">{s.id === PROMPT_ID ? '★' : all ? `step ${s.steps.join('+') || '–'}` : i + 1 - starred} · </span>
                   {s.title}
                 </button>
                 {s.id === RENDER_SNIPPET_ID && detail && (
-                  <button className={`sub${rendered ? ' active' : ''}`} onClick={() => setActive(RENDERED_ID)} title="the output of this function for the ontology selected above">
+                  <button className={`sub${rendered ? ' active' : ''}`} aria-pressed={rendered} onClick={() => setActive(RENDERED_ID)} title="the output of this function for the ontology selected above">
                     <span className="muted">↳ </span>
                     rendered prompt: {detail.name}
                   </button>

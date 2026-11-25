@@ -70,7 +70,7 @@ export function OntologyFile({
         <>
           {loading && (
             <p className="muted small">
-              <span className="spinner" /> Reading {file}…
+              <span className="spinner" aria-hidden="true" /> Reading {file}…
             </p>
           )}
           {error && <p className="error">{error}</p>}
@@ -79,9 +79,7 @@ export function OntologyFile({
               <p className="muted small onto-file-note">
                 {node ? (hit !== null ? `Showing the definition of ${term} (line ${hit + 1}).` : `${term} has no definition line of its own in this file.`) : `${lineCount.toLocaleString()} lines. Select a term in step 1 to jump to its definition.`}
               </p>
-              <div role="region" aria-label={`${file}, read-only`}>
-                <CodeViewer code={text} language="turtle" highlights={NO_MARKS} focusLine={hit === null ? null : hit + 1} maxHeight={480} />
-              </div>
+              <CodeViewer code={text} language="turtle" highlights={NO_MARKS} focusLine={hit === null ? null : hit + 1} maxHeight={480} label={`${file}, read-only`} />
             </>
           )}
         </>

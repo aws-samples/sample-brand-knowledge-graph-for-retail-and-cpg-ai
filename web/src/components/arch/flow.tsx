@@ -55,7 +55,7 @@ export function ServiceNode({ data, selected }: NodeProps<ServiceNodeType>) {
         </div>
         <div className="svc-sub">{data.subtitle}</div>
       </div>
-      {data.status === 'active' && <span className="spinner svc-spinner" aria-label="in flight" />}
+      {data.status === 'active' && <><span className="spinner svc-spinner" aria-hidden="true" /><span className="sr-only"> (in flight)</span></>}
       {data.badge && <span className="svc-badge">{data.badge}</span>}
     </div>
   );

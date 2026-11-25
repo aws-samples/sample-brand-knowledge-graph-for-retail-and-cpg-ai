@@ -124,7 +124,7 @@ export function GraphQuery({
   };
   const chips = (pick: (e: QueryExample) => boolean) =>
     examples.filter(pick).map((e) => (
-      <button key={e.title} className={`secondary small query-example kind-${e.kind}${text === e.text ? ' active' : ''}`} onClick={() => setText(e.text)} disabled={busy} title={e.text}>
+      <button key={e.title} className={`secondary small query-example kind-${e.kind}${text === e.text ? ' active' : ''}`} aria-pressed={text === e.text} onClick={() => setText(e.text)} disabled={busy} title={e.text}>
         {e.title}
       </button>
     ));
@@ -181,9 +181,9 @@ export function GraphQuery({
       {guided ? (
         <div className="query-guided">
           {notices}
-          <div className="row query-switch" role="tablist" aria-label="ways to query the graph">
+          <div className="row query-switch" role="group" aria-label="ways to query the graph">
             {GUIDED.map((g) => (
-              <button key={g.id} role="tab" aria-selected={way === g.id} className={way === g.id ? '' : 'secondary'} onClick={() => chooseWay(g.id)} disabled={busy}>
+              <button key={g.id} aria-pressed={way === g.id} className={way === g.id ? '' : 'secondary'} onClick={() => chooseWay(g.id)} disabled={busy}>
                 <span className="rt-substep-n">{g.id}</span> {g.title}
               </button>
             ))}
@@ -320,7 +320,7 @@ export function GraphQuery({
           </h3>
           {direct.status === 'running' && (
             <p className="muted">
-              <span className="spinner" /> running…
+              <span className="spinner" aria-hidden="true" /> running…
             </p>
           )}
           {direct.status === 'done' && <ResultTable rows={direct.result.rows} />}
@@ -376,7 +376,7 @@ export function GraphQuery({
           </h3>
           {agent.status === 'running' && (
             <p className="muted">
-              <span className="spinner" /> {agent.why === 'failed' ? 'Neptune rejected the text. ' : ''}
+              <span className="spinner" aria-hidden="true" /> {agent.why === 'failed' ? 'Neptune rejected the text. ' : ''}
               {onAgentCore ? 'On AgentCore Runtime, the agent' : 'The agent'} is reading the schema through the MCP server, writing a query and running it …{' '}
               {((now - agent.startedAt) / 1000).toFixed(0)} s
             </p>

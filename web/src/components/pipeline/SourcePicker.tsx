@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { fileToDataUrl, type ArticleInfo, type ExampleInfo } from '../../api';
 import { MAX_IMAGE_MB } from '../../limits';
 import { UploadNote } from '../shared/UploadNote';
@@ -46,6 +46,7 @@ export function SourcePicker({
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [preview, setPreview] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
   const imageKeys = examples.map((e) => `img:${e.file}`);
   const textKeys = articles.map((a) => `txt:${a.file}`);
   const allImages = imageKeys.length > 0 && imageKeys.every((k) => selected.has(k));
@@ -167,11 +168,11 @@ export function SourcePicker({
               </div>
             );
           })}
-          <label className={`source-tile text add${disabled ? ' disabled' : ''}`}>
+          <button type="button" className="source-tile text add" disabled={disabled} onClick={() => fileRef.current?.click()}>
             <span className="source-kind">+ files</span>
             <span className="source-title">Add photos or .md / .txt files</span>
-            <input type="file" multiple hidden disabled={disabled} accept="image/jpeg,image/png,image/webp,image/gif,.md,.txt,text/plain,text/markdown" onChange={(e) => onFiles(e.target.files).then(() => (e.target.value = ''))} />
-          </label>
+          </button>
+          <input ref={fileRef} type="file" multiple hidden disabled={disabled} accept="image/jpeg,image/png,image/webp,image/gif,.md,.txt,text/plain,text/markdown" onChange={(e) => onFiles(e.target.files).then(() => (e.target.value = ''))} />
         </div>
         <UploadNote texts />
         <div className="row add-text">

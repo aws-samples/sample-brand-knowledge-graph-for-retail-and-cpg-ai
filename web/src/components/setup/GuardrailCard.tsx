@@ -28,7 +28,7 @@ export function GuardrailCard({ s }: { s: SetupStatus }) {
           </p>
           <div className="setup-actions">
             <a className="button-link" href={guardrailsConsoleUrl(s.region)} target="_blank" rel="noopener noreferrer">
-              Guardrails console ↗
+              Guardrails console <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
             </a>
           </div>
         </>

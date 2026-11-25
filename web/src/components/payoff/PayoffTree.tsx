@@ -93,7 +93,7 @@ export function PayoffTree({
 
   return (
     <div className="po-canvas">
-      <svg viewBox={`0 0 ${layout.width} ${layout.height}`} width="100%" style={{ minWidth: 760 }} role="img" aria-label="GraphRAG's traversal: the starting garments, their looks, what is worn with them, and catalog products">
+      <svg viewBox={`0 0 ${layout.width} ${layout.height}`} width="100%" style={{ minWidth: 760 }} role="group" aria-label="GraphRAG's traversal: the starting garments, their looks, what is worn with them, and catalog products">
         {layout.columns.map((col) => (
           <text key={col.kind} x={col.x} y={12 + HEADER_H / 2} className="po-heading">
             {HEADINGS[col.kind]}

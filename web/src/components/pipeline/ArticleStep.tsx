@@ -53,6 +53,11 @@ export function ArticleStep({
   const [preview, setPreview] = useState<string | null>(null);
   const { status, running, starting } = run;
   const progress = progressOf(status);
+  const progressText = !status
+    ? ''
+    : running
+      ? `${progress.done} of ${progress.total} through · ${elapsedLabel(status.execution.started_at ?? status.run.started_at, undefined, run.now)}`
+      : `${status.status} · ${progress.total} article${progress.total === 1 ? '' : 's'}, ${progress.failed} failed`;
   const rows = rowsOf(status);
   const ingested = status?.records.flatMap((r) => (r.status === 'ingested' && r.ingest ? [r.ingest] : [])) ?? [];
   const toggle = (file: string) =>
@@ -111,24 +116,20 @@ export function ArticleStep({
         <button disabled={!picked.size || !modelId || running || starting} onClick={start} className={starting || running ? 'busy' : ''}>
           {starting || running ? (
             <>
-              <span className="spinner light" /> {starting ? 'Starting…' : 'Running…'}
+              <span className="spinner light" aria-hidden="true" /> {starting ? 'Starting…' : 'Running…'}
             </>
           ) : (
             runLabel(picked.size)
           )}
         </button>
         {status && (
-          <div className="progress grow" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.pct}>
+          <div className="progress grow" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.pct} aria-valuetext={progressText}>
             <div className={`bar${progress.finished ? ' done' : ''}`} style={{ transform: `scaleX(${Math.max(4, progress.pct) / 100})` }} />
-            <span>
-              {running
-                ? `${progress.done} of ${progress.total} through · ${elapsedLabel(status.execution.started_at ?? status.run.started_at, undefined, run.now)}`
-                : `${status.status} · ${progress.total} article${progress.total === 1 ? '' : 's'}, ${progress.failed} failed`}
-            </span>
+            <span>{progressText}</span>
           </div>
         )}
       </div>
-      {run.error && <p className="error small">{run.error}</p>}
+      {run.error && <p className="error small" role="alert">{run.error}</p>}
       {status && <RunResults rows={rows} selected={null} onSelect={() => undefined} imageFor={() => null} />}
       {ingested.map((ing) => {
         const file = status?.run.sources[ing.index]?.example ?? '';

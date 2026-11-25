@@ -55,7 +55,7 @@ describe('the answers a tab keeps', () => {
     setKept('query.explorer.agent', { status: 'done', result: agent, why: 'asked' });
     const html = renderToStaticMarkup(<GraphQuery title="explorer" examples={[]} guided />);
     expect(html).toContain('which looks have white sneakers?');
-    expect(html).toMatch(/aria-selected="true"[^>]*><span class="rt-substep-n">3b</);
+    expect(html).toMatch(/aria-pressed="true"[^>]*><span class="rt-substep-n">3b</);
     expect(html).toContain(agent.model.name);
   });
 

@@ -123,7 +123,7 @@ describe('ShopItYourself (tab 0, step 2)', () => {
     setKept('shopIt.results', { [dress]: { status: 'error', error: 'HTTP 403' } });
     setKept('shopIt.picked', dress);
     const html = renderToStaticMarkup(<ShopItYourself />);
-    expect(html).toContain('<p class="error">HTTP 403</p>');
+    expect(html).toContain('<p class="error" role="alert">HTTP 403</p>');
     const seen = spaced(html);
     expect(seen).toContain("A similarity search has no way to say 'not'. It matched \"dress\" and ignored the rest.");
     expect(seen).toContain('Terms to note'); // the step still teaches

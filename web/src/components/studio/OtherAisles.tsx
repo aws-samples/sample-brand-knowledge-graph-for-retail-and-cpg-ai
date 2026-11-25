@@ -112,7 +112,7 @@ export function OtherAisles({ fashion }: { fashion: OntologyDetail | null }) {
       {error && <p className="error">{error}</p>}
       {!detail && !error && (
         <p className="muted">
-          <span className="spinner" /> Reading the ontology…
+          <span className="spinner" aria-hidden="true" /> Reading the ontology…
         </p>
       )}
       {detail && (
@@ -147,7 +147,7 @@ export function OtherAisles({ fashion }: { fashion: OntologyDetail | null }) {
             <div className="row explore-filter">
               <span className="small">Start with:</span>
               {start.map((name) => (
-                <button key={name} className={`small secondary${focus && localName(focus.id) === name ? ' active' : ''}`} onClick={() => pick(name)}>
+                <button key={name} className={`small secondary${focus && localName(focus.id) === name ? ' active' : ''}`} aria-pressed={!!focus && localName(focus.id) === name} onClick={() => pick(name)}>
                   {name}
                 </button>
               ))}

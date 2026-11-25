@@ -38,7 +38,7 @@ export function GraphCard({ s }: { s: SetupStatus }) {
       {nep?.console_url && (
         <div className="setup-actions">
           <a className="button-link" href={nep.console_url} target="_blank" rel="noopener noreferrer">
-            Neptune console ↗
+            Neptune console <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
       )}

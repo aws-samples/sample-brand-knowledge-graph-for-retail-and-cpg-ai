@@ -147,234 +147,238 @@ export function OntologyStudio({ domain }: { domain: string }) {
   const imageName = img ? (img.kind === 'example' ? img.title : img.name) : 'Photo';
 
   return (
-    <div className="stack studio">
-      {error && <p className="error">{error}</p>}
+    <>
+      {/* the other tabs open with a visible h2; kept outside .stack so its sibling spacing does not move step 1 */}
+      <h2 className="sr-only">Ontology explorer</h2>
+      <div className="stack studio">
+        {error && <p className="error">{error}</p>}
 
-      {/* ------------------------------------------------------------ 1. meet the ontology */}
-      <Stage n={1} title="Meet the ontology" sub="The kinds of garment, their details, and the values each detail allows." locked={null} done={browsed}>
-        <Lead>
-          An ontology is a shared vocabulary that lists the kinds of garment (coat, trousers, shoe), the details each kind can have (length, neckline, silhouette) and the values each detail allows
-          (mini, midi, maxi). The vision model may answer only with these words, so a midi skirt is <i>midi</i> in every look and you can count midi skirts across the whole graph later.
-        </Lead>
-        {detail ? (
-          <dl className="counts">
-            <div className="count">
-              <dt>kinds the model may name</dt>
-              <dd>
-                <b>{detail.entity_classes}</b>
-              </dd>
-            </div>
-            <div className="count">
-              <dt>families of detail</dt>
-              <dd>
-                <b>{detail.value_classes}</b>
-              </dd>
-            </div>
-            <div className="count">
-              <dt>allowed values</dt>
-              <dd>
-                <b>{detail.stats.individuals}</b>
-              </dd>
-            </div>
-            <div className="count">
-              <dt>as a prompt</dt>
-              <dd>
-                <b>≈ {detail.prompt_tokens_estimate.toLocaleString()}</b> tokens
-              </dd>
-            </div>
-          </dl>
-        ) : (
-          ontology.loading && (
-            <p className="muted">
-              <span className="spinner" /> Reading the ontology…
-            </p>
-          )
-        )}
-        <YourTurn>
-          <ol className="po-intro-steps">
-            <li>
-              Look up{' '}
-              <button type="button" className="linklike" onClick={look('Coat')}>
-                <b>Coat</b>
-              </button>
-              . The list is what the model can say about a coat (its length, silhouette, opening and parts).
-            </li>
-            <li>
-              Click{' '}
-              <button type="button" className="linklike" onClick={look('hasLength')}>
-                <b>hasLength</b>
-              </button>{' '}
-              in that list. These are the only lengths the model may answer with.
-            </li>
-            <li>
-              Look up{' '}
-              <button type="button" className="linklike" onClick={look('Lapel')}>
-                <b>Lapel</b>
-              </button>
-              . It is a part, linked to the garment by <code>hasPart</code>.
-            </li>
-            <li>
-              Look up{' '}
-              <button type="button" className="linklike" onClick={look('nickname_blazer')}>
-                <b>blazer</b>
-              </button>
-              . Here blazer is a value, not a kind of garment. The model says <i>jacket</i>, with the nickname <i>blazer</i>.
-            </li>
-            <li>
-              Look up{' '}
-              <button type="button" className="linklike" onClick={look('silhouette_wide-leg')}>
-                <b>wide leg</b>
-              </button>
-              , a silhouette. See which detail accepts it and which kinds of garment can have it.
-            </li>
-            <li>
-              Look up{' '}
-              <button type="button" className="linklike" onClick={look('Shoe')}>
-                <b>Shoe</b>
-              </button>
-              . This ontology has no <i>sneaker</i>. White sneakers are a shoe, and &ldquo;white sneakers&rdquo; is only the label the model writes. Remember this for tab 4.
-            </li>
-            <li>
-              Look up{' '}
-              <button type="button" className="linklike" onClick={look('textile-finishing-manufacturing-techniques_pleat')}>
-                <b>pleat</b>
-              </button>
-              . It is a finishing, so a pleated skirt is a skirt with the finishing <i>pleat</i>.
-            </li>
-          </ol>
-        </YourTurn>
-        <div className="row explore-filter" style={{ position: 'relative' }}>
-          <input className="po-question" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Look up a word, e.g. coat, midi, lapel, hasSilhouette" aria-label="search the ontology" />
-          {suggested.map(({ node: n, text }) => (
-            <button key={n.id} className={`small secondary${focusNode?.id === n.id ? ' active' : ''}`} onClick={() => selectNode(n)}>
-              {text}
-            </button>
-          ))}
-          {matches.length > 0 && (
-            <div className="search-pop">
-              {matches.map((n) => (
-                <button
-                  key={n.id}
-                  className="secondary small"
-                  onClick={() => {
-                    selectNode(n);
-                    setQuery('');
-                  }}
-                >
-                  <span className={`pill kind-${n.kind}`}>{n.kind === 'individual' ? 'value' : n.kind}</span> {localName(n.id)}
-                  {n.label && n.label.toLowerCase() !== localName(n.id).toLowerCase() ? ` (${n.label})` : ''}
-                </button>
-              ))}
-            </div>
+        {/* ------------------------------------------------------------ 1. meet the ontology */}
+        <Stage n={1} title="Meet the ontology" sub="The kinds of garment, their details, and the values each detail allows." locked={null} done={browsed}>
+          <Lead>
+            An ontology is a shared vocabulary that lists the kinds of garment (coat, trousers, shoe), the details each kind can have (length, neckline, silhouette) and the values each detail allows
+            (mini, midi, maxi). The vision model may answer only with these words, so a midi skirt is <i>midi</i> in every look and you can count midi skirts across the whole graph later.
+          </Lead>
+          {detail ? (
+            <dl className="counts">
+              <div className="count">
+                <dt>kinds the model may name</dt>
+                <dd>
+                  <b>{detail.entity_classes}</b>
+                </dd>
+              </div>
+              <div className="count">
+                <dt>families of detail</dt>
+                <dd>
+                  <b>{detail.value_classes}</b>
+                </dd>
+              </div>
+              <div className="count">
+                <dt>allowed values</dt>
+                <dd>
+                  <b>{detail.stats.individuals}</b>
+                </dd>
+              </div>
+              <div className="count">
+                <dt>as a prompt</dt>
+                <dd>
+                  <b>≈ {detail.prompt_tokens_estimate.toLocaleString()}</b> tokens
+                </dd>
+              </div>
+            </dl>
+          ) : (
+            ontology.loading && (
+              <p className="muted">
+                <span className="spinner" aria-hidden="true" /> Reading the ontology…
+              </p>
+            )
           )}
-        </div>
-        {detail && <OntologyGraph view={detail.view} highlight={NO_HIGHLIGHT} focus={focusNode?.id ?? null} height={460} onNodeClick={(n) => n && selectNode(n)} />}
-        <OntologyDetails detail={detail} node={focusNode} hitCount={focusNode ? activeBoxes.size : 0} onNavigate={(n) => selectNode(n)} />
-        {detail && !ontology.isUpload && <OntologyFile key={ontology.ontologyId} ontologyId={ontology.ontologyId} file={detail.file} node={focusNode} />}
-        <Notice>
-          <p>
-            The vocabulary is closed. For a coat&apos;s length the model may answer only with one of the allowed values. Anything else fails the check in step 3, so the same garment gets the same words in
-            every photo.
-          </p>
-          <p>
-            <b>In CPG:</b> swap the ontology. A beauty ontology lists product types (serum, cleanser, SPF), ingredients, finishes and skin concerns, so the same call reads a product shot or a regimen photo
-            in those words. The last step of this tab shows one.
-          </p>
-        </Notice>
-      </Stage>
-
-      {/* ------------------------------------------------------------ 2. the photo through a vision model */}
-      <Stage n={2} title="Use a multimodal vision model to break the photo down into the ontology's terms" sub="The ontology is the model's instructions and the photo is the question." locked={null} done={!!shownResult}>
-        <Lead>
-          Press <b>Classify</b>. The model on Amazon Bedrock gets the ontology as its instructions and the photo.
-        </Lead>
-        <PhotoBar ontology={ontology} image={image} runs={runs} models={models} modelId={modelId} onModel={setModelId} promptCaching={promptCaching} />
-        <div className="studio-grid">
-          <div className="card">
-            <h3 style={{ margin: '0 0 0.4rem' }}>{selectedBox ? 'How the model named this box' : 'What a box means'}</h3>
-            {selectedBox ? (
-              <>
-                <BoxInOntology detail={detail} box={selectedBox} onNavigate={openDetails} />
-                <p className="muted small">Click a name to see its details in step 1. Click another box on the photo to see it here.</p>
-              </>
-            ) : (
-              <p className="muted">{shownResult ? 'Click a box on the photo. Its kind, each detail with the value the model picked, and its parts show here.' : 'Press Classify, then click a box on the photo to see how the model named that garment.'}</p>
+          <YourTurn>
+            <ol className="po-intro-steps">
+              <li>
+                Look up{' '}
+                <button type="button" className="linklike" onClick={look('Coat')}>
+                  <b>Coat</b>
+                </button>
+                . The list is what the model can say about a coat (its length, silhouette, opening and parts).
+              </li>
+              <li>
+                Click{' '}
+                <button type="button" className="linklike" onClick={look('hasLength')}>
+                  <b>hasLength</b>
+                </button>{' '}
+                in that list. These are the only lengths the model may answer with.
+              </li>
+              <li>
+                Look up{' '}
+                <button type="button" className="linklike" onClick={look('Lapel')}>
+                  <b>Lapel</b>
+                </button>
+                . It is a part, linked to the garment by <code>hasPart</code>.
+              </li>
+              <li>
+                Look up{' '}
+                <button type="button" className="linklike" onClick={look('nickname_blazer')}>
+                  <b>blazer</b>
+                </button>
+                . Here blazer is a value, not a kind of garment. The model says <i>jacket</i>, with the nickname <i>blazer</i>.
+              </li>
+              <li>
+                Look up{' '}
+                <button type="button" className="linklike" onClick={look('silhouette_wide-leg')}>
+                  <b>wide leg</b>
+                </button>
+                , a silhouette. See which detail accepts it and which kinds of garment can have it.
+              </li>
+              <li>
+                Look up{' '}
+                <button type="button" className="linklike" onClick={look('Shoe')}>
+                  <b>Shoe</b>
+                </button>
+                . This ontology has no <i>sneaker</i>. White sneakers are a shoe, and &ldquo;white sneakers&rdquo; is only the label the model writes. Remember this for tab 4.
+              </li>
+              <li>
+                Look up{' '}
+                <button type="button" className="linklike" onClick={look('textile-finishing-manufacturing-techniques_pleat')}>
+                  <b>pleat</b>
+                </button>
+                . It is a finishing, so a pleated skirt is a skirt with the finishing <i>pleat</i>.
+              </li>
+            </ol>
+          </YourTurn>
+          <div className="row explore-filter" style={{ position: 'relative' }}>
+            <input className="po-question" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Look up a word, e.g. coat, midi, lapel, hasSilhouette" aria-label="search the ontology" />
+            {suggested.map(({ node: n, text }) => (
+              <button key={n.id} className={`small secondary${focusNode?.id === n.id ? ' active' : ''}`} aria-pressed={focusNode?.id === n.id} onClick={() => selectNode(n)}>
+                {text}
+              </button>
+            ))}
+            {matches.length > 0 && (
+              <div className="search-pop">
+                {matches.map((n) => (
+                  <button
+                    key={n.id}
+                    className="secondary small"
+                    onClick={() => {
+                      selectNode(n);
+                      setQuery('');
+                    }}
+                  >
+                    <span className={`pill kind-${n.kind}`}>{n.kind === 'individual' ? 'value' : n.kind}</span> {localName(n.id)}
+                    {n.label && n.label.toLowerCase() !== localName(n.id).toLowerCase() ? ` (${n.label})` : ''}
+                  </button>
+                ))}
+              </div>
             )}
           </div>
+          {detail && <OntologyGraph view={detail.view} highlight={NO_HIGHLIGHT} focus={focusNode?.id ?? null} height={460} onNodeClick={(n) => n && selectNode(n)} />}
+          <OntologyDetails detail={detail} node={focusNode} hitCount={focusNode ? activeBoxes.size : 0} onNavigate={(n) => selectNode(n)} />
+          {detail && !ontology.isUpload && <OntologyFile key={ontology.ontologyId} ontologyId={ontology.ontologyId} file={detail.file} node={focusNode} />}
+          <Notice>
+            <p>
+              The vocabulary is closed. For a coat&apos;s length the model may answer only with one of the allowed values. Anything else fails the check in step 3, so the same garment gets the same words in
+              every photo.
+            </p>
+            <p>
+              <b>In CPG:</b> swap the ontology. A beauty ontology lists product types (serum, cleanser, SPF), ingredients, finishes and skin concerns, so the same call reads a product shot or a regimen photo
+              in those words. The last step of this tab shows one.
+            </p>
+          </Notice>
+        </Stage>
 
-          <div className="card">
-            <div className="row" style={{ alignItems: 'center', marginBottom: '0.4rem' }}>
-              <h3 style={{ margin: 0, flex: '1 1 auto' }}>{imageName}</h3>
-              <label className="check" style={{ flex: '0 0 auto' }}>
-                <input type="checkbox" checked={showParts} onChange={(e) => setShowParts(e.target.checked)} /> show parts
-              </label>
-              {shownResult && (
-                <span className="muted" style={{ flex: '0 0 auto' }}>
-                  {shownResult.model.name} · {shownResult.entities.length} entities · {boxes.filter((b) => b.kind === 'part').length} parts
-                </span>
+        {/* ------------------------------------------------------------ 2. the photo through a vision model */}
+        <Stage n={2} title="Use a multimodal vision model to break the photo down into the ontology's terms" sub="The ontology is the model's instructions and the photo is the question." locked={null} done={!!shownResult}>
+          <Lead>
+            Press <b>Classify</b>. The model on Amazon Bedrock gets the ontology as its instructions and the photo.
+          </Lead>
+          <PhotoBar ontology={ontology} image={image} runs={runs} models={models} modelId={modelId} onModel={setModelId} promptCaching={promptCaching} />
+          <div className="studio-grid">
+            <div className="card">
+              <h3 style={{ margin: '0 0 0.4rem' }}>{selectedBox ? 'How the model named this box' : 'What a box means'}</h3>
+              {selectedBox ? (
+                <>
+                  <BoxInOntology detail={detail} box={selectedBox} onNavigate={openDetails} />
+                  <p className="muted small">Click a name to see its details in step 1. Click another box on the photo to see it here.</p>
+                </>
+              ) : (
+                <p className="muted">{shownResult ? 'Click a box on the photo. Its kind, each detail with the value the model picked, and its parts show here.' : 'Press Classify, then click a box on the photo to see how the model named that garment.'}</p>
               )}
             </div>
-            <ImageCanvas
-              src={img?.dataUrl ?? null}
-              boxes={boxes}
-              active={activeBoxes}
-              showParts={showParts}
-              onSelect={(b) => {
-                setSelectedBox(b);
-                setFocusNode(null);
-              }}
-              onHover={() => undefined}
-            />
-            {shown?.status === 'running' && (
-              <p className="muted">
-                <span className="spinner" /> Calling {models.find((m) => m.id === runs.activeKey.split('|')[2])?.name ?? 'the model'}…
-              </p>
-            )}
-            {shown?.status === 'error' && <p className="error">{shown.error}</p>}
-            {!img && <p className="muted">Pick an example photo or upload one to get started.</p>}
-            {!shownResult && img && shown?.status !== 'running' && !runs.anyRunning && <p className="muted">Press Classify above.</p>}
+
+            <div className="card">
+              <div className="row" style={{ alignItems: 'center', marginBottom: '0.4rem' }}>
+                <h3 style={{ margin: 0, flex: '1 1 auto' }}>{imageName}</h3>
+                <label className="check" style={{ flex: '0 0 auto' }}>
+                  <input type="checkbox" checked={showParts} onChange={(e) => setShowParts(e.target.checked)} /> show parts
+                </label>
+                {shownResult && (
+                  <span className="muted" style={{ flex: '0 0 auto' }}>
+                    {shownResult.model.name} · {shownResult.entities.length} entities · {boxes.filter((b) => b.kind === 'part').length} parts
+                  </span>
+                )}
+              </div>
+              <ImageCanvas
+                src={img?.dataUrl ?? null}
+                boxes={boxes}
+                active={activeBoxes}
+                showParts={showParts}
+                onSelect={(b) => {
+                  setSelectedBox(b);
+                  setFocusNode(null);
+                }}
+                onHover={() => undefined}
+              />
+              {shown?.status === 'running' && (
+                <p className="muted" role="status">
+                  <span className="spinner" aria-hidden="true" /> Calling {models.find((m) => m.id === runs.activeKey.split('|')[2])?.name ?? 'the model'}…
+                </p>
+              )}
+              {shown?.status === 'error' && <p className="error">{shown.error}</p>}
+              {!img && <p className="muted">Pick an example photo or upload one to get started.</p>}
+              {!shownResult && img && shown?.status !== 'running' && !runs.anyRunning && <p className="muted">Press Classify above.</p>}
+            </div>
           </div>
-        </div>
-        <YourTurn>
+          <YourTurn>
+            <p>
+              When the boxes appear, click one on the photo. The left side shows how the model named it: its kind, each detail with the value it picked, and its parts. Click a name there. Its
+              details open in step 1, and every box that uses it lights up on the photo. Then try another photo, or your own.
+            </p>
+          </YourTurn>
+        </Stage>
+
+        {/* ------------------------------------------------------------ 3. the answer after the check */}
+        <Stage n={3} title="The model's answer after the ontology check" sub="What passed, what failed and what was sent." locked={shownResult ? null : 'Classify a photo in step 2 first.'} done={!!shownResult}>
+          <RunTabs runs={runs.runList} models={models} activeKey={runs.activeKey} onSelect={runs.setActiveKey} />
+          {shown?.status === 'error' && <p className="error">{shown.error}</p>}
+          {shownResult && <RunDetails result={shownResult} detail={detail} onRerun={runs.rerun} />}
+          <Notice>
+            <p>
+              Every kind and value in the table is a word of the ontology, so it can become a node in the graph. When the model strays, the check says so instead of letting a new word in. The same detail
+              always has the same name, so the graph stays countable.
+            </p>
+          </Notice>
+          <GoodToKnow>
+            <p>
+              The model sees the ontology and the current photo only. It does not see the graph&apos;s data, that is, how other photos were classified, and it does not see the graph&apos;s own classes (Look,
+              Item, Article, Statement, Brand). In tab 2 the pipeline turns its answer into a look and its garments and merges them into Amazon Neptune Analytics.
+            </p>
+          </GoodToKnow>
+        </Stage>
+
+        {/* ------------------------------------------------------------ how it works */}
+        <ArchitecturePanel runs={runs.allRuns} models={models} detail={detail} ontologyId={ontology.isUpload ? examples.from : ontology.ontologyId} open={archOpen} onToggle={setArchOpen} />
+
+        {/* ------------------------------------------------------------ 4. other retail domains */}
+        <OtherAisles fashion={detail} />
+
+        {/* ------------------------------------------------------------ next */}
+        <NextTab to="ingest">
           <p>
-            When the boxes appear, click one on the photo. The left side shows how the model named it: its kind, each detail with the value it picked, and its parts. Click a name there. Its
-            details open in step 1, and every box that uses it lights up on the photo. Then try another photo, or your own.
+            Here one photo went through one model call. Tab 2 sends the brand&apos;s new shoot through the same call, checks each answer the same way, and merges the looks into
+            the graph.
           </p>
-        </YourTurn>
-      </Stage>
-
-      {/* ------------------------------------------------------------ 3. the answer after the check */}
-      <Stage n={3} title="The model's answer after the ontology check" sub="What passed, what failed and what was sent." locked={shownResult ? null : 'Classify a photo in step 2 first.'} done={!!shownResult}>
-        <RunTabs runs={runs.runList} models={models} activeKey={runs.activeKey} onSelect={runs.setActiveKey} />
-        {shown?.status === 'error' && <p className="error">{shown.error}</p>}
-        {shownResult && <RunDetails result={shownResult} detail={detail} onRerun={runs.rerun} />}
-        <Notice>
-          <p>
-            Every kind and value in the table is a word of the ontology, so it can become a node in the graph. When the model strays, the check says so instead of letting a new word in. The same detail
-            always has the same name, so the graph stays countable.
-          </p>
-        </Notice>
-        <GoodToKnow>
-          <p>
-            The model sees the ontology and the current photo only. It does not see the graph&apos;s data, that is, how other photos were classified, and it does not see the graph&apos;s own classes (Look,
-            Item, Article, Statement, Brand). In tab 2 the pipeline turns its answer into a look and its garments and merges them into Amazon Neptune Analytics.
-          </p>
-        </GoodToKnow>
-      </Stage>
-
-      {/* ------------------------------------------------------------ how it works */}
-      <ArchitecturePanel runs={runs.allRuns} models={models} detail={detail} ontologyId={ontology.isUpload ? examples.from : ontology.ontologyId} open={archOpen} onToggle={setArchOpen} />
-
-      {/* ------------------------------------------------------------ 4. other retail domains */}
-      <OtherAisles fashion={detail} />
-
-      {/* ------------------------------------------------------------ next */}
-      <NextTab to="ingest">
-        <p>
-          Here one photo went through one model call. Tab 2 sends the brand&apos;s new shoot through the same call, checks each answer the same way, and merges the looks into
-          the graph.
-        </p>
-      </NextTab>
-    </div>
+        </NextTab>
+      </div>
+    </>
   );
 }

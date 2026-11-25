@@ -82,7 +82,7 @@ export function PhotoBar({
   return (
     <>
       <div className="po-sec-label">Pick a photo</div>
-      <div className="photo-strip" role="listbox" aria-label="example photos">
+      <div className="photo-strip" role="group" aria-label="example photos">
         {examples.list.map((ex) => {
           const on = chosen === ex.file;
           const src = thumbOf(ex.file);
@@ -90,8 +90,7 @@ export function PhotoBar({
             <button
               key={ex.file}
               type="button"
-              role="option"
-              aria-selected={on}
+              aria-pressed={on}
               className={`photo-tile${on ? ' on' : ''}`}
               disabled={image.loading || classifying}
               onClick={() => !on && image.pickExample(examples.from, ex)}
@@ -120,9 +119,12 @@ export function PhotoBar({
           <button key={m.id} type="button" role="radio" aria-checked={m.id === modelId} className={`small${m.id === modelId ? '' : ' secondary'}`} onClick={() => pickModel(m.id)} title={m.notes || m.provider}>
             {m.name}
             {keptRun(m.id) && (
-              <span className="done-mark" aria-label="answered">
-                ✓
-              </span>
+              <>
+                <span className="done-mark" aria-hidden="true">
+                  ✓
+                </span>
+                <span className="sr-only"> (answered)</span>
+              </>
             )}
           </button>
         ))}
@@ -130,7 +132,7 @@ export function PhotoBar({
         <button disabled={!canRun || classifying} onClick={() => runs.run(modelId, promptCaching)} className={classifying ? 'busy' : ''}>
           {classifying ? (
             <>
-              <span className="spinner light" /> Classifying…
+              <span className="spinner light" aria-hidden="true" /> Classifying…
             </>
           ) : (
             'Classify'

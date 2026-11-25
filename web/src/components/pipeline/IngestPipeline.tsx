@@ -161,10 +161,15 @@ export function IngestPipeline({ onChanged, domain, wording }: { onChanged: () =
   const error = modelsError || sources.error || run.error;
   const stepFunctions = status?.execution.runner === 'step-functions';
   const ingested = status?.summary?.sources.ingested ?? 0;
+  const progressText = !status
+    ? ''
+    : running
+      ? `Step Functions · ${progress.done} of ${progress.total} sources through${progress.done === progress.total ? ' · summarizing' : ''} · ${elapsedLabel(status.execution.started_at ?? status.run.started_at, undefined, run.now)}`
+      : `${status.status} · ${progress.total} sources, ${progress.failed} failed · ${elapsedLabel(status.execution.started_at ?? status.run.started_at, status.execution.stopped_at ?? status.summary?.finished_at)}`;
 
   return (
     <div className="stack studio">
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error" role="alert">{error}</p>}
 
       {/* ------------------------------------------------------------ the intro */}
       <div className="card">
@@ -199,10 +204,10 @@ export function IngestPipeline({ onChanged, domain, wording }: { onChanged: () =
 
       {/* ------------------------------------------------------------ 1. where you start */}
       <Stage n={1} title="Where you start: the brand's graph" sub="What the graph holds before your batch." locked={null} done={!!before}>
-        {countsError && <p className="error small">{countsError}</p>}
+        {countsError && <p className="error small" role="alert">{countsError}</p>}
         {!before && !countsError && (
-          <p className="muted">
-            <span className="spinner" /> Counting the graph…
+          <p className="muted" role="status">
+            <span className="spinner" aria-hidden="true" /> Counting the graph…
           </p>
         )}
         {before && <GraphCountsView now={before} />}
@@ -270,24 +275,20 @@ export function IngestPipeline({ onChanged, domain, wording }: { onChanged: () =
           <button ref={runButton} disabled={!canRun} onClick={start} className={starting || running ? 'busy' : ''}>
             {starting ? (
               <>
-                <span className="spinner light" /> Starting…
+                <span className="spinner light" aria-hidden="true" /> Starting…
               </>
             ) : running ? (
               <>
-                <span className="spinner light" /> Running…
+                <span className="spinner light" aria-hidden="true" /> Running…
               </>
             ) : (
               `Run the pipeline (${sources.selected.size} source${sources.selected.size === 1 ? '' : 's'})`
             )}
           </button>
           {status && (
-            <div className="progress grow" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.pct}>
+            <div className="progress grow" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.pct} aria-valuetext={progressText}>
               <div className={`bar${progress.finished ? ' done' : ''}`} style={{ transform: `scaleX(${Math.max(4, progress.pct) / 100})` }} />
-              <span>
-                {running
-                  ? `Step Functions · ${progress.done} of ${progress.total} sources through${progress.done === progress.total ? ' · summarizing' : ''} · ${elapsedLabel(status.execution.started_at ?? status.run.started_at, undefined, run.now)}`
-                  : `${status.status} · ${progress.total} sources, ${progress.failed} failed · ${elapsedLabel(status.execution.started_at ?? status.run.started_at, status.execution.stopped_at ?? status.summary?.finished_at)}`}
-              </span>
+              <span>{progressText}</span>
             </div>
           )}
         </div>
@@ -295,7 +296,8 @@ export function IngestPipeline({ onChanged, domain, wording }: { onChanged: () =
           <YourTurn title="Your turn: open the execution">
             <p>
               <a href={status.execution.console_url} target="_blank" rel="noopener noreferrer">
-                Open this execution in the Step Functions console ↗
+                Open this execution in the Step Functions console <span aria-hidden="true">↗</span>
+                <span className="sr-only"> (opens in a new tab)</span>
               </a>
               . The graph view shows the steps: <b>Classify</b> and <b>Ingest</b> run once per photo inside a <b>Map</b>, then <b>Summarize</b>. Click a step to see its input and output: the vision
               model&apos;s answer, then what was merged.
@@ -330,8 +332,8 @@ export function IngestPipeline({ onChanged, domain, wording }: { onChanged: () =
           </>
         ) : (
           finished && (
-            <p className="muted">
-              <span className="spinner" /> Counting again…
+            <p className="muted" role="status">
+              <span className="spinner" aria-hidden="true" /> Counting again…
             </p>
           )
         )}

@@ -22,7 +22,7 @@ export function PipelineCard() {
   const link = (href: string | undefined, text: string) =>
     href ? (
       <a className="button-link" href={href} target="_blank" rel="noopener noreferrer">
-        {text} ↗
+        {text} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
       </a>
     ) : null;
   return (

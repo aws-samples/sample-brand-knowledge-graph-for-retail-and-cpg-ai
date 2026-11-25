@@ -15,8 +15,8 @@ export function RunSummaryCard({ status, highlighted, onShared }: { status: RunS
     return (
       <div className="card">
         <h3>Summary</h3>
-        <p className="muted">
-          <span className="spinner" /> The summary step runs once every source is through.
+        <p className="muted" role="status">
+          <span className="spinner" aria-hidden="true" /> The summary step runs once every source is through.
         </p>
       </div>
     );
@@ -72,7 +72,7 @@ export function RunSummaryCard({ status, highlighted, onShared }: { status: RunS
             <ul className="plain shared-list">
               {s.shared.slice(0, 14).map((n) => (
                 <li key={n.id}>
-                  <button className={`shared${highlighted === n.id ? ' active' : ''}`} onClick={() => onShared(highlighted === n.id ? null : n.id)} title={`highlight ${n.id} and the items that reference it in the graph`}>
+                  <button className={`shared${highlighted === n.id ? ' active' : ''}`} onClick={() => onShared(highlighted === n.id ? null : n.id)} aria-pressed={highlighted === n.id} title={`highlight ${n.id} and the items that reference it in the graph`}>
                     <span className={`pill ${n.label}`}>{n.label === 'Attribute' ? 'value' : 'category'}</span> <b>{n.name}</b>
                     <span className="muted">
                       {' '}

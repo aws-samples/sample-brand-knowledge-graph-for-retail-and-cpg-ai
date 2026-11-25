@@ -127,7 +127,7 @@ export function StageWalk({ g }: { g: GraphRetriever }) {
           look&apos;s occasion. Read it, then choose <b>Run the traversal</b>.
         </p>
       </YourTurn>
-      {g.templatesError && <p className="error">Could not load the traversal: {g.templatesError}. Reload the page to try again.</p>}
+      {g.templatesError && <p className="error" role="alert">Could not load the traversal: {g.templatesError}. Reload the page to try again.</p>}
       <textarea className="code rt-cypher" rows={9} value={g.cypher} readOnly spellCheck={false} aria-label="the traversal, openCypher (read-only)" />
       <div className="row rt-buttons">
         <button onClick={g.runWalk} disabled={!g.ids.length || !g.cypher || g.walk.status === 'running'} title={g.ids.length ? '' : 'find the starting garments first (stage 3)'}>

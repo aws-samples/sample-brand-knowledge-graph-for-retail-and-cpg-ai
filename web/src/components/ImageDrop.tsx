@@ -28,7 +28,12 @@ export function ImageDrop({ onImage, label }: { onImage: (dataUrl: string, file:
       onClick={() => input.current?.click()}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === 'Enter' && input.current?.click()}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          input.current?.click();
+        }
+      }}
       aria-label="choose an image"
     >
       {preview ? <img src={preview} alt="the selected photo" /> : <span>{label}</span>}

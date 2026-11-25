@@ -132,26 +132,38 @@ export function ImageCanvas({
     );
   }
   return (
-    <div className="image-stage">
-      <img ref={imgRef} src={src} alt="input" onLoad={() => setSize({ w: imgRef.current?.clientWidth ?? 0, h: imgRef.current?.clientHeight ?? 0 })} />
-      <canvas
-        ref={canvasRef}
-        style={{ width: size.w, height: size.h }}
-        onMouseMove={(e) => {
-          const b = hit(e);
-          const k = b?.key ?? null;
-          if (k !== hover) {
-            setHover(k);
-            onHover?.(b);
-          }
-        }}
-        onMouseLeave={() => {
-          setHover(null);
-          onHover?.(null);
-        }}
-        onClick={(e) => onSelect(hit(e))}
-        aria-label="detected entities"
-      />
-    </div>
+    <>
+      <div className="image-stage">
+        <img ref={imgRef} src={src} alt={`the photo with ${boxes.length} detected boxes`} onLoad={() => setSize({ w: imgRef.current?.clientWidth ?? 0, h: imgRef.current?.clientHeight ?? 0 })} />
+        <canvas
+          ref={canvasRef}
+          style={{ width: size.w, height: size.h }}
+          onMouseMove={(e) => {
+            const b = hit(e);
+            const k = b?.key ?? null;
+            if (k !== hover) {
+              setHover(k);
+              onHover?.(b);
+            }
+          }}
+          onMouseLeave={() => {
+            setHover(null);
+            onHover?.(null);
+          }}
+          onClick={(e) => onSelect(hit(e))}
+          aria-hidden="true"
+        />
+      </div>
+      {/* keyboard and screen reader path to the boxes drawn on the canvas */}
+      {visible.length > 0 && (
+        <div className="row po-chips box-buttons" role="group" aria-label="boxes on the photo">
+          {visible.map((b) => (
+            <button key={b.key} type="button" className={`small secondary${active.has(b.key) ? ' active' : ''}`} aria-pressed={active.has(b.key)} onClick={() => onSelect(b)}>
+              {b.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </>
   );
 }

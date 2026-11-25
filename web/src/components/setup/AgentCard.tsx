@@ -29,7 +29,7 @@ export function AgentCard({ s }: { s: SetupStatus }) {
       {runtimeConsole && (
         <div className="setup-actions">
           <a className="button-link" href={runtimeConsole} target="_blank" rel="noopener noreferrer">
-            AgentCore runtime console ↗
+            AgentCore runtime console <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
       )}

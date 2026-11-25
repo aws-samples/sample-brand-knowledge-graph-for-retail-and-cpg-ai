@@ -240,7 +240,7 @@ export function BatchGraph({
         {s.sources} source{s.sources === 1 ? '' : 's'} → {s.items} {many} → {s.features} ontology nodes, {s.shared} of them used by several {many}
         {layout.lines.length ? <> · all in line {layout.lines.join(', ')}</> : null}. Each tree starts at a source and goes down to the {many} found in it. A source is an article with the statement the model read, or the look of a photo. Under each {noun.singular} you see what the ontology resolved: its category, its components and its values. A node the graph holds once but several {many} use is drawn under each of them, marked <b>×N</b>: that is where items from different sources meet.
       </p>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error" role="alert">{error}</p>}
       <div className="ev-tree">
         <div className="ev-toolbar">
           {maxDepth > 0 && (

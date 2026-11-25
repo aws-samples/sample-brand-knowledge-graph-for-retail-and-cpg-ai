@@ -25,11 +25,11 @@ export async function runInto<T>(set: (s: Async<T>) => void, fn: () => Promise<T
 export function Busy({ state, text }: { state: Async<unknown>; text: string }) {
   if (state.status === 'running')
     return (
-      <p className="muted">
-        <span className="spinner" /> {text}
+      <p className="muted" role="status">
+        <span className="spinner" aria-hidden="true" /> {text}
       </p>
     );
-  if (state.status === 'error') return <p className="error">{state.error}</p>;
+  if (state.status === 'error') return <p className="error" role="alert">{state.error}</p>;
   return null;
 }
 
@@ -102,7 +102,7 @@ export function EvidenceList({ evidence, active, onPick }: { evidence: PayoffEvi
     <ol className="po-evidence">
       {evidence.map((e) => (
         <li key={e.n} className={`po-ev po-ev-${e.kind}${active === e.n ? ' active' : ''}`}>
-          <button type="button" className="po-ev-n" onClick={() => onPick(e.n)} aria-label={`select evidence ${e.n}`}>
+          <button type="button" className="po-ev-n" onClick={() => onPick(e.n)} aria-label={`select evidence ${e.n}`} aria-pressed={active === e.n}>
             [{e.n}]
           </button>
           <span>

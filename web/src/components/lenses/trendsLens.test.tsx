@@ -108,7 +108,7 @@ describe("the creative director's trends question", () => {
     expect(none).toContain('>Open tab 2</button>');
     expect(renderToStaticMarkup(<MethodError entry={error(409, 'the query agent runtime is not set up')} method="graph" />)).toContain('The graph agent is not available: the query agent runtime is not set up.');
     expect(renderToStaticMarkup(<MethodError entry={error(400, "effort 'xhigh' is not offered for Claude Sonnet 5.5: default, low, medium, high")} method="lake" />)).toBe(
-      '<p class="error">effort &#x27;xhigh&#x27; is not offered for Claude Sonnet 5.5: default, low, medium, high</p>',
+      '<p class="error" role="alert">effort &#x27;xhigh&#x27; is not offered for Claude Sonnet 5.5: default, low, medium, high</p>',
     );
   });
 

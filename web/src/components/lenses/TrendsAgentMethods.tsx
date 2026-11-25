@@ -61,7 +61,7 @@ export function GraphAgentMethod({ health, entry }: { health: Health | null; ent
       </div>
       {running && (
         <p className="muted" role="status">
-          <span className="spinner" /> {agentProgress(entry.step)} · {((now - entry.startedAt) / 1000).toFixed(0)} s
+          <span className="spinner" aria-hidden="true" /> {agentProgress(entry.step)} · {((now - entry.startedAt) / 1000).toFixed(0)} s
         </p>
       )}
       {entry?.status === 'error' && <MethodError entry={entry} method="graph" />}
@@ -134,7 +134,7 @@ export function LakeAgentMethod({ entry, exported, dataVersion }: { entry: Metho
       <p className="small ln-method-def">
         <b>New against old:</b> {m.definition}
       </p>
-      {statusError && <p className="error">{statusError}</p>}
+      {statusError && <p className="error" role="alert">{statusError}</p>}
       {status && !ready && <p className="notice text">{lakeOff(status.reason || 'the stack creates it')}</p>}
       {status?.configured && (
         <p className="muted trend-lake-status">
@@ -160,10 +160,10 @@ export function LakeAgentMethod({ entry, exported, dataVersion }: { entry: Metho
       </div>
       {exp.status === 'running' && (
         <p className="muted" role="status">
-          <span className="spinner" /> reading the graph, writing both tables … {((now - exp.startedAt) / 1000).toFixed(0)} s
+          <span className="spinner" aria-hidden="true" /> reading the graph, writing both tables … {((now - exp.startedAt) / 1000).toFixed(0)} s
         </p>
       )}
-      {exp.status === 'error' && <p className="error">{exp.error}</p>}
+      {exp.status === 'error' && <p className="error" role="alert">{exp.error}</p>}
       {exported && (
         <div className="ask-metrics">
           <span>export {(exported.ms / 1000).toFixed(1)} s</span>
@@ -180,7 +180,7 @@ export function LakeAgentMethod({ entry, exported, dataVersion }: { entry: Metho
       )}
       {running && (
         <p className="muted" role="status">
-          <span className="spinner" /> The data agent is writing and running SQL (a background job, polled every {POLL_MS / 1000} s) … {((now - entry.startedAt) / 1000).toFixed(0)} s
+          <span className="spinner" aria-hidden="true" /> The data agent is writing and running SQL (a background job, polled every {POLL_MS / 1000} s) … {((now - entry.startedAt) / 1000).toFixed(0)} s
         </p>
       )}
       {entry?.status === 'error' && <MethodError entry={entry} method="lake" />}
@@ -216,7 +216,7 @@ export function MethodError({ entry, method }: { entry: Extract<MethodEntry, { s
       </p>
     );
   if (entry.code === 409 && method === 'graph') return <p className="notice text">{agentOff(entry.error)}</p>;
-  return <p className="error">{entry.error}</p>;
+  return <p className="error" role="alert">{entry.error}</p>;
 }
 
 /**
