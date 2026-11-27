@@ -1,0 +1,1082 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix fo: <http://example.org/multimodal-ai-knowledge-graph/fashion#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix be: <http://example.org/multimodal-ai-knowledge-graph/beauty#> .
+
+
+
+<http://example.org/multimodal-ai-knowledge-graph/beauty> a owl:Ontology ;
+
+    rdfs:label "Beauty and skincare ontology (sample)"@en ;
+
+    dcterms:creator "Amazon Web Services (sample code, MIT-0)" ;
+
+    rdfs:comment "A small sample ontology written by hand for this workshop, in the same shape as the fashion ontology: product kinds in a hierarchy, families of detail with their allowed values, product parts, and a graph-only schema with the brand's curatorial relations (the order of a routine, ingredients that should not be combined). Not a standard; extend it for a real catalog."@en ;
+
+    owl:versionInfo "0.1.0" .
+
+
+
+fo:visual a owl:AnnotationProperty ;
+
+    rdfs:label "visual concept"@en ;
+
+    rdfs:comment "false for schema concepts that cannot be observed in an image (used to exclude them from classification prompts)."@en .
+
+
+
+# ---------------------------------------------------------------- kinds
+
+be:Product a owl:Class ;
+    rdfs:label "Product"@en ;
+    rdfs:comment "A beauty or personal-care product, or a beauty tool."@en ;
+    skos:prefLabel "Product"@en .
+
+be:Skincare a owl:Class ;
+    rdfs:label "skincare"@en ;
+    rdfs:subClassOf be:Product ;
+    skos:prefLabel "skincare"@en .
+
+be:Cleanser a owl:Class ;
+    rdfs:label "cleanser"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "cleanser"@en .
+
+be:Toner a owl:Class ;
+    rdfs:label "toner"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "toner"@en .
+
+be:Essence a owl:Class ;
+    rdfs:label "essence"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "essence"@en .
+
+be:Serum a owl:Class ;
+    rdfs:label "serum"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "serum"@en .
+
+be:Moisturizer a owl:Class ;
+    rdfs:label "moisturizer"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "moisturizer"@en .
+
+be:EyeCream a owl:Class ;
+    rdfs:label "eye cream"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "eye cream"@en .
+
+be:FaceOil a owl:Class ;
+    rdfs:label "face oil"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "face oil"@en .
+
+be:Mask a owl:Class ;
+    rdfs:label "mask"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "mask"@en .
+
+be:Exfoliant a owl:Class ;
+    rdfs:label "exfoliant"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "exfoliant"@en .
+
+be:Sunscreen a owl:Class ;
+    rdfs:label "sunscreen"@en ;
+    rdfs:subClassOf be:Skincare ;
+    skos:prefLabel "sunscreen"@en .
+
+be:Makeup a owl:Class ;
+    rdfs:label "makeup"@en ;
+    rdfs:subClassOf be:Product ;
+    skos:prefLabel "makeup"@en .
+
+be:Primer a owl:Class ;
+    rdfs:label "primer"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "primer"@en .
+
+be:Foundation a owl:Class ;
+    rdfs:label "foundation"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "foundation"@en .
+
+be:Concealer a owl:Class ;
+    rdfs:label "concealer"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "concealer"@en .
+
+be:Powder a owl:Class ;
+    rdfs:label "powder"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "powder"@en .
+
+be:Blush a owl:Class ;
+    rdfs:label "blush"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "blush"@en .
+
+be:Bronzer a owl:Class ;
+    rdfs:label "bronzer"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "bronzer"@en .
+
+be:Highlighter a owl:Class ;
+    rdfs:label "highlighter"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "highlighter"@en .
+
+be:Eyeshadow a owl:Class ;
+    rdfs:label "eyeshadow"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "eyeshadow"@en .
+
+be:Eyeliner a owl:Class ;
+    rdfs:label "eyeliner"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "eyeliner"@en .
+
+be:Mascara a owl:Class ;
+    rdfs:label "mascara"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "mascara"@en .
+
+be:BrowProduct a owl:Class ;
+    rdfs:label "brow product"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "brow product"@en .
+
+be:Lipstick a owl:Class ;
+    rdfs:label "lipstick"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "lipstick"@en .
+
+be:LipGloss a owl:Class ;
+    rdfs:label "lip gloss"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "lip gloss"@en .
+
+be:LipLiner a owl:Class ;
+    rdfs:label "lip liner"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "lip liner"@en .
+
+be:SettingSpray a owl:Class ;
+    rdfs:label "setting spray"@en ;
+    rdfs:subClassOf be:Makeup ;
+    skos:prefLabel "setting spray"@en .
+
+be:Haircare a owl:Class ;
+    rdfs:label "haircare"@en ;
+    rdfs:subClassOf be:Product ;
+    skos:prefLabel "haircare"@en .
+
+be:Shampoo a owl:Class ;
+    rdfs:label "shampoo"@en ;
+    rdfs:subClassOf be:Haircare ;
+    skos:prefLabel "shampoo"@en .
+
+be:Conditioner a owl:Class ;
+    rdfs:label "conditioner"@en ;
+    rdfs:subClassOf be:Haircare ;
+    skos:prefLabel "conditioner"@en .
+
+be:HairMask a owl:Class ;
+    rdfs:label "hair mask"@en ;
+    rdfs:subClassOf be:Haircare ;
+    skos:prefLabel "hair mask"@en .
+
+be:HairOil a owl:Class ;
+    rdfs:label "hair oil"@en ;
+    rdfs:subClassOf be:Haircare ;
+    skos:prefLabel "hair oil"@en .
+
+be:StylingProduct a owl:Class ;
+    rdfs:label "styling product"@en ;
+    rdfs:subClassOf be:Haircare ;
+    skos:prefLabel "styling product"@en .
+
+be:BodyCare a owl:Class ;
+    rdfs:label "body care"@en ;
+    rdfs:subClassOf be:Product ;
+    skos:prefLabel "body care"@en .
+
+be:BodyWash a owl:Class ;
+    rdfs:label "body wash"@en ;
+    rdfs:subClassOf be:BodyCare ;
+    skos:prefLabel "body wash"@en .
+
+be:BodyLotion a owl:Class ;
+    rdfs:label "body lotion"@en ;
+    rdfs:subClassOf be:BodyCare ;
+    skos:prefLabel "body lotion"@en .
+
+be:HandCream a owl:Class ;
+    rdfs:label "hand cream"@en ;
+    rdfs:subClassOf be:BodyCare ;
+    skos:prefLabel "hand cream"@en .
+
+be:Deodorant a owl:Class ;
+    rdfs:label "deodorant"@en ;
+    rdfs:subClassOf be:BodyCare ;
+    skos:prefLabel "deodorant"@en .
+
+be:Fragrance a owl:Class ;
+    rdfs:label "fragrance"@en ;
+    rdfs:subClassOf be:Product ;
+    skos:prefLabel "fragrance"@en .
+
+be:Perfume a owl:Class ;
+    rdfs:label "perfume"@en ;
+    rdfs:subClassOf be:Fragrance ;
+    skos:prefLabel "perfume"@en .
+
+be:BodyMist a owl:Class ;
+    rdfs:label "body mist"@en ;
+    rdfs:subClassOf be:Fragrance ;
+    skos:prefLabel "body mist"@en .
+
+be:BeautyTool a owl:Class ;
+    rdfs:label "beauty tool"@en ;
+    rdfs:subClassOf be:Product ;
+    skos:prefLabel "beauty tool"@en .
+
+be:MakeupBrush a owl:Class ;
+    rdfs:label "makeup brush"@en ;
+    rdfs:subClassOf be:BeautyTool ;
+    skos:prefLabel "makeup brush"@en .
+
+be:MakeupSponge a owl:Class ;
+    rdfs:label "makeup sponge"@en ;
+    rdfs:subClassOf be:BeautyTool ;
+    skos:prefLabel "makeup sponge"@en .
+
+be:EyelashCurler a owl:Class ;
+    rdfs:label "eyelash curler"@en ;
+    rdfs:subClassOf be:BeautyTool ;
+    skos:prefLabel "eyelash curler"@en .
+
+be:FacialRoller a owl:Class ;
+    rdfs:label "facial roller"@en ;
+    rdfs:subClassOf be:BeautyTool ;
+    skos:prefLabel "facial roller"@en .
+
+
+# ---------------------------------------------------------------- parts
+
+be:ProductComponent a owl:Class ;
+    rdfs:label "Product component"@en ;
+    rdfs:comment "A visible part of a product's packaging or applicator."@en ;
+    skos:prefLabel "Product component"@en .
+
+be:Container a owl:Class ;
+    rdfs:label "container"@en ;
+    rdfs:subClassOf be:ProductComponent ;
+    skos:prefLabel "container"@en .
+
+be:Bottle a owl:Class ;
+    rdfs:label "bottle"@en ;
+    rdfs:subClassOf be:Container ;
+    skos:prefLabel "bottle"@en .
+
+be:Jar a owl:Class ;
+    rdfs:label "jar"@en ;
+    rdfs:subClassOf be:Container ;
+    skos:prefLabel "jar"@en .
+
+be:Tube a owl:Class ;
+    rdfs:label "tube"@en ;
+    rdfs:subClassOf be:Container ;
+    skos:prefLabel "tube"@en .
+
+be:Compact a owl:Class ;
+    rdfs:label "compact"@en ;
+    rdfs:subClassOf be:Container ;
+    skos:prefLabel "compact"@en .
+
+be:Palette a owl:Class ;
+    rdfs:label "palette"@en ;
+    rdfs:subClassOf be:Container ;
+    skos:prefLabel "palette"@en .
+
+be:Stick a owl:Class ;
+    rdfs:label "stick"@en ;
+    rdfs:subClassOf be:Container ;
+    skos:prefLabel "stick"@en .
+
+be:Dispenser a owl:Class ;
+    rdfs:label "dispenser"@en ;
+    rdfs:subClassOf be:ProductComponent ;
+    skos:prefLabel "dispenser"@en .
+
+be:Pump a owl:Class ;
+    rdfs:label "pump"@en ;
+    rdfs:subClassOf be:Dispenser ;
+    skos:prefLabel "pump"@en .
+
+be:Dropper a owl:Class ;
+    rdfs:label "dropper"@en ;
+    rdfs:subClassOf be:Dispenser ;
+    skos:prefLabel "dropper"@en .
+
+be:SprayNozzle a owl:Class ;
+    rdfs:label "spray nozzle"@en ;
+    rdfs:subClassOf be:Dispenser ;
+    skos:prefLabel "spray nozzle"@en .
+
+be:Cap a owl:Class ;
+    rdfs:label "cap"@en ;
+    rdfs:subClassOf be:Dispenser ;
+    skos:prefLabel "cap"@en .
+
+be:Applicator a owl:Class ;
+    rdfs:label "applicator"@en ;
+    rdfs:subClassOf be:ProductComponent ;
+    skos:prefLabel "applicator"@en .
+
+be:Wand a owl:Class ;
+    rdfs:label "wand"@en ;
+    rdfs:subClassOf be:Applicator ;
+    skos:prefLabel "wand"@en .
+
+be:DoeFootApplicator a owl:Class ;
+    rdfs:label "doe foot applicator"@en ;
+    rdfs:subClassOf be:Applicator ;
+    skos:prefLabel "doe foot applicator"@en .
+
+be:BuiltInBrush a owl:Class ;
+    rdfs:label "built in brush"@en ;
+    rdfs:subClassOf be:Applicator ;
+    skos:prefLabel "built in brush"@en .
+
+be:Puff a owl:Class ;
+    rdfs:label "puff"@en ;
+    rdfs:subClassOf be:Applicator ;
+    skos:prefLabel "puff"@en .
+
+be:hasPart a owl:ObjectProperty ;
+    rdfs:label "has part"@en ;
+    rdfs:comment "A part of the packaging, applicator or piece, visible in the photo."@en ;
+    rdfs:domain be:Product ;
+    rdfs:range be:ProductComponent .
+
+
+# ---------------------------------------------------------------- details and their allowed values
+
+be:Attribute a owl:Class ;
+    rdfs:label "Attribute value"@en ;
+    rdfs:comment "A detail of a product; each family is a subclass and each value a named individual."@en ;
+    skos:prefLabel "Attribute value"@en .
+
+be:hasAttribute a owl:ObjectProperty ;
+    rdfs:label "has attribute"@en ;
+    rdfs:comment "Generic link from a product to one of its detail values; sub-properties are one per family."@en ;
+    rdfs:domain be:Product ;
+    rdfs:range be:Attribute .
+
+be:Texture a owl:Class ;
+    rdfs:label "texture"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "texture"@en .
+
+be:hasTexture a owl:ObjectProperty ;
+    rdfs:label "hasTexture"@en ;
+    rdfs:domain be:Product ;
+    rdfs:range be:Texture ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:texture_cream a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "cream"@en ;
+    skos:prefLabel "cream"@en .
+
+be:texture_gel a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "gel"@en ;
+    skos:prefLabel "gel"@en .
+
+be:texture_lotion a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "lotion"@en ;
+    skos:prefLabel "lotion"@en .
+
+be:texture_oil a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "oil"@en ;
+    skos:prefLabel "oil"@en .
+
+be:texture_balm a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "balm"@en ;
+    skos:prefLabel "balm"@en .
+
+be:texture_foam a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "foam"@en ;
+    skos:prefLabel "foam"@en .
+
+be:texture_liquid a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "liquid"@en ;
+    skos:prefLabel "liquid"@en .
+
+be:texture_powder a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "powder"@en ;
+    skos:prefLabel "powder"@en .
+
+be:texture_clay a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "clay"@en ;
+    skos:prefLabel "clay"@en .
+
+be:texture_mist a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "mist"@en ;
+    skos:prefLabel "mist"@en .
+
+be:texture_sheet a be:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "sheet"@en ;
+    skos:prefLabel "sheet"@en .
+
+be:Finish a owl:Class ;
+    rdfs:label "finish"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "finish"@en .
+
+be:hasFinish a owl:ObjectProperty ;
+    rdfs:label "hasFinish"@en ;
+    rdfs:domain be:Makeup ;
+    rdfs:range be:Finish ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:finish_matte a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "matte"@en ;
+    skos:prefLabel "matte"@en .
+
+be:finish_satin a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "satin"@en ;
+    skos:prefLabel "satin"@en .
+
+be:finish_natural a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "natural"@en ;
+    skos:prefLabel "natural"@en .
+
+be:finish_dewy a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "dewy"@en ;
+    skos:prefLabel "dewy"@en .
+
+be:finish_radiant a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "radiant"@en ;
+    skos:prefLabel "radiant"@en .
+
+be:finish_shimmer a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "shimmer"@en ;
+    skos:prefLabel "shimmer"@en .
+
+be:finish_metallic a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "metallic"@en ;
+    skos:prefLabel "metallic"@en .
+
+be:finish_glossy a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "glossy"@en ;
+    skos:prefLabel "glossy"@en .
+
+be:finish_sheer a be:Finish,
+        owl:NamedIndividual ;
+    rdfs:label "sheer"@en ;
+    skos:prefLabel "sheer"@en .
+
+be:Coverage a owl:Class ;
+    rdfs:label "coverage"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "coverage"@en .
+
+be:hasCoverage a owl:ObjectProperty ;
+    rdfs:label "hasCoverage"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( be:Foundation be:Concealer be:Powder ) ] ;
+    rdfs:range be:Coverage ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:coverage_sheer a be:Coverage,
+        owl:NamedIndividual ;
+    rdfs:label "sheer"@en ;
+    skos:prefLabel "sheer"@en .
+
+be:coverage_light a be:Coverage,
+        owl:NamedIndividual ;
+    rdfs:label "light"@en ;
+    skos:prefLabel "light"@en .
+
+be:coverage_medium a be:Coverage,
+        owl:NamedIndividual ;
+    rdfs:label "medium"@en ;
+    skos:prefLabel "medium"@en .
+
+be:coverage_full a be:Coverage,
+        owl:NamedIndividual ;
+    rdfs:label "full"@en ;
+    skos:prefLabel "full"@en .
+
+be:coverage_buildable a be:Coverage,
+        owl:NamedIndividual ;
+    rdfs:label "buildable"@en ;
+    skos:prefLabel "buildable"@en .
+
+be:Undertone a owl:Class ;
+    rdfs:label "undertone"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "undertone"@en .
+
+be:hasUndertone a owl:ObjectProperty ;
+    rdfs:label "hasUndertone"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( be:Foundation be:Concealer be:Powder ) ] ;
+    rdfs:range be:Undertone ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:undertone_cool a be:Undertone,
+        owl:NamedIndividual ;
+    rdfs:label "cool"@en ;
+    skos:prefLabel "cool"@en .
+
+be:undertone_warm a be:Undertone,
+        owl:NamedIndividual ;
+    rdfs:label "warm"@en ;
+    skos:prefLabel "warm"@en .
+
+be:undertone_neutral a be:Undertone,
+        owl:NamedIndividual ;
+    rdfs:label "neutral"@en ;
+    skos:prefLabel "neutral"@en .
+
+be:undertone_olive a be:Undertone,
+        owl:NamedIndividual ;
+    rdfs:label "olive"@en ;
+    skos:prefLabel "olive"@en .
+
+be:ShadeDepth a owl:Class ;
+    rdfs:label "shade depth"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "shade depth"@en .
+
+be:hasShadeDepth a owl:ObjectProperty ;
+    rdfs:label "hasShadeDepth"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( be:Foundation be:Concealer be:Powder ) ] ;
+    rdfs:range be:ShadeDepth ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:shade-depth_fair a be:ShadeDepth,
+        owl:NamedIndividual ;
+    rdfs:label "fair"@en ;
+    skos:prefLabel "fair"@en .
+
+be:shade-depth_light a be:ShadeDepth,
+        owl:NamedIndividual ;
+    rdfs:label "light"@en ;
+    skos:prefLabel "light"@en .
+
+be:shade-depth_light-medium a be:ShadeDepth,
+        owl:NamedIndividual ;
+    rdfs:label "light medium"@en ;
+    skos:prefLabel "light medium"@en .
+
+be:shade-depth_medium a be:ShadeDepth,
+        owl:NamedIndividual ;
+    rdfs:label "medium"@en ;
+    skos:prefLabel "medium"@en .
+
+be:shade-depth_tan a be:ShadeDepth,
+        owl:NamedIndividual ;
+    rdfs:label "tan"@en ;
+    skos:prefLabel "tan"@en .
+
+be:shade-depth_deep a be:ShadeDepth,
+        owl:NamedIndividual ;
+    rdfs:label "deep"@en ;
+    skos:prefLabel "deep"@en .
+
+be:shade-depth_rich a be:ShadeDepth,
+        owl:NamedIndividual ;
+    rdfs:label "rich"@en ;
+    skos:prefLabel "rich"@en .
+
+be:SkinType a owl:Class ;
+    rdfs:label "skin type"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "skin type"@en .
+
+be:hasSkinType a owl:ObjectProperty ;
+    rdfs:label "hasSkinType"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( be:Skincare be:Makeup be:BodyCare ) ] ;
+    rdfs:range be:SkinType ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:skin-type_oily a be:SkinType,
+        owl:NamedIndividual ;
+    rdfs:label "oily"@en ;
+    skos:prefLabel "oily"@en .
+
+be:skin-type_dry a be:SkinType,
+        owl:NamedIndividual ;
+    rdfs:label "dry"@en ;
+    skos:prefLabel "dry"@en .
+
+be:skin-type_combination a be:SkinType,
+        owl:NamedIndividual ;
+    rdfs:label "combination"@en ;
+    skos:prefLabel "combination"@en .
+
+be:skin-type_normal a be:SkinType,
+        owl:NamedIndividual ;
+    rdfs:label "normal"@en ;
+    skos:prefLabel "normal"@en .
+
+be:skin-type_sensitive a be:SkinType,
+        owl:NamedIndividual ;
+    rdfs:label "sensitive"@en ;
+    skos:prefLabel "sensitive"@en .
+
+be:skin-type_mature a be:SkinType,
+        owl:NamedIndividual ;
+    rdfs:label "mature"@en ;
+    skos:prefLabel "mature"@en .
+
+be:skin-type_acne-prone a be:SkinType,
+        owl:NamedIndividual ;
+    rdfs:label "acne-prone"@en ;
+    skos:prefLabel "acne-prone"@en .
+
+be:SkinConcern a owl:Class ;
+    rdfs:label "skin concern"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "skin concern"@en .
+
+be:hasSkinConcern a owl:ObjectProperty ;
+    rdfs:label "hasSkinConcern"@en ;
+    rdfs:domain be:Skincare ;
+    rdfs:range be:SkinConcern ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:skin-concern_acne a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "acne"@en ;
+    skos:prefLabel "acne"@en .
+
+be:skin-concern_dark-spots a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "dark spots"@en ;
+    skos:prefLabel "dark spots"@en .
+
+be:skin-concern_fine-lines a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "fine lines"@en ;
+    skos:prefLabel "fine lines"@en .
+
+be:skin-concern_dullness a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "dullness"@en ;
+    skos:prefLabel "dullness"@en .
+
+be:skin-concern_redness a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "redness"@en ;
+    skos:prefLabel "redness"@en .
+
+be:skin-concern_dehydration a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "dehydration"@en ;
+    skos:prefLabel "dehydration"@en .
+
+be:skin-concern_enlarged-pores a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "enlarged pores"@en ;
+    skos:prefLabel "enlarged pores"@en .
+
+be:skin-concern_uneven-texture a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "uneven texture"@en ;
+    skos:prefLabel "uneven texture"@en .
+
+be:skin-concern_dark-circles a be:SkinConcern,
+        owl:NamedIndividual ;
+    rdfs:label "dark circles"@en ;
+    skos:prefLabel "dark circles"@en .
+
+be:KeyIngredient a owl:Class ;
+    rdfs:label "key ingredient"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "key ingredient"@en .
+
+be:hasKeyIngredient a owl:ObjectProperty ;
+    rdfs:label "hasKeyIngredient"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( be:Skincare be:Haircare be:BodyCare ) ] ;
+    rdfs:range be:KeyIngredient ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:key-ingredient_vitamin-c a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "vitamin C"@en ;
+    skos:prefLabel "vitamin C"@en .
+
+be:key-ingredient_retinol a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "retinol"@en ;
+    skos:prefLabel "retinol"@en .
+
+be:key-ingredient_niacinamide a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "niacinamide"@en ;
+    skos:prefLabel "niacinamide"@en .
+
+be:key-ingredient_hyaluronic-acid a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "hyaluronic acid"@en ;
+    skos:prefLabel "hyaluronic acid"@en .
+
+be:key-ingredient_salicylic-acid a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "salicylic acid"@en ;
+    skos:prefLabel "salicylic acid"@en .
+
+be:key-ingredient_glycolic-acid a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "glycolic acid"@en ;
+    skos:prefLabel "glycolic acid"@en .
+
+be:key-ingredient_lactic-acid a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "lactic acid"@en ;
+    skos:prefLabel "lactic acid"@en .
+
+be:key-ingredient_azelaic-acid a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "azelaic acid"@en ;
+    skos:prefLabel "azelaic acid"@en .
+
+be:key-ingredient_benzoyl-peroxide a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "benzoyl peroxide"@en ;
+    skos:prefLabel "benzoyl peroxide"@en .
+
+be:key-ingredient_ceramides a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "ceramides"@en ;
+    skos:prefLabel "ceramides"@en .
+
+be:key-ingredient_peptides a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "peptides"@en ;
+    skos:prefLabel "peptides"@en .
+
+be:key-ingredient_squalane a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "squalane"@en ;
+    skos:prefLabel "squalane"@en .
+
+be:key-ingredient_zinc-oxide a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "zinc oxide"@en ;
+    skos:prefLabel "zinc oxide"@en .
+
+be:key-ingredient_bakuchiol a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "bakuchiol"@en ;
+    skos:prefLabel "bakuchiol"@en .
+
+be:key-ingredient_centella a be:KeyIngredient,
+        owl:NamedIndividual ;
+    rdfs:label "centella"@en ;
+    skos:prefLabel "centella"@en .
+
+be:SunProtection a owl:Class ;
+    rdfs:label "sun protection"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "sun protection"@en .
+
+be:hasSunProtection a owl:ObjectProperty ;
+    rdfs:label "hasSunProtection"@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( be:Sunscreen be:Moisturizer be:Primer be:Foundation ) ] ;
+    rdfs:range be:SunProtection ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:sun-protection_spf-15 a be:SunProtection,
+        owl:NamedIndividual ;
+    rdfs:label "SPF 15"@en ;
+    skos:prefLabel "SPF 15"@en .
+
+be:sun-protection_spf-30 a be:SunProtection,
+        owl:NamedIndividual ;
+    rdfs:label "SPF 30"@en ;
+    skos:prefLabel "SPF 30"@en .
+
+be:sun-protection_spf-50 a be:SunProtection,
+        owl:NamedIndividual ;
+    rdfs:label "SPF 50"@en ;
+    skos:prefLabel "SPF 50"@en .
+
+be:sun-protection_spf-50-plus a be:SunProtection,
+        owl:NamedIndividual ;
+    rdfs:label "SPF 50+"@en ;
+    skos:prefLabel "SPF 50+"@en .
+
+be:HairType a owl:Class ;
+    rdfs:label "hair type"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "hair type"@en .
+
+be:hasHairType a owl:ObjectProperty ;
+    rdfs:label "hasHairType"@en ;
+    rdfs:domain be:Haircare ;
+    rdfs:range be:HairType ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:hair-type_straight a be:HairType,
+        owl:NamedIndividual ;
+    rdfs:label "straight"@en ;
+    skos:prefLabel "straight"@en .
+
+be:hair-type_wavy a be:HairType,
+        owl:NamedIndividual ;
+    rdfs:label "wavy"@en ;
+    skos:prefLabel "wavy"@en .
+
+be:hair-type_curly a be:HairType,
+        owl:NamedIndividual ;
+    rdfs:label "curly"@en ;
+    skos:prefLabel "curly"@en .
+
+be:hair-type_coily a be:HairType,
+        owl:NamedIndividual ;
+    rdfs:label "coily"@en ;
+    skos:prefLabel "coily"@en .
+
+be:hair-type_fine a be:HairType,
+        owl:NamedIndividual ;
+    rdfs:label "fine"@en ;
+    skos:prefLabel "fine"@en .
+
+be:hair-type_thick a be:HairType,
+        owl:NamedIndividual ;
+    rdfs:label "thick"@en ;
+    skos:prefLabel "thick"@en .
+
+be:hair-type_color-treated a be:HairType,
+        owl:NamedIndividual ;
+    rdfs:label "color-treated"@en ;
+    skos:prefLabel "color-treated"@en .
+
+be:Scent a owl:Class ;
+    rdfs:label "scent"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "scent"@en .
+
+be:hasScent a owl:ObjectProperty ;
+    rdfs:label "hasScent"@en ;
+    rdfs:domain be:Product ;
+    rdfs:range be:Scent ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:scent_fragrance-free a be:Scent,
+        owl:NamedIndividual ;
+    rdfs:label "fragrance-free"@en ;
+    skos:prefLabel "fragrance-free"@en .
+
+be:scent_floral a be:Scent,
+        owl:NamedIndividual ;
+    rdfs:label "floral"@en ;
+    skos:prefLabel "floral"@en .
+
+be:scent_citrus a be:Scent,
+        owl:NamedIndividual ;
+    rdfs:label "citrus"@en ;
+    skos:prefLabel "citrus"@en .
+
+be:scent_woody a be:Scent,
+        owl:NamedIndividual ;
+    rdfs:label "woody"@en ;
+    skos:prefLabel "woody"@en .
+
+be:scent_fresh a be:Scent,
+        owl:NamedIndividual ;
+    rdfs:label "fresh"@en ;
+    skos:prefLabel "fresh"@en .
+
+be:scent_gourmand a be:Scent,
+        owl:NamedIndividual ;
+    rdfs:label "gourmand"@en ;
+    skos:prefLabel "gourmand"@en .
+
+be:scent_herbal a be:Scent,
+        owl:NamedIndividual ;
+    rdfs:label "herbal"@en ;
+    skos:prefLabel "herbal"@en .
+
+be:Claim a owl:Class ;
+    rdfs:label "claim"@en ;
+    rdfs:subClassOf be:Attribute ;
+    skos:prefLabel "claim"@en .
+
+be:hasClaim a owl:ObjectProperty ;
+    rdfs:label "hasClaim"@en ;
+    rdfs:domain be:Product ;
+    rdfs:range be:Claim ;
+    rdfs:subPropertyOf be:hasAttribute .
+
+be:claim_vegan a be:Claim,
+        owl:NamedIndividual ;
+    rdfs:label "vegan"@en ;
+    skos:prefLabel "vegan"@en .
+
+be:claim_cruelty-free a be:Claim,
+        owl:NamedIndividual ;
+    rdfs:label "cruelty-free"@en ;
+    skos:prefLabel "cruelty-free"@en .
+
+be:claim_non-comedogenic a be:Claim,
+        owl:NamedIndividual ;
+    rdfs:label "non-comedogenic"@en ;
+    skos:prefLabel "non-comedogenic"@en .
+
+be:claim_hypoallergenic a be:Claim,
+        owl:NamedIndividual ;
+    rdfs:label "hypoallergenic"@en ;
+    skos:prefLabel "hypoallergenic"@en .
+
+be:claim_dermatologist-tested a be:Claim,
+        owl:NamedIndividual ;
+    rdfs:label "dermatologist-tested"@en ;
+    skos:prefLabel "dermatologist-tested"@en .
+
+be:claim_oil-free a be:Claim,
+        owl:NamedIndividual ;
+    rdfs:label "oil-free"@en ;
+    skos:prefLabel "oil-free"@en .
+
+be:claim_reef-safe a be:Claim,
+        owl:NamedIndividual ;
+    rdfs:label "reef-safe"@en ;
+    skos:prefLabel "reef-safe"@en .
+
+
+# ---------------------------------------------------------------- the brand graph's schema (not shown to the vision model)
+
+be:Regimen a owl:Class ;
+    rdfs:label "Regimen"@en ;
+    fo:visual false ;
+    rdfs:comment "A routine the brand recommends: an ordered set of products for a skin type or concern (beauty's look)."@en ;
+    skos:prefLabel "Regimen"@en .
+
+be:Item a owl:Class ;
+    rdfs:label "Item"@en ;
+    fo:visual false ;
+    rdfs:comment "One product as it appears in a regimen photo or a product shot."@en ;
+    skos:prefLabel "Item"@en .
+
+be:Brand a owl:Class ;
+    rdfs:label "Brand"@en ;
+    fo:visual false ;
+    rdfs:comment "The brand."@en ;
+    skos:prefLabel "Brand"@en .
+
+be:Article a owl:Class ;
+    rdfs:label "Article"@en ;
+    fo:visual false ;
+    rdfs:comment "An editorial text: a journal post, a routine guide."@en ;
+    skos:prefLabel "Article"@en .
+
+be:Statement a owl:Class ;
+    rdfs:label "Statement"@en ;
+    fo:visual false ;
+    rdfs:comment "One claim of an article, about a regimen or a product."@en ;
+    skos:prefLabel "Statement"@en .
+
+be:contains a owl:ObjectProperty ;
+    rdfs:label "contains"@en ;
+    fo:visual false ;
+    rdfs:comment "The products in a regimen."@en ;
+    rdfs:domain be:Regimen ;
+    rdfs:range be:Item .
+
+be:isCategory a owl:ObjectProperty ;
+    rdfs:label "is category"@en ;
+    fo:visual false ;
+    rdfs:comment "The kind of product an item is."@en ;
+    rdfs:domain be:Item ;
+    rdfs:range be:Product .
+
+be:hasStatement a owl:ObjectProperty ;
+    rdfs:label "has statement"@en ;
+    fo:visual false ;
+    rdfs:comment "The statements of an article."@en ;
+    rdfs:domain be:Article ;
+    rdfs:range be:Statement .
+
+be:illustrates a owl:ObjectProperty ;
+    rdfs:label "illustrates"@en ;
+    fo:visual false ;
+    rdfs:comment "The regimen a statement is about."@en ;
+    rdfs:domain be:Statement ;
+    rdfs:range be:Regimen .
+
+be:appliedBefore a owl:ObjectProperty ;
+    rdfs:label "applied before"@en ;
+    fo:visual false ;
+    rdfs:comment "Routine order at the kind level: a cleanser goes on before a toner, a serum before a moisturizer."@en ;
+    rdfs:domain be:Product ;
+    rdfs:range be:Product .
+
+be:conflictsWith a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "conflicts with"@en ;
+    fo:visual false ;
+    rdfs:comment "Ingredients the brand does not combine in one routine step."@en ;
+    rdfs:domain be:KeyIngredient ;
+    rdfs:range be:KeyIngredient .
+
+
+# ---------------------------------------------------------------- a few of the brand's rules, as examples
+
+be:Cleanser be:appliedBefore be:Toner .
+
+be:Toner be:appliedBefore be:Serum .
+
+be:Serum be:appliedBefore be:Moisturizer .
+
+be:Moisturizer be:appliedBefore be:Sunscreen .
+
+be:Sunscreen be:appliedBefore be:Primer .
+
+be:Primer be:appliedBefore be:Foundation .
+
+be:key-ingredient_retinol be:conflictsWith be:key-ingredient_glycolic-acid .
+
+be:key-ingredient_retinol be:conflictsWith be:key-ingredient_salicylic-acid .
+
+be:key-ingredient_retinol be:conflictsWith be:key-ingredient_benzoyl-peroxide .
+
+be:key-ingredient_vitamin-c be:conflictsWith be:key-ingredient_benzoyl-peroxide .

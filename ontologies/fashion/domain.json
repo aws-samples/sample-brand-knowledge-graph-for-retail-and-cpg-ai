@@ -1,0 +1,31 @@
+{
+  "name": "Fashion",
+  "description": "Apparel: garments, accessories (jewelry included) and garment parts with their visible attributes (silhouette, neckline, length, pattern, opening, material), derived from the Fashionpedia ontology.",
+  "start_with": ["Coat", "hasLength", "Lapel"],
+  "subject": "garment, accessory and garment component",
+  "scene": "an outfit",
+  "example_questions": [
+    "What goes with a trench coat in autumn?"
+  ],
+  "photo_questions": [
+    "What goes with this piece? Style the rest of the outfit around it.",
+    "What would the brand pair with this piece for an evening out?",
+    "What goes with what I am wearing? Suggest the rest, piece by piece."
+  ],
+  "persona": {
+    "answer": "You are the in-house stylist for a fashion brand.",
+    "role": "stylist"
+  },
+  "noun": { "singular": "garment", "plural": "garments" },
+  "labels": {
+    "qa_tab": "Style Q&A + Style recommendation",
+    "rule": "brand rule",
+    "rules": "brand rules"
+  },
+  "query_examples": [
+    {
+      "question": "What did the most recent ingest run write?",
+      "cypher": "MATCH (n) WHERE n.run IS NOT NULL\nWITH max(n.run) AS last\nMATCH (n) WHERE n.run = last\nRETURN last AS run, labels(n)[0] AS label, count(n) AS nodes, collect(n.name)[..10] AS examples\nORDER BY nodes DESC"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+# OpenTelemetry 1.45.2 / 0.66b2 for both agents' runtimes (agentcore/ and agentcore-lake/).
+# aws-opentelemetry-distro 0.22.0, the newest release, pins OpenTelemetry 1.45.1 / 0.66b1 exactly;
+# opentelemetry-api 1.45.2 fixes CVE-2026-126360 (GHSA-mf5v-w3w3-f6cg: quadratic-time traceparent
+# parsing in the W3C trace-context propagator). These are the patch releases of the same versions,
+# released together on 29 Oct 2026. Used as `uv pip compile --override` (see each requirements.in);
+# drop this file once the distro pins 1.45.2 or later.
+opentelemetry-api==1.45.2
+opentelemetry-distro==0.66b2
+opentelemetry-exporter-http-transport==0.66b2
+opentelemetry-exporter-otlp-common==0.66b2
+opentelemetry-exporter-otlp-proto-common==1.45.2
+opentelemetry-exporter-otlp-proto-grpc==1.45.2
+opentelemetry-exporter-otlp-proto-http==1.45.2
+opentelemetry-instrumentation-aio-pika==0.66b2
+opentelemetry-instrumentation-aiohttp-client==0.66b2
+opentelemetry-instrumentation-aiokafka==0.66b2
+opentelemetry-instrumentation-aiopg==0.66b2
+opentelemetry-instrumentation-asgi==0.66b2
+opentelemetry-instrumentation-asyncpg==0.66b2
+opentelemetry-instrumentation-aws-lambda==0.66b2
+opentelemetry-instrumentation-boto3sqs==0.66b2
+opentelemetry-instrumentation-botocore==0.66b2
+opentelemetry-instrumentation-cassandra==0.66b2
+opentelemetry-instrumentation-celery==0.66b2
+opentelemetry-instrumentation-confluent-kafka==0.66b2
+opentelemetry-instrumentation-dbapi==0.66b2
+opentelemetry-instrumentation-django==0.66b2
+opentelemetry-instrumentation-falcon==0.66b2
+opentelemetry-instrumentation-fastapi==0.66b2
+opentelemetry-instrumentation-flask==0.66b2
+opentelemetry-instrumentation-grpc==0.66b2
+opentelemetry-instrumentation-httpx==0.66b2
+opentelemetry-instrumentation-jinja2==0.66b2
+opentelemetry-instrumentation-kafka-python==0.66b2
+opentelemetry-instrumentation-logging==0.66b2
+opentelemetry-instrumentation-mysql==0.66b2
+opentelemetry-instrumentation-mysqlclient==0.66b2
+opentelemetry-instrumentation-pika==0.66b2
+opentelemetry-instrumentation-psycopg2==0.66b2
+opentelemetry-instrumentation-pymemcache==0.66b2
+opentelemetry-instrumentation-pymongo==0.66b2
+opentelemetry-instrumentation-pymysql==0.66b2
+opentelemetry-instrumentation-pyramid==0.66b2
+opentelemetry-instrumentation-redis==0.66b2
+opentelemetry-instrumentation-remoulade==0.66b2
+opentelemetry-instrumentation-requests==0.66b2
+opentelemetry-instrumentation-sqlalchemy==0.66b2
+opentelemetry-instrumentation-sqlite3==0.66b2
+opentelemetry-instrumentation-starlette==0.66b2
+opentelemetry-instrumentation-system-metrics==0.66b2
+opentelemetry-instrumentation-threading==0.66b2
+opentelemetry-instrumentation-tornado==0.66b2
+opentelemetry-instrumentation-tortoiseorm==0.66b2
+opentelemetry-instrumentation-urllib3==0.66b2
+opentelemetry-instrumentation-urllib==0.66b2
+opentelemetry-instrumentation-wsgi==0.66b2
+opentelemetry-instrumentation==0.66b2
+opentelemetry-processor-baggage==0.66b2
+opentelemetry-propagator-b3==1.45.2
+opentelemetry-propagator-jaeger==1.45.2
+opentelemetry-propagator-ot-trace==0.66b2
+opentelemetry-proto==1.45.2
+opentelemetry-sdk==1.45.2
+opentelemetry-semantic-conventions==0.66b2
+opentelemetry-util-http==0.66b2

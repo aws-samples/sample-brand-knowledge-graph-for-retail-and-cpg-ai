@@ -1,0 +1,29 @@
+{
+  "example_questions": [
+    "What do I wear with the waxed field jacket?",
+    "Black tie without a dress shirt: what does the brand suggest?",
+    "Linen outfit for a terrace lunch",
+    "Can I mix the tuxedo jacket with denim?"
+  ],
+  "photo_questions": [
+    "Which brand rules apply to this piece?"
+  ],
+  "query_examples": [
+    {
+      "question": "How many catalog items does each line have?",
+      "cypher": "MATCH (i:Item) WHERE i.run IS NULL\nRETURN i.line AS line, count(i) AS items ORDER BY items DESC"
+    },
+    {
+      "question": "What is a linen blazer worn with, and why?",
+      "cypher": "MATCH (i:Item) WHERE toLower(i.name) CONTAINS 'linen blazer'\nOPTIONAL MATCH (i)-[r:LAYERED_WITH]-(p:Item)\nOPTIONAL MATCH (i)-[:IS_CATEGORY]->(c:Category)-[pw:PAIRS_WITH]-(pc:Category)\nRETURN i.name AS item, collect(DISTINCT {item: p.name, why: r.rationale}) AS layered_with,\n       collect(DISTINCT {category: pc.short, why: pw.rationale}) AS category_rules"
+    },
+    {
+      "question": "Which articles say something about trench coats?",
+      "cypher": "MATCH (a:Article)-[:HAS_STATEMENT]->(s:Statement)-[:ILLUSTRATES]->(i:Item)-[:IS_CATEGORY]->(c:Category)\nWHERE c.short = 'coat' AND toLower(i.name) CONTAINS 'trench'\nRETURN a.title AS article, substring(s.text, 0, 200) AS statement, collect(DISTINCT i.name) AS items LIMIT 50"
+    },
+    {
+      "question": "Which category rules are meant for evening?",
+      "cypher": "MATCH (a:Category)-[r:PAIRS_WITH]->(b:Category)\nWHERE r.occasion IN ['evening', 'any']\nRETURN a.short AS category, b.short AS pairs_with, r.occasion AS occasion, r.rationale AS why\nORDER BY occasion, category"
+    }
+  ]
+}

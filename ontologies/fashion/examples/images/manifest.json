@@ -1,0 +1,96 @@
+{
+  "license": "Synthetic photos generated with Amazon Nova Canvas on Amazon Bedrock: lookbook photos of the fictional brand AnyCompany Fashion House (see ../../datasets/anycompany-fashion-house/README.md). No real people and no third-party photos.",
+  "examples": [
+    {
+      "file": "01-trench-coat-sweater-dress.jpg",
+      "title": "trench coat, sweater dress, mules",
+      "source": "AnyCompany Fashion House lookbook photo fashion_dress_20241206_161841_1.jpg (from the IND416 workshop's data set)",
+      "model_id": "amazon.nova-canvas-v1:0",
+      "size": [
+        576,
+        1024
+      ],
+      "generated": "2024-12-06",
+      "batch": "first"
+    },
+    {
+      "file": "02-sheath-dress-knee-high-boots.jpg",
+      "title": "sheath dress, knee-high boots, clutch",
+      "source": "AnyCompany Fashion House lookbook photo fashion_dress_20241206_160940_1.jpg (from the IND416 workshop's data set)",
+      "model_id": "amazon.nova-canvas-v1:0",
+      "size": [
+        576,
+        1024
+      ],
+      "generated": "2024-12-06"
+    },
+    {
+      "file": "03-navy-blazer-pleated-skirt.jpg",
+      "title": "navy blazer, pleated skirt, studded slides",
+      "source": "AnyCompany Fashion House lookbook photo fashion_professional_20241206_164610_1.jpg (from the IND416 workshop's data set)",
+      "model_id": "amazon.nova-canvas-v1:0",
+      "size": [
+        576,
+        1024
+      ],
+      "generated": "2024-12-06"
+    },
+    {
+      "file": "04-biker-jacket-jeans-sneakers.jpg",
+      "title": "biker jacket, jeans, white sneakers",
+      "source": "AnyCompany Fashion House lookbook photo fashion_business_casual_20241206_161618_1.jpg (from the IND416 workshop's data set)",
+      "model_id": "amazon.nova-canvas-v1:0",
+      "size": [
+        576,
+        1024
+      ],
+      "generated": "2024-12-06",
+      "batch": "first"
+    },
+    {
+      "file": "05-turtleneck-denim-skirt.jpg",
+      "title": "turtleneck, denim skirt, ankle boots",
+      "source": "AnyCompany Fashion House lookbook photo fashion_business_casual_20241206_161640_1.jpg (from the IND416 workshop's data set)",
+      "model_id": "amazon.nova-canvas-v1:0",
+      "size": [
+        576,
+        1024
+      ],
+      "generated": "2024-12-06"
+    },
+    {
+      "file": "06-cardigan-wide-leg-trousers.jpg",
+      "title": "cardigan, wide-leg trousers, flats",
+      "source": "AnyCompany Fashion House lookbook photo fashion_business_casual_20241206_161444_1.jpg (from the IND416 workshop's data set)",
+      "model_id": "amazon.nova-canvas-v1:0",
+      "size": [
+        576,
+        1024
+      ],
+      "generated": "2024-12-06"
+    },
+    {
+      "file": "07-wool-coat-ankle-boots.jpg",
+      "title": "wool coat, wide-leg trousers, ankle boots",
+      "source": "AnyCompany Fashion House lookbook photo fashion_professional_20241206_163312_1.jpg (from the IND416 workshop's data set)",
+      "model_id": "amazon.nova-canvas-v1:0",
+      "size": [
+        576,
+        1024
+      ],
+      "generated": "2024-12-06"
+    },
+    {
+      "file": "08-pinstripe-suit.jpg",
+      "title": "pinstripe suit, silk blouse, slides",
+      "source": "AnyCompany Fashion House lookbook photo fashion_professional_20241206_164849_1.jpg (from the IND416 workshop's data set)",
+      "model_id": "amazon.nova-canvas-v1:0",
+      "size": [
+        576,
+        1024
+      ],
+      "generated": "2024-12-06",
+      "batch": "first"
+    }
+  ]
+}

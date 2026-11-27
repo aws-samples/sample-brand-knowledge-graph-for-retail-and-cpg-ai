@@ -1,0 +1,6 @@
+{
+  "name": "Home furnishings",
+  "description": "Seating, tables, storage, beds, lighting, textiles and decor, their parts and their details (material, color, finish, style, room), with what is placed together in a room as the brand's rule. Written by hand for this sample, to browse.",
+  "browse_only": true,
+  "start_with": ["Sofa", "hasMaterial", "Leg"]
+}

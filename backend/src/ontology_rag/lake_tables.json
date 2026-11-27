@@ -1,0 +1,30 @@
+{
+  "namespace": "brand_graph",
+  "tables": {
+    "items": {
+      "description": "One row per Item node of the graph: the brand's lookbook and every garment tab 2 ingested.",
+      "fields": [
+        { "name": "item_id", "type": "string", "required": true, "doc": "the node id, e.g. item:utility-field-jacket" },
+        { "name": "name", "type": "string", "doc": "the item's name" },
+        { "name": "category_id", "type": "string", "doc": "its Category node, e.g. category:jacket" },
+        { "name": "category", "type": "string", "doc": "the category's name" },
+        { "name": "origin", "type": "string", "required": true, "doc": "new (ingested in tab 2) or lookbook" },
+        { "name": "source", "type": "string", "doc": "new items: the photo or text they were ingested from (one piece of content); empty for the lookbook" },
+        { "name": "run_id", "type": "string", "doc": "new items: the ingest run" },
+        { "name": "confidence", "type": "double", "doc": "new items: the vision model's confidence (0-1, -1 when it gave none)" },
+        { "name": "line", "type": "string", "doc": "lookbook items: the product line" }
+      ]
+    },
+    "item_features": {
+      "description": "One row per edge from an Item to the ontology's vocabulary: its category, its values and its components.",
+      "fields": [
+        { "name": "item_id", "type": "string", "required": true, "doc": "items.item_id" },
+        { "name": "feature_id", "type": "string", "required": true, "doc": "the vocabulary node, e.g. attribute:length:knee or category:lapel" },
+        { "name": "relation", "type": "string", "required": true, "doc": "IS_CATEGORY, HAS_ATTRIBUTE or HAS_PART" },
+        { "name": "kind", "type": "string", "required": true, "doc": "category or attribute" },
+        { "name": "family", "type": "string", "doc": "attributes: the value family, e.g. length" },
+        { "name": "name", "type": "string", "doc": "the vocabulary node's name, e.g. knee (length)" }
+      ]
+    }
+  }
+}

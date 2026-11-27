@@ -1,0 +1,14 @@
+# What the query agent (tab 3, tab 6's method 1) needs on Amazon Bedrock AgentCore Runtime
+# (Python 3.14, Linux arm64).
+# requirements.txt is the resolved, pinned closure with hashes the agent zip is built from
+# (`uv pip install -r requirements.txt --require-hashes`); regenerate it with
+#   uv pip compile requirements.in --override ../otel-overrides.txt --python-version 3.14 \
+#     --python-platform aarch64-manylinux2014 --only-binary :all: --generate-hashes -o requirements.txt
+# (../otel-overrides.txt: the OpenTelemetry patch releases the distro does not pin yet.)
+# Keep boto3 on the version of ../lambda-requirements.in and ../agentcore-lake/requirements.in.
+bedrock-agentcore==1.24.1
+aws-opentelemetry-distro==0.22.0
+awslabs.amazon-neptune-mcp-server==1.1.1
+boto3==1.43.111
+# ontology_rag.vision (the model registry) imports owl.py, which needs rdflib
+rdflib==7.6.0

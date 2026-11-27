@@ -1,0 +1,843 @@
+[
+  {
+    "id": "item:utility-field-jacket",
+    "name": "Waxed field jacket",
+    "category_id": "jacket",
+    "line_id": "line:utility",
+    "description": "Four-pocket waxed cotton field jacket with corduroy collar and brass zip; the Utility line's anchor piece.",
+    "color": "olive",
+    "material": "waxed cotton",
+    "attributes": {
+      "silhouette": "silhouette:regular",
+      "opening-type": "opening-type:zip-up",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain",
+      "nickname": "nickname:safari-jacket"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-trench",
+    "name": "Cotton gabardine trench coat",
+    "category_id": "coat",
+    "line_id": "line:utility",
+    "description": "Double-breasted trench with a storm flap and a belt meant to be tied; the piece that survives every edit of the line.",
+    "color": "stone",
+    "material": "cotton gabardine",
+    "attributes": {
+      "silhouette": "silhouette:regular",
+      "opening-type": "opening-type:double-breasted",
+      "length": "length:knee",
+      "textile-pattern": "textile-pattern:plain",
+      "nickname": "nickname:trench-coat"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-chore-coat",
+    "name": "Corduroy chore coat",
+    "category_id": "coat",
+    "line_id": "line:utility",
+    "description": "Relaxed chore coat in wide-wale corduroy with patch pockets; layers over knitwear.",
+    "color": "rust",
+    "material": "corduroy",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "opening-type": "opening-type:single-breasted",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-quilted-vest",
+    "name": "Quilted liner vest",
+    "category_id": "vest",
+    "line_id": "line:utility",
+    "description": "Lightweight quilted vest designed to sit under the field jacket or over a flannel shirt.",
+    "color": "navy",
+    "material": "recycled nylon",
+    "attributes": {
+      "silhouette": "silhouette:regular",
+      "opening-type": "opening-type:zip-up",
+      "length": "length:hip",
+      "textile-finishing-manufacturing-techniques": "textile-finishing-manufacturing-techniques:quilted"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-flannel-shirt",
+    "name": "Brushed flannel overshirt",
+    "category_id": "shirt",
+    "line_id": "line:utility",
+    "description": "Heavyweight brushed flannel in a forest-green check; worn open as an overshirt or buttoned as a layer.",
+    "color": "forest green",
+    "material": "brushed cotton",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "nickname": "nickname:shirt-collar",
+      "opening-type": "opening-type:single-breasted",
+      "textile-pattern": "textile-pattern:check",
+      "length": "length:hip"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-henley",
+    "name": "Thermal henley",
+    "category_id": "top",
+    "line_id": "line:utility",
+    "description": "Waffle-knit henley with a three-button placket; the base layer of the Utility line.",
+    "color": "ecru",
+    "material": "waffle cotton",
+    "attributes": {
+      "silhouette": "silhouette:regular",
+      "neckline-type": "neckline-type:round",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain",
+      "nickname": "nickname:henley-shirt"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-fisherman-sweater",
+    "name": "Fisherman rib sweater",
+    "category_id": "sweater",
+    "line_id": "line:utility",
+    "description": "Chunky rib-knit crew neck in undyed wool; sized to sit over shirts.",
+    "color": "oatmeal",
+    "material": "wool",
+    "attributes": {
+      "silhouette": "silhouette:oversized",
+      "neckline-type": "neckline-type:crew",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-shawl-cardigan",
+    "name": "Shawl-collar cardigan",
+    "category_id": "cardigan",
+    "line_id": "line:utility",
+    "description": "Heavy shawl-collar cardigan with horn buttons; a soft alternative to the chore coat.",
+    "color": "charcoal",
+    "material": "wool blend",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "nickname": "nickname:shawl-lapel",
+      "opening-type": "opening-type:single-breasted",
+      "length": "length:hip"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-cargo-pants",
+    "name": "Ripstop cargo pants",
+    "category_id": "pants",
+    "line_id": "line:utility",
+    "description": "Straight-leg cargo pants in tear-resistant ripstop with bellows pockets.",
+    "color": "khaki",
+    "material": "cotton ripstop",
+    "attributes": {
+      "silhouette": "silhouette:straight",
+      "waistline": "waistline:normal-waist",
+      "length": "length:floor",
+      "opening-type": "opening-type:fly",
+      "textile-pattern": "textile-pattern:plain",
+      "nickname": "nickname:cargo-pants"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-carpenter-pants",
+    "name": "Duck canvas carpenter pants",
+    "category_id": "pants",
+    "line_id": "line:utility",
+    "description": "Wide-leg carpenter pants in stiff duck canvas with hammer loop; softens with wear.",
+    "color": "tan",
+    "material": "cotton duck canvas",
+    "attributes": {
+      "silhouette": "silhouette:wide-leg",
+      "waistline": "waistline:normal-waist",
+      "length": "length:floor",
+      "opening-type": "opening-type:fly"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-selvedge-jeans",
+    "name": "Selvedge denim jeans",
+    "category_id": "pants",
+    "line_id": "line:utility",
+    "description": "Rinse-washed selvedge jeans with a high rise and straight leg.",
+    "color": "indigo",
+    "material": "selvedge denim",
+    "attributes": {
+      "silhouette": "silhouette:straight",
+      "waistline": "waistline:high-waist",
+      "length": "length:floor",
+      "opening-type": "opening-type:fly",
+      "textile-finishing-manufacturing-techniques": "textile-finishing-manufacturing-techniques:washed",
+      "nickname": "nickname:jeans"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-work-shorts",
+    "name": "Canvas work shorts",
+    "category_id": "shorts",
+    "line_id": "line:utility",
+    "description": "Knee-length canvas shorts with utility pockets for warm-weather site days.",
+    "color": "stone",
+    "material": "cotton canvas",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "waistline": "waistline:normal-waist",
+      "length": "length:knee",
+      "opening-type": "opening-type:fly"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-work-boot",
+    "name": "Moc-toe work boot",
+    "category_id": "shoe",
+    "line_id": "line:utility",
+    "description": "Goodyear-welted moc-toe boot on a rubber lug sole; the Utility line's footwear staple.",
+    "color": "brown",
+    "material": "full-grain leather",
+    "attributes": {
+      "opening-type": "opening-type:lace-up",
+      "non-textile-material-type": "non-textile-material-type:rubber"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-suede-chukka",
+    "name": "Suede chukka boot",
+    "category_id": "shoe",
+    "line_id": "line:utility",
+    "description": "Two-eyelet suede chukka on a crepe sole; dresses the cargo pants up.",
+    "color": "sand",
+    "material": "suede",
+    "attributes": {
+      "opening-type": "opening-type:lace-up",
+      "leather": "leather:suede"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-beanie",
+    "name": "Rib-knit watch cap",
+    "category_id": "hat",
+    "line_id": "line:utility",
+    "description": "Close-fitting ribbed watch cap in merino.",
+    "color": "charcoal",
+    "material": "merino wool",
+    "attributes": {
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-tote",
+    "name": "Waxed canvas tote",
+    "category_id": "bag",
+    "line_id": "line:utility",
+    "description": "Structured waxed canvas tote with brass rivets and leather handles.",
+    "color": "olive",
+    "material": "waxed canvas",
+    "attributes": {
+      "non-textile-material-type": "non-textile-material-type:metal"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-belt",
+    "name": "Bridle leather belt",
+    "category_id": "belt",
+    "line_id": "line:utility",
+    "description": "Thick bridle leather belt with a solid brass buckle.",
+    "color": "brown",
+    "material": "bridle leather",
+    "attributes": {
+      "non-textile-material-type": "non-textile-material-type:metal"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-wool-scarf",
+    "name": "Herringbone wool scarf",
+    "category_id": "scarf",
+    "line_id": "line:utility",
+    "description": "Long lambswool scarf woven in a herringbone twill.",
+    "color": "gray",
+    "material": "lambswool",
+    "attributes": {},
+    "image_key": ""
+  },
+  {
+    "id": "item:utility-boot-sock",
+    "name": "Boot sock",
+    "category_id": "sock",
+    "line_id": "line:utility",
+    "description": "Cushioned wool-blend boot sock.",
+    "color": "oatmeal",
+    "material": "wool blend",
+    "attributes": {
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-linen-shirt",
+    "name": "Camp-collar linen shirt",
+    "category_id": "shirt",
+    "line_id": "line:resort",
+    "description": "Boxy camp-collar shirt in washed linen; the Resort line's signature.",
+    "color": "white",
+    "material": "linen",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "nickname": "nickname:shirt-collar",
+      "opening-type": "opening-type:single-breasted",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-stripe-shirt",
+    "name": "Striped linen shirt",
+    "category_id": "shirt",
+    "line_id": "line:resort",
+    "description": "Relaxed button-front shirt in a navy stripe on linen-cotton.",
+    "color": "navy",
+    "material": "linen cotton",
+    "attributes": {
+      "silhouette": "silhouette:regular",
+      "nickname": "nickname:shirt-collar",
+      "opening-type": "opening-type:single-breasted",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:stripe"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-knit-polo",
+    "name": "Open-knit polo",
+    "category_id": "top",
+    "line_id": "line:resort",
+    "description": "Airy open-knit polo with a soft collar; wears like a t-shirt.",
+    "color": "sage",
+    "material": "cotton",
+    "attributes": {
+      "silhouette": "silhouette:regular",
+      "nickname": "nickname:polo-shirt",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-tank",
+    "name": "Ribbed tank",
+    "category_id": "top",
+    "line_id": "line:resort",
+    "description": "Fine ribbed scoop-neck tank; the layer under every Resort shirt.",
+    "color": "ivory",
+    "material": "organic cotton",
+    "attributes": {
+      "silhouette": "silhouette:tight",
+      "neckline-type": "neckline-type:scoop",
+      "length": "length:hip",
+      "nickname": "nickname:tank-top"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-linen-blazer",
+    "name": "Unlined linen blazer",
+    "category_id": "jacket",
+    "line_id": "line:resort",
+    "description": "Unstructured single-breasted blazer in slubby linen; creases are part of the look.",
+    "color": "sand",
+    "material": "linen",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "opening-type": "opening-type:single-breasted",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain",
+      "nickname": "nickname:blazer"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-drawstring-pants",
+    "name": "Drawstring linen pants",
+    "category_id": "pants",
+    "line_id": "line:resort",
+    "description": "Wide-leg linen pants with an elasticated drawstring waist.",
+    "color": "stone",
+    "material": "linen",
+    "attributes": {
+      "silhouette": "silhouette:wide-leg",
+      "waistline": "waistline:normal-waist",
+      "length": "length:floor",
+      "opening-type": "opening-type:no-opening"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-pleated-shorts",
+    "name": "Pleated linen shorts",
+    "category_id": "shorts",
+    "line_id": "line:resort",
+    "description": "High-waisted pleated shorts that pair with knit polos and camp shirts.",
+    "color": "white",
+    "material": "linen",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "waistline": "waistline:high-waist",
+      "length": "length:above-the-knee",
+      "opening-type": "opening-type:fly",
+      "textile-finishing-manufacturing-techniques": "textile-finishing-manufacturing-techniques:pleat"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-wrap-skirt",
+    "name": "Linen wrap skirt",
+    "category_id": "skirt",
+    "line_id": "line:resort",
+    "description": "Midi wrap skirt with a self-tie waist in sun-faded terracotta.",
+    "color": "terracotta",
+    "material": "linen",
+    "attributes": {
+      "silhouette": "silhouette:a-line",
+      "waistline": "waistline:high-waist",
+      "length": "length:midi",
+      "opening-type": "opening-type:wrapping",
+      "nickname": "nickname:wrap-skirt"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-shirt-dress",
+    "name": "Linen shirt dress",
+    "category_id": "dress",
+    "line_id": "line:resort",
+    "description": "Relaxed shirt dress in washed linen; belt it or wear it open over the tank.",
+    "color": "white",
+    "material": "linen",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "nickname": "nickname:shirt-dress",
+      "length": "length:midi",
+      "opening-type": "opening-type:single-breasted",
+      "waistline": "waistline:dropped-waistline"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-slip-dress",
+    "name": "Bias-cut slip dress",
+    "category_id": "dress",
+    "line_id": "line:resort",
+    "description": "Fluid bias-cut slip dress with a cowl neck; day to evening.",
+    "color": "sage",
+    "material": "cupro",
+    "attributes": {
+      "silhouette": "silhouette:straight",
+      "neckline-type": "neckline-type:cowl",
+      "length": "length:midi",
+      "opening-type": "opening-type:no-opening",
+      "waistline": "waistline:no-waistline",
+      "nickname": "nickname:slip-dress"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-jumpsuit",
+    "name": "Utility linen jumpsuit",
+    "category_id": "jumpsuit",
+    "line_id": "line:resort",
+    "description": "One-piece linen jumpsuit with a belted waist and zip front.",
+    "color": "olive",
+    "material": "linen",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "neckline-type": "neckline-type:v-neck",
+      "length": "length:floor",
+      "opening-type": "opening-type:zip-up",
+      "waistline": "waistline:normal-waist"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-espadrille",
+    "name": "Canvas espadrille",
+    "category_id": "shoe",
+    "line_id": "line:resort",
+    "description": "Slip-on canvas espadrille on a jute-wrapped sole.",
+    "color": "natural",
+    "material": "canvas",
+    "attributes": {
+      "opening-type": "opening-type:no-opening",
+      "non-textile-material-type": "non-textile-material-type:rubber"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-leather-sandal",
+    "name": "Leather slide sandal",
+    "category_id": "shoe",
+    "line_id": "line:resort",
+    "description": "Minimal leather slide with a brass buckle.",
+    "color": "tan",
+    "material": "leather",
+    "attributes": {
+      "opening-type": "opening-type:buckled",
+      "non-textile-material-type": "non-textile-material-type:metal"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-straw-hat",
+    "name": "Wide-brim straw hat",
+    "category_id": "hat",
+    "line_id": "line:resort",
+    "description": "Wide-brim raffia hat with a cotton band.",
+    "color": "natural",
+    "material": "raffia",
+    "attributes": {
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-sunglasses",
+    "name": "Round acetate sunglasses",
+    "category_id": "glasses",
+    "line_id": "line:resort",
+    "description": "Round tortoiseshell acetate frames.",
+    "color": "tortoise",
+    "material": "acetate",
+    "attributes": {
+      "non-textile-material-type": "non-textile-material-type:plastic"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-basket-bag",
+    "name": "Woven basket bag",
+    "category_id": "bag",
+    "line_id": "line:resort",
+    "description": "Hand-woven palm basket bag with leather handles.",
+    "color": "natural",
+    "material": "palm leaf",
+    "attributes": {
+      "non-textile-material-type": "non-textile-material-type:wood"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-woven-belt",
+    "name": "Braided leather belt",
+    "category_id": "belt",
+    "line_id": "line:resort",
+    "description": "Braided tan leather belt with a matte buckle.",
+    "color": "tan",
+    "material": "leather",
+    "attributes": {
+      "non-textile-material-type": "non-textile-material-type:metal"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:resort-silk-scarf",
+    "name": "Printed silk scarf",
+    "category_id": "scarf",
+    "line_id": "line:resort",
+    "description": "Square silk scarf with a sun-faded botanical print; wear at the neck or on a bag.",
+    "color": "coral",
+    "material": "silk",
+    "attributes": {},
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-tux-jacket",
+    "name": "Satin-lapel tuxedo jacket",
+    "category_id": "jacket",
+    "line_id": "line:evening",
+    "description": "Slim single-breasted tuxedo jacket with satin lapels; the Evening line's centerpiece.",
+    "color": "black",
+    "material": "wool",
+    "attributes": {
+      "silhouette": "silhouette:tight",
+      "opening-type": "opening-type:single-breasted",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain",
+      "textile-finishing-manufacturing-techniques": "textile-finishing-manufacturing-techniques:lining",
+      "nickname": "nickname:tuxedo-jacket"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-db-blazer",
+    "name": "Double-breasted blazer",
+    "category_id": "jacket",
+    "line_id": "line:evening",
+    "description": "Sharp double-breasted blazer in midnight wool with peak lapels.",
+    "color": "midnight",
+    "material": "wool",
+    "attributes": {
+      "silhouette": "silhouette:regular",
+      "opening-type": "opening-type:double-breasted",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain",
+      "nickname": "nickname:peak-lapel"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-silk-blouse",
+    "name": "Silk tie-neck blouse",
+    "category_id": "shirt",
+    "line_id": "line:evening",
+    "description": "Fluid silk blouse with a high neck and a self-tie bow.",
+    "color": "ivory",
+    "material": "silk",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "neckline-type": "neckline-type:high",
+      "opening-type": "opening-type:single-breasted",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain",
+      "nickname": "nickname:bow-collar"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-cashmere-turtleneck",
+    "name": "Fine cashmere turtleneck",
+    "category_id": "sweater",
+    "line_id": "line:evening",
+    "description": "Fine-gauge cashmere turtleneck; the understated base under tailoring.",
+    "color": "black",
+    "material": "cashmere",
+    "attributes": {
+      "silhouette": "silhouette:tight",
+      "neckline-type": "neckline-type:turtle",
+      "length": "length:hip",
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-cami",
+    "name": "Satin camisole",
+    "category_id": "top",
+    "line_id": "line:evening",
+    "description": "Bias-cut satin camisole with fine straps.",
+    "color": "champagne",
+    "material": "satin",
+    "attributes": {
+      "silhouette": "silhouette:tight",
+      "neckline-type": "neckline-type:v-neck",
+      "length": "length:hip",
+      "nickname": "nickname:camisole"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-tux-trousers",
+    "name": "Satin-stripe tuxedo trousers",
+    "category_id": "pants",
+    "line_id": "line:evening",
+    "description": "High-waisted straight tuxedo trousers with a satin side stripe.",
+    "color": "black",
+    "material": "wool",
+    "attributes": {
+      "silhouette": "silhouette:straight",
+      "waistline": "waistline:high-waist",
+      "length": "length:floor",
+      "opening-type": "opening-type:fly",
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-wide-trousers",
+    "name": "Fluid wide-leg trousers",
+    "category_id": "pants",
+    "line_id": "line:evening",
+    "description": "Fluid wide-leg crepe trousers that move like a skirt.",
+    "color": "midnight",
+    "material": "crepe",
+    "attributes": {
+      "silhouette": "silhouette:wide-leg",
+      "waistline": "waistline:high-waist",
+      "length": "length:floor",
+      "opening-type": "opening-type:fly"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-pencil-skirt",
+    "name": "Satin pencil skirt",
+    "category_id": "skirt",
+    "line_id": "line:evening",
+    "description": "High-waisted satin pencil skirt with a back slit.",
+    "color": "burgundy",
+    "material": "satin",
+    "attributes": {
+      "silhouette": "silhouette:pencil",
+      "waistline": "waistline:high-waist",
+      "length": "length:midi",
+      "opening-type": "opening-type:zip-up",
+      "textile-finishing-manufacturing-techniques": "textile-finishing-manufacturing-techniques:slit"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-column-dress",
+    "name": "Column gown",
+    "category_id": "dress",
+    "line_id": "line:evening",
+    "description": "Floor-length column dress with a boat neck and clean back.",
+    "color": "black",
+    "material": "crepe",
+    "attributes": {
+      "silhouette": "silhouette:straight",
+      "neckline-type": "neckline-type:boat",
+      "length": "length:floor",
+      "opening-type": "opening-type:zip-up",
+      "waistline": "waistline:no-waistline",
+      "nickname": "nickname:gown"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-velvet-cape",
+    "name": "Velvet evening cape",
+    "category_id": "cape",
+    "line_id": "line:evening",
+    "description": "Short velvet cape with a stand collar; worn over the column gown or tuxedo.",
+    "color": "oxblood",
+    "material": "velvet",
+    "attributes": {
+      "silhouette": "silhouette:loose",
+      "neckline-type": "neckline-type:high",
+      "length": "length:hip",
+      "opening-type": "opening-type:no-opening"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-overcoat",
+    "name": "Tailored wool overcoat",
+    "category_id": "coat",
+    "line_id": "line:evening",
+    "description": "Knee-length single-breasted overcoat in camel wool-cashmere.",
+    "color": "camel",
+    "material": "wool cashmere",
+    "attributes": {
+      "silhouette": "silhouette:regular",
+      "opening-type": "opening-type:single-breasted",
+      "length": "length:knee",
+      "textile-pattern": "textile-pattern:plain",
+      "textile-finishing-manufacturing-techniques": "textile-finishing-manufacturing-techniques:lining"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-patent-loafer",
+    "name": "Patent leather loafer",
+    "category_id": "shoe",
+    "line_id": "line:evening",
+    "description": "Slim patent loafer with a low stacked heel.",
+    "color": "black",
+    "material": "patent leather",
+    "attributes": {
+      "opening-type": "opening-type:no-opening"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-strappy-heel",
+    "name": "Strappy satin heel",
+    "category_id": "shoe",
+    "line_id": "line:evening",
+    "description": "Strappy satin sandal on a slender heel.",
+    "color": "black",
+    "material": "satin",
+    "attributes": {
+      "opening-type": "opening-type:buckled",
+      "non-textile-material-type": "non-textile-material-type:metal"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-clutch",
+    "name": "Box clutch",
+    "category_id": "bag",
+    "line_id": "line:evening",
+    "description": "Rigid box clutch in brushed gold metal.",
+    "color": "gold",
+    "material": "metal",
+    "attributes": {
+      "non-textile-material-type": "non-textile-material-type:metal"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-silk-tie",
+    "name": "Slim silk tie",
+    "category_id": "tie",
+    "line_id": "line:evening",
+    "description": "Slim black silk tie with a subtle sheen.",
+    "color": "black",
+    "material": "silk",
+    "attributes": {},
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-dress-watch",
+    "name": "Slim dress watch",
+    "category_id": "watch",
+    "line_id": "line:evening",
+    "description": "Thin gold-tone dress watch on a black leather strap.",
+    "color": "gold",
+    "material": "steel",
+    "attributes": {
+      "non-textile-material-type": "non-textile-material-type:metal"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-sheer-tights",
+    "name": "Sheer tights",
+    "category_id": "tights",
+    "line_id": "line:evening",
+    "description": "Sheer black tights.",
+    "color": "black",
+    "material": "nylon",
+    "attributes": {
+      "textile-pattern": "textile-pattern:plain"
+    },
+    "image_key": ""
+  },
+  {
+    "id": "item:evening-evening-gloves",
+    "name": "Opera gloves",
+    "category_id": "glove",
+    "line_id": "line:evening",
+    "description": "Elbow-length satin opera gloves.",
+    "color": "black",
+    "material": "satin",
+    "attributes": {},
+    "image_key": ""
+  }
+]

@@ -1,0 +1,210 @@
+[
+  {
+    "id": "article:anycompany-apparel-journal-01",
+    "title": "Notes on layering: how the Utility line does it",
+    "source": "AnyCompany Apparel Journal",
+    "published": "2026-09-01",
+    "statements": [
+      {
+        "id": "st:layering-1",
+        "text": "Start with a plain base layer: the thermal henley under everything, so collars never compete.",
+        "illustrates": [
+          "look:utility-site-day",
+          "item:utility-henley"
+        ]
+      },
+      {
+        "id": "st:layering-2",
+        "text": "The waxed field jacket is cut short on purpose; it should end where a high-rise trouser begins.",
+        "illustrates": [
+          "item:utility-field-jacket",
+          "look:utility-site-day"
+        ]
+      },
+      {
+        "id": "st:layering-3",
+        "text": "Corduroy over brushed flannel gives two textures in one palette; keep both in the earth range.",
+        "illustrates": [
+          "look:utility-weekend-layers"
+        ]
+      },
+      {
+        "id": "st:layering-4",
+        "text": "When it turns cold, the quilted vest goes over the fisherman sweater, not under it.",
+        "illustrates": [
+          "look:utility-cold-snap"
+        ]
+      },
+      {
+        "id": "st:layering-5",
+        "text": "Rinse denim breaks cleanly on a crepe sole; save the lug boot for canvas.",
+        "illustrates": [
+          "item:utility-suede-chukka",
+          "item:utility-work-boot"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "article:anycompany-apparel-journal-02",
+    "title": "Linen, worn properly",
+    "source": "AnyCompany Apparel Journal",
+    "published": "2026-06-15",
+    "statements": [
+      {
+        "id": "st:linen-1",
+        "text": "Linen is meant to crease. The unlined blazer looks best after a day, not before.",
+        "illustrates": [
+          "item:resort-linen-blazer"
+        ]
+      },
+      {
+        "id": "st:linen-2",
+        "text": "The camp-collar shirt is always worn open over the ribbed tank; buttoned up it loses the point.",
+        "illustrates": [
+          "look:resort-harbour",
+          "item:resort-linen-shirt"
+        ]
+      },
+      {
+        "id": "st:linen-3",
+        "text": "Pair tonal linen on linen for daytime; add one color, the terracotta wrap skirt or the coral scarf, for evening.",
+        "illustrates": [
+          "look:resort-market",
+          "look:resort-golden-hour"
+        ]
+      },
+      {
+        "id": "st:linen-4",
+        "text": "Pleated shorts sit at the natural waist and finish above the knee; the striped linen shirt stays untucked.",
+        "illustrates": [
+          "look:resort-terrace-lunch"
+        ]
+      },
+      {
+        "id": "st:linen-5",
+        "text": "A wide linen leg needs a flat shoe: espadrille or slide, never a heel.",
+        "illustrates": [
+          "item:resort-drawstring-pants",
+          "item:resort-espadrille"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "article:anycompany-apparel-journal-03",
+    "title": "Black tie, the Evening line's way",
+    "source": "AnyCompany Apparel Journal",
+    "published": "2026-11-20",
+    "statements": [
+      {
+        "id": "st:blacktie-1",
+        "text": "The Evening line's black tie replaces the dress shirt with a fine cashmere turtleneck under the satin-lapel jacket.",
+        "illustrates": [
+          "look:evening-black-tie",
+          "item:evening-cashmere-turtleneck"
+        ]
+      },
+      {
+        "id": "st:blacktie-2",
+        "text": "Patent loafers, never lace-ups, with the tuxedo trouser.",
+        "illustrates": [
+          "item:evening-patent-loafer",
+          "look:evening-black-tie"
+        ]
+      },
+      {
+        "id": "st:blacktie-3",
+        "text": "For gala dressing the column gown takes the velvet cape rather than a jacket; nothing should break the vertical line.",
+        "illustrates": [
+          "look:evening-gala"
+        ]
+      },
+      {
+        "id": "st:blacktie-4",
+        "text": "The double-breasted blazer over a satin camisole is the house cocktail look.",
+        "illustrates": [
+          "look:evening-cocktail"
+        ]
+      },
+      {
+        "id": "st:blacktie-5",
+        "text": "A slim silk tie appears only with the tuxedo jacket and only in winter, under the camel overcoat.",
+        "illustrates": [
+          "look:evening-winter-evening"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "article:anycompany-apparel-journal-04",
+    "title": "High-low: mixing the lines",
+    "source": "AnyCompany Apparel Journal",
+    "published": "2026-10-05",
+    "statements": [
+      {
+        "id": "st:highlow-1",
+        "text": "The tuxedo jacket over raw selvedge denim and suede chukkas is the most AnyCompany Apparel outfit there is.",
+        "illustrates": [
+          "look:cross-tux-and-denim"
+        ]
+      },
+      {
+        "id": "st:highlow-2",
+        "text": "Sharp Evening tailoring over a relaxed Resort camp collar reads as effortless rather than undone.",
+        "illustrates": [
+          "look:cross-linen-and-tailoring"
+        ]
+      },
+      {
+        "id": "st:highlow-3",
+        "text": "Cross the lines by texture, not by color: keep one palette and change the fabric weight.",
+        "illustrates": [
+          "look:cross-tux-and-denim",
+          "look:cross-linen-and-tailoring"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "article:anycompany-apparel-fit-guide",
+    "title": "Fit and proportion guide",
+    "source": "AnyCompany Apparel Fit Guide",
+    "published": "2026-08-01",
+    "statements": [
+      {
+        "id": "st:fit-1",
+        "text": "Every AnyCompany Apparel jacket is cut to sit over a high-rise trouser; the proportion is the brand's core silhouette.",
+        "illustrates": [
+          "item:utility-field-jacket",
+          "item:evening-tux-jacket",
+          "item:resort-linen-blazer"
+        ]
+      },
+      {
+        "id": "st:fit-2",
+        "text": "Oversized knitwear balances a wide leg; slim knitwear balances a straight leg.",
+        "illustrates": [
+          "look:utility-cold-snap",
+          "look:evening-boardroom"
+        ]
+      },
+      {
+        "id": "st:fit-3",
+        "text": "Trouser hems break on the shoe: wide legs take a slim shoe, straight legs take a boot.",
+        "illustrates": [
+          "item:evening-wide-trousers",
+          "item:utility-cargo-pants"
+        ]
+      },
+      {
+        "id": "st:fit-4",
+        "text": "Loose shirt dresses are belted at the natural waist; fitted dresses never are.",
+        "illustrates": [
+          "look:resort-shirt-dress-day",
+          "item:resort-slip-dress"
+        ]
+      }
+    ]
+  }
+]

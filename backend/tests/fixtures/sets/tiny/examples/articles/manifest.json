@@ -1,0 +1,14 @@
+{
+  "license": "MIT-0. Test fixture about the fictional brand Tiny.",
+  "articles": [
+    {
+      "file": "a1.md",
+      "title": "The camel coat, two ways",
+      "kind": "editorial",
+      "source": "Tiny Journal",
+      "published": "2026-11-01",
+      "pairs_with_image": "h1.jpg",
+      "batch": "new-shoot"
+    }
+  ]
+}

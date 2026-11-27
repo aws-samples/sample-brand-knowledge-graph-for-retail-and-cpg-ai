@@ -1,0 +1,18 @@
+{
+"dimension": 8,
+"items": [
+{
+"key": "tiny-p1",
+"metadata": {
+"product_id": "tiny-p1",
+"name": "Camel wool coat",
+"category": "outerwear",
+"type": "coat",
+"color": "camel",
+"image_key": "tiny/products/p1.jpg",
+"text": "Camel wool coat. outerwear coat. A knee-length camel coat in brushed wool."
+},
+"vector": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgD8="
+}
+]
+}

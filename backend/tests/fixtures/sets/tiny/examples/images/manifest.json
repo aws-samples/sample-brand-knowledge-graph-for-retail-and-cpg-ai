@@ -1,0 +1,17 @@
+{
+  "license": "MIT-0. Test fixture: 8 by 8 pixel photos of one colour.",
+  "examples": [
+    {
+      "file": "h1.jpg",
+      "title": "camel coat and slip skirt",
+      "batch": "new-shoot",
+      "occasion": "dress"
+    },
+    {
+      "file": "nw1.jpg",
+      "title": "sage tailoring",
+      "batch": "new-work",
+      "origin": "From the Tiny studio's spring fittings"
+    }
+  ]
+}

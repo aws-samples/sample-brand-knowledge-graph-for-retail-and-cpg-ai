@@ -1,0 +1,354 @@
+[
+  {
+    "source_id": "jacket",
+    "target_id": "pants",
+    "level": "category",
+    "rationale": "Every AnyCompany Apparel jacket is cut to sit over a high-rise trouser; the proportion is the brand's core silhouette.",
+    "occasion": "any",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "jacket",
+    "target_id": "skirt",
+    "level": "category",
+    "rationale": "Tailored jackets pair with midi skirts; the hem should clear the jacket by a hand's width.",
+    "occasion": "smart",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "jacket",
+    "target_id": "top",
+    "level": "category",
+    "rationale": "Jackets layer over knit tops and camisoles rather than shirts when the look is relaxed.",
+    "occasion": "any",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "coat",
+    "target_id": "sweater",
+    "level": "category",
+    "rationale": "Outerwear is sized to layer over chunky knitwear.",
+    "occasion": "cold weather",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "shirt",
+    "target_id": "pants",
+    "level": "category",
+    "rationale": "Shirts are worn tucked into high-rise trousers or open over a tank.",
+    "occasion": "any",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "shirt",
+    "target_id": "shorts",
+    "level": "category",
+    "rationale": "Camp and stripe shirts pair with pleated or utility shorts.",
+    "occasion": "warm weather",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "dress",
+    "target_id": "cape",
+    "level": "category",
+    "rationale": "Evening dresses take a short cape instead of a jacket to keep the line clean.",
+    "occasion": "evening",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "dress",
+    "target_id": "belt",
+    "level": "category",
+    "rationale": "Loose shirt dresses are belted; fitted dresses never are.",
+    "occasion": "daytime",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "sweater",
+    "target_id": "pants",
+    "level": "category",
+    "rationale": "Knitwear tucks into or sits just over high-rise trousers.",
+    "occasion": "any",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "pants",
+    "target_id": "shoe",
+    "level": "category",
+    "rationale": "Trouser hems break on the shoe; wide legs take a slim shoe, straight legs a boot.",
+    "occasion": "any",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "skirt",
+    "target_id": "tights",
+    "level": "category",
+    "rationale": "Midi skirts take sheer tights in winter, bare legs in summer.",
+    "occasion": "cold weather",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "hat",
+    "target_id": "glasses",
+    "level": "category",
+    "rationale": "Straw hats pair with round acetate frames.",
+    "occasion": "resort",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-field-jacket",
+    "target_id": "item:utility-henley",
+    "level": "item",
+    "rationale": "The jacket's short body wants a plain base layer, not a shirt collar.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-field-jacket",
+    "target_id": "item:utility-cargo-pants",
+    "level": "item",
+    "rationale": "Waxed cotton and ripstop share the utility register.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-field-jacket",
+    "target_id": "item:utility-work-boot",
+    "level": "item",
+    "rationale": "Field jacket and work boot are sold as a set in-store.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-trench",
+    "target_id": "item:utility-selvedge-jeans",
+    "level": "item",
+    "rationale": "The trench over straight high-rise jeans, rolled once so the boot shows, is the Utility line's autumn opener.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-chore-coat",
+    "target_id": "item:utility-flannel-shirt",
+    "level": "item",
+    "rationale": "Corduroy over brushed flannel: two textures, one palette.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-chore-coat",
+    "target_id": "item:utility-selvedge-jeans",
+    "level": "item",
+    "rationale": "Rust corduroy against indigo is the Utility line's color story.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-quilted-vest",
+    "target_id": "item:utility-fisherman-sweater",
+    "level": "item",
+    "rationale": "The vest is cut wide enough to sit over the chunky rib.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-fisherman-sweater",
+    "target_id": "item:utility-carpenter-pants",
+    "level": "item",
+    "rationale": "Oversized knit balances a wide canvas leg.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-shawl-cardigan",
+    "target_id": "item:utility-flannel-shirt",
+    "level": "item",
+    "rationale": "Soft outer layer over a check shirt.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-selvedge-jeans",
+    "target_id": "item:utility-suede-chukka",
+    "level": "item",
+    "rationale": "Straight rinse denim breaks cleanly on a crepe-soled chukka.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:utility-cargo-pants",
+    "target_id": "item:utility-work-boot",
+    "level": "item",
+    "rationale": "Straight leg over a lug sole.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-linen-shirt",
+    "target_id": "item:resort-tank",
+    "level": "item",
+    "rationale": "The camp shirt is always worn open over the ribbed tank.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-linen-shirt",
+    "target_id": "item:resort-drawstring-pants",
+    "level": "item",
+    "rationale": "Tonal linen on linen.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-stripe-shirt",
+    "target_id": "item:resort-pleated-shorts",
+    "level": "item",
+    "rationale": "Navy stripe with white pleated shorts is the terrace uniform.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-linen-blazer",
+    "target_id": "item:resort-slip-dress",
+    "level": "item",
+    "rationale": "Unstructured tailoring over a fluid slip.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-linen-blazer",
+    "target_id": "item:resort-drawstring-pants",
+    "level": "item",
+    "rationale": "The unlined blazer works as a linen suit with the drawstring pant.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-wrap-skirt",
+    "target_id": "item:resort-tank",
+    "level": "item",
+    "rationale": "Wrap skirt with a fitted tank keeps the waist visible.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-shirt-dress",
+    "target_id": "item:resort-woven-belt",
+    "level": "item",
+    "rationale": "The shirt dress is belted at the natural waist.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-straw-hat",
+    "target_id": "item:resort-sunglasses",
+    "level": "item",
+    "rationale": "Wide brim and round frames.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:resort-drawstring-pants",
+    "target_id": "item:resort-espadrille",
+    "level": "item",
+    "rationale": "Wide linen leg over a flat canvas shoe.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-tux-jacket",
+    "target_id": "item:evening-tux-trousers",
+    "level": "item",
+    "rationale": "The tuxedo is one piece in two parts.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-tux-jacket",
+    "target_id": "item:evening-cashmere-turtleneck",
+    "level": "item",
+    "rationale": "Turtleneck instead of a dress shirt is the Evening line's black-tie signature.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-tux-jacket",
+    "target_id": "item:evening-patent-loafer",
+    "level": "item",
+    "rationale": "Patent loafer, never a lace-up, with the tuxedo.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-db-blazer",
+    "target_id": "item:evening-wide-trousers",
+    "level": "item",
+    "rationale": "Double-breasted volume above, fluid volume below.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-db-blazer",
+    "target_id": "item:evening-cami",
+    "level": "item",
+    "rationale": "A satin camisole softens the double-breasted blazer for evening.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-silk-blouse",
+    "target_id": "item:evening-pencil-skirt",
+    "level": "item",
+    "rationale": "High neck above, pencil line below.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-pencil-skirt",
+    "target_id": "item:evening-sheer-tights",
+    "level": "item",
+    "rationale": "Satin skirt with sheer black tights for winter dinners.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-column-dress",
+    "target_id": "item:evening-velvet-cape",
+    "level": "item",
+    "rationale": "The cape covers the shoulders without breaking the column.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-column-dress",
+    "target_id": "item:evening-strappy-heel",
+    "level": "item",
+    "rationale": "A slender heel keeps the floor-length line.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-overcoat",
+    "target_id": "item:evening-tux-jacket",
+    "level": "item",
+    "rationale": "The camel overcoat is cut to clear the tuxedo jacket.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-tux-jacket",
+    "target_id": "item:utility-selvedge-jeans",
+    "level": "item",
+    "rationale": "High-low: the tuxedo jacket over raw denim is an AnyCompany Apparel signature.",
+    "occasion": "",
+    "source": "brand-stylist"
+  },
+  {
+    "source_id": "item:evening-db-blazer",
+    "target_id": "item:resort-linen-shirt",
+    "level": "item",
+    "rationale": "Sharp tailoring over a relaxed camp collar.",
+    "occasion": "",
+    "source": "brand-stylist"
+  }
+]

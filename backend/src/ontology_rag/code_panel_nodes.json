@@ -1,0 +1,81 @@
+{
+  "explorer": [
+    "s3-ontology",
+    "s3-images",
+    "lambda",
+    "bedrock",
+    "output",
+    "browser",
+    "cognito",
+    "cloudwatch"
+  ],
+  "pipeline": [
+    "sfn",
+    "classify",
+    "ingest",
+    "summary",
+    "s3",
+    "bedrock",
+    "neptune"
+  ],
+  "query": [
+    "browser",
+    "api",
+    "agent",
+    "mcp",
+    "neptune",
+    "bedrock"
+  ],
+  "trends_graph": [
+    "agent",
+    "browser",
+    "lambda",
+    "neptune",
+    "llm"
+  ],
+  "trends_lake": [
+    "neptune",
+    "browser",
+    "lambda",
+    "agent",
+    "s3tables",
+    "llm",
+    "mcp"
+  ],
+  "rt_catalog": [
+    "products",
+    "embed",
+    "vectors",
+    "browser",
+    "lambda"
+  ],
+  "rt_rag": [
+    "browser",
+    "lambda",
+    "planner",
+    "embed",
+    "vectors",
+    "llm"
+  ],
+  "rt_graph": [
+    "browser",
+    "lambda",
+    "embed",
+    "neptune",
+    "vectors",
+    "llm"
+  ],
+  "rt_payoff": [
+    "browser",
+    "lambda",
+    "llm",
+    "vectors",
+    "neptune"
+  ],
+  "lens_trends": [
+    "browser",
+    "lambda",
+    "neptune",
+    "llm"
+  ]
+}

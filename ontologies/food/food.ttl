@@ -1,0 +1,901 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix fo: <http://example.org/multimodal-ai-knowledge-graph/fashion#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix fb: <http://example.org/multimodal-ai-knowledge-graph/food#> .
+
+
+
+<http://example.org/multimodal-ai-knowledge-graph/food> a owl:Ontology ;
+
+    rdfs:label "Food and beverage ontology (sample)"@en ;
+
+    dcterms:creator "Amazon Web Services (sample code, MIT-0)" ;
+
+    rdfs:comment "A small sample ontology written by hand for this workshop, in the same shape as the fashion ontology: kinds of food and drink in a hierarchy, families of detail with their allowed values, packaging parts, and a graph-only schema with the brand's curatorial relation (what is served together). Not a standard; extend it for a real catalog."@en ;
+
+    owl:versionInfo "0.1.0" .
+
+
+
+fo:visual a owl:AnnotationProperty ;
+
+    rdfs:label "visual concept"@en ;
+
+    rdfs:comment "false for schema concepts that cannot be observed in an image (used to exclude them from classification prompts)."@en .
+
+
+
+# ---------------------------------------------------------------- kinds
+
+fb:FoodAndDrink a owl:Class ;
+    rdfs:label "Food and drink"@en ;
+    rdfs:comment "A packaged or prepared food, or a drink."@en ;
+    skos:prefLabel "Food and drink"@en .
+
+fb:Beverage a owl:Class ;
+    rdfs:label "beverage"@en ;
+    rdfs:subClassOf fb:FoodAndDrink ;
+    skos:prefLabel "beverage"@en .
+
+fb:Coffee a owl:Class ;
+    rdfs:label "coffee"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "coffee"@en .
+
+fb:Tea a owl:Class ;
+    rdfs:label "tea"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "tea"@en .
+
+fb:Juice a owl:Class ;
+    rdfs:label "juice"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "juice"@en .
+
+fb:SparklingWater a owl:Class ;
+    rdfs:label "sparkling water"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "sparkling water"@en .
+
+fb:Soda a owl:Class ;
+    rdfs:label "soda"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "soda"@en .
+
+fb:Kombucha a owl:Class ;
+    rdfs:label "kombucha"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "kombucha"@en .
+
+fb:PlantMilk a owl:Class ;
+    rdfs:label "plant milk"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "plant milk"@en .
+
+fb:Wine a owl:Class ;
+    rdfs:label "wine"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "wine"@en .
+
+fb:Beer a owl:Class ;
+    rdfs:label "beer"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "beer"@en .
+
+fb:Spirit a owl:Class ;
+    rdfs:label "spirit"@en ;
+    rdfs:subClassOf fb:Beverage ;
+    skos:prefLabel "spirit"@en .
+
+fb:DairyAndAlternative a owl:Class ;
+    rdfs:label "dairy and alternative"@en ;
+    rdfs:subClassOf fb:FoodAndDrink ;
+    skos:prefLabel "dairy and alternative"@en .
+
+fb:Cheese a owl:Class ;
+    rdfs:label "cheese"@en ;
+    rdfs:subClassOf fb:DairyAndAlternative ;
+    skos:prefLabel "cheese"@en .
+
+fb:Yogurt a owl:Class ;
+    rdfs:label "yogurt"@en ;
+    rdfs:subClassOf fb:DairyAndAlternative ;
+    skos:prefLabel "yogurt"@en .
+
+fb:Butter a owl:Class ;
+    rdfs:label "butter"@en ;
+    rdfs:subClassOf fb:DairyAndAlternative ;
+    skos:prefLabel "butter"@en .
+
+fb:Milk a owl:Class ;
+    rdfs:label "milk"@en ;
+    rdfs:subClassOf fb:DairyAndAlternative ;
+    skos:prefLabel "milk"@en .
+
+fb:Bakery a owl:Class ;
+    rdfs:label "bakery"@en ;
+    rdfs:subClassOf fb:FoodAndDrink ;
+    skos:prefLabel "bakery"@en .
+
+fb:Bread a owl:Class ;
+    rdfs:label "bread"@en ;
+    rdfs:subClassOf fb:Bakery ;
+    skos:prefLabel "bread"@en .
+
+fb:Pastry a owl:Class ;
+    rdfs:label "pastry"@en ;
+    rdfs:subClassOf fb:Bakery ;
+    skos:prefLabel "pastry"@en .
+
+fb:Cracker a owl:Class ;
+    rdfs:label "cracker"@en ;
+    rdfs:subClassOf fb:Bakery ;
+    skos:prefLabel "cracker"@en .
+
+fb:Snack a owl:Class ;
+    rdfs:label "snack"@en ;
+    rdfs:subClassOf fb:FoodAndDrink ;
+    skos:prefLabel "snack"@en .
+
+fb:Chips a owl:Class ;
+    rdfs:label "chips"@en ;
+    rdfs:subClassOf fb:Snack ;
+    skos:prefLabel "chips"@en .
+
+fb:Nuts a owl:Class ;
+    rdfs:label "nuts"@en ;
+    rdfs:subClassOf fb:Snack ;
+    skos:prefLabel "nuts"@en .
+
+fb:Chocolate a owl:Class ;
+    rdfs:label "chocolate"@en ;
+    rdfs:subClassOf fb:Snack ;
+    skos:prefLabel "chocolate"@en .
+
+fb:SnackBar a owl:Class ;
+    rdfs:label "snack bar"@en ;
+    rdfs:subClassOf fb:Snack ;
+    skos:prefLabel "snack bar"@en .
+
+fb:Popcorn a owl:Class ;
+    rdfs:label "popcorn"@en ;
+    rdfs:subClassOf fb:Snack ;
+    skos:prefLabel "popcorn"@en .
+
+fb:Pantry a owl:Class ;
+    rdfs:label "pantry"@en ;
+    rdfs:subClassOf fb:FoodAndDrink ;
+    skos:prefLabel "pantry"@en .
+
+fb:Pasta a owl:Class ;
+    rdfs:label "pasta"@en ;
+    rdfs:subClassOf fb:Pantry ;
+    skos:prefLabel "pasta"@en .
+
+fb:Rice a owl:Class ;
+    rdfs:label "rice"@en ;
+    rdfs:subClassOf fb:Pantry ;
+    skos:prefLabel "rice"@en .
+
+fb:Sauce a owl:Class ;
+    rdfs:label "sauce"@en ;
+    rdfs:subClassOf fb:Pantry ;
+    skos:prefLabel "sauce"@en .
+
+fb:Oil a owl:Class ;
+    rdfs:label "oil"@en ;
+    rdfs:subClassOf fb:Pantry ;
+    skos:prefLabel "oil"@en .
+
+fb:Vinegar a owl:Class ;
+    rdfs:label "vinegar"@en ;
+    rdfs:subClassOf fb:Pantry ;
+    skos:prefLabel "vinegar"@en .
+
+fb:Spice a owl:Class ;
+    rdfs:label "spice"@en ;
+    rdfs:subClassOf fb:Pantry ;
+    skos:prefLabel "spice"@en .
+
+fb:Honey a owl:Class ;
+    rdfs:label "honey"@en ;
+    rdfs:subClassOf fb:Pantry ;
+    skos:prefLabel "honey"@en .
+
+fb:Jam a owl:Class ;
+    rdfs:label "jam"@en ;
+    rdfs:subClassOf fb:Pantry ;
+    skos:prefLabel "jam"@en .
+
+fb:Produce a owl:Class ;
+    rdfs:label "produce"@en ;
+    rdfs:subClassOf fb:FoodAndDrink ;
+    skos:prefLabel "produce"@en .
+
+fb:Fruit a owl:Class ;
+    rdfs:label "fruit"@en ;
+    rdfs:subClassOf fb:Produce ;
+    skos:prefLabel "fruit"@en .
+
+fb:Vegetable a owl:Class ;
+    rdfs:label "vegetable"@en ;
+    rdfs:subClassOf fb:Produce ;
+    skos:prefLabel "vegetable"@en .
+
+fb:Herb a owl:Class ;
+    rdfs:label "herb"@en ;
+    rdfs:subClassOf fb:Produce ;
+    skos:prefLabel "herb"@en .
+
+fb:Protein a owl:Class ;
+    rdfs:label "protein"@en ;
+    rdfs:subClassOf fb:FoodAndDrink ;
+    skos:prefLabel "protein"@en .
+
+fb:Meat a owl:Class ;
+    rdfs:label "meat"@en ;
+    rdfs:subClassOf fb:Protein ;
+    skos:prefLabel "meat"@en .
+
+fb:Fish a owl:Class ;
+    rdfs:label "fish"@en ;
+    rdfs:subClassOf fb:Protein ;
+    skos:prefLabel "fish"@en .
+
+fb:Tofu a owl:Class ;
+    rdfs:label "tofu"@en ;
+    rdfs:subClassOf fb:Protein ;
+    skos:prefLabel "tofu"@en .
+
+fb:Egg a owl:Class ;
+    rdfs:label "egg"@en ;
+    rdfs:subClassOf fb:Protein ;
+    skos:prefLabel "egg"@en .
+
+fb:Dessert a owl:Class ;
+    rdfs:label "dessert"@en ;
+    rdfs:subClassOf fb:FoodAndDrink ;
+    skos:prefLabel "dessert"@en .
+
+fb:IceCream a owl:Class ;
+    rdfs:label "ice cream"@en ;
+    rdfs:subClassOf fb:Dessert ;
+    skos:prefLabel "ice cream"@en .
+
+fb:Cake a owl:Class ;
+    rdfs:label "cake"@en ;
+    rdfs:subClassOf fb:Dessert ;
+    skos:prefLabel "cake"@en .
+
+fb:Cookie a owl:Class ;
+    rdfs:label "cookie"@en ;
+    rdfs:subClassOf fb:Dessert ;
+    skos:prefLabel "cookie"@en .
+
+
+# ---------------------------------------------------------------- parts
+
+fb:PackagingComponent a owl:Class ;
+    rdfs:label "Packaging component"@en ;
+    rdfs:comment "A visible part of a product's packaging."@en ;
+    skos:prefLabel "Packaging component"@en .
+
+fb:Container a owl:Class ;
+    rdfs:label "container"@en ;
+    rdfs:subClassOf fb:PackagingComponent ;
+    skos:prefLabel "container"@en .
+
+fb:Bottle a owl:Class ;
+    rdfs:label "bottle"@en ;
+    rdfs:subClassOf fb:Container ;
+    skos:prefLabel "bottle"@en .
+
+fb:Can a owl:Class ;
+    rdfs:label "can"@en ;
+    rdfs:subClassOf fb:Container ;
+    skos:prefLabel "can"@en .
+
+fb:Jar a owl:Class ;
+    rdfs:label "jar"@en ;
+    rdfs:subClassOf fb:Container ;
+    skos:prefLabel "jar"@en .
+
+fb:Box a owl:Class ;
+    rdfs:label "box"@en ;
+    rdfs:subClassOf fb:Container ;
+    skos:prefLabel "box"@en .
+
+fb:Pouch a owl:Class ;
+    rdfs:label "pouch"@en ;
+    rdfs:subClassOf fb:Container ;
+    skos:prefLabel "pouch"@en .
+
+fb:Carton a owl:Class ;
+    rdfs:label "carton"@en ;
+    rdfs:subClassOf fb:Container ;
+    skos:prefLabel "carton"@en .
+
+fb:Tin a owl:Class ;
+    rdfs:label "tin"@en ;
+    rdfs:subClassOf fb:Container ;
+    skos:prefLabel "tin"@en .
+
+fb:Closure a owl:Class ;
+    rdfs:label "closure"@en ;
+    rdfs:subClassOf fb:PackagingComponent ;
+    skos:prefLabel "closure"@en .
+
+fb:Cap a owl:Class ;
+    rdfs:label "cap"@en ;
+    rdfs:subClassOf fb:Closure ;
+    skos:prefLabel "cap"@en .
+
+fb:Cork a owl:Class ;
+    rdfs:label "cork"@en ;
+    rdfs:subClassOf fb:Closure ;
+    skos:prefLabel "cork"@en .
+
+fb:Lid a owl:Class ;
+    rdfs:label "lid"@en ;
+    rdfs:subClassOf fb:Closure ;
+    skos:prefLabel "lid"@en .
+
+fb:PullTab a owl:Class ;
+    rdfs:label "pull tab"@en ;
+    rdfs:subClassOf fb:Closure ;
+    skos:prefLabel "pull tab"@en .
+
+fb:Marking a owl:Class ;
+    rdfs:label "marking"@en ;
+    rdfs:subClassOf fb:PackagingComponent ;
+    skos:prefLabel "marking"@en .
+
+fb:FrontLabel a owl:Class ;
+    rdfs:label "front label"@en ;
+    rdfs:subClassOf fb:Marking ;
+    skos:prefLabel "front label"@en .
+
+fb:Seal a owl:Class ;
+    rdfs:label "seal"@en ;
+    rdfs:subClassOf fb:Marking ;
+    skos:prefLabel "seal"@en .
+
+fb:hasPart a owl:ObjectProperty ;
+    rdfs:label "has part"@en ;
+    rdfs:comment "A part of the packaging, applicator or piece, visible in the photo."@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:PackagingComponent .
+
+
+# ---------------------------------------------------------------- details and their allowed values
+
+fb:Attribute a owl:Class ;
+    rdfs:label "Attribute value"@en ;
+    rdfs:comment "A detail of a product; each family is a subclass and each value a named individual."@en ;
+    skos:prefLabel "Attribute value"@en .
+
+fb:hasAttribute a owl:ObjectProperty ;
+    rdfs:label "has attribute"@en ;
+    rdfs:comment "Generic link from a product to one of its detail values; sub-properties are one per family."@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:Attribute .
+
+fb:Flavor a owl:Class ;
+    rdfs:label "flavor"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "flavor"@en .
+
+fb:hasFlavor a owl:ObjectProperty ;
+    rdfs:label "hasFlavor"@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:Flavor ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:flavor_sweet a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "sweet"@en ;
+    skos:prefLabel "sweet"@en .
+
+fb:flavor_salty a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "salty"@en ;
+    skos:prefLabel "salty"@en .
+
+fb:flavor_sour a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "sour"@en ;
+    skos:prefLabel "sour"@en .
+
+fb:flavor_bitter a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "bitter"@en ;
+    skos:prefLabel "bitter"@en .
+
+fb:flavor_umami a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "umami"@en ;
+    skos:prefLabel "umami"@en .
+
+fb:flavor_spicy a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "spicy"@en ;
+    skos:prefLabel "spicy"@en .
+
+fb:flavor_smoky a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "smoky"@en ;
+    skos:prefLabel "smoky"@en .
+
+fb:flavor_fruity a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "fruity"@en ;
+    skos:prefLabel "fruity"@en .
+
+fb:flavor_floral a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "floral"@en ;
+    skos:prefLabel "floral"@en .
+
+fb:flavor_nutty a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "nutty"@en ;
+    skos:prefLabel "nutty"@en .
+
+fb:flavor_herbal a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "herbal"@en ;
+    skos:prefLabel "herbal"@en .
+
+fb:flavor_citrus a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "citrus"@en ;
+    skos:prefLabel "citrus"@en .
+
+fb:flavor_creamy a fb:Flavor,
+        owl:NamedIndividual ;
+    rdfs:label "creamy"@en ;
+    skos:prefLabel "creamy"@en .
+
+fb:Texture a owl:Class ;
+    rdfs:label "texture"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "texture"@en .
+
+fb:hasTexture a owl:ObjectProperty ;
+    rdfs:label "hasTexture"@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:Texture ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:texture_crunchy a fb:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "crunchy"@en ;
+    skos:prefLabel "crunchy"@en .
+
+fb:texture_crispy a fb:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "crispy"@en ;
+    skos:prefLabel "crispy"@en .
+
+fb:texture_creamy a fb:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "creamy"@en ;
+    skos:prefLabel "creamy"@en .
+
+fb:texture_chewy a fb:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "chewy"@en ;
+    skos:prefLabel "chewy"@en .
+
+fb:texture_smooth a fb:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "smooth"@en ;
+    skos:prefLabel "smooth"@en .
+
+fb:texture_flaky a fb:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "flaky"@en ;
+    skos:prefLabel "flaky"@en .
+
+fb:texture_sparkling a fb:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "sparkling"@en ;
+    skos:prefLabel "sparkling"@en .
+
+fb:texture_still a fb:Texture,
+        owl:NamedIndividual ;
+    rdfs:label "still"@en ;
+    skos:prefLabel "still"@en .
+
+fb:Diet a owl:Class ;
+    rdfs:label "diet"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "diet"@en .
+
+fb:hasDiet a owl:ObjectProperty ;
+    rdfs:label "hasDiet"@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:Diet ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:diet_vegan a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "vegan"@en ;
+    skos:prefLabel "vegan"@en .
+
+fb:diet_vegetarian a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "vegetarian"@en ;
+    skos:prefLabel "vegetarian"@en .
+
+fb:diet_gluten-free a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "gluten-free"@en ;
+    skos:prefLabel "gluten-free"@en .
+
+fb:diet_dairy-free a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "dairy-free"@en ;
+    skos:prefLabel "dairy-free"@en .
+
+fb:diet_keto a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "keto"@en ;
+    skos:prefLabel "keto"@en .
+
+fb:diet_organic a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "organic"@en ;
+    skos:prefLabel "organic"@en .
+
+fb:diet_halal a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "halal"@en ;
+    skos:prefLabel "halal"@en .
+
+fb:diet_kosher a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "kosher"@en ;
+    skos:prefLabel "kosher"@en .
+
+fb:diet_low-sugar a fb:Diet,
+        owl:NamedIndividual ;
+    rdfs:label "low sugar"@en ;
+    skos:prefLabel "low sugar"@en .
+
+fb:Allergen a owl:Class ;
+    rdfs:label "allergen"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "allergen"@en .
+
+fb:hasAllergen a owl:ObjectProperty ;
+    rdfs:label "hasAllergen"@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:Allergen ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:allergen_nuts a fb:Allergen,
+        owl:NamedIndividual ;
+    rdfs:label "nuts"@en ;
+    skos:prefLabel "nuts"@en .
+
+fb:allergen_peanuts a fb:Allergen,
+        owl:NamedIndividual ;
+    rdfs:label "peanuts"@en ;
+    skos:prefLabel "peanuts"@en .
+
+fb:allergen_dairy a fb:Allergen,
+        owl:NamedIndividual ;
+    rdfs:label "dairy"@en ;
+    skos:prefLabel "dairy"@en .
+
+fb:allergen_gluten a fb:Allergen,
+        owl:NamedIndividual ;
+    rdfs:label "gluten"@en ;
+    skos:prefLabel "gluten"@en .
+
+fb:allergen_soy a fb:Allergen,
+        owl:NamedIndividual ;
+    rdfs:label "soy"@en ;
+    skos:prefLabel "soy"@en .
+
+fb:allergen_egg a fb:Allergen,
+        owl:NamedIndividual ;
+    rdfs:label "egg"@en ;
+    skos:prefLabel "egg"@en .
+
+fb:allergen_shellfish a fb:Allergen,
+        owl:NamedIndividual ;
+    rdfs:label "shellfish"@en ;
+    skos:prefLabel "shellfish"@en .
+
+fb:allergen_sesame a fb:Allergen,
+        owl:NamedIndividual ;
+    rdfs:label "sesame"@en ;
+    skos:prefLabel "sesame"@en .
+
+fb:MealOccasion a owl:Class ;
+    rdfs:label "meal occasion"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "meal occasion"@en .
+
+fb:hasMealOccasion a owl:ObjectProperty ;
+    rdfs:label "hasMealOccasion"@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:MealOccasion ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:meal-occasion_breakfast a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "breakfast"@en ;
+    skos:prefLabel "breakfast"@en .
+
+fb:meal-occasion_brunch a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "brunch"@en ;
+    skos:prefLabel "brunch"@en .
+
+fb:meal-occasion_lunch a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "lunch"@en ;
+    skos:prefLabel "lunch"@en .
+
+fb:meal-occasion_dinner a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "dinner"@en ;
+    skos:prefLabel "dinner"@en .
+
+fb:meal-occasion_snack a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "snack"@en ;
+    skos:prefLabel "snack"@en .
+
+fb:meal-occasion_aperitivo a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "aperitivo"@en ;
+    skos:prefLabel "aperitivo"@en .
+
+fb:meal-occasion_dessert a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "dessert"@en ;
+    skos:prefLabel "dessert"@en .
+
+fb:meal-occasion_picnic a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "picnic"@en ;
+    skos:prefLabel "picnic"@en .
+
+fb:meal-occasion_celebration a fb:MealOccasion,
+        owl:NamedIndividual ;
+    rdfs:label "celebration"@en ;
+    skos:prefLabel "celebration"@en .
+
+fb:Serving a owl:Class ;
+    rdfs:label "serving"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "serving"@en .
+
+fb:hasServing a owl:ObjectProperty ;
+    rdfs:label "hasServing"@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:Serving ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:serving_hot a fb:Serving,
+        owl:NamedIndividual ;
+    rdfs:label "hot"@en ;
+    skos:prefLabel "hot"@en .
+
+fb:serving_chilled a fb:Serving,
+        owl:NamedIndividual ;
+    rdfs:label "chilled"@en ;
+    skos:prefLabel "chilled"@en .
+
+fb:serving_room-temperature a fb:Serving,
+        owl:NamedIndividual ;
+    rdfs:label "room temperature"@en ;
+    skos:prefLabel "room temperature"@en .
+
+fb:serving_frozen a fb:Serving,
+        owl:NamedIndividual ;
+    rdfs:label "frozen"@en ;
+    skos:prefLabel "frozen"@en .
+
+fb:Cuisine a owl:Class ;
+    rdfs:label "cuisine"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "cuisine"@en .
+
+fb:hasCuisine a owl:ObjectProperty ;
+    rdfs:label "hasCuisine"@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:Cuisine ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:cuisine_italian a fb:Cuisine,
+        owl:NamedIndividual ;
+    rdfs:label "Italian"@en ;
+    skos:prefLabel "Italian"@en .
+
+fb:cuisine_french a fb:Cuisine,
+        owl:NamedIndividual ;
+    rdfs:label "French"@en ;
+    skos:prefLabel "French"@en .
+
+fb:cuisine_japanese a fb:Cuisine,
+        owl:NamedIndividual ;
+    rdfs:label "Japanese"@en ;
+    skos:prefLabel "Japanese"@en .
+
+fb:cuisine_mexican a fb:Cuisine,
+        owl:NamedIndividual ;
+    rdfs:label "Mexican"@en ;
+    skos:prefLabel "Mexican"@en .
+
+fb:cuisine_indian a fb:Cuisine,
+        owl:NamedIndividual ;
+    rdfs:label "Indian"@en ;
+    skos:prefLabel "Indian"@en .
+
+fb:cuisine_mediterranean a fb:Cuisine,
+        owl:NamedIndividual ;
+    rdfs:label "Mediterranean"@en ;
+    skos:prefLabel "Mediterranean"@en .
+
+fb:cuisine_middle-eastern a fb:Cuisine,
+        owl:NamedIndividual ;
+    rdfs:label "Middle Eastern"@en ;
+    skos:prefLabel "Middle Eastern"@en .
+
+fb:cuisine_nordic a fb:Cuisine,
+        owl:NamedIndividual ;
+    rdfs:label "Nordic"@en ;
+    skos:prefLabel "Nordic"@en .
+
+fb:Body a owl:Class ;
+    rdfs:label "body"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "body"@en .
+
+fb:hasBody a owl:ObjectProperty ;
+    rdfs:label "hasBody"@en ;
+    rdfs:domain fb:Beverage ;
+    rdfs:range fb:Body ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:body_light a fb:Body,
+        owl:NamedIndividual ;
+    rdfs:label "light"@en ;
+    skos:prefLabel "light"@en .
+
+fb:body_medium a fb:Body,
+        owl:NamedIndividual ;
+    rdfs:label "medium"@en ;
+    skos:prefLabel "medium"@en .
+
+fb:body_full a fb:Body,
+        owl:NamedIndividual ;
+    rdfs:label "full"@en ;
+    skos:prefLabel "full"@en .
+
+fb:Sweetness a owl:Class ;
+    rdfs:label "sweetness"@en ;
+    rdfs:subClassOf fb:Attribute ;
+    skos:prefLabel "sweetness"@en .
+
+fb:hasSweetness a owl:ObjectProperty ;
+    rdfs:label "hasSweetness"@en ;
+    rdfs:domain fb:Beverage ;
+    rdfs:range fb:Sweetness ;
+    rdfs:subPropertyOf fb:hasAttribute .
+
+fb:sweetness_dry a fb:Sweetness,
+        owl:NamedIndividual ;
+    rdfs:label "dry"@en ;
+    skos:prefLabel "dry"@en .
+
+fb:sweetness_off-dry a fb:Sweetness,
+        owl:NamedIndividual ;
+    rdfs:label "off-dry"@en ;
+    skos:prefLabel "off-dry"@en .
+
+fb:sweetness_medium-sweet a fb:Sweetness,
+        owl:NamedIndividual ;
+    rdfs:label "medium sweet"@en ;
+    skos:prefLabel "medium sweet"@en .
+
+fb:sweetness_sweet a fb:Sweetness,
+        owl:NamedIndividual ;
+    rdfs:label "sweet"@en ;
+    skos:prefLabel "sweet"@en .
+
+
+# ---------------------------------------------------------------- the brand graph's schema (not shown to the vision model)
+
+fb:Spread a owl:Class ;
+    rdfs:label "Spread"@en ;
+    fo:visual false ;
+    rdfs:comment "A styled table the brand shows: a recipe, a menu or a serving photo (food's look)."@en ;
+    skos:prefLabel "Spread"@en .
+
+fb:Item a owl:Class ;
+    rdfs:label "Item"@en ;
+    fo:visual false ;
+    rdfs:comment "One product as it appears in a spread or a product shot."@en ;
+    skos:prefLabel "Item"@en .
+
+fb:Brand a owl:Class ;
+    rdfs:label "Brand"@en ;
+    fo:visual false ;
+    rdfs:comment "The brand."@en ;
+    skos:prefLabel "Brand"@en .
+
+fb:Article a owl:Class ;
+    rdfs:label "Article"@en ;
+    fo:visual false ;
+    rdfs:comment "An editorial text: a recipe, a pairing guide."@en ;
+    skos:prefLabel "Article"@en .
+
+fb:Statement a owl:Class ;
+    rdfs:label "Statement"@en ;
+    fo:visual false ;
+    rdfs:comment "One claim of an article, about a spread or a product."@en ;
+    skos:prefLabel "Statement"@en .
+
+fb:contains a owl:ObjectProperty ;
+    rdfs:label "contains"@en ;
+    fo:visual false ;
+    rdfs:comment "The products in a spread."@en ;
+    rdfs:domain fb:Spread ;
+    rdfs:range fb:Item .
+
+fb:isCategory a owl:ObjectProperty ;
+    rdfs:label "is category"@en ;
+    fo:visual false ;
+    rdfs:comment "The kind of food or drink an item is."@en ;
+    rdfs:domain fb:Item ;
+    rdfs:range fb:FoodAndDrink .
+
+fb:hasStatement a owl:ObjectProperty ;
+    rdfs:label "has statement"@en ;
+    fo:visual false ;
+    rdfs:comment "The statements of an article."@en ;
+    rdfs:domain fb:Article ;
+    rdfs:range fb:Statement .
+
+fb:illustrates a owl:ObjectProperty ;
+    rdfs:label "illustrates"@en ;
+    fo:visual false ;
+    rdfs:comment "The spread a statement is about."@en ;
+    rdfs:domain fb:Statement ;
+    rdfs:range fb:Spread .
+
+fb:servedWith a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "served with"@en ;
+    fo:visual false ;
+    rdfs:comment "Kind-level pairing rule: these are served together."@en ;
+    rdfs:domain fb:FoodAndDrink ;
+    rdfs:range fb:FoodAndDrink .
+
+
+# ---------------------------------------------------------------- a few of the brand's rules, as examples
+
+fb:Cheese fb:servedWith fb:Wine .
+
+fb:Cheese fb:servedWith fb:Cracker .
+
+fb:Bread fb:servedWith fb:Oil .
+
+fb:Coffee fb:servedWith fb:Pastry .
+
+fb:Chocolate fb:servedWith fb:Spirit .

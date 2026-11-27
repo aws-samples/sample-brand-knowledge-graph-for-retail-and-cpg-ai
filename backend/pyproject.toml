@@ -1,0 +1,40 @@
+[project]
+name = "ontology-rag"
+version = "0.1.0"
+description = "Multimodal AI knowledge graph: ontology-grounded GraphRAG on Amazon Neptune Analytics and Amazon Bedrock (extraction, embedding, loading, retrieval, grounding)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT-0"
+authors = [{ name = "Amazon Web Services" }]
+# rdflib (+ its only dependency, pyparsing) and boto3/botocore (>= 1.43: the s3vectors client) get
+# vendored into the Lambda zip by infra/ (backend/lambda-requirements.txt), so the code does not
+# depend on the runtime's own boto3; so does the `agent` extra (MCP_PACKAGES).
+dependencies = ["boto3>=1.43", "rdflib==7.6.0"]
+
+[project.optional-dependencies]
+# The query agent of tab 3 starts the Amazon Neptune MCP server (and talks to it with the MCP SDK it
+# depends on). Pinned: the agent reads the server's log format (query_agent.neptune_error).
+agent = ["awslabs.amazon-neptune-mcp-server==1.1.1"]
+# Tab 6's trends method 2 writes the graph into Iceberg tables in an S3 table bucket (lakehouse.py). The
+# S3 Tables MCP server its agent queries them through is not installed here: it pins versions that
+# clash with this package, so it runs in its own environment through uvx (lake_agent.py).
+lake = ["pyiceberg[pyarrow]==0.12.0", "pyarrow==25.0.1"]
+dev = ["pytest==9.1.1", "ruff==0.17.0"]
+
+[project.scripts]
+ontology-rag = "ontology_rag.cli:main"
+
+[build-system]
+requires = ["hatchling==1.33.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ontology_rag"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

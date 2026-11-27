@@ -1,0 +1,32 @@
+{
+  "name": "multimodal-ai-knowledge-graph-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT-0",
+  "description": "Demo UI: setup, ontology explorer, ingest pipeline with openCypher and a Neptune MCP agent, RAG vs. GraphRAG side by side with Style recommendation, brand rules, emerging trends from the vector store vs. the graph",
+  "scripts": {
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aws-crypto/sha256-js": "5.2.0",
+    "@aws-sdk/credential-providers": "3.1167.0",
+    "@smithy/signature-v4": "5.7.5",
+    "@xyflow/react": "12.12.0",
+    "oidc-client-ts": "3.5.0",
+    "prism-react-renderer": "2.4.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-force-graph-2d": "1.29.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "4.7.0",
+    "typescript": "5.7.3",
+    "vite": "7.3.7",
+    "vitest": "5.0.3"
+  }
+}

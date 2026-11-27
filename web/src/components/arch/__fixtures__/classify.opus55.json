@@ -1,0 +1,376 @@
+{
+ "model": {
+  "id": "global.anthropic.claude-opus-5-5",
+  "name": "Claude Opus 5.5",
+  "provider": "Anthropic",
+  "third_party": true,
+  "explicit_cache": true,
+  "cache_min_tokens": 512,
+  "supports_temperature": false,
+  "notes": "explicit + implicit caching (5 min / 1 h TTL)",
+  "temperature": 0.0,
+  "max_tokens": 8192,
+  "request_fields": {},
+  "reasoning": {
+   "levels": [
+    "default",
+    "low",
+    "medium",
+    "high"
+   ],
+   "default_means": "medium",
+   "readable": true,
+   "family": "anthropic"
+  },
+  "reasoning_note": null
+ },
+ "ontology_id": "fashion",
+ "prompt_caching": true,
+ "entities": [
+  {
+   "id": "e1",
+   "class": "Jacket",
+   "label": "navy oversized double-breasted blazer with peak lapels",
+   "confidence": 0.92,
+   "bbox": [
+    233,
+    78,
+    808,
+    535
+   ],
+   "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Jacket",
+   "attributes": {
+    "hasNickname": "blazer",
+    "hasOpeningType": "double breasted",
+    "hasSilhouette": "oversized",
+    "hasTextilePattern": "plain (pattern)",
+    "hasLength": "hip (length)"
+   },
+   "attribute_iris": {
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasNickname": "http://example.org/multimodal-ai-knowledge-graph/fashion#nickname_blazer",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasOpeningType": "http://example.org/multimodal-ai-knowledge-graph/fashion#opening-type_double-breasted",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasSilhouette": "http://example.org/multimodal-ai-knowledge-graph/fashion#silhouette_oversized",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasTextilePattern": "http://example.org/multimodal-ai-knowledge-graph/fashion#textile-pattern_plain",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasLength": "http://example.org/multimodal-ai-knowledge-graph/fashion#length_hip"
+   },
+   "parts": [
+    {
+     "id": "e1.p1",
+     "class": "Lapel",
+     "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Lapel",
+     "label": "peak lapel",
+     "bbox": [
+      375,
+      85,
+      690,
+      280
+     ],
+     "relation": "hasPart",
+     "relation_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#hasPart"
+    },
+    {
+     "id": "e1.p2",
+     "class": "Pocket",
+     "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Pocket",
+     "label": "flap pocket on chest/hip",
+     "bbox": [
+      693,
+      315,
+      748,
+      365
+     ],
+     "relation": "hasPart",
+     "relation_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#hasPart"
+    },
+    {
+     "id": "e1.p3",
+     "class": "Sleeve",
+     "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Sleeve",
+     "label": "long sleeve",
+     "bbox": [
+      233,
+      110,
+      320,
+      470
+     ],
+     "relation": "hasPart",
+     "relation_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#hasPart"
+    }
+   ]
+  },
+  {
+   "id": "e2",
+   "class": "Shirt",
+   "label": "grey button-front shirt with collar",
+   "confidence": 0.8,
+   "bbox": [
+    245,
+    85,
+    580,
+    480
+   ],
+   "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Shirt",
+   "attributes": {
+    "hasTextilePattern": "plain (pattern)",
+    "hasOpeningType": "single breasted"
+   },
+   "attribute_iris": {
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasTextilePattern": "http://example.org/multimodal-ai-knowledge-graph/fashion#textile-pattern_plain",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasOpeningType": "http://example.org/multimodal-ai-knowledge-graph/fashion#opening-type_single-breasted"
+   },
+   "parts": [
+    {
+     "id": "e2.p1",
+     "class": "Collar",
+     "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Collar",
+     "label": "shirt collar",
+     "bbox": [
+      465,
+      85,
+      585,
+      175
+     ],
+     "relation": "hasPart",
+     "relation_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#hasPart"
+    }
+   ]
+  },
+  {
+   "id": "e3",
+   "class": "Skirt",
+   "label": "grey pleated midi skirt",
+   "confidence": 0.92,
+   "bbox": [
+    285,
+    285,
+    845,
+    795
+   ],
+   "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Skirt",
+   "attributes": {
+    "hasLength": "midi",
+    "hasTextileFinishing": "pleat",
+    "hasNickname": "accordion (skirt)",
+    "hasSilhouette": "a-line",
+    "hasTextilePattern": "plain (pattern)",
+    "hasWaistline": "high waist"
+   },
+   "attribute_iris": {
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasLength": "http://example.org/multimodal-ai-knowledge-graph/fashion#length_midi",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasTextileFinishing": "http://example.org/multimodal-ai-knowledge-graph/fashion#textile-finishing-manufacturing-techniques_pleat",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasNickname": "http://example.org/multimodal-ai-knowledge-graph/fashion#nickname_accordion-skirt",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasSilhouette": "http://example.org/multimodal-ai-knowledge-graph/fashion#silhouette_a-line",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasTextilePattern": "http://example.org/multimodal-ai-knowledge-graph/fashion#textile-pattern_plain",
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasWaistline": "http://example.org/multimodal-ai-knowledge-graph/fashion#waistline_high-waist"
+   },
+   "parts": []
+  },
+  {
+   "id": "e4",
+   "class": "Bag",
+   "label": "black woven tote with beaded chain handles",
+   "confidence": 0.9,
+   "bbox": [
+    55,
+    500,
+    370,
+    780
+   ],
+   "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Bag",
+   "attributes": {
+    "hasNonTextileMaterial": "metal"
+   },
+   "attribute_iris": {
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasNonTextileMaterial": "http://example.org/multimodal-ai-knowledge-graph/fashion#non-textile-material-type_metal"
+   },
+   "parts": [
+    {
+     "id": "e4.p1",
+     "class": "Bead",
+     "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Bead",
+     "label": "pearl-like beads on handles",
+     "bbox": [
+      140,
+      500,
+      330,
+      645
+     ],
+     "relation": "hasPart",
+     "relation_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#hasPart"
+    }
+   ]
+  },
+  {
+   "id": "e5",
+   "class": "Shoe",
+   "label": "black studded slide sandals",
+   "confidence": 0.88,
+   "bbox": [
+    325,
+    880,
+    765,
+    980
+   ],
+   "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Shoe",
+   "attributes": {
+    "hasOpeningType": "no opening"
+   },
+   "attribute_iris": {
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasOpeningType": "http://example.org/multimodal-ai-knowledge-graph/fashion#opening-type_no-opening"
+   },
+   "parts": [
+    {
+     "id": "e5.p1",
+     "class": "Rivet",
+     "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Rivet",
+     "label": "studs on straps",
+     "bbox": [
+      330,
+      885,
+      760,
+      960
+     ],
+     "relation": "hasPart",
+     "relation_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#hasPart"
+    }
+   ]
+  },
+  {
+   "id": "e6",
+   "class": "Earring",
+   "label": "gold earring",
+   "confidence": 0.5,
+   "bbox": [
+    580,
+    0,
+    605,
+    30
+   ],
+   "class_iri": "http://example.org/multimodal-ai-knowledge-graph/fashion#Earring",
+   "attributes": {
+    "hasNonTextileMaterial": "metal"
+   },
+   "attribute_iris": {
+    "http://example.org/multimodal-ai-knowledge-graph/fashion#hasNonTextileMaterial": "http://example.org/multimodal-ai-knowledge-graph/fashion#non-textile-material-type_metal"
+   },
+   "parts": []
+  }
+ ],
+ "photo_properties": {
+  "for": "Smart casual"
+ },
+ "photo_property_iris": {
+  "http://example.org/multimodal-ai-knowledge-graph/fashion#for": "http://example.org/multimodal-ai-knowledge-graph/fashion#occasion_smart_casual"
+ },
+ "feedback": [
+  {
+   "observed": "Shoes are open-toe slide sandals; no footwear type distinction",
+   "entity": "e5",
+   "kind": "class",
+   "suggestion": "add classes Sandal, Slide, Boot, Pump under LegsAndFeetwear",
+   "already_known": []
+  },
+  {
+   "observed": "Bag is a woven/raffia tote; no bag type or weave material",
+   "entity": "e4",
+   "kind": "value",
+   "suggestion": "add hasNickname values tote, clutch, crossbody for Bag; add 'straw/raffia' to hasNonTextileMaterial",
+   "already_known": []
+  },
+  {
+   "observed": "Buttons on blazer and shirt cannot be expressed",
+   "entity": "e1",
+   "kind": "class",
+   "suggestion": "add class Button under Closure",
+   "already_known": []
+  },
+  {
+   "observed": "No colour property (navy, grey, black)",
+   "entity": null,
+   "kind": "property",
+   "suggestion": "add hasColor property for Apparel with a colour value list",
+   "already_known": []
+  },
+  {
+   "observed": "Pearl beads on handle; no pearl material",
+   "entity": "e4",
+   "kind": "value",
+   "suggestion": "add 'pearl' to hasNonTextileMaterial",
+   "already_known": []
+  },
+  {
+   "observed": "Layering of shirt under blazer not expressible",
+   "entity": null,
+   "kind": "relation",
+   "suggestion": "add relation wornUnder: Apparel -> Apparel",
+   "already_known": []
+  }
+ ],
+ "notes": "Bag handles appear to be bead/chain strands; earring partially visible.",
+ "issues": [],
+ "raw_text": "{\"entities\":[{\"id\":\"e1\",\"class\":\"Jacket\",\"label\":\"navy oversized double-breasted blazer with peak lapels\",\"bbox\":[233,78,808,535],\"confidence\":0.92,\"attributes\":{\"hasNickname\":\"blazer\",\"hasOpeningType\":\"double breasted\",\"hasSilhouette\":\"oversized\",\"hasTextilePattern\":\"plain (pattern)\",\"hasLength\":\"hip (length)\"},\"parts\":[{\"class\":\"Lapel\",\"label\":\"peak lapel\",\"bbox\":[375,85,690,280],\"relation\":\"hasPart\"},{\"class\":\"Pocket\",\"label\":\"flap pocket on chest/hip\",\"bbox\":[693,315,748,365],\"relation\":\"hasPart\"},{\"class\":\"Sleeve\",\"label\":\"long sleeve\",\"bbox\":[233,110,320,470],\"relation\":\"hasPart\"}]},{\"id\":\"e2\",\"class\":\"Shirt\",\"label\":\"grey button-front shirt with collar\",\"bbox\":[245,85,580,480],\"confidence\":0.8,\"attributes\":{\"hasTextilePattern\":\"plain (pattern)\",\"hasOpeningType\":\"single breasted\"},\"parts\":[{\"class\":\"Collar\",\"label\":\"shirt collar\",\"bbox\":[465,85,585,175],\"relation\":\"hasPart\"}]},{\"id\":\"e3\",\"class\":\"Skirt\",\"label\":\"grey pleated midi skirt\",\"bbox\":[285,285,845,795],\"confidence\":0.92,\"attributes\":{\"hasLength\":\"midi\",\"hasTextileFinishing\":\"pleat\",\"hasNickname\":\"accordion (skirt)\",\"hasSilhouette\":\"a-line\",\"hasTextilePattern\":\"plain (pattern)\",\"hasWaistline\":\"high waist\"},\"parts\":[]},{\"id\":\"e4\",\"class\":\"Bag\",\"label\":\"black woven tote with beaded chain handles\",\"bbox\":[55,500,370,780],\"confidence\":0.9,\"attributes\":{\"hasNonTextileMaterial\":\"metal\"},\"parts\":[{\"class\":\"Bead\",\"label\":\"pearl-like beads on handles\",\"bbox\":[140,500,330,645],\"relation\":\"hasPart\"}]},{\"id\":\"e5\",\"class\":\"Shoe\",\"label\":\"black studded slide sandals\",\"bbox\":[325,880,765,980],\"confidence\":0.88,\"attributes\":{\"hasOpeningType\":\"no opening\"},\"parts\":[{\"class\":\"Rivet\",\"label\":\"studs on straps\",\"bbox\":[330,885,760,960],\"relation\":\"hasPart\"}]},{\"id\":\"e6\",\"class\":\"Earring\",\"label\":\"gold earring\",\"bbox\":[580,0,605,30],\"confidence\":0.5,\"attributes\":{\"hasNonTextileMaterial\":\"metal\"},\"parts\":[]}],\"photo_properties\":{\"for\":\"Smart casual\"},\"ontology_feedback\":[{\"observed\":\"Shoes are open-toe slide sandals; no footwear type distinction\",\"entity\":\"e5\",\"kind\":\"class\",\"suggestion\":\"add classes Sandal, Slide, Boot, Pump under LegsAndFeetwear\"},{\"observed\":\"Bag is a woven/raffia tote; no bag type or weave material\",\"entity\":\"e4\",\"kind\":\"value\",\"suggestion\":\"add hasNickname values tote, clutch, crossbody for Bag; add 'straw/raffia' to hasNonTextileMaterial\"},{\"observed\":\"Buttons on blazer and shirt cannot be expressed\",\"entity\":\"e1\",\"kind\":\"class\",\"suggestion\":\"add class Button under Closure\"},{\"observed\":\"No colour property (navy, grey, black)\",\"entity\":null,\"kind\":\"property\",\"suggestion\":\"add hasColor property for Apparel with a colour value list\"},{\"observed\":\"Pearl beads on handle; no pearl material\",\"entity\":\"e4\",\"kind\":\"value\",\"suggestion\":\"add 'pearl' to hasNonTextileMaterial\"},{\"observed\":\"Layering of shirt under blazer not expressible\",\"entity\":null,\"kind\":\"relation\",\"suggestion\":\"add relation wornUnder: Apparel -> Apparel\"}],\"notes\":\"Bag handles appear to be bead/chain strands; earring partially visible.\"}",
+ "stop_reason": "end_turn",
+ "prompt": {
+  "system": "You classify what is visible in a photo using ONLY the vocabulary of the ontology \"Fashion ontology for the multimodal AI knowledge graph sample\". Never invent classes, properties or values that are not listed below; if something has no fitting class, leave it out.\n\n## Entity classes (things you can locate in the image)\nFormat: ClassName: label [also: synonyms]. Indented classes are subclasses of the class above.\n- Apparel\n  - ArmsAndHandsAccessory: Arms and hands\n    - Glove\n    - Watch\n  - Headwear: Head\n    - Glasses\n    - Hat\n    - Headband [also: hair accessory, head covering]\n  - LegsAndFeetwear: Legs and feet\n    - LegWarmer: leg warmer\n    - Shoe\n    - Sock\n    - Tights [also: stockings]\n  - LowerBodyGarment: Lower body\n    - Pants\n    - Shorts\n    - Skirt\n  - Neckwear: Neck\n    - Tie\n  - OtherAccessory: Other accessories\n    - Bag [also: wallet]\n    - Bracelet [also: bangle, cuff bracelet]\n    - Earring [also: ear stud, hoop]\n    - Necklace [also: choker, pendant]\n    - Ring\n    - Scarf\n    - Umbrella\n  - UpperBodyGarment: Upper body\n    - Cardigan\n    - Jacket\n    - Shirt [also: blouse]\n    - Sweater\n    - Top [also: sweatshirt, t-shirt]\n    - Vest\n  - WaistAccessory: Waist\n    - Belt\n  - WholeBodyGarment: Whole body\n    - Cape\n    - Coat\n    - Dress\n    - Jumpsuit\n- GarmentComponent: Garment component\n  - Closure: Closures\n    - Buckle\n    - Zipper\n  - Decoration: Decorations\n    - Applique\n    - Bead\n    - Bow\n    - Flower\n    - Fringe\n    - Ribbon\n    - Rivet\n    - Ruffle\n    - Sequin\n    - Tassel\n  - GarmentPart: Garment parts\n    - Collar\n    - Epaulette\n    - Hood\n    - Lapel\n    - Neckline\n    - Pocket\n    - Sleeve\n\n## Relations between entities (name: domain -> range)\n- hasPart: Apparel -> GarmentComponent\n\n## Attribute properties (name (applies to ...): allowed values)\n- hasAnimalMaterial (applies to LegsAndFeetwear, ArmsAndHandsAccessory, OtherAccessory): cheetah, giraffe, leopard, peacock, snakeskin (pattern), zebra\n- hasLeatherType (applies to LegsAndFeetwear, ArmsAndHandsAccessory, WaistAccessory, OtherAccessory): crocodile, shearling, snakeskin, suede\n- hasLength (applies to UpperBodyGarment, LowerBodyGarment, WholeBodyGarment): above-the-hip (length), above-the-knee (length), below the knee (length), elbow-length, floor (length), hip (length), knee (length), maxi (length), micro (length), midi, mini (length), short (length), sleeveless, three quarter (length), wrist-length\n- hasNecklineType (applies to UpperBodyGarment, WholeBodyGarment): asymmetric (neckline), boat (neck), choker (neck), collarless, cowl (neck), crew (neck), crossover (neck), halter (neck), high (neck), illusion (neck), keyhole (neck), off-the-shoulder, one shoulder, oval (neck), plunging (neckline), queen anne (neck), round (neck), scoop (neck), square (neckline), straight across (neck), surplice (neck), sweetheart (neckline), turtle (neck), u-neck, v-neck\n- hasNickname (applies to UpperBodyGarment, LowerBodyGarment, WholeBodyGarment, LegsAndFeetwear, Headwear): accordion (skirt), anorak, asymmetric (collar), ball gown (skirt), banded (collar), bell (sleeve), bermuda (shorts), biker (jacket), bishop (sleeve), blanket (coat), blazer, bloomers, blouson (dress), boardshorts, bodycon (dress), bolero, bomber (jacket), booty (shorts), bow (collar), camisole, camo (pants), cap (sleeve), capri (pants), cargo (pants), cargo (pocket), cargo (shorts), cargo (skirt), chanel (jacket), chelsea (collar), chemise (dress), cheongsams, circular flounce (sleeve), classic military (jacket), classic (t-shirt), crop (jacket), crop (pants), crop (top), culotte (shorts), culottes, curved (pocket), dirndl (skirt), dolman (sleeve), batwing (sleeve), dress (coat ), dropped-shoulder sleeve, duffle (coat), duster (coat), flamenco (skirt), flap (pocket), godet (skirt), gown, gypsy (skirt), halter (dress), halter (top), harem (pants), henley (shirt), hip-huggers (pants), hobble (skirt), hoodie, jabot (collar), jeans, jodhpur, jumper (dress), kaftan, kangaroo (pocket), kilt, kimono, kimono (sleeve), leg of mutton (sleeve), leggings, lounge (shorts), mandarin (collar), mao (jacket), military (coat), napoleon (lapel), nehru (jacket), nightgown, norfolk (jacket), notched (lapel), oversized (collar), oversized (lapel), parka, patch (pocket), pea (coat), pea (jacket), peak (lapel), peasant (top), peg (pants), peter pan (collar), poet (sleeve), polo (collar), polo (shirt), prairie (skirt), puff (sleeve), puffer (coat), puffer (jacket), raglan (sleeve), raglan (t-shirt), rah-rah (skirt), raincoat, regular (collar), ringer (t-shirt), robe, roll-up (shorts), rugby (shirt), safari (jacket), sailor (collar), sailor (pants), sailor (shirt), sarong (skirt), seam (pocket), set-in sleeve, shawl (lapel), shearling (coat), sheath (dress), sheath (skirt), shift (dress), shirt (collar), shirt (dress), short (shorts), skater (dress), skater (skirt), skort, slash (pocket), slip (dress), smock (top), stand-away (collar), sundress, sweater (dress), sweatpants, swing (coat), tank (top), tea (dress), teddy bear (coat), tie-up (shorts), track (jacket), track (pants), trench (coat), trucker (jacket), trunks, tube (top), tulip (skirt), tulip (sleeve), tunic (dress), tunic (top), tutu (skirt), tuxedo (jacket), undershirt, varsity (jacket), welt (pocket), windbreaker, wrap (coat), wrap (dress), wrap (skirt)\n- hasNonTextileMaterial (applies to LegsAndFeetwear, ArmsAndHandsAccessory, Headwear, WaistAccessory, OtherAccessory): bone, feather, fur, gem, ivory, metal, no non-textile material, plastic, rubber, wood\n- hasOpeningType (applies to UpperBodyGarment, LowerBodyGarment, WholeBodyGarment, LegsAndFeetwear): buckled (opening), chained (opening), double breasted, fly (opening), lace up, no opening, single breasted, toggled (opening), wrapping, zip-up\n- hasSilhouette (applies to UpperBodyGarment, LowerBodyGarment, WholeBodyGarment): a-line, asymmetrical, baggy, balloon, bell, bell bottom, bootcut, circle, curved (fit), fit and flare, flare, high low, loose (fit), mermaid, oversized, peg, pencil, peplum, regular (fit), straight, symmetrical, tent, tight (fit), trumpet, wide leg\n- hasTextileFinishing (applies to UpperBodyGarment, LowerBodyGarment, WholeBodyGarment): applique(a), bead(a), burnout, cutout, distressed, embossed, frayed, gathering, lining, no special manufacturing technique, perforated, pleat, printed, quilted, rivet(a), ruched, sequin(a), slit, smocking, tiered, washed\n- hasTextilePattern (applies to UpperBodyGarment, LowerBodyGarment, WholeBodyGarment, Neckwear, Headwear, LegsAndFeetwear): abstract, argyle, camouflage, cartoon, check, chevron, dot, fair isle, floral, geometric, herringbone (pattern), houndstooth (pattern), letters, numbers, paisley, plain (pattern), plant, stripe, toile de jouy\n- hasWaistline (applies to LowerBodyGarment, WholeBodyGarment): basque (wasitline), dropped waistline, empire waistline, high waist, low waist, no waistline, normal waist\n\n## The whole photo (name: allowed values)\nFor a photo of an outfit, choose at most one value per property for the outfit as a whole, or leave the property out when no value fits. For a text, leave \"photo_properties\" out.\n- for: Business casual (An office without a suit.); Casual (Relaxed everyday wear.); Dress (A day look built around a dress.); Evening (An evening out: dinner, drinks, a show.); Formal (Black tie and formal events.); Outdoor (Outdoor work and weather.); Professional (Tailored office wear.); Resort (Warm-weather travel and resort days.); Smart casual (Casual pieces dressed up a step.)\n\n## Ontology feedback\nThis ontology is a work in progress and you are also its reviewer. Once you have classified the material (the photo or the text), look back at everything you saw in it that the ontology kept you from expressing: an item with no fitting class, a class too coarse to tell two things apart, a value missing from an attribute's allowed list, an attribute, component, material or relation the ontology does not have. Do not bend the vocabulary to fit: leave it out of the entities and propose an improvement to the ontology in \"ontology_feedback\" instead. For each improvement say what you observed, which entity it concerns (or null), and exactly how you would extend the ontology: a new class and its parent class, a new value and the property it belongs to, or a new property or relation with its domain and range. Be specific and brief; at most 8 items, the most useful first.\n\n## Output\nReturn ONLY a JSON object, no prose, with this shape:\n{\"entities\": [{\"id\": \"e1\", \"class\": \"<EntityClass>\", \"label\": \"<short description>\", \"bbox\": [x_min, y_min, x_max, y_max], \"confidence\": 0.0-1.0, \"attributes\": {\"<attributeProperty>\": \"<allowed value>\"}, \"parts\": [{\"class\": \"<EntityClass>\", \"label\": \"<short>\", \"bbox\": [x_min, y_min, x_max, y_max], \"relation\": \"<relation property>\"}]}], \"photo_properties\": {\"<property>\": \"<allowed value>\"}, \"ontology_feedback\": [{\"observed\": \"<what is visible but cannot be expressed>\", \"entity\": \"<entity id or null>\", \"kind\": \"class|value|property|relation\", \"suggestion\": \"<how to extend the ontology, e.g. add value X to property P, add class C under D>\"}], \"notes\": \"<anything else you could not map to the ontology>\"}\nCoordinates are integers on a 0-1000 scale of the image width (x) and height (y), origin top-left. One entity per distinct visible object; put components (collars, pockets, zippers, ...) in \"parts\" of the entity they belong to, each distinct component exactly once. Always use the most specific class in the hierarchy (a leaf, never its parent when a leaf fits). Only use attribute properties that apply to the entity's class and only values from the allowed list.",
+  "user": "The image is 576x1024 pixels (width x height); bbox values are on the 0-1000 scale of that width and height. Classify every garment, accessory and garment component visible in this image using the ontology. Return only the JSON object.",
+  "request": {
+   "modelId": "global.anthropic.claude-opus-5-5",
+   "system": [
+    {
+     "text": "<ontology prompt, 9682 chars>"
+    },
+    {
+     "cachePoint": {
+      "type": "default"
+     }
+    }
+   ],
+   "messages": [
+    {
+     "role": "user",
+     "content": [
+      {
+       "image": {
+        "format": "jpeg",
+        "source": {
+         "bytes": "<107148 bytes>"
+        }
+       }
+      },
+      {
+       "text": "The image is 576x1024 pixels (width x height); bbox values are on the 0-1000 scale of that width and height. Classify every garment, accessory and garment component visible in this image using the ontology. Return only the JSON object."
+      }
+     ]
+    }
+   ],
+   "inferenceConfig": {
+    "maxTokens": 8192
+   }
+  }
+ },
+ "usage": {
+  "inputTokens": 858,
+  "outputTokens": 1382,
+  "totalTokens": 6370,
+  "cacheReadInputTokens": 0,
+  "cacheWriteInputTokens": 4130,
+  "cacheDetails": [
+   {
+    "ttl": "5m",
+    "inputTokens": 4130
+   }
+  ]
+ },
+ "metrics": {
+  "latency_ms": 12685,
+  "input_tokens": 858,
+  "output_tokens": 1382,
+  "cache_read_tokens": 0,
+  "cache_write_tokens": 4130,
+  "total_input_tokens": 4988,
+  "cache_hit_ratio": 0.0,
+  "prompt_tokens_estimate": 3227,
+  "cache_min_tokens": 512,
+  "cache_eligible": true
+ }
+}
